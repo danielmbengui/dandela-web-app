@@ -100,9 +100,9 @@ export default function Dashboard({ children, firebase, auth, content, pages, cu
     useEffect(() => {
         //setUser(auth.currentUser);
         //console.log("AUTHOOO", auth);
-        console.log("AUTH dashboard", auth.currentUser);
+        //console.log("AUTH dashboard", auth.currentUser);
         //console.log("USER", user);
-      }, [auth.currentUser]);
+      }, [auth]);
     useEffect(() => {
         updateUserInfo();
         console.log("USER dashboard", user);
