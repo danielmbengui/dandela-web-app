@@ -4,6 +4,7 @@ import { updateUser, connectUser } from "../../redux/user/userActions";
 import { styled, useTheme } from '@mui/material/styles';
 import { Grid } from '@mui/material';
 import Image from "next/image";
+import 'firebaseui/dist/firebaseui.css';
 
 //const logo = "/img/logo-pic-text.png";
 const logo = "/img/logo.png";
