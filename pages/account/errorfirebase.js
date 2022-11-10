@@ -1,5 +1,5 @@
 import React from 'react';
-import ErrorLogin from '../../components/Login/ErrorLogin';
+import ErrorFirebase from '../../components/Login/ErrorFirebase';
 
 export default function ErrorFirebasePage({logo, firebase, firestore, handleUser}) {
   return (
