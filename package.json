@@ -1,7 +1,8 @@
 {
   "name": "dandela-web-app-test",
   "version": "0.1.0",
-  "private": true,
+  "host": "https://dandela.com",
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
