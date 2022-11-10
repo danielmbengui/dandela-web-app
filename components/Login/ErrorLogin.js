@@ -30,7 +30,11 @@ export default function ErrorLogin({logo, firestore}) {
   */
 
   return (
-    <Grid container
+   <>
+   Eror Login
+   {
+    /*
+     <Grid container
     direction={'column'}
     justifyContent={'center'}
     alignItems={'center'}
@@ -87,18 +91,16 @@ export default function ErrorLogin({logo, firestore}) {
         //disabled={open}
         color='primary'
         variant="outlined"
-        /*
-onClick={() => {
-          setOpen(true);
-        }}
-        */
-      >
+        >
         Go to Login
       </Button>
       </Link>
     </Box>
     </Grid>
 </Grid>
+    */
+   }
+   </>
 
   );
 }
