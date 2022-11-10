@@ -83,7 +83,7 @@ export default function ErrorLogin({logo, firestore}) {
           
         </Alert>
       </Collapse>
-      <Link href="/">
+      <Link href='/'>
       <Button
         //disabled={open}
         color='primary'
