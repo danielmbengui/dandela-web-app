@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Image from "next/image";
-import Menu from '../Menu/Menu'
 import styles from './Home.module.css'
 
 export default function Home() {

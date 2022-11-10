@@ -4,7 +4,8 @@ export default function Document() {
     return (
         <Html>
             <Head>
-
+            <meta name="description" content="Created by Daniel Slaver Mbengui" />
+            <link rel="icon" href="/favicon.ico" />
             </Head>
             <body>
                 <Main />

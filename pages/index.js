@@ -3,29 +3,42 @@ import Head from 'next/head'
 import Image from "next/image";
 import Home from '../components/Home/Home'
 import Login from '../components/Login/Login'
-import Menu from '../components/Menu/Menu';
 import { firestore } from "../config.firebase";
 import firebase from "../config.firebase";
 
-export default function HomePage({ firebase, firestore, user, handleUser }) {
+export default function HomePage({ logo, firebase, firestore, user, handleUser }) {
   const [uid, setUid] = useState(null);
-  const auth = firebase.auth();
-  console.log("AUTH index", auth);
-
+  
+  //const auth = firebase.auth();
+  //console.log("AUTH index", auth);
+  /*
+  if (auth.currentUser) {
+    if (auth.currentUser.phoneNumber != '') {
+      window.location.href = "/about";
+    }
+    console.log("auth.currentUser AUTH", auth._delegate.currentUser);
+  }
+  */
+ /*
   firebase.auth().signOut().then(() => {
     // Sign-out successful.
   }).catch((error) => {
     // An error happened.
   });
+  */
+  
 
+
+  
+/*
   useEffect(() => {
 
-    if (auth.currentUser) {
-      window.location.href = "/about";
-    }
-    console.log("useEffect UID", uid);
-
+  
+    //window.location.href = "/about";
+    console.log("useEffect auth.currentUser", auth);
   }, [auth]);
+  */
+  
 
   /*
   auth.onAuthStateChanged((user) => {
@@ -57,30 +70,12 @@ export default function HomePage({ firebase, firestore, user, handleUser }) {
 
 
   useEffect(() => {
-    if (!user) {
-      /*
-      setContent(<Login firebase={firebase} handleUser={handleUser} />);
-      firestore.collection("USER").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            console.log('User FIRESTORE', `${doc.id} => ${JSON.stringify(doc.data())}`);
-        });
-        
-       
-    });
-    */
-      //window.location.href = "/users/login";
-    } else {
-      //handleUser();
-      //window.location.href = "/about";
-      //console.log("AUTHOOO index", user);
-    }
-
 
 
   }, []);
 
   return (
-    <Login firebase={firebase} handleUser={handleUser} />
+    <Login logo={logo} firebase={firebase} firestore={firestore} handleUser={handleUser} />
     /*
 <div className={styles.container}>
       <Menu firebase={firebase} />
