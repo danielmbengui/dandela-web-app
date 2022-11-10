@@ -9,7 +9,7 @@ import 'firebaseui/dist/firebaseui.css';
 //const logo = "/img/logo-pic-text.png";
 
 
-const Login = ({ logo, links, firebase, firestore }) => {
+const Login = ({ logo, links, firebase, firestore, userFirebase }) => {
     //var firebase = require('firebase');
     const auth = firebase.auth();
     const dispatch = useDispatch();
@@ -28,8 +28,7 @@ const Login = ({ logo, links, firebase, firestore }) => {
     }, [auth, links]);
     //console.log("AUTHOOO", auth);
     useEffect(() => {
-        if (auth.currentUser === null) {
-            var firebaseui = require('firebaseui');
+        var firebaseui = require('firebaseui');
             //var ui = new firebaseui.auth.AuthUI(auth);
 
             var uiConfig = {
@@ -125,15 +124,6 @@ const Login = ({ logo, links, firebase, firestore }) => {
                 ui.reset();
                 ui.start('#firebaseui-auth-container', uiConfig);
             }
-        } else {
-            /*
-            firebase.auth().signOut().then(() => {
-                // Sign-out successful.
-              }).catch((error) => {
-                // An error happened.
-              });
-              */
-        }
 
     }, [auth]);
 
