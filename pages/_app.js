@@ -29,8 +29,8 @@ function MyApp({ Component, pageProps }) {
         // https://firebase.google.com/docs/reference/js/firebase.User
         var uid = user.uid;
         //var docRef = firestore.collection("USER").doc(user.phoneNumber);
-        var docRef = firestore.collection("USER").doc(user.phoneNumber)
-.withConverter(userConverter);
+        var docRef = firestore.collection("USER").doc(user.phoneNumber);
+//.withConverter(userConverter);
 //.get();
 
         docRef.get().then((doc) => {

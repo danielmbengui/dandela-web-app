@@ -15,13 +15,16 @@ const Login = ({ logo, links, firebase, firestore, handleUser }) => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
 
+    /*
+
     const updateUserInfo = () => {
         dispatch(updateUser());
     }
+    */
 
     useEffect(() => {
         console.log("LIIIIINKS", links)
-        updateUserInfo();
+        //updateUserInfo();
         //console.log("USER dashboard", auth._delegate.currentUser);
     }, [auth, links]);
     //console.log("AUTHOOO", auth);
@@ -59,7 +62,7 @@ const Login = ({ logo, links, firebase, firestore, handleUser }) => {
                             console.log("Error getting document:", error);
                         });
                         console.log("AUTH login", auth.currentUser);
-                        updateUserInfo();
+                        //updateUserInfo();
                         //return false;
                     },
                     signInFailure: function (error) {
