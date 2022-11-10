@@ -31,9 +31,6 @@ export default function ErrorLogin({logo, firestore}) {
 
   return (
    <>
-   Eror Login
-   {
-    /*
      <Grid container
     direction={'column'}
     justifyContent={'center'}
@@ -98,8 +95,6 @@ export default function ErrorLogin({logo, firestore}) {
     </Box>
     </Grid>
 </Grid>
-    */
-   }
    </>
 
   );

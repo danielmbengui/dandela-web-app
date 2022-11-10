@@ -9,7 +9,7 @@ import 'firebaseui/dist/firebaseui.css';
 //const logo = "/img/logo-pic-text.png";
 
 
-const Login = ({ logo, links, firebase, firestore, handleUser }) => {
+const Login = ({ logo, links, firebase, firestore }) => {
     //var firebase = require('firebase');
     const auth = firebase.auth();
     const dispatch = useDispatch();
