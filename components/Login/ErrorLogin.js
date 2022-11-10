@@ -12,23 +12,6 @@ import Link from 'next/link';
 export default function ErrorLogin({logo, firestore}) {
   const [open, setOpen] = React.useState(true);
 
-  /*
-  var docRef = firestore.collection("USER").doc("+41766795115");
-
-  docRef.get().then((doc) => {
-      if (doc.exists) {
-          console.log("Document data ERROR:", doc.data());
-          window.location.href = "/about";
-      } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document ERROR!");
-          window.location.href = "/users/errorlogin";
-      }
-  }).catch((error) => {
-      console.log("Error getting document ERROR:", error);
-  });
-  */
-
   return (
     <Grid container
     direction={'column'}
@@ -82,16 +65,10 @@ export default function ErrorLogin({logo, firestore}) {
           
         </Alert>
       </Collapse>
-      <Link href="/">
+      <Link href="/index">
       <Button
-        //disabled={open}
         color='primary'
         variant="outlined"
-        /*
-onClick={() => {
-          setOpen(true);
-        }}
-        */
       >
         Go to Login
       </Button>
