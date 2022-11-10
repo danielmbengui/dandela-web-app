@@ -16,7 +16,6 @@ const links = {
 
 function MyApp({ Component, pageProps }) {
   const [uid, setUid] = useState(null);
-  const [userId, setUserId] = useState(null);
   const [user, setUser] = useState(null);
 
   const hash = hashResult("123456");
