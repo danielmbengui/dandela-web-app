@@ -9,6 +9,7 @@ import ColorMode from "../components/ColorMode";
 //import {hashResult} from "../functions/HashResult";
 import hashResult from "../functions/ConvertToHash";
 import User, { userConverter } from "../classes/UserClass";
+import Head from "next/head";
 const logo = "/img/logo.png";
 
 const links = {
@@ -124,6 +125,12 @@ setPhoneNumber(user.phoneNumber);
   return (
     <ColorMode>
       <Provider store={store}>
+        <Head>
+        <meta
+  name='viewport'
+  content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
+/>
+        </Head>
         <Component {...pageProps} logo={logo} links={links} firebase={firebase} firestore={firestore} storage={storage} userFirebase={userFirebase} uid={uid} user={user} handleUser={handleUser} />
       </Provider>
     </ColorMode>
