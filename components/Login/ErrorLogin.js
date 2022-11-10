@@ -79,7 +79,7 @@ export default function ErrorLogin({logo, firestore}) {
           sx={{ mb: 2, textAlign: 'start' }}
         >
             <AlertTitle sx={{ mb: 0.5, alignItems: 'flex-start' }}>Action prohibited</AlertTitle>
-            You can't access to the WebApp. — <strong>please contact the owner!</strong>
+            You can&apos;t access to the WebApp. — <strong>please contact the owner!</strong>
           
         </Alert>
       </Collapse>
