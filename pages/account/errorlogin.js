@@ -1,8 +1,8 @@
 import React from 'react';
 import ErrorLogin from '../../components/Login/ErrorLogin';
 
-export default function ErrorLoginPage({logo, links, firebase, firestore, handleUser}) {
+export default function ErrorLoginPage({logo, links,}) {
   return (
-    <ErrorLogin logo={logo} links={links} firebase={firebase} firestore={firestore} handleUser={handleUser} />
+    <ErrorLogin logo={logo} links={links} />
   )
 }
