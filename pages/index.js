@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head'
 import Image from "next/image";
-import Home from '../components/Home/Home'
 import Login from '../components/Login/Login'
 import { firestore } from "../config.firebase";
 import firebase from "../config.firebase";
+import Home from '../components/Home/Home';
 
-export default function HomePage({ logo, firebase, firestore, user, handleUser }) {
+export default function HomePage({ logo, firebase, firestore, user, handleUser, userFirebase, handleUserFirebase }) {
   const [uid, setUid] = useState(null);
   
   //const auth = firebase.auth();
@@ -74,8 +74,12 @@ export default function HomePage({ logo, firebase, firestore, user, handleUser }
   }, []);
 
   return (
-    <Login logo={logo} firebase={firebase} firestore={firestore} handleUser={handleUser} />
+    <Home logo={logo} firebase={firebase} firestore={firestore} userFirebase={userFirebase} handleUserFirebase={handleUserFirebase} handleUser={handleUser} />
+    
     /*
+    <Login logo={logo} firebase={firebase} firestore={firestore} handleUser={handleUser} />
+
+
 <div className={styles.container}>
       <Menu firebase={firebase} />
       <Head>

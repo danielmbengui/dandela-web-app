@@ -1,37 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser, connectUser } from "../../redux/user/userActions";
-import { styled, useTheme } from '@mui/material/styles';
 import { Grid } from '@mui/material';
 import Image from "next/image";
 import 'firebaseui/dist/firebaseui.css';
-import { myLoader } from '../../functions/ImageLoader';
+import { styled, useTheme } from '@mui/material/styles';
 
 //const logo = "/img/logo-pic-text.png";
 
 
 const Login = ({ logo, links, firebase, firestore, userFirebase }) => {
-    //var firebase = require('firebase');
-    const auth = firebase.auth();
-    const dispatch = useDispatch();
-    const user = useSelector((state) => state.user);
-
-    /*
-
-    const updateUserInfo = () => {
-        dispatch(updateUser());
-    }
-    */
-
-    useEffect(() => {
-        console.log("LIIIIINKS", links)
-        //updateUserInfo();
-    }, [auth, links]);
+    const theme = useTheme();
     //console.log("AUTHOOO", auth);
     useEffect(() => {
         var firebaseui = require('firebaseui');
-            //var ui = new firebaseui.auth.AuthUI(auth);
-
             var uiConfig = {
                 callbacks: {
                     signInSuccessWithAuthResult: function (authResult, redirectUrl) {
@@ -86,7 +67,7 @@ const Login = ({ logo, links, firebase, firestore, userFirebase }) => {
                     // Leave the lines as is for the providers you want to offer your users.
                     {
                         provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
-                        buttonColor: '#2F2F2F',
+                        buttonColor: theme.palette.primary.main,
                         recaptchaParameters: {
                             type: 'image', // 'audio'
                             size: 'normal', // 'invisible' or 'compact'
@@ -126,41 +107,16 @@ const Login = ({ logo, links, firebase, firestore, userFirebase }) => {
                 ui.start('#firebaseui-auth-container', uiConfig);
             }
 
-    }, [auth]);
+    }, [userFirebase]);
 
     return (
         <Grid container
             direction={'column'}
             justifyContent={'center'}
             alignItems={'center'}
-            style={{ width: "100%" }}
+            //style={{ width: "100%" }}
         >
-            <Grid item p={5} style={{ display: 'block' }}>
-
-                <Image
-                    src={logo}
-                    //fill
-                    //width="responsive"
-                    //layout="responsive"
-                    width={100}
-                    height={100}
-                    //height={320}
-                    data-width="1500" data-height="1024"
-                    loader={myLoader}
-                    quality={100}
-                    alt="logo"
-                    //loading='lazy'
-                    priority
-                    sizes="(min-width: 60em) 24vw,
-                            (min-width: 28em) 45vw,
-                            100vw"
-                    sx={{
-                        width: "100%",
-                        height: "auto"
-                    }} 
-                    />
-            </Grid>
-            <Grid item p={3} style={{ textAlign: 'center' }}>
+            <Grid item p={0} style={{ textAlign: 'center' }}>
                 <div id="firebaseui-auth-container"></div>
                 <div id="loader">Loading...</div>
             </Grid>

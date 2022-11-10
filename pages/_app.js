@@ -97,6 +97,10 @@ setPhoneNumber(user.phoneNumber);
     setUser(pUser);
   }
 
+  const handleUserFirebase = (_user) => {
+    setUserFirebase(_user);
+  }
+
 
 
 
@@ -131,7 +135,10 @@ setPhoneNumber(user.phoneNumber);
   content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
 />
         </Head>
-        <Component {...pageProps} logo={logo} links={links} firebase={firebase} firestore={firestore} storage={storage} userFirebase={userFirebase} uid={uid} user={user} handleUser={handleUser} />
+        <Component {...pageProps} 
+        logo={logo} links={links} firebase={firebase} firestore={firestore} storage={storage} 
+        userFirebase={userFirebase} handleUserFirebase={handleUserFirebase}
+        uid={uid} user={user} handleUser={handleUser} />
       </Provider>
     </ColorMode>
 

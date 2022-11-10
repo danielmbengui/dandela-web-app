@@ -1,0 +1,28 @@
+#display-image{
+    width: 400px;
+    height: 225px;
+    border: 1px solid black;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .custom-file-upload {
+    color: var(--primary);
+    cursor: pointer;
+  }
+
+  .fullscreen:-webkit-full-screen {
+    width: auto !important;
+    height: auto !important;
+    margin:auto !important;
+}
+   .fullscreen:-moz-full-screen {
+    width: auto !important;
+    height: auto !important;
+    margin:auto !important;
+}
+   .fullscreen:-ms-fullscreen {
+    width: auto !important;
+    height: auto !important;
+    margin:auto !important;
+}  

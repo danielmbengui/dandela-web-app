@@ -45,6 +45,7 @@ export default function ColorMode({children}) {
                 primary: {
                     //main: "rgb(9, 67, 151)",
                     main: `rgb(${primaryDecimal})`,
+                    contrastText: 'white',
                   }, 
                   secondary: {
                     main: `rgb(${secondaryDecimal})`,
@@ -53,7 +54,6 @@ export default function ColorMode({children}) {
                   background: {
                     menu : greyLight,
                 },
-                
                 text: {
                 },
                 }
