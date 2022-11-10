@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect, useState} from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
-import { AlertTitle, FormHelperText, Grid } from '@mui/material';
+import { AlertTitle, Avatar, FormHelperText, Grid } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -15,6 +15,9 @@ import InputBase from '@mui/material/InputBase';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
+import styles from './Login.module.css';
+import { UploadSharp } from '@mui/icons-material';
+
 
 const TexFieldCustom = styled(TextField)(({ theme }) => ({
     '& .MuiInputBase-input': {
@@ -104,9 +107,25 @@ const TexFieldCustom = styled(TextField)(({ theme }) => ({
 
 export default function CompleteLogin({logo, firestore, userFirebase}) {
     const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
+  const [srcAvatar, setSrcAvatar] = useState('');
 
-  console.log("FIREBASE USER", userFirebase)
+  console.log("FIREBASE USER", userFirebase);
+
+  useEffect(() => {
+    const image_input = document.querySelector("#image-input");
+    image_input.addEventListener("change", function() {
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        const uploaded_image = reader.result;
+        document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
+        setSrcAvatar(uploaded_image);
+      });
+      reader.readAsDataURL(this.files[0]);
+    });
+    
+  })
+
 
   return (
     <Grid container
@@ -116,6 +135,41 @@ export default function CompleteLogin({logo, firestore, userFirebase}) {
     style={{ width: "100%" }}
     //spacing={1.5}
 >
+  <Grid item>
+  <Avatar
+  alt="Remy Sharp"
+  src={srcAvatar}
+  sx={{ width: 100, height: 100 }}
+/>
+  </Grid>
+  <Grid item>
+  <label htmlFor="image-input" className="custom-file-upload">
+    Custom Upload
+</label>
+<input id="image-input" type="file" accept="image/jpeg, image/png, image/jpg" style={{display: 'none'}} />
+  </Grid>
+  <Grid item>
+    <Button onClick={()=>{
+      const image_input = document.querySelector("#image-input");
+      image_input.addEventListener("change", function() {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+          const uploaded_image = reader.result;
+          document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
+        });
+        reader.readAsDataURL(this.files[0]);
+      });
+    }}>OK</Button>
+  </Grid>
+  <Grid item>
+  <input type="file" id="image-input1" accept="image/jpeg, image/png, image/jpg" />
+  </Grid>
+  <Grid item>
+<div id="display-image" style={{
+  width: '400px',
+  height: '225px',
+}}></div>
+  </Grid>
     <Grid item p={5} style={{ display: 'block' }}>
         <Image
             src={logo}

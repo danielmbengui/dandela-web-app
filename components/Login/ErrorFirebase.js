@@ -9,7 +9,7 @@ import { AlertTitle, Grid } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function ErrorFirebase({logo, firestore}) {
+export default function ErrorFirebase({logo}) {
   const [open, setOpen] = React.useState(true);
 
   /*
