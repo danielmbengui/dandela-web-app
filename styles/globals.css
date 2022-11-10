@@ -1,13 +1,30 @@
+@font-face {
+  font-family: "EximaGeometric";   /*Can be any text*/
+  src: local("EximaGeometric"),
+    url("./fonts/Exima\ Geometric.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "ChangaOneRegular";   /*Can be any text*/
+  src: local("ChangaOneRegular"),
+    url("./fonts/ChangaOne-Regular.ttf") format("truetype");
+}
+
 :root {
   /*-----   WINNO BEARZ COLORS   -----*/
   --blue-dandela: rgb(9, 67, 151); /* blue dandela */
+  --blue-dandela-decimal:9, 67, 151; /* blue dandela */
   --blue-opacity-dandela: rgba(9, 67, 151, 0.5); /* blue dandela */
   --blue-light-dandela: rgb(55, 138, 255); /* blue dandela */
+  --blue-light-dandela-decimal: 55, 138, 255; /* blue dandela */
   --blue-light-opacity-dandela: rgba(55, 138, 255, 0.5); /* blue dandela */
   --purple-dandela: rgb(122, 107, 162); /* purple dandela */
-  --primary: rgb(9, 67, 151); /* blue dandela */
+  --purple-dandela-decimal: 122, 107, 162; /* purple dandela */
+  --primary: var(--blue-dandela); /* blue dandela */
+  --primary-decimal: var(--blue-dandela-decimal); /* blue dandela */
   --primary-opacity: var(--blue-opacity-dandela); /* blue dandela */
-  --secondary: pink; /* purple dandela */
+  --secondary: var(--blue-light-dandela); /* purple dandela */
+  --secondary-decimal: var(--blue-light-dandela-decimal); /* purple dandela */
   --secondary-opacity: var(--blue-light-opacity-dandela); /* purple dandela */
 
   --black: rgb(0, 0, 0); /* purple dandela */
@@ -35,7 +52,6 @@
   --brown-dark-winno-decimal: 87, 22, 22;
   --blue-winno-decimal:0, 153, 219;
   --blue-dark-winno-decimal:39, 105, 202;
-
   --primary-text: #000000;
   --secondary-text: #ffffff;
   --text-style-general: 'VT323', monospace;
@@ -75,7 +91,7 @@ body {
   margin: 0;
   color: var(--text-primary);
     background: var(--background-color);
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: 'ChangaOneRegular', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
@@ -84,6 +100,17 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: underline;
+  filter: brightness(80%);
+}
+
 * {
   box-sizing: border-box;
+}
+
+.evidence {
+  font-family: "EximaGeometric";
+  font-weight: bold;
+  color: var(--primary);
 }

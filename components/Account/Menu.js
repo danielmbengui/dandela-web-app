@@ -106,15 +106,16 @@ function Menu(props) {
 
     const dashboard = [
         {
-            name: 'About', link: '/about',
-            styleBackground: pages.about !== undefined && pages.about ? styleItemActive : styleItem,
-            styleText: pages.about !== undefined && pages.about ? styleTextActive : styleItem,
-        },
-        {
             name: 'Profile', link: '/profile',
             styleBackground: pages.profile !== undefined && pages.profile ? styleItemActive : styleItem,
             styleText: pages.profile !== undefined && pages.profile ? styleTextActive : styleItem,
         },
+        {
+            name: 'About', link: '/about',
+            styleBackground: pages.about !== undefined && pages.about ? styleItemActive : styleItem,
+            styleText: pages.about !== undefined && pages.about ? styleTextActive : styleItem,
+        },
+
     ]
 
     const handleDrawerToggle = () => {
@@ -190,68 +191,69 @@ function Menu(props) {
             >
                 <Toolbar>
                     <Grid container
-                    direction={"row"}
-                     //sx={{background:'cyan'}}
-                     justifyContent={'stretch'}
-                     alignItems={'center'}
-                     columns={{xs:12, sm:12}}
-                     >
+                        direction={"row"}
+                        //sx={{background:'cyan'}}
+                        justifyContent={'stretch'}
+                        alignItems={'center'}
+                        columns={{ xs: 12, sm: 12 }}
+                    >
                         <Grid item justifyContent={'center'} alignItems={'center'}
-                        //sx={{background:'yellow'}} 
-                        xs sm
+                            //sx={{background:'yellow'}} 
+                            xs sm
                         >
-                        <Stack direction={"row"} alignItems={"center"} p={1} spacing={0.5} 
-                        //sx={{background:'green'}}
-                        >
-                        <IconButton
-                                color="primary"
-                                aria-label="open drawer"
-                                edge="start"
-                                onClick={handleDrawerToggle}
-                                sx={{ mr: {xs:2, sm:0}, display: { md: 'none' }, 
-                               // background:'cyan'
-                             }}
+                            <Stack direction={"row"} alignItems={"center"} p={1} spacing={0.5}
+                            //sx={{background:'green'}}
                             >
-                                <MenuIcon />
-                            </IconButton>
-                            <Image
-                            src={logo}
-                                width={40}
-                                height={40}
-                                //height={320}
-                                alt="logo"
-                                //loading='lazy'
-                                priority
-                                sizes="(min-width: 60em) 24vw,
+                                <IconButton
+                                    color="primary"
+                                    aria-label="open drawer"
+                                    edge="start"
+                                    onClick={handleDrawerToggle}
+                                    sx={{
+                                        mr: { xs: 2, sm: 0 }, display: { md: 'none' },
+                                        // background:'cyan'
+                                    }}
+                                >
+                                    <MenuIcon />
+                                </IconButton>
+                                <Image
+                                    src={logo}
+                                    width={40}
+                                    height={40}
+                                    //height={320}
+                                    alt="logo"
+                                    //loading='lazy'
+                                    priority
+                                    sizes="(min-width: 60em) 24vw,
                                         (min-width: 28em) 45vw,
                                         100vw"
-                                style={{
-                                    //width: "100%",
-                                    //height: "auto",
-                                    //background:'red'
-                                }} 
-                            />
-                            <Typography variant="h6" noWrap component="div"
-                            sx={{fontWeight:'bold'}}
-                            >
+                                    style={{
+                                        //width: "100%",
+                                        //height: "auto",
+                                        //background:'red'
+                                    }}
+                                />
+                                <Typography variant="h8" noWrap component="div" className='evidence'
+                                    sx={{ fontWeight: 'bold' }}
+                                >
                                     {title}
                                 </Typography>
-                        </Stack>
-                        
+                            </Stack>
+
                         </Grid>
-                        <Grid item   
-                        xs={2} sm={1}             
+                        <Grid item
+                            xs={2} sm={1}
                         //sx={{background:'green'}}
                         >
-                             <Stack direction={"row"} alignItems={"flex-end"}
-                             //sx={{background:'green'}}
-                             >
-                             <FormControlLabel
-                                        control={<MaterialUISwitch sx={{ m: 1 }} checked={checked} onChange={onChangeMode} />}
-                                        //label={`Mode ${theme.palette.mode}`}
-                                        //labelPlacement="start"
-                                    />
-                             </Stack>
+                            <Stack direction={"row"} alignItems={"flex-end"}
+                            //sx={{background:'green'}}
+                            >
+                                <FormControlLabel
+                                    control={<MaterialUISwitch sx={{ m: 1 }} checked={checked} onChange={onChangeMode} />}
+                                //label={`Mode ${theme.palette.mode}`}
+                                //labelPlacement="start"
+                                />
+                            </Stack>
                         </Grid>
                     </Grid>
 

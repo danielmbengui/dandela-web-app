@@ -2,6 +2,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 //import "firebase/firestore";
 import 'firebase/compat/auth';
+import "firebase/compat/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -11,13 +12,16 @@ const firebaseConfig = {
     storageBucket: "dandelawebapp.appspot.com",
     messagingSenderId: "277196487914",
     appId: "1:277196487914:web:91bae7b1a1065c0a51eb93",
-    measurementId: "G-MJ6X1M1YRR"
+    measurementId: "G-MJ6X1M1YRR",
+    storageBucket: "gs://dandelawebapp.appspot.com",
   };
 
 
 firebase.initializeApp(firebaseConfig);
 
 export const firestore = firebase.firestore();
+// Initialize Cloud Storage and get a reference to the service
+export const storage = firebase.storage();
 
 
 export default firebase;

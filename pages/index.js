@@ -16,7 +16,6 @@ export default function HomePage({ logo, firebase, firestore, user, handleUser }
     if (auth.currentUser.phoneNumber != '') {
       window.location.href = "/about";
     }
-    console.log("auth.currentUser AUTH", auth._delegate.currentUser);
   }
   */
  /*

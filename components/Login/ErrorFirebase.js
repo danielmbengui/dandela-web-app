@@ -43,8 +43,8 @@ export default function ErrorFirebase({logo, firestore}) {
             //fill
             //width="responsive"
             //layout="responsive"
-            width={250}
-            height={250}
+            width={100}
+            height={100}
             //height={320}
             alt="logo"
             //loading='lazy'

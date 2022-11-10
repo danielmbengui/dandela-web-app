@@ -25,7 +25,6 @@ const Login = ({ logo, links, firebase, firestore, handleUser }) => {
     useEffect(() => {
         console.log("LIIIIINKS", links)
         //updateUserInfo();
-        //console.log("USER dashboard", auth._delegate.currentUser);
     }, [auth, links]);
     //console.log("AUTHOOO", auth);
     useEffect(() => {
@@ -119,7 +118,13 @@ const Login = ({ logo, links, firebase, firestore, handleUser }) => {
                 privacyPolicyUrl: '<your-privacy-policy-url>'
             };
             var ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth());
-            ui.start('#firebaseui-auth-container', uiConfig);
+            
+            if (!ui.isPendingRedirect() ){
+                ui.start('#firebaseui-auth-container', uiConfig);
+            }else {
+                ui.reset();
+                ui.start('#firebaseui-auth-container', uiConfig);
+            }
         } else {
             /*
             firebase.auth().signOut().then(() => {

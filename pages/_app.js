@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '../styles/globals.css';
 // Import the functions you need from the SDKs you need
-import { firestore } from "../config.firebase";
+import { firestore, storage } from "../config.firebase";
 import firebase from "../config.firebase";
 import store from "../redux/store";
 import { Provider } from "react-redux";
@@ -18,6 +18,8 @@ const links = {
 function MyApp({ Component, pageProps }) {
   const [uid, setUid] = useState(null);
   const [user, setUser] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState(null);
+  const [userFirebase, setUserFirebase] = useState(null);
 
   const hash = hashResult("123456");
   console.log("HAAAASH", hash);
@@ -29,31 +31,9 @@ function MyApp({ Component, pageProps }) {
         // https://firebase.google.com/docs/reference/js/firebase.User
         var uid = user.uid;
         //var docRef = firestore.collection("USER").doc(user.phoneNumber);
-        var docRef = firestore.collection("USER").doc(user.phoneNumber);
-//.withConverter(userConverter);
-//.get();
-
-        docRef.get().then((doc) => {
-          if (doc.exists) {
-            console.log("Document data:", doc.data());
-            // Set with cityConverter
-
-            //window.location.href = "/about";
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-            //window.location.href = "/account/errorlogin";
-          }
-        }).catch((error) => {
-          console.log("Error getting document:", error);
-        });
+        
+setPhoneNumber(user.phoneNumber);
 /*
-        docRef
-    .onSnapshot((doc) => {
-        console.log("Current data: ", doc.data());
-    });
-    */
-
     firestore.collection("USER").where("phoneNumber", "==", user.phoneNumber)
     .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
@@ -68,6 +48,7 @@ function MyApp({ Component, pageProps }) {
             }
         });
     });
+    */
     
         //setUid(uid);
         console.log("onAuthStateChanged user", user.phoneNumber);
@@ -77,10 +58,38 @@ function MyApp({ Component, pageProps }) {
         // ...
         //setUid(null);
         console.log("onAuthStateChanged user", "null");
+        setPhoneNumber(null);
       }
 
     });
   }, []);
+
+  useEffect(() => {
+    if( phoneNumber){
+      var docRef = firestore.collection("USER").doc(phoneNumber);
+    //.withConverter(userConverter);
+//.get();
+
+    docRef.get().then((doc) => {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+        // Set with cityConverter
+        setUserFirebase(doc.data());
+        //setPhoneNumber(doc.data().phoneNumber);
+        //window.location.href = "/about";
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        setUserFirebase(null);
+        //window.location.href = "/account/errorlogin";
+      }
+    }).catch((error) => {
+      console.log("Error getting document:", error);
+      setUserFirebase(null);
+      //setPhoneNumber(null);
+    });
+    }
+  }, [phoneNumber]);
 
 
   const handleUser = (pUser) => {
@@ -115,7 +124,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <ColorMode>
       <Provider store={store}>
-        <Component {...pageProps} logo={logo} links={links} firebase={firebase} firestore={firestore} uid={uid} user={user} handleUser={handleUser} />
+        <Component {...pageProps} logo={logo} links={links} firebase={firebase} firestore={firestore} storage={storage} userFirebase={userFirebase} uid={uid} user={user} handleUser={handleUser} />
       </Provider>
     </ColorMode>
 
