@@ -137,7 +137,7 @@ export default function CompleteLogin({logo, firestore, userFirebase}) {
 >
   <Grid item>
   <Avatar
-  alt="Remy Sharp"
+  alt="Dandela Web App"
   src={srcAvatar}
   sx={{ width: 100, height: 100 }}
 />

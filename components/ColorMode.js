@@ -4,7 +4,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 export default function ColorMode({children}) {
-    let screenMode = 'dark';
+    let screenMode = 'light';
     const [mode, setMode] = useState(screenMode);
     //const [primaryDecimal, setPrimaryDecimal] = useState("var(--blue-dandela-decimal)");
 
