@@ -6,7 +6,7 @@ import firebase from "../config.firebase";
 import store from "../redux/store";
 import { Provider } from "react-redux";
 import ColorMode from "../components/ColorMode";
-import hashResult from "../functions/HashResult";
+import {hashResult} from "../functions/HashResult";
 import User, { userConverter } from "../classes/UserClass";
 const logo = "/img/logo.png";
 

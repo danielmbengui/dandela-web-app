@@ -1,5 +1,5 @@
 import { createHash } from 'crypto';
 
-export default function hashResult(string) {
+export const hashResult = (string) => {
   return createHash('sha256').update(string).digest('hex');
 }
