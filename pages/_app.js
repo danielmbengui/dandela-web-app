@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import '../styles/globals.css';
-//import '../styles/firebaseui.css';
+import '../styles/firebaseui.css';
 // Import the functions you need from the SDKs you need
 import { firestore, storage } from "../config.firebase";
 import firebase from "../config.firebase";

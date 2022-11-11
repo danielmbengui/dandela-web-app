@@ -847,7 +847,7 @@ dialog{
     margin:auto;
     border:solid;
     padding:1em;
-    background:var(--background-color);
+    background:transparent;
     color:var(--text-primary);
     display:block
 }
@@ -1331,8 +1331,9 @@ input.firebaseui-input,input.firebaseui-input-invalid{
 @media (max-width:480px){
     .firebaseui-container{
         box-shadow:none;
-        max-width:none;
-        width:100%
+        max-width:100%;
+        width:100%;
+        background: transparent;
     }
     .firebaseui-card-header{
         border-bottom:1px solid var(--text-primary);

@@ -87,7 +87,7 @@ const Home = ({logo, links, firebase, firestore, storage, userFirebase, handleUs
         return (
           <Toolbar 
           //sx={{background: 'red'}} 
-          justifyContent={'flex-end'}
+          //justifyContent={'flex-end'}
           >
             <Grid container justifyContent={'flex-end'} alignItems={'center'} 
             //</Toolbar>sx={{background: 'green'}}

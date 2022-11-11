@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Grid } from '@mui/material';
 import Image from "next/image";
-import 'firebaseui/dist/firebaseui.css';
+//import 'firebaseui/dist/firebaseui.css';
 import { styled, useTheme } from '@mui/material/styles';
 
 //const logo = "/img/logo-pic-text.png";
