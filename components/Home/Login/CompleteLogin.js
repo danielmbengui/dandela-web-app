@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
-import { AlertTitle, Avatar, Badge, FormHelperText, Grid } from '@mui/material';
+import { AlertTitle, Avatar, Badge, FormHelperText, Grid, Stack } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -259,9 +259,11 @@ export default function CompleteLogin({logo, firebase, firestore, storage, userF
     </Box>
     </Grid>
 <Grid container spacing={1.5} direction={'column'} justifyContent={'center'} alignItems={'center'}
-//sx={{width:'400px', }}
+sx={{background:'yellow',}}
+pl={1} pr={1}
+columns={{xs:12}}
 >
-<Grid item mb={3}>
+<Grid item mb={3} xs>
 <Badge
   overlap="circular"
   anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
@@ -277,10 +279,37 @@ export default function CompleteLogin({logo, firebase, firestore, storage, userF
 </Badge>
 <input id="image-input" type="file" accept="image/jpeg, image/png, image/jpg" style={{display: 'none'}} />
   </Grid>
+
+  <Grid item xs={12}>
+  <Stack direction={'column'} justifyContent={'center'} alignItems={'stretch'}
+  sx={{background:'cyan'}}
+  >
+  <TextField
+    fullWidth
+          error={false}
+          id="outlined-error-helper-text"
+          label="Name"
+          //required
+          //defaultValue="Hello World"
+          helperText="Incorrect entry."
+          theme={theme}
+          placeholder={"any name"}
+          color="primary"
+          sx={{
+            color:theme.palette.primary,
+            width:'100%'
+          }}
+        />
+  </Stack>
+  </Grid>
+
 <Grid item 
-//sx={{background: 'green'}}
+xs={12}
+sx={{width:'90%', background: 'green'}}
+pl={2} pr={2}
 >
     <TexFieldCustom
+    fullWidth
           error={false}
           id="outlined-error-helper-text"
           label="Name"
@@ -297,7 +326,7 @@ export default function CompleteLogin({logo, firebase, firestore, storage, userF
         />
     
     </Grid>
-    <Grid item>
+    <Grid item xs={12}>
     <TexFieldCustom
           error={false}
           id="yes1"
@@ -315,7 +344,7 @@ export default function CompleteLogin({logo, firebase, firestore, storage, userF
         />
     
     </Grid>
-    <Grid item>
+    <Grid item xs={12}>
     <TexFieldCustom
           error={true}
           id="yes2"
@@ -334,7 +363,7 @@ export default function CompleteLogin({logo, firebase, firestore, storage, userF
     
     </Grid>
 
-    <Grid item>
+    <Grid item xs={12}>
         <Button variant='contained' onClick={() => {
 var washingtonRef = firestore.collection("USER").doc(userFirebase.phoneNumber);
 const _user = JSON.parse(JSON.stringify(userFirebase));
@@ -355,7 +384,7 @@ return washingtonRef.update({
         </Button>
     </Grid>
     
-    <Grid item>
+    <Grid item xs={12}>
     <FormControl variant="standard">
         <InputLabel shrink htmlFor="bootstrap-input" >
           Bootstrap

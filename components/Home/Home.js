@@ -137,7 +137,7 @@ const Home = ({logo, links, firebase, firestore, storage, userFirebase, handleUs
 }
 
 {
-    <Login logo={logo} firebase={firebase} firestore={firestore} userFirebase={userFirebase} />
+    !userFirebase && <Login logo={logo} firebase={firebase} firestore={firestore} userFirebase={userFirebase} />
 }
         </Grid>
     </Grid>

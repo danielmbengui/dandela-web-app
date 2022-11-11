@@ -215,9 +215,14 @@ export default function CompleteLogin({logo, firestore, userFirebase}) {
       
     </Box>
     </Grid>
-<Grid container spacing={1.5} direction={'column'} justifyContent={'center'} alignItems={'center'}>
-<Grid item >
+<Grid container spacing={1.5} direction={'column'} justifyContent={'center'} alignItems={'center'}
+sx={{background:'red'}}
+>
+<Grid item 
+sx={{background:'green'}}
+>
     <TexFieldCustom
+    fullWidth
           error={false}
           id="outlined-error-helper-text"
           label="Name"
@@ -228,7 +233,7 @@ export default function CompleteLogin({logo, firestore, userFirebase}) {
           placeholder={"any name"}
           color="primary"
           sx={{
-            color:theme.palette.primary
+            color:theme.palette.primary,
           }}
         />
     

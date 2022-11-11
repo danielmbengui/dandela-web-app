@@ -6,7 +6,6 @@ export default function Document() {
             <Head>
             <meta name="description" content="Created by Daniel Slaver Mbengui" />
             <link rel="icon" href="/favicon.ico" />
-            
 <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
 
             <meta name="application-name" content="PWA App" />
