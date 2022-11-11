@@ -215,7 +215,7 @@ input.mdl-button[type=submit]{
     color:rgba(0,0,0,.26)
 }
 .mdl-button .material-icons{
-    vertical-align:middle
+    vertical-align: middle;
 }
 .mdl-card{
     display:flex;
@@ -895,7 +895,8 @@ dialog.fixed{
     overflow:visible
 }
 .firebaseui-card-header{
-    padding:24px 24px 0 24px
+    padding:24px 24px 0 24px;
+    color:var(--primary);
 }
 .firebaseui-card-content{
     padding:0 24px
