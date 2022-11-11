@@ -131,14 +131,14 @@ const Home = ({logo, links, firebase, firestore, storage, userFirebase, handleUs
         </Grid>
         <Grid item xs={12}>
         {}
-
+        {
+    <Login logo={logo} firebase={firebase} firestore={firestore} userFirebase={userFirebase} />
+}
 {
      userFirebase && !userFirebase.displayName && <CompleteLogin logo={logo} firebase={firebase} firestore={firestore} storage={storage} userFirebase={userFirebase} handleUserFirebase={handleUserFirebase} />
 }
 
-{
-    !userFirebase && <Login logo={logo} firebase={firebase} firestore={firestore} userFirebase={userFirebase} />
-}
+
         </Grid>
     </Grid>
         </>

@@ -73,6 +73,7 @@
 
 [data-theme="dark"] {
   --primary: var(--secondary);
+  --primary-opacity: var(--secondary-opacity); /* blue dandela */
   --background-color: black;
   --text-primary: white;
   --text-secondary: black;
