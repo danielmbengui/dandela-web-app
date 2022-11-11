@@ -259,7 +259,7 @@ export default function CompleteLogin({logo, firebase, firestore, storage, userF
     </Box>
     </Grid>
 <Grid container spacing={1.5} direction={'column'} justifyContent={'center'} alignItems={'center'}
-sx={{background:'yellow',}}
+//sx={{background:'yellow',}}
 pl={1} pr={1}
 columns={{xs:12}}
 >
@@ -282,7 +282,7 @@ columns={{xs:12}}
 
   <Grid item xs={12}>
   <Stack direction={'column'} justifyContent={'center'} alignItems={'stretch'}
-  sx={{background:'cyan'}}
+  //sx={{background:'cyan'}}
   >
   <TextField
     fullWidth
@@ -305,8 +305,7 @@ columns={{xs:12}}
 
 <Grid item 
 xs={12}
-sx={{width:'90%', background: 'green'}}
-pl={2} pr={2}
+//sx={{width:'90%', background: 'green'}}
 >
     <TexFieldCustom
     fullWidth
