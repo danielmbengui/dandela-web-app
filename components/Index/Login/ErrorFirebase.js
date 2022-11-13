@@ -11,7 +11,15 @@ import Link from 'next/link';
 import { myLoader } from '../../../functions/ImageLoader';
 
 export default function ErrorFirebase({ logo, user }) {
+    const [phoneNumber, setPhoneNumber] = useState('');
 
+    useEffect(() => {
+      if (user){
+        setPhoneNumber(user.phoneNumber);
+      }else{
+        setPhoneNumber('');
+      }
+    }, [user]);
     return (
         <Grid container
             direction={'column'}
@@ -38,7 +46,7 @@ export default function ErrorFirebase({ logo, user }) {
                         sx={{ mb: 2, textAlign: 'start' }}
                     >
                         <AlertTitle sx={{ mb: 0.5, alignItems: 'flex-start' }}>Error</AlertTitle>
-                        Some unrecoverable error occurred during sign-in with this number: {user.phoneNumber}. — <strong>retry to connect!</strong>
+                        Some unrecoverable error occurred during sign-in with this number: {phoneNumber}. — <strong>retry to connect!</strong>
                     </Alert>
                     <Link href="/">
                         <Button
