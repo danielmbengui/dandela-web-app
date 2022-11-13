@@ -1,9 +1,10 @@
 import React, { useState,useMemo, createContext, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useUserContext } from './UserProvider';
 
-export const ColorModeContext = createContext({ toggleColorMode: () => {} });
+export const ThemeModeProviderContext = createContext({ toggleColorMode: () => {} });
 
-export default function ColorMode({children}) {
+export default function ThemeModeProvider({children}) {
     let screenMode = 'light';
     const [mode, setMode] = useState(screenMode);
     //const [primaryDecimal, setPrimaryDecimal] = useState("var(--blue-dandela-decimal)");
@@ -21,7 +22,7 @@ export default function ColorMode({children}) {
       }, [mode]);
       
 
-    const colorMode = useMemo(
+    const themeMode = useMemo(
       () => ({
         toggleColorMode: () => {
           setMode((prevMode) => (prevMode === 'dark' ? 'light' : 'dark'));
@@ -86,10 +87,10 @@ warning: {
     );
   
     return (
-      <ColorModeContext.Provider value={colorMode}>
+      <ThemeModeProviderContext.Provider value={themeMode}>
         <ThemeProvider theme={theme}>          
           {children}
         </ThemeProvider>
-      </ColorModeContext.Provider>
+      </ThemeModeProviderContext.Provider>
     );
   }

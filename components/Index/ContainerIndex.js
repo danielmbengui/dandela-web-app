@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { AppBar, FormControlLabel, Grid, Switch, Toolbar, Typography } from "@mui/material";
 import Image from "next/image";
-import Login from './Login/Login';
-import CompleteLogin from './Login/CompleteLogin';
 import { myLoader } from '../../functions/ImageLoader';
-import { ColorModeContext } from '../ColorMode';
+import { ThemeModeProviderContext } from '../../context/ThemeProvider';
+//import Login from './Login/Login';
+//import CompleteLogin from './Login/CompleteLogin';
+//import { myLoader } from '../../functions/ImageLoader';
+//import { ColorModeContext } from '../ColorMode';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -54,68 +56,44 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     },
 }));
 
-const Home = ({ logo, links, firebase, firestore, storage, userFirebase, handleUserFirebase }) => {
-    const theme = useTheme();
-    const colorMode = useContext(ColorModeContext);
-    const [mode, setMode] = useState(theme.palette.mode);
-    const [checked, setChecked] = useState(theme.palette.mode === 'dark' ? true : false);
-    const [phoneNumber, setPhoneNumber] = useState('');
-
-    const [content, setContent] = useState(<></>);
-
-    const onChangeMode = (event) => {
-        colorMode.toggleColorMode();
-        setMode(event.target.checked ? 'dark' : 'light');
-        setChecked(event.target.checked ? true : false);
-        //dispatch(updateScreenMode(event.target.checked ? 'dark' : 'light'));
-    }
-
-    useEffect(() => {
-        console.log("user firebase HOME", userFirebase);
-        if (userFirebase) {
-            setPhoneNumber(userFirebase.phoneNumber);
-            if (!userFirebase.displayName) {
-                setContent(<CompleteLogin logo={logo} firebase={firebase} firestore={firestore} storage={storage} userFirebase={userFirebase} handleUserFirebase={handleUserFirebase} />);
-            }
-
-        } else {
-            setContent(<Login logo={logo} firebase={firebase} firestore={firestore} userFirebase={userFirebase} />);
-        }
-    }, [userFirebase])
-
-    function appBarLabel(label) {
-        return (
-            <Toolbar
-            //sx={{background: 'red'}} 
-            //justifyContent={'flex-end'}
-            >
+const AppBarIndex = ({ checked, onChangeMode }) => {
+    return (
+        <AppBar position="static" elevation={0} sx={{ height: '10vh', background: 'transparent' }}>
+            <Toolbar>
                 <Grid container justifyContent={'flex-end'} alignItems={'center'}
                 //sx={{background: 'green'}}
                 >
                     <Grid item>
                         <FormControlLabel
                             control={<MaterialUISwitch sx={{ m: 1 }} checked={checked} onChange={onChangeMode} />}
-                        //label={`Mode ${theme.palette.mode}`}
-                        //labelPlacement="start"
                         />
                     </Grid>
                 </Grid>
             </Toolbar>
-        );
+        </AppBar>
+    );
+}
+
+export default function ContainerIndex({ children, logo, }) {
+    const theme = useTheme();
+    const themeMode = useContext(ThemeModeProviderContext);
+    const [checked, setChecked] = useState(theme.palette.mode === 'dark' ? true : false);
+
+    const onChangeMode = (event) => {
+        themeMode.toggleColorMode();
+        setChecked(event.target.checked ? true : false);
     }
 
     return (
         <>
-            <AppBar position="static" elevation={0} sx={{ height: '10vh', background: 'transparent' }}>
-                {appBarLabel('default')}
-            </AppBar>
+            <AppBarIndex checked={checked} onChangeMode={onChangeMode} />
             <Grid container
                 direction={'column'}
                 justifyContent={'center'}
                 alignItems={'center'}
-                //style={{ width: "100%", marginTop:10 }}
                 mt={5}
                 columns={{ xs: 12 }}
+                pb={10}
             >
                 <Grid item p={5} style={{ display: 'block' }} xs={12}>
                     <Image
@@ -123,26 +101,16 @@ const Home = ({ logo, links, firebase, firestore, storage, userFirebase, handleU
                         width={100}
                         height={100}
                         alt="logo"
-                        //layout="responsive"
                         priority
                         quality={100}
                         loader={myLoader}
                     />
                 </Grid>
+
                 <Grid item xs={12}>
-                    { }
-                    {
-                        !userFirebase && <Login logo={logo} firebase={firebase} firestore={firestore} userFirebase={userFirebase} />
-                    }
-                    {
-                        userFirebase && !userFirebase.displayName && <CompleteLogin logo={logo} firebase={firebase} firestore={firestore} storage={storage} userFirebase={userFirebase} handleUserFirebase={handleUserFirebase} />
-                    }
-
-
+                    {children}
                 </Grid>
             </Grid>
         </>
     )
-}
-
-export default Home;
+};

@@ -1,8 +1,8 @@
+// v9 compat packages are API compatible with v8 code
 import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
-//import "firebase/firestore";
 import 'firebase/compat/auth';
-import "firebase/compat/storage";
+import 'firebase/compat/firestore';
+import 'firebase/compat/storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -17,7 +17,7 @@ const firebaseConfig = {
   };
 
 
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 
 export const firestore = firebase.firestore();
 // Initialize Cloud Storage and get a reference to the service

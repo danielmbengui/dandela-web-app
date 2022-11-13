@@ -115,6 +115,7 @@ const Login = ({ logo, links, firebase, firestore, userFirebase }) => {
             justifyContent={'center'}
             alignItems={'center'}
             //style={{ width: "100%" }}
+            pb={5}
         >
             <Grid item p={0} style={{ textAlign: 'center' }}>
                 <div id="firebaseui-auth-container"></div>

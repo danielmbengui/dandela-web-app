@@ -275,7 +275,7 @@ columns={{xs:12}}
       </label>
   }
 >
-      <Avatar id="avatar-user" className={styles['fullscreen']} alt="Avatar user" src={srcAvatar} sx={{ width: 100, height: 100 }} />
+      <Avatar id="avatar-user" className={styles['fullscreen']} src={srcAvatar} sx={{ width: 100, height: 100 }} />
 </Badge>
 <input id="image-input" type="file" accept="image/jpeg, image/png, image/jpg" style={{display: 'none'}} />
   </Grid>

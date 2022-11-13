@@ -1,82 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Head from 'next/head'
 import Image from "next/image";
 import Login from '../components/Login/Login'
-import { firestore } from "../config.firebase";
-import firebase from "../config.firebase";
 import Home from '../components/Home/Home';
+import Index from '../components/Index/Index';
+import { firestore, storage } from "../config.firebase";
+import firebase from "../config.firebase";
 
-export default function HomePage({ logo, firebase, firestore, user, handleUser, userFirebase, handleUserFirebase }) {
-  const [uid, setUid] = useState(null);
+export default function HomePage({logo, firebase, firestore, userFirebase, user, handleUser}) {
+  //const [user, setUser] = useUserContext();
+  //const { state, userReducer } = useAppContext();
+  //console.log("STATE ++++++++", state);
+  //console.log("USER_REDUCER ++++++++", userReducer);
+/*
+  const handleUser = (pUser) => {
+    setUser(pUser);
+  }
+  */
+console.log("CUSTOM KEY", process.env.customKey)
   
   //const auth = firebase.auth();
   //console.log("AUTH index", auth);
-  /*
-  if (auth.currentUser) {
-    if (auth.currentUser.phoneNumber != '') {
-      window.location.href = "/about";
-    }
-  }
-  */
- /*
-  firebase.auth().signOut().then(() => {
-    // Sign-out successful.
-  }).catch((error) => {
-    // An error happened.
-  });
-  */
-  
-
-
-  
-/*
-  useEffect(() => {
-
-  
-    //window.location.href = "/about";
-    console.log("useEffect auth.currentUser", auth);
-  }, [auth]);
-  */
-  
-
-  /*
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      let uid = user.uid;
-
-      setUid(uid);
-      // ...
-    } else {
-      //handleUser(null);
-      setUid(null);
-    }
-    console.log("AUTH index onAuthStateChanged", user);
-
-  });
-  */
-
   const [content, setContent] = useState(<></>);
-  /*
-  useEffect(() => {
-    //setUser(auth.currentUser);
-    //console.log("AUTHOOO", auth);
-    console.log("AUTH index", auth);
-    //console.log("USER", user);
-  }, [auth.currentUser]);
-  */
-
 
   useEffect(() => {
 
-
-  }, []);
+    console.log("userFirebase +++++++", userFirebase);
+    console.log("user ++++++++", user);
+  }, [user]);
 
   return (
-    <Home logo={logo} firebase={firebase} firestore={firestore} userFirebase={userFirebase} handleUserFirebase={handleUserFirebase} handleUser={handleUser} />
-    
+    <Index logo={logo} firebase={firebase} firestore={firestore} user={user} handleUser={handleUser} />
+
     /*
+        <Home logo={logo} firebase={firebase} firestore={firestore} userFirebase={userFirebase} handleUserFirebase={handleUserFirebase} handleUser={handleUser} />
+
+
     <Login logo={logo} firebase={firebase} firestore={firestore} handleUser={handleUser} />
 
 
@@ -147,3 +106,15 @@ export default function HomePage({ logo, firebase, firestore, user, handleUser, 
     */
   )
 }
+
+/*
+// This gets called on every request
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch(`https://.../data`)
+  const data = await res.json()
+
+  // Pass data to the page via props
+  return { props: { data } }
+}
+*/
