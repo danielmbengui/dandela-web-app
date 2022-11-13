@@ -19,7 +19,7 @@ import styles from './CompleteLogin.module.css';
 import { UploadSharp } from '@mui/icons-material';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import ContainerIndex from '../ContainerIndex';
-import { hashResult } from '../../../functions/HashResult';
+//import hashResult from '../../../functions/ConvertToHash';
 
 const TexFieldCustom = styled(TextField)(({ theme }) => ({
   '& .MuiInputBase-input': {
@@ -182,7 +182,7 @@ export default function CompleteLogin({ logo, firebase, firestore, user, handleU
     const _userFirebase = JSON.parse(JSON.stringify(user));
     const _user = firebase.auth().currentUser;
     _userFirebase.displayName = displayName;
-    _userFirebase.password = hashResult('123456');
+    //_userFirebase.password = hashResult('123456');
     _userFirebase.photoURL = photoURL;
 
     if (photoURL && photoFile) {
