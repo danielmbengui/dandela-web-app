@@ -8,16 +8,9 @@ import Menu from '../components/Account/Menu';
 export default function ProfilePage({firebase, auth, dashboard}) {
     return(
         <>
-        {
-            /*
-            <Dashboard pages={{ profile: true, }} content={<Profile />} />
-            */
-        }
         <Menu pages={{ profile: true, }} title={"Profile"}>
             <Profile />
         </Menu>
-        </>
-
-        
+        </>  
     )
 }
