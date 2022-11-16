@@ -51,7 +51,7 @@ const Login = ({ logo, links, firebase, firestore, userFirebase }) => {
                         docRef.get().then((doc) => {
                             if (doc.exists) {
                                 console.log("Document data:", doc.data());
-                                window.location.href = "/about";
+                                window.location.href = "/profile";
                             } else {
                                 // doc.data() will be undefined in this case
                                 console.log("No such document!");

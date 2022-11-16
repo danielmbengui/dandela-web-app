@@ -4,14 +4,10 @@ import { AppBar, FormControlLabel, Grid, Switch, Toolbar, Typography } from "@mu
 import Image from "next/image";
 import { myLoader } from '../../functions/ImageLoader';
 import { ThemeModeProviderContext } from '../../context/ThemeProvider';
-//import Login from './Login/Login';
-//import CompleteLogin from './Login/CompleteLogin';
-//import { myLoader } from '../../functions/ImageLoader';
-//import { ColorModeContext } from '../ColorMode';
 
-const logo = "/img/logo.png";
+const srcLogo = "/img/logo.png";
 
-const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+const MaterialUISwitch = styled(Switch)(() => ({
     width: 62,
     height: 34,
     padding: 7,
@@ -58,7 +54,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     },
 }));
 
-const AppBarIndex = ({ checked, onChangeMode }) => {
+const AppBarLogin = ({ checked, onChangeMode }) => {
     return (
         <AppBar position="static" elevation={0} sx={{ height: '10vh', background: 'transparent' }}>
             <Toolbar>
@@ -76,7 +72,7 @@ const AppBarIndex = ({ checked, onChangeMode }) => {
     );
 }
 
-export default function ContainerIndex({children}) {
+export default function ContainerLogin({ children }) {
     const theme = useTheme();
     const themeMode = useContext(ThemeModeProviderContext);
     const [checked, setChecked] = useState(theme.palette.mode === 'dark' ? true : false);
@@ -88,7 +84,7 @@ export default function ContainerIndex({children}) {
 
     return (
         <>
-            <AppBarIndex checked={checked} onChangeMode={onChangeMode} />
+            <AppBarLogin checked={checked} onChangeMode={onChangeMode} />
             <Grid container
                 direction={'column'}
                 justifyContent={'center'}
@@ -99,7 +95,7 @@ export default function ContainerIndex({children}) {
             >
                 <Grid item p={5} style={{ display: 'block' }} xs={12}>
                     <Image
-                        src={logo}
+                        src={srcLogo}
                         width={100}
                         height={100}
                         alt="logo"

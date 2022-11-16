@@ -1,10 +1,13 @@
 // ./pages/demo
 import React from 'react'
 import { withAuthUser, AuthAction } from 'next-firebase-auth'
+import PermanentBackdrop from '../components/Loading/PermanentBackdrop'
+import Login from '../components/Index/Login/Login'
+import Index from '../components/Index/Index'
 
-const MyLoader = () => <div>Loading...</div>
+const MyLoader = () => <PermanentBackdrop />
 
-const LoginPage = () => <div>My login page</div>
+const LoginPage = () => <Index />
 
 export default withAuthUser({
     whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,

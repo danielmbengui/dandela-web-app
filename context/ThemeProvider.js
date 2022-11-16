@@ -5,7 +5,7 @@ import { useUserContext } from './UserProvider';
 export const ThemeModeProviderContext = createContext({ toggleColorMode: () => {} });
 
 export default function ThemeModeProvider({children}) {
-    let screenMode = 'light';
+    let screenMode = 'dark';
     const [mode, setMode] = useState(screenMode);
     //const [primaryDecimal, setPrimaryDecimal] = useState("var(--blue-dandela-decimal)");
 

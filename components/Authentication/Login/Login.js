@@ -1,16 +1,10 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
 import { Grid } from '@mui/material';
-import Image from "next/image";
-//import 'firebaseui/dist/firebaseui.css';
 import { styled, useTheme } from '@mui/material/styles';
-import PermanentBackdrop from '../../Loading/PermanentBackdrop';
 import { firestore } from '../../../config.firebase';
 import firebase from '../../../config.firebase';
-//const logo = "/img/logo-pic-text.png";
 
-
-const Login = ({ user, handleUser }) => {
+export default function Login(){
     const theme = useTheme();
     useEffect(() => {
         var firebaseui = require('firebaseui');
@@ -22,10 +16,6 @@ const Login = ({ user, handleUser }) => {
                     // or whether we leave that to developer to handle.
                     //handleUser(auth.currentUser);
                     var userFirebase = authResult.user;
-                    var credential = authResult.credential;
-                    var isNewUser = authResult.additionalUserInfo.isNewUser;
-                    var providerId = authResult.additionalUserInfo.providerId;
-                    var operationType = authResult.operationType;
                     var docRef = firestore.collection("USER").doc(userFirebase.phoneNumber);
 
                     docRef.get().then((doc) => {
@@ -39,17 +29,17 @@ const Login = ({ user, handleUser }) => {
                                 console.log("Document successfully written!");
                                 //handleUser(_user);
                             });
-                            window.location.href = "/about";
+                            window.location.href = "/profile";
                         } else {
                             // doc.data() will be undefined in this case
                             console.log("No such document!");
                             //handleUser(null);
-                            window.location.href = "/login/errorlogin";
+                            window.location.href = "/authentication/errorlogin";
                         }
                     }).catch((error) => {
                         console.log("Error getting document:", error);
+                        window.location.href = "/authentication/errorlogin";
                     });
-                    console.log("AUTH login", auth.currentUser);
                 },
                 signInFailure: function (error) {
                     // Some unrecoverable error occurred during sign-in.
@@ -58,7 +48,7 @@ const Login = ({ user, handleUser }) => {
                     // 'firebaseui/anonymous-upgrade-merge-conflict' when merge conflict
                     // occurs. Check below for more details on this.
                     //return handleUIError(error);
-                    window.location.href = "/login/errorfirebase";
+                    window.location.href = "/authentication/errorfirebase";
                     return false;
                 },
                 uiShown: function () {
@@ -131,5 +121,3 @@ const Login = ({ user, handleUser }) => {
         </Grid>
     );
 }
-
-export default Login;

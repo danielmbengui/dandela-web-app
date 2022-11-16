@@ -17,7 +17,7 @@ export default function Index({ state, userReducer, logo, firebase, firestore, u
     const theme = useTheme();
     const [content, setContent] = useState(<></>);
 
-
+/*
     useEffect(() => {
         if (!userReducer) {
             setContent(<Login firebase={firebase} firestore={firestore} user={user} handleUser={handleUser} />);
@@ -31,10 +31,11 @@ export default function Index({ state, userReducer, logo, firebase, firestore, u
             setContent(<></>);
         }
     }, []);
+    */
 
     return (
-        <ContainerIndex logo={logo} firebase={firebase} firestore={firestore} user={user} handleUser={handleUser}>
-            {!user && content}
+        <ContainerIndex>
+            <Login />
         </ContainerIndex>
     )
 };

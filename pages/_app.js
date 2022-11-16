@@ -14,6 +14,7 @@ import { UserProvider } from "../context/UserProvider";
 import AppProvider, { AppContext } from "../context/AppProvider";
 import initAuth from '../initAuth' // the module you created above
 
+initAuth();
 
 
 const logo = "/img/logo.png";
@@ -99,7 +100,7 @@ function MyApp({ Component, pageProps, }) {
     setUserFirebase(_user);
   }
 
-  initAuth();
+  
 
   return (
     <ThemeModeProvider>
@@ -113,6 +114,7 @@ function MyApp({ Component, pageProps, }) {
         </Head>
         <Component {...pageProps}
           logo={logo} links={links}
+          phoneNumber={phoneNumber}
           firebase={firebase} firestore={firestore} storage={storage}
           user={user} handleUser={handleUser}
           userFirebase={userFirebase} handleUserFirebase={handleUserFirebase}

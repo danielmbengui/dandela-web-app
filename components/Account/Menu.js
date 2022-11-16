@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
-import { ColorModeContext } from '../ColorMode';
+import { ThemeModeProviderContext } from '../../context/ThemeProvider';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -98,7 +98,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 function Menu(props) {
     const { window, children, firebase, auth, content, pages, currentOpen, title } = props;
     const theme = useTheme();
-    const colorMode = useContext(ColorModeContext);
+    const colorMode = useContext(ThemeModeProviderContext);
     const [mode, setMode] = useState(theme.palette.mode);
     const [checked, setChecked] = useState(theme.palette.mode === 'dark' ? true : false);
 

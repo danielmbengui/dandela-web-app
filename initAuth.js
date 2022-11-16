@@ -4,8 +4,8 @@ import adminFirebaseConfig from './config.admin.firebase';
 
 const initAuth = () => {
   init({
-    authPageURL: '/profile',
-    appPageURL: '/completelogin',
+    authPageURL: '/',
+    appPageURL: '/profile',
     loginAPIEndpoint: '/api/login', // required
     logoutAPIEndpoint: '/api/logout', // required
     onLoginRequestError: (err) => {
