@@ -24,7 +24,7 @@ const initAuth = () => {
         projectId: 'dandelawebapp',
         clientEmail: 'daniel.mbengui@gmail.com',
         // The private key must not be accessible on the client side.
-        privateKey: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY,
       },
       databaseURL: 'https://my-example-app.firebaseio.com',
     },

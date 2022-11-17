@@ -13,7 +13,6 @@ const firebaseConfig = {
     messagingSenderId: "277196487914",
     appId: "1:277196487914:web:91bae7b1a1065c0a51eb93",
     measurementId: "G-MJ6X1M1YRR",
-    storageBucket: "gs://dandelawebapp.appspot.com/",
   };
 
 
