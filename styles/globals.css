@@ -54,7 +54,7 @@
   --blue-dark-winno-decimal:39, 105, 202;
   --primary-text: #000000;
   --secondary-text: #ffffff;
-  --text-style-general: 'VT323', monospace;
+  --text-style-general: 'EximaGeometric';
   --text-style-title: 'Press Start 2P', sans-serif;
 }
 
@@ -93,8 +93,11 @@ body {
   margin: 0;
   color: var(--text-primary);
     background: var(--background-color);
+    /*font-family: var(--text-style-general);
+    */
   font-family: 'ChangaOneRegular', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    
 }
 
 a {
@@ -112,7 +115,7 @@ a:hover {
 }
 
 .evidence {
-  font-family: "EximaGeometric";
+  font-family: "ChangaOneRegular";
   font-weight: bold;
-  color: var(--primary);
+  font-size: x-large;
 }

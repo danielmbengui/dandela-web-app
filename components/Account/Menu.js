@@ -216,7 +216,9 @@ function Menu(props) {
                 <AppBar
                     position="fixed"
                     sx={{
-                        background: theme.palette.background.menu,
+                        //background: theme.palette.background.menu,
+                        //background: 'transparent',
+                        background: 'var(--background-color)',
                         color: "var(--primary)",
                         width: { md: `calc(100% - ${drawerWidth}px)` },
                         ml: { md: `${drawerWidth}px` },
@@ -249,7 +251,14 @@ function Menu(props) {
                                     >
                                         <MenuIcon />
                                     </IconButton>
-                                    <Image
+                                    <Typography variant="h8" noWrap component="div" className='evidence'
+                                        sx={{ fontWeight: 'bold' }}
+                                    >
+                                        {user.phoneNumber}
+                                    </Typography>
+                                    {
+                                        /*
+<Image
                                         src={logo}
                                         width={40}
                                         height={40}
@@ -271,10 +280,14 @@ function Menu(props) {
                                     >
                                         {title}
                                     </Typography>
+                                        */
+                                    }
                                 </Stack>
 
                             </Grid>
-                            <Grid item
+                            {
+                                /*
+<Grid item
                                 xs={2} sm={1}
                             //sx={{background:'green'}}
                             >
@@ -288,6 +301,8 @@ function Menu(props) {
                                     />
                                 </Stack>
                             </Grid>
+                                */
+                            }
                         </Grid>
 
                     </Toolbar>
