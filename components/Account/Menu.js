@@ -141,7 +141,7 @@ function Menu(props) {
     }
 
     const drawer = (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center', backgroundColor:theme.palette.background.paper.main }}>
 
             <Firebash drawerWidth={drawerWidth} />
             <Divider />
