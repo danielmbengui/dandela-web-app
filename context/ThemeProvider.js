@@ -22,6 +22,7 @@ export default function ThemeModeProvider({children, screenMode}) {
     const primaryDecimal = "var(--primary-decimal)";
     const secondaryDecimal = "var(--secondary-decimal)";
     const secondary = "var(--secondary)";
+    const grey = "var(--grey)";
     const greyLight = "var(--grey-light)";
     const greyDark = "var(--grey-dark)";
 
@@ -99,6 +100,7 @@ warning: {
                   secondary: {
                     main: `rgb(${secondaryDecimal})`,
                   },
+                  divider: grey,
                   background: {
                     menu : greyLight,
                     paper : {
@@ -126,7 +128,7 @@ warning: {
                 // palette values for dark mode
                 //backgroundColor: "rgb(" + 0 + "," + 0 + "," + 0 + ")",
                 //primary: deepOrange,
-             
+                divider: grey,
                 background: {
                     menu: greyDark,
                     paper: {

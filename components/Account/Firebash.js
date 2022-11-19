@@ -136,9 +136,9 @@ const onChangeMode = (event) => {
           },
           palette: {
             mode: 'dark',
-            primary: { main: 'rgb(102, 157, 246)' },
+            primary: { main: themeGeneral.palette.primary.main },
             background: { paper: themeGeneral.palette.background.paper.main },
-            divider: themeGeneral.palette.text.primary,
+            divider: themeGeneral.palette.divider,
           },
         })}
       >
