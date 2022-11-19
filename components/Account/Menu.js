@@ -24,9 +24,16 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
-import { Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import Image from 'next/image';
 
+import { updateUser } from '../../redux/user/userActions';
+import { updateScreenMode } from '../../redux/user/userActions';
+import { useDispatch, useSelector } from "react-redux";
+import PermanentBackdrop from '../Loading/PermanentBackdrop';
+import ErrorLogin from '../Authentication/Login/ErrorLogin';
+import ContainerLogin from '../Authentication/ContainerLogin';
+import Firebash from './Firebash';
 //import logo from "/img/logo.png";
 const logo = "/img/logo.png";
 
@@ -96,9 +103,10 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 function Menu(props) {
-    const { window, children, firebase, auth, content, pages, currentOpen, title } = props;
+    const { window, children, firebase, auth, content, pages, currentOpen, title, user } = props;
+    const dispatch = useDispatch();
     const theme = useTheme();
-    const colorMode = useContext(ThemeModeProviderContext);
+    const themeMode = useContext(ThemeModeProviderContext);
     const [mode, setMode] = useState(theme.palette.mode);
     const [checked, setChecked] = useState(theme.palette.mode === 'dark' ? true : false);
 
@@ -115,23 +123,27 @@ function Menu(props) {
             styleBackground: pages.about !== undefined && pages.about ? styleItemActive : styleItem,
             styleText: pages.about !== undefined && pages.about ? styleTextActive : styleItem,
         },
-
     ]
+
+    useEffect(() => {
+        setChecked(theme.palette.mode === 'dark' ? true : false);
+    }, [theme.palette.mode])
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
     const onChangeMode = (event) => {
-        colorMode.toggleColorMode();
-        setMode(event.target.checked ? 'dark' : 'light');
+        themeMode.toggleColorMode();
+        //setMode(event.target.checked ? 'dark' : 'light');
         setChecked(event.target.checked ? true : false);
-        //dispatch(updateScreenMode(event.target.checked ? 'dark' : 'light'));
+        dispatch(updateScreenMode(event.target.checked ? 'dark' : 'light'));
     }
 
     const drawer = (
-        <div>
-            <Toolbar />
+        <div style={{ textAlign: 'center' }}>
+
+            <Firebash drawerWidth={drawerWidth} />
             <Divider />
             <List>
                 {dashboard.map((item, index) => (
@@ -172,160 +184,183 @@ function Menu(props) {
                     </ListItem>
                 ))}
             </List>
+            <Divider sx={{ marginTop: '5vh', marginBottom: '3vh' }} />
+            <Button fullWidth variant='contained' onClick={() => {
+                firebase.auth().signOut().then(() => {
+                    // Sign-out successful.
+                    location.href = "/";
+                    console.log("Disconnected !!!");
+                }).catch((error) => {
+                    // An error happened.
+                    console.log("ERROR Disconnected !!!");
+                });
+                console.log("CLICK Disconnected !!!");
+            }}>
+                Disconnect
+            </Button>
         </div>
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
-        <Box sx={{ display: 'flex', }}>
-            <CssBaseline />
-            <AppBar
-                position="fixed"
-                sx={{
-                    background: theme.palette.background.menu,
-                    color: "var(--primary)",
-                    width: { md: `calc(100% - ${drawerWidth}px)` },
-                    ml: { md: `${drawerWidth}px` },
-                }}
-            >
-                <Toolbar>
-                    <Grid container
-                        direction={"row"}
-                        //sx={{background:'cyan'}}
-                        justifyContent={'stretch'}
-                        alignItems={'center'}
-                        columns={{ xs: 12, sm: 12 }}
-                    >
-                        <Grid item justifyContent={'center'} alignItems={'center'}
-                            //sx={{background:'yellow'}} 
-                            xs sm
+        <>
+
+            <div style={{ display: !user ? 'block' : 'none', }}>
+                <ContainerLogin>
+                    <ErrorLogin phoneNumber={''} />
+                </ContainerLogin>
+            </div>
+            <Box sx={{ display: user ? 'flex' : 'none', }}>
+                <CssBaseline />
+                <AppBar
+                    position="fixed"
+                    sx={{
+                        background: theme.palette.background.menu,
+                        color: "var(--primary)",
+                        width: { md: `calc(100% - ${drawerWidth}px)` },
+                        ml: { md: `${drawerWidth}px` },
+                    }}
+                >
+                    <Toolbar>
+                        <Grid container
+                            direction={"row"}
+                            //sx={{background:'cyan'}}
+                            justifyContent={'stretch'}
+                            alignItems={'center'}
+                            columns={{ xs: 12, sm: 12 }}
                         >
-                            <Stack direction={"row"} alignItems={"center"} p={1} spacing={0.5}
-                            //sx={{background:'green'}}
+                            <Grid item justifyContent={'center'} alignItems={'center'}
+                                //sx={{background:'yellow'}} 
+                                xs sm
                             >
-                                <IconButton
-                                    color="primary"
-                                    aria-label="open drawer"
-                                    edge="start"
-                                    onClick={handleDrawerToggle}
-                                    sx={{
-                                        mr: { xs: 2, sm: 0 }, display: { md: 'none' },
-                                        // background:'cyan'
-                                    }}
+                                <Stack direction={"row"} alignItems={"center"} p={1} spacing={0.5}
+                                //sx={{background:'green'}}
                                 >
-                                    <MenuIcon />
-                                </IconButton>
-                                <Image
-                                    src={logo}
-                                    width={40}
-                                    height={40}
-                                    //height={320}
-                                    alt="logo"
-                                    //loading='lazy'
-                                    priority
-                                    sizes="(min-width: 60em) 24vw,
+                                    <IconButton
+                                        color="primary"
+                                        aria-label="open drawer"
+                                        edge="start"
+                                        onClick={handleDrawerToggle}
+                                        sx={{
+                                            mr: { xs: 2, sm: 0 }, display: { md: 'none' },
+                                            // background:'cyan'
+                                        }}
+                                    >
+                                        <MenuIcon />
+                                    </IconButton>
+                                    <Image
+                                        src={logo}
+                                        width={40}
+                                        height={40}
+                                        //height={320}
+                                        alt="logo"
+                                        //loading='lazy'
+                                        priority
+                                        sizes="(min-width: 60em) 24vw,
                                         (min-width: 28em) 45vw,
                                         100vw"
-                                    style={{
-                                        //width: "100%",
-                                        //height: "auto",
-                                        //background:'red'
-                                    }}
-                                />
-                                <Typography variant="h8" noWrap component="div" className='evidence'
-                                    sx={{ fontWeight: 'bold' }}
-                                >
-                                    {title}
-                                </Typography>
-                            </Stack>
+                                        style={{
+                                            //width: "100%",
+                                            //height: "auto",
+                                            //background:'red'
+                                        }}
+                                    />
+                                    <Typography variant="h8" noWrap component="div" className='evidence'
+                                        sx={{ fontWeight: 'bold' }}
+                                    >
+                                        {title}
+                                    </Typography>
+                                </Stack>
 
-                        </Grid>
-                        <Grid item
-                            xs={2} sm={1}
-                        //sx={{background:'green'}}
-                        >
-                            <Stack direction={"row"} alignItems={"flex-end"}
+                            </Grid>
+                            <Grid item
+                                xs={2} sm={1}
                             //sx={{background:'green'}}
                             >
-                                <FormControlLabel
-                                    control={<MaterialUISwitch sx={{ m: 1 }} checked={checked} onChange={onChangeMode} />}
-                                //label={`Mode ${theme.palette.mode}`}
-                                //labelPlacement="start"
-                                />
-                            </Stack>
+                                <Stack direction={"row"} alignItems={"flex-end"}
+                                //sx={{background:'green'}}
+                                >
+                                    <FormControlLabel
+                                        control={<MaterialUISwitch sx={{ m: 1 }} checked={checked} onChange={onChangeMode} />}
+                                    //label={`Mode ${theme.palette.mode}`}
+                                    //labelPlacement="start"
+                                    />
+                                </Stack>
+                            </Grid>
                         </Grid>
-                    </Grid>
 
-                </Toolbar>
-            </AppBar>
-            <Box
-                component="nav"
-                sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 } }}
-                aria-label="mailbox folders"
-            >
-                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-                <Drawer
-                    container={container}
-                    variant="temporary"
-                    open={mobileOpen}
-                    onClose={handleDrawerToggle}
-                    ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
-                    }}
-                    sx={{
-                        display: { xs: 'block', md: 'none' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-                    }}
+                    </Toolbar>
+                </AppBar>
+                <Box
+                    component="nav"
+                    sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 } }}
+                    aria-label="mailbox folders"
                 >
-                    {drawer}
-                </Drawer>
-                <Drawer
-                    variant="permanent"
-                    sx={{
-                        display: { xs: 'none', md: 'block' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-                    }}
-                    open
+                    {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+                    <Drawer
+                        container={container}
+                        variant="temporary"
+                        open={mobileOpen}
+                        onClose={handleDrawerToggle}
+                        ModalProps={{
+                            keepMounted: true, // Better open performance on mobile.
+                        }}
+                        sx={{
+                            display: { xs: 'block', md: 'none' },
+                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        }}
+                    >
+                        {drawer}
+                    </Drawer>
+                    <Drawer
+                        variant="permanent"
+                        sx={{
+                            display: { xs: 'none', md: 'block' },
+                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        }}
+                        open
+                    >
+                        {drawer}
+                    </Drawer>
+                </Box>
+                <Box
+                    component="main"
+                    sx={{ flexGrow: 1, p: 3, width: { md: `calc(100% - ${drawerWidth}px)` } }}
                 >
-                    {drawer}
-                </Drawer>
+                    <Toolbar />
+                    
+                    {children}
+                    <Typography paragraph>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
+                        enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
+                        imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
+                        Convallis convallis tellus id interdum velit laoreet id donec ultrices.
+                        Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
+                        adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
+                        nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
+                        leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
+                        feugiat vivamus at augue. At augue eget arcu dictum varius duis at
+                        consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
+                        sapien faucibus et molestie ac.
+                    </Typography>
+                    <Typography paragraph>
+                        Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
+                        eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
+                        neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
+                        tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
+                        sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
+                        tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
+                        gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
+                        et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
+                        tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
+                        eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
+                        posuere sollicitudin aliquam ultrices sagittis orci a.
+                    </Typography>
+                </Box>
             </Box>
-            <Box
-                component="main"
-                sx={{ flexGrow: 1, p: 3, width: { md: `calc(100% - ${drawerWidth}px)` } }}
-            >
-                <Toolbar />
-                {children}
-                <Typography paragraph>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-                    enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-                    imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-                    Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-                    Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                    adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-                    nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-                    leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-                    feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-                    consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-                    sapien faucibus et molestie ac.
-                </Typography>
-                <Typography paragraph>
-                    Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-                    eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-                    neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-                    tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-                    sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-                    tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-                    gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-                    et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-                    tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-                    eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-                    posuere sollicitudin aliquam ultrices sagittis orci a.
-                </Typography>
-            </Box>
-        </Box>
+        </>
     );
 }
 

@@ -3,6 +3,9 @@ import ContainerLogin from '../components/Authentication/ContainerLogin';
 import Login from '../components/Authentication/Login/Login';
 import { withAuthUser, AuthAction } from 'next-firebase-auth'
 import PermanentBackdrop from '../components/Loading/PermanentBackdrop';
+import initAuth from '../initAuth';
+
+initAuth();
 
 const MyLoader = () => <PermanentBackdrop />
 const LoginPage = () => <ContainerLogin><Login /></ContainerLogin>
@@ -13,4 +16,4 @@ export default withAuthUser({
     whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
     whenUnauthedAfterInit: AuthAction.RENDER,
     LoaderComponent: MyLoader,
-})(LoginPage)
+})(LoginPage);

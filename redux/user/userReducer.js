@@ -2,6 +2,7 @@ const initialState = {
   loading: false,
   phoneNumber:'',
   isConnected: null,
+  screenMode: 'dark',
   errorMsg: "",
 };
 
@@ -40,6 +41,7 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         phoneNumber: action.payload.phoneNumber,
         isConnected: action.payload.isConnected,
+        screenMode: action.payload.screenMode,
       };
     case "CONNECTION_REQUEST":
       return {

@@ -13,8 +13,9 @@ import ThemeModeProvider from "../context/ThemeProvider";
 import { UserProvider } from "../context/UserProvider";
 import AppProvider, { AppContext } from "../context/AppProvider";
 import initAuth from '../initAuth' // the module you created above
+import { DEFAULT_SCREEN_MODE } from "../constants";
 
-initAuth();
+
 
 
 const logo = "/img/logo.png";
@@ -29,6 +30,7 @@ function MyApp({ Component, pageProps, }) {
   const [user, setUser] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [userFirebase, setUserFirebase] = useState(null);
+  const [screenMode, setScreenMode] = useState(DEFAULT_SCREEN_MODE);
 
   /*
   firebase.auth().signOut().then(() => {
@@ -41,7 +43,17 @@ function MyApp({ Component, pageProps, }) {
 
   const hash = hashResult("123456");
   console.log("HAAAASH", hash);
+  console.log("ADMIN KEY", process.env.FIREBASE_ADMIN_PRIVATE_KEY_ID);
   
+  /*
+  useEffect(() => {
+    if( window.localStorage.getItem('screenMode') ){
+      setScreenMode(window.localStorage.getItem('screenMode'));
+      console.log('SECREEEN MODE storage', window.localStorage.getItem('screenMode'))
+    }
+    //screenMode
+  }, [screenMode])
+  */
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -50,7 +62,7 @@ function MyApp({ Component, pageProps, }) {
         // https://firebase.google.com/docs/reference/js/firebase.User
         //var uid = user.uid;
         //var docRef = firestore.collection("USER").doc(user.phoneNumber);
-
+        setUid(user.id);
         setPhoneNumber(user.phoneNumber);
         console.log("onAuthStateChanged user", user.phoneNumber);
         // ...
@@ -59,10 +71,20 @@ function MyApp({ Component, pageProps, }) {
         // ...
         //setUid(null);
         console.log("onAuthStateChanged user", "null");
+        setUid(user.id);
         setPhoneNumber(null);
+        //window.location.href = "/";
       }
 
     });
+
+    if( window.localStorage.getItem('screenMode') !== null ){
+      //_screenMode = window.localStorage.getItem('screenMode');
+      setScreenMode(window.localStorage.getItem('screenMode'));
+      console.log('STORAGE aaaaap', window.localStorage.getItem('screenMode'))
+    }else{
+      
+    }
   }, []);
 
   useEffect(() => {
@@ -88,6 +110,22 @@ function MyApp({ Component, pageProps, }) {
         setUser(null);
         //setPhoneNumber(null);
       });
+
+      docRef.onSnapshot((doc) => {
+        console.log("Current data: ", doc.data());
+        if (doc.exists) {
+          console.log("Document data:", doc.data());
+          // Set with cityConverter
+          setUserFirebase(doc.data());
+          setUser(doc.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+          setUserFirebase(null);
+          setUser(null);
+          //window.location.href = "/account/errorlogin";
+        }
+    });
     }
   }, [phoneNumber]);
 
@@ -100,11 +138,12 @@ function MyApp({ Component, pageProps, }) {
     setUserFirebase(_user);
   }
 
+  initAuth();
   
 
   return (
-    <ThemeModeProvider>
-      <Provider store={store}>
+    <Provider store={store}>
+    <ThemeModeProvider screenMode={screenMode}>
         <Head>
           <title>Dandela Web App</title>
           <meta
@@ -118,13 +157,13 @@ function MyApp({ Component, pageProps, }) {
           firebase={firebase} firestore={firestore} storage={storage}
           user={user} handleUser={handleUser}
           userFirebase={userFirebase} handleUserFirebase={handleUserFirebase}
-          uid={uid} />
-      </Provider>
+          uid={uid} 
+          />
+     
     </ThemeModeProvider>
+    </Provider>
 
   )
 }
-
-
 
 export default MyApp

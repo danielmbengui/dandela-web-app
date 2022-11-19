@@ -1,6 +1,6 @@
 // ./initAuth.js
 import { init } from 'next-firebase-auth'
-import adminFirebaseConfig from './config.admin.firebase';
+//import adminFirebaseConfig from './config.admin.firebase';
 
 const initAuth = () => {
   init({
@@ -15,34 +15,31 @@ const initAuth = () => {
     onLogoutRequestError: (err) => {
       console.error(err)
       console.log('ERROR logout', err);
-
     },
 
     //firebaseAuthEmulatorHost: 'localhost:9099',
     firebaseAdminInitConfig: {
       credential: {
-        projectId: 'dandelawebapp',
-        clientEmail: 'daniel.mbengui@gmail.com',
+        projectId: process.env.FIREBASE_ADMIN_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
         // The private key must not be accessible on the client side.
-        privateKey: process.env.FIREBASE_PRIVATE_KEY,
+        privateKey: process.env.NEXT_FIREBASE_ADMIN_PRIVATE_KEY_ID,
       },
-      databaseURL: 'https://my-example-app.firebaseio.com',
+      databaseURL: process.env.FIREBASE_ADMIN_DATABASE,
     },
 
     // Use application default credentials (takes precedence over firebaseAdminInitConfig if set)
     // useFirebaseAdminDefaultCredential: true,
     firebaseClientInitConfig: {
-        apiKey: "AIzaSyArSaR9DcR2UpEZxRrIb7FuhnyG5-TfWB8",
-        authDomain: "dandelawebapp.firebaseapp.com",
-        projectId: "dandelawebapp",
-      databaseURL: 'https://my-example-app.firebaseio.com',
+      apiKey: process.env.FIREBASE_API_KEY,
+        authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+        projectId: process.env.FIREBASE_PROJECT_ID,
+      databaseURL: process.env.FIREBASE_ADMIN_DATABASE,
 
-
-    storageBucket: "dandelawebapp.appspot.com",
-    messagingSenderId: "277196487914",
-    appId: "1:277196487914:web:91bae7b1a1065c0a51eb93",
-    measurementId: "G-MJ6X1M1YRR",
-    storageBucket: "gs://dandelawebapp.appspot.com/",
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.FIREBASE_APP_ID,
+    measurementId: process.env.FIREBASE_MEASUREMENT_ID,
     },
     cookies: {
       name: 'Dandela Web App', // required

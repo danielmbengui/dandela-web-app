@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-
+import { DEFAULT_SCREEN_MODE } from "../../constants";
+const STORAGE_SCREEN_MODE = 'screenMode';
 
 const connectRequest = () => {
   return {
@@ -63,16 +64,34 @@ export const updateUser = () => {
         //const auth = firebase.auth();
         //console.log("AUTH redux", auth.currentUser);
 
+        let _screenMode = DEFAULT_SCREEN_MODE;
+        if( typeof(Storage) !== "undefined" ){
+          if( window.localStorage.getItem(STORAGE_SCREEN_MODE) === null ){
+            window.localStorage.setItem(STORAGE_SCREEN_MODE, _screenMode);
+          }
+          _screenMode = window.localStorage.getItem(STORAGE_SCREEN_MODE);
+        }
+
         dispatch(
           updateUserRequest({
               phoneNumber: '+41761234567',
               isConnected: false,
+              screenMode: _screenMode,
           })
-        );
-
-        
+        );  
     }
 }
+
+export const updateScreenMode = (_screenMode) => {
+  return async (dispatch) => {
+    //let _isConnected = _account !== null ? true: false;
+    //window.localStorage.removeItem(STORAGE_SCREEN_MODE);
+    if( typeof(Storage) !== "undefined" ){
+      window.localStorage.setItem(STORAGE_SCREEN_MODE, _screenMode);
+    }
+    dispatch(updateScreenModeUser({ screenMode: _screenMode }));
+  };
+};
 
 export const connectUser = () => {
   return async (dispatch) => {

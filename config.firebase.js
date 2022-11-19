@@ -5,18 +5,17 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyArSaR9DcR2UpEZxRrIb7FuhnyG5-TfWB8",
-    authDomain: "dandelawebapp.firebaseapp.com",
-    projectId: "dandelawebapp",
-    storageBucket: "dandelawebapp.appspot.com",
-    messagingSenderId: "277196487914",
-    appId: "1:277196487914:web:91bae7b1a1065c0a51eb93",
-    measurementId: "G-MJ6X1M1YRR",
+export const firebaseConfig = {
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.FIREBASE_APP_ID,
+    measurementId: process.env.FIREBASE_MEASUREMENT_ID,
   };
 
-
-const app = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
 export const firestore = firebase.firestore();
 // Initialize Cloud Storage and get a reference to the service

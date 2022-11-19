@@ -72,8 +72,9 @@
 }
 
 [data-theme="dark"] {
-  --primary: var(--secondary);
+  --primary: var(--blue-light-dandela);
   --primary-opacity: var(--secondary-opacity); /* blue dandela */
+  --secondary: var(--blue-dandela);
   --background-color: black;
   --text-primary: white;
   --text-secondary: black;
