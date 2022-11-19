@@ -33,6 +33,8 @@
   --grey-light: #efefef;
   --grey-dark:#1d1d1d;
 
+  --background-card:var(--grey-light);
+
   /* standards */
   --yellow-winno: #ebc908;
   --yellow-dark-winno: #c4a708;
@@ -63,6 +65,7 @@
   --text-primary: black;
   --text-secondary: white;
   --menu-background: var(--grey-light);
+  --card-background:var(--grey-light);
   /*
   --primary: var(--yellow-winno);
   --secondary: var(--brown-dark-winno);
@@ -79,6 +82,7 @@
   --text-primary: white;
   --text-secondary: black;
   --menu-background: var(--grey-dark);
+  --card-background:var(--grey-dark);
   /*
   --primary: var(--yellow-winno);
   --secondary: var(--brown-winno);
@@ -117,5 +121,5 @@ a:hover {
 .evidence {
   font-family: "ChangaOneRegular";
   font-weight: bold;
-  font-size: x-large;
+  font-size: large;
 }

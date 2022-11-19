@@ -104,7 +104,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     },
 }));
 
-export default function Firebash({drawerWidth}) {
+export default function Firebash({drawerWidth, firebase}) {
     const themeGeneral = useTheme();
     const dispatch = useDispatch();
     const themeMode = useContext(ThemeModeProviderContext);
@@ -160,10 +160,25 @@ const onChangeMode = (event) => {
             </ListItemButton>
             <Divider />
             <ListItem component="div" disablePadding>
-              <ListItemButton sx={{ height: 56, color:themeGeneral.palette.primary.main,
+              <ListItemButton 
+              onClick={() => {
+                firebase.auth().signOut().then(() => {
+                    // Sign-out successful.
+                    location.href = "/";
+                    console.log("Disconnected !!!");
+                }).catch((error) => {
+                    // An error happened.
+                    console.log("ERROR Disconnected !!!");
+                });
+                console.log("CLICK Disconnected !!!");
+              }}
+              sx={{ 
+                height: 56, 
+                color:themeGeneral.palette.primary.main,
             '&:hover': { 
                 backgroundColor: 'var(--primary-opacity)',
-            }, }}>
+            }, }}
+            >
                 <ListItemIcon>
                   <Home sx={{color:themeGeneral.palette.primary.main}} />
                 </ListItemIcon>

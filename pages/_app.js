@@ -71,7 +71,7 @@ function MyApp({ Component, pageProps, }) {
         // ...
         //setUid(null);
         console.log("onAuthStateChanged user", "null");
-        setUid(user.id);
+        setUid(null);
         setPhoneNumber(null);
         //window.location.href = "/";
       }

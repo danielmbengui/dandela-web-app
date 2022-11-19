@@ -38,8 +38,9 @@ export default function Login(){
                         }
                     }).catch((error) => {
                         console.log("Error getting document:", error);
-                        window.location.href = "/authentication/errorlogin";
+                        //window.location.href = "/authentication/errorlogin";
                     });
+                    return true;
                 },
                 signInFailure: function (error) {
                     // Some unrecoverable error occurred during sign-in.

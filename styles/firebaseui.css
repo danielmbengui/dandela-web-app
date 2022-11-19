@@ -175,7 +175,7 @@ input.mdl-button[type=submit]{
     overflow:hidden
 }
 .mdl-button.mdl-button--disabled .mdl-button__ripple-container .mdl-ripple,.mdl-button[disabled] .mdl-button__ripple-container .mdl-ripple{
-    background-color:transparent
+    background-color:var(--back)
 }
 .mdl-button--primary.mdl-button--primary{
     color:var(--primary)
@@ -227,7 +227,7 @@ input.mdl-button[type=submit]{
     width:330px;
     z-index:1;
     position:relative;
-    background:transparent;
+    background:red;
 
     border-radius:2px;
     box-sizing:border-box
@@ -338,7 +338,8 @@ input.mdl-button[type=submit]{
 }
 .mdl-dialog__content{
     padding:20px 24px 24px 24px;
-    color:var(--text-primary)
+    color:var(--text-primary);
+    background-color: red;
 }
 .mdl-progress{
     display:block;
@@ -847,7 +848,7 @@ dialog{
     margin:auto;
     border:solid;
     padding:1em;
-    background:transparent;
+    background:var(--card-background);
     color:var(--text-primary);
     display:block
 }

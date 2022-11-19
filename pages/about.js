@@ -4,7 +4,7 @@ import Image from "next/image";
 import About from '../components/About/About';
 import Menu from '../components/Account/Menu';
 
-export default function AboutPage({ auth, user}) {
+export default function AboutPage({ auth, user, firebase}) {
     return(
         <>
         {
@@ -15,7 +15,7 @@ export default function AboutPage({ auth, user}) {
         */
         }
 
-        <Menu pages={{ about: true, }} title={"About"} user={user}>
+        <Menu pages={{ about: true, }} title={"About"} firebase={firebase} user={user}>
 <About />
         </Menu>
         </>

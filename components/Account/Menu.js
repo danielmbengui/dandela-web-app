@@ -143,7 +143,7 @@ function Menu(props) {
     const drawer = (
         <div style={{ textAlign: 'center', backgroundColor:theme.palette.background.paper.main }}>
 
-            <Firebash drawerWidth={drawerWidth} />
+            <Firebash drawerWidth={drawerWidth} firebase={firebase} />
             <Divider />
             <List>
                 {dashboard.map((item, index) => (
