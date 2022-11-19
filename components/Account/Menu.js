@@ -110,7 +110,7 @@ function Menu(props) {
     const [mode, setMode] = useState(theme.palette.mode);
     const [checked, setChecked] = useState(theme.palette.mode === 'dark' ? true : false);
 
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
 
     const dashboard = [
         {
@@ -254,7 +254,7 @@ function Menu(props) {
                                     <Typography variant="h8" noWrap component="div" className='evidence'
                                         sx={{ fontWeight: 'bold' }}
                                     >
-                                        {user.phoneNumber}
+                                        {user ? user.phoneNumber : ''}
                                     </Typography>
                                     {
                                         /*
