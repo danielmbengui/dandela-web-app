@@ -216,7 +216,7 @@ const onChangeMode = (event) => {
             <Box
               sx={{
                 //bgcolor: openTransfert ? 'rgba(71, 98, 130, 0.2)' : null,
-                bgcolor: openTransfert ? 'var(--primary-opacity)' : null,
+                //bgcolor: openTransfert ? 'var(--primary-opacity)' : null,
                 pb: openTransfert ? 2 : 0,
                 '&:hover, &:focus': { 
                     backgroundColor: 'var(--primary-opacity)',
