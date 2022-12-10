@@ -5,7 +5,7 @@ import { withAuthUser, AuthAction } from 'next-firebase-auth'
 import PermanentBackdrop from '../components/Loading/PermanentBackdrop';
 import initAuth from '../initAuth';
 
-initAuth();
+//initAuth();
 
 const MyLoader = () => <PermanentBackdrop />
 const LoginPage = () => <ContainerLogin><Login /></ContainerLogin>

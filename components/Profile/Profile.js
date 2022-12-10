@@ -17,10 +17,29 @@ import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import { UploadSharp } from '@mui/icons-material';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
-import styles from './Profile.module.css'
+import styles from './Profile.module.css';
+
+const fontFamilyMain = [
+  'ChangaOneRegular',
+  '-apple-system',
+  'BlinkMacSystemFont',
+  '"Segoe UI"',
+  'Roboto',
+  '"Helvetica Neue"',
+  'Arial',
+  'sans-serif',
+  '"Apple Color Emoji"',
+  '"Segoe UI Emoji"',
+  '"Segoe UI Symbol"',
+].join(',');
 
 const TexFieldCustom = styled(TextField)(({ theme }) => ({
-  '& .MuiInputBase-input': {
+  '& .MuiInputLabel-root': {
+    fontFamily: fontFamilyMain,
+    color:'var(--primary)',
+  },
+  '& .MuiInputBase-root': {
+    color: 'var(--primary)',
     /*
   borderRadius: 4,
   position: 'relative',
@@ -38,19 +57,7 @@ const TexFieldCustom = styled(TextField)(({ theme }) => ({
   ]),
   */
     // Use the system font instead of the default Roboto font.
-    fontFamily: [
-      'ChangaOneRegular',
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
+    fontFamily: fontFamilyMain,
     /*
     '&:focus': {
       boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
@@ -147,6 +154,9 @@ export default function Profile({ logo, firebase, firestore, user, handleUser, s
           };
           profileImgRef.put(files[0], metadata).then((snapshot) => {
             console.log('Uploaded a blob or file! Snapshot:', snapshot);
+            const _user = JSON.parse(JSON.stringify(user));
+            _user.photoURL = srcUploaded;
+            handleUser(_user);
             //const _userFirebase = JSON.parse(JSON.stringify(user));
             //_userFirebase.photoURL = `${user.phoneNumber}/profile`;
             //handleUser(_userFirebase);
@@ -281,17 +291,34 @@ export default function Profile({ logo, firebase, firestore, user, handleUser, s
             spacing={2}
           //sx={{background:'cyan'}}
           >
-            <TextField
+            <TexFieldCustom
+              fullWidth
+              error={false}
+              id="phoneNumber"
+              //label="Téléphone"
+              required
+              disabled
+              //defaultValue={displayName}
+              value={user ? user.phoneNumber : ''}
+              helperText="Incorrect entry."
+              theme={theme}
+              placeholder={"Name"}
+              sx={{
+                color: theme.palette.primary,
+                width: '100%'
+              }}
+            />
+            <TexFieldCustom
               fullWidth
               error={false}
               id="name"
-              label="Name"
+              label={user ? '' : 'Name'}
               required
               //defaultValue="Hello World"
+              value={user ? user.displayName : ''}
               helperText="Incorrect entry."
               theme={theme}
-              placeholder={"name"}
-              color="primary"
+              //placeholder={"Name"}
               sx={{
                 color: theme.palette.primary,
                 width: '100%'

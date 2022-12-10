@@ -36,7 +36,7 @@ const Login = ({ logo, links, firebase, firestore, userFirebase }) => {
                             } else {
                                 // doc.data() will be undefined in this case
                                 console.log("No such document!");
-                                window.location.href = "/account/errorlogin";
+                                //window.location.href = "/account/errorlogin";
                             }
                         }).catch((error) => {
                             console.log("Error getting document:", error);

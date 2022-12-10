@@ -44,7 +44,7 @@ const Login = ({ user, handleUser }) => {
                             // doc.data() will be undefined in this case
                             console.log("No such document!");
                             //handleUser(null);
-                            window.location.href = "/login/errorlogin";
+                            //window.location.href = "/login/errorlogin";
                         }
                     }).catch((error) => {
                         console.log("Error getting document:", error);

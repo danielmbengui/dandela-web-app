@@ -34,6 +34,11 @@ import PermanentBackdrop from '../Loading/PermanentBackdrop';
 import ErrorLogin from '../Authentication/Login/ErrorLogin';
 import ContainerLogin from '../Authentication/ContainerLogin';
 import Firebash from './Firebash';
+import SwitchThemeComponent from '../Dashboard/Menu/SwitchThemeComponent';
+import ProfileComponent from '../Dashboard/Menu/ProfileComponent';
+import TransfertComponent from '../Dashboard/Menu/TransfertComponent';
+import SettingsComponent from '../Dashboard/Menu/SettingsComponent';
+import MenuDashboard from '../Dashboard/Menu/MenuDashboard';
 //import logo from "/img/logo.png";
 const logo = "/img/logo.png";
 
@@ -142,7 +147,24 @@ function Menu(props) {
 
     const drawer = (
         <div style={{ textAlign: 'center', backgroundColor:theme.palette.background.paper.main }}>
-
+            <SwitchThemeComponent />
+            <Divider />
+            <SettingsComponent firebase={firebase} />
+            <Divider sx={{
+                marginBottom:'5vh'
+            }} />
+            <Divider />
+            <ProfileComponent profilePage={pages.profile} />
+            <Divider />
+            {
+                /* 
+                <MenuDashboard drawerWidth={drawerWidth} firebase={firebase} profilePage={pages.profile} />
+                <Divider />
+                */
+            }
+            
+            <TransfertComponent />
+            <Divider />
             <Firebash drawerWidth={drawerWidth} firebase={firebase} />
             <Divider />
             <List>
@@ -206,11 +228,15 @@ function Menu(props) {
     return (
         <>
 
-            <div style={{ display: !user ? 'block' : 'none', }}>
+            {
+                /*
+<div style={{ display: !user ? 'block' : 'none', }}>
                 <ContainerLogin>
                     <ErrorLogin phoneNumber={''} />
                 </ContainerLogin>
             </div>
+                */
+            }
             <Box sx={{ display: user ? 'flex' : 'none', }}>
                 <CssBaseline />
                 <AppBar
@@ -218,7 +244,7 @@ function Menu(props) {
                     sx={{
                         //background: theme.palette.background.menu,
                         //background: 'transparent',
-                        background: 'var(--background-color)',
+                        background: 'var(--menu-background)',
                         color: "var(--primary)",
                         width: { md: `calc(100% - ${drawerWidth}px)` },
                         ml: { md: `${drawerWidth}px` },

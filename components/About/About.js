@@ -1,7 +1,11 @@
+import { Stack, Typography } from '@mui/material';
+import { Container } from '@mui/system';
 import Head from 'next/head'
 import Image from "next/image";
+import { COMPANY_NAME } from '../../constants';
 import styles from './About.module.css'
 
+const logo = '/img/logo.png';
 export default function About() {
   return (
     <div className={styles.container}>
@@ -53,26 +57,26 @@ export default function About() {
               </a>
             </div>
           </main>
-
-          <footer className={styles.footer}>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Powered by{' '}
-              <span className={styles.logo}>
-                <Image
-                  src="/vercel.svg"
+      
+          <footer className={styles.footer} style={{
+          }}>
+                <Container sx={{
+  display:'flex',
+  alignItems:'center',
+  justifyContent:'center',
+  marginBottom: '3vh'
+}}>
+© 2023  {COMPANY_NAME}
+</Container>
+<Image
+                  src={logo}
                   alt="Vercel Logo"
                   width={72}
                   height={16}
                   style={{
                     maxWidth: "100%",
-                    height: "auto"
+                    height: "auto",
                   }} />
-              </span>
-            </a>
           </footer>
         </div>
   );

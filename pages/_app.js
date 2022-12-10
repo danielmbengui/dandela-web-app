@@ -14,8 +14,10 @@ import { UserProvider } from "../context/UserProvider";
 import AppProvider, { AppContext } from "../context/AppProvider";
 import initAuth from '../initAuth' // the module you created above
 import { DEFAULT_SCREEN_MODE } from "../constants";
+import { getUserFirestore, getUserFirestoreSnapshot, setUserFirestoreSnapshot } from "../functions/firestore/UserFunctions";
 
 
+initAuth();
 
 
 const logo = "/img/logo.png";
@@ -89,43 +91,7 @@ function MyApp({ Component, pageProps, }) {
 
   useEffect(() => {
     if (phoneNumber) {
-      var docRef = firestore.collection("USER").doc(phoneNumber);
-
-      docRef.get().then((doc) => {
-        if (doc.exists) {
-          console.log("Document data:", doc.data());
-          // Set with cityConverter
-          setUserFirebase(doc.data());
-          setUser(doc.data());
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-          setUserFirebase(null);
-          setUser(null);
-          //window.location.href = "/account/errorlogin";
-        }
-      }).catch((error) => {
-        console.log("Error getting document:", error);
-        setUserFirebase(null);
-        setUser(null);
-        //setPhoneNumber(null);
-      });
-
-      docRef.onSnapshot((doc) => {
-        console.log("Current data: ", doc.data());
-        if (doc.exists) {
-          console.log("Document data:", doc.data());
-          // Set with cityConverter
-          setUserFirebase(doc.data());
-          setUser(doc.data());
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-          setUserFirebase(null);
-          setUser(null);
-          //window.location.href = "/account/errorlogin";
-        }
-    });
+      setUserFirestoreSnapshot(phoneNumber, handleUser);
     }
   }, [phoneNumber]);
 
@@ -137,10 +103,7 @@ function MyApp({ Component, pageProps, }) {
   const handleUserFirebase = (_user) => {
     setUserFirebase(_user);
   }
-
-  initAuth();
   
-
   return (
     <Provider store={store}>
     <ThemeModeProvider screenMode={screenMode}>

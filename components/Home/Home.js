@@ -74,9 +74,11 @@ const Home = ({ logo, links, firebase, firestore, storage, userFirebase, handleU
         console.log("user firebase HOME", userFirebase);
         if (userFirebase) {
             setPhoneNumber(userFirebase.phoneNumber);
-            if (!userFirebase.displayName) {
+            /*
+if (!userFirebase.displayName) {
                 setContent(<CompleteLogin logo={logo} firebase={firebase} firestore={firestore} storage={storage} userFirebase={userFirebase} handleUserFirebase={handleUserFirebase} />);
             }
+            */
 
         } else {
             setContent(<Login logo={logo} firebase={firebase} firestore={firestore} userFirebase={userFirebase} />);
