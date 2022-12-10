@@ -85,7 +85,7 @@ export default function Dashboard(props) {
             <Divider />
             <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                   <Link href="/about">
+                   <Link href="/about" key={text + index}>
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
