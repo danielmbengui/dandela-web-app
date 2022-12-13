@@ -25,20 +25,22 @@ import Link from 'next/link';
 
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-const data = {
-    title: 'Transferts',
-    subtitle: "Créer, voir, statistiques",
-    menu: [
-        { icon: <AddCircleIcon />, label: 'Nouveau', link: '/' },
-        { icon: <Dns />, label: 'In progress', link: '/' },
-        { icon: <PermMedia />, label: 'All', link: '/' },
-        { icon: <Public />, label: 'Statistics', link: '/' },
-    ],
-};
-
-export default function TransfertComponent() {
+export default function TransfertComponent(props) {
+    const {openSub, pages, newtransfertPage} = props;
     const theme = useTheme();
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(openSub);
+
+    const data = {
+        title: 'Transferts',
+        subtitle: "Créer, voir, statistiques",
+        menu: [
+            { icon: <AddCircleIcon />, label: 'Nouveau', link: '/transferts/new', active: pages.newtransfert},
+            { icon: <Dns />, label: 'En cours', link: '', active: false },
+            { icon: <PermMedia />, label: 'Tous', link: '/transferts/all', active: pages.alltransfert },
+            { icon: <Public />, label: 'Statistics', link: '/', active: false },
+        ],
+    };
+
     return (
         <Box
             sx={{
@@ -98,7 +100,8 @@ export default function TransfertComponent() {
                             sx={{ 
                                 py: 0, 
                                 minHeight: 32, 
-                                color: 'var(--text-primary)',
+                                color: item.active ? 'var(--text-secondary)' : 'var(--text-primary)',
+                                backgroundColor: item.active ? 'var(--primary)' : '',
                                 '&:hover': {
                                     backgroundColor: 'var(--primary)',
                                     color: 'var(--text-secondary)',

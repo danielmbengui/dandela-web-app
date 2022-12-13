@@ -66,6 +66,7 @@
   --text-secondary: white;
   --menu-background: var(--grey-light);
   --card-background:var(--grey-light);
+  --divider-color:var(--grey-light);
   /*
   --primary: var(--yellow-winno);
   --secondary: var(--brown-dark-winno);
@@ -83,6 +84,7 @@
   --text-secondary: black;
   --menu-background: var(--grey-dark);
   --card-background:var(--grey-dark);
+  --divider-color:var(--grey-dark);
   /*
   --primary: var(--yellow-winno);
   --secondary: var(--brown-winno);

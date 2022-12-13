@@ -28,10 +28,10 @@ import { Button, Grid } from '@mui/material';
 import styles from './BarApp.module.css';
 
 export default function BarApp(props) {
-    const { user, storage, drawerWidth } = props;
+    const { user, storage, drawerWidth, mobileOpen, setMobileOpen } = props;
     const storageRef = storage.ref();
     const [photoURL, setPhotoURL] = useState(null);
-    const [mobileOpen, setMobileOpen] = useState(false);
+    //const [mobileOpen, setMobileOpen] = useState(false);
 
     useEffect(() => {
         if (user) {
@@ -88,13 +88,10 @@ export default function BarApp(props) {
                                 <MenuIcon />
                             </IconButton>
                             <Avatar id="avatar-user" className={styles['fullscreen']} src={photoURL} sx={{ width: 40, height: 40 }} />
-                            <Typography variant="h8" noWrap component="div" className='evidence'
-                                sx={{ fontWeight: 'bold' }}
-                            >
+                            <Typography variant="h8" noWrap component="div" className='evidence' sx={{ fontWeight: 'bold' }}>
                                 {user ? user.phoneNumber : ''}
                             </Typography>
                         </Stack>
-
                     </Grid>
                 </Grid>
             </Toolbar>

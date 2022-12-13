@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
-import { AlertTitle, Avatar, Badge, FormHelperText, Grid, Stack } from '@mui/material';
+import { AlertTitle, Avatar, Badge, FormHelperText, Grid, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -18,6 +18,10 @@ import FormControl from '@mui/material/FormControl';
 import { UploadSharp } from '@mui/icons-material';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import styles from './Profile.module.css';
+//import { Configuration, OpenAIApi } from "openai";
+//import axios from 'axios';
+import { responsiveProperty } from '@mui/material/styles/cssUtils';
+const { Configuration, OpenAIApi } = require("openai");
 
 const fontFamilyMain = [
   'ChangaOneRegular',
@@ -67,6 +71,11 @@ const TexFieldCustom = styled(TextField)(({ theme }) => ({
     */
 
   },
+  '&:focus': {
+    boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+    //borderColor: theme.palette.primary.main,
+    border: `1px solid ${theme.palette.primary.main}`,
+  },
 }));
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
@@ -115,10 +124,60 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 export default function Profile({ logo, firebase, firestore, user, handleUser, storage }) {
   const theme = useTheme();
   const storageRef = storage.ref();
-  const [displayName, setDisplayName] = useState('');
+  const uid = user ? user.uid : '';
+  const phoneNumber = user ? user.phoneNumber : '';
+  const [displayName, setDisplayName] = useState(user ? user.displayName : '');
+  const [errorName, setErrorName] = useState(false);
   const [password, setPassword] = useState('');
   const [photoURL, setPhotoURL] = useState(null);
   const [photoFile, setPhotoFile] = useState(null);
+
+  useEffect(() => {
+    setErrorName(user ? (user.displayName == '' ? true : false ) : true);
+  }, [user]);
+
+  const onChangeName = (e) => {
+    setDisplayName(e.target.value);
+  }
+
+  /*
+const configuration = new Configuration({
+    organization: "org-pGzvq8dWxPVgP1htPYBS1yBD",
+    apiKey: "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",
+});
+const openai = new OpenAIApi(configuration);
+
+  //const chatGPT = require('chat-gpt');
+
+async function generateResponse() {
+  const response = await openai.listEngines();
+  console.log("CHATGPT response", response);
+  return response;
+}
+
+async function getTest() {
+  //axios.defaults.headers.common["Content-Type"] = "application/json";
+  //axios.defaults.headers.common["Authorization"] = `Bearer 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`;
+  const response = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt: "Say this is a test",
+    max_tokens: 3,
+    temperature: 0,
+    "top_p": 1,
+  "n": 1,
+  "stream": false,
+  "logprobs": null,
+  "stop": "\n",
+  });
+  return (response);
+}
+
+useEffect(() => {
+  generateResponse();
+  const playerJson = getTest();
+console.log("FFFFIRST TEST: ", playerJson);
+})
+*/
 
   useEffect(() => {
     if (user) {
@@ -293,53 +352,44 @@ export default function Profile({ logo, firebase, firestore, user, handleUser, s
           >
             <TexFieldCustom
               fullWidth
-              error={false}
-              id="phoneNumber"
-              //label="Téléphone"
+              error={errorName}
+              id="name"
+              label={'Nom'}
               required
-              disabled
-              //defaultValue={displayName}
-              value={user ? user.phoneNumber : ''}
-              helperText="Incorrect entry."
-              theme={theme}
-              placeholder={"Name"}
-              sx={{
-                color: theme.palette.primary,
-                width: '100%'
-              }}
+              //defaultValue="Hello World"
+              value={displayName}
+              onChange={onChangeName}
+              helperText={errorName ? "Incorrect entry." : ''}
+              //theme={theme}
+              placeholder={"Nom"}
             />
             <TexFieldCustom
               fullWidth
-              error={false}
-              id="name"
-              label={user ? '' : 'Name'}
-              required
-              //defaultValue="Hello World"
-              value={user ? user.displayName : ''}
-              helperText="Incorrect entry."
-              theme={theme}
+              //error={false}
+              id="uid"
+              label="ID utilisateur"
+              //required
+              disabled
+              //defaultValue={displayName}
+              value={uid}
+              //helperText="Incorrect entry."
+              //theme={theme}
               //placeholder={"Name"}
-              sx={{
-                color: theme.palette.primary,
-                width: '100%'
-              }}
             />
-            <TextField
+            <TexFieldCustom
               fullWidth
-              error={false}
-              id="password"
-              label="Password"
-              required
-              //defaultValue="Hello World"
-              helperText="Incorrect entry."
-              theme={theme}
-              placeholder={"password"}
-              color="primary"
-              sx={{
-                color: theme.palette.primary,
-                width: '100%'
-              }}
+              //error={false}
+              id="phoneNumber"
+              label="Téléphone"
+              //required
+              disabled
+              //defaultValue={displayName}
+              value={phoneNumber}
+              //helperText="Incorrect entry."
+              //theme={theme}
+              //placeholder={"Name"}
             />
+
             <Grid container pt={3} justifyContent={'center'}>
               <Button variant='contained' onClick={() => {
                 //setDisplayName('Claav');
@@ -349,7 +399,7 @@ export default function Profile({ logo, firebase, firestore, user, handleUser, s
 
 
               }>
-                Continue
+                Modifier
               </Button>
             </Grid>
           </Stack>

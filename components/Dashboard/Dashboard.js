@@ -61,7 +61,7 @@ const Navigation = styled(List)({
     },
 });
 
-export default function Dashboard(props) {
+function Dashboard(props) {
     const { window, children, firebase, auth, content, pages, currentOpen, title, user, storage } = props;
     const dispatch = useDispatch();
     const theme = useTheme();
@@ -77,11 +77,13 @@ export default function Dashboard(props) {
             <Divider />
             <SettingsComponent firebase={firebase} />
             <Divider />
-            <TransfertComponent />
-            <Divider sx={{
-                marginTop: '5vh',
-            }} />
             <ProfileComponent profilePage={pages.profile} />
+            <Divider />
+            <TransfertComponent openSub={true} pages={{
+                newtransfert:pages.newtransfert,
+                alltransfert:pages.alltransfert,
+            }} 
+                newtransfertPage={pages.newtransfert} />
             <Divider />
             <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -118,11 +120,11 @@ export default function Dashboard(props) {
     };
 
     const container = window !== undefined ? () => window().document.body : undefined;
+
     return (
         <Box sx={{ display: user ? 'flex' : 'none', }}>
-            <BarApp user={user} storage={storage} drawerWidth={drawerWidth} />
             <CssBaseline />
-
+            <BarApp user={user} storage={storage} drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
             <Box
                 component="nav"
                 sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -201,3 +203,5 @@ Dashboard.propTypes = {
      */
     window: PropTypes.func,
 };
+
+export default Dashboard;
