@@ -40,7 +40,6 @@ export default function OneTransfertNoValidPage({ id, firebase, firestore, user,
         </Dashboard>
     )
 }
-
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths({ }) {
     const res = await axios.get(`${process.env.ADDRESS_SERVER}api/transferts/getnovalidlistpaths?userType=Admin`);

@@ -39,7 +39,6 @@ export default function OneTransferInProgressPage({ id, firebase, firestore, use
         </Dashboard>
     )
 }
-
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths({ }) {
     const res = await axios.get(`${process.env.ADDRESS_SERVER}api/transferts/getinprogress?userType=Admin`);
