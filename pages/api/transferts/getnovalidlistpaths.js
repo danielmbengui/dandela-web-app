@@ -7,14 +7,14 @@ export default function handler(req, res) {
         
     firestore.collection(COLLECTION_TRANSFERT).where("valide", "==", false)
     .onSnapshot((querySnapshot) => {
-        const transfertsList = [];
+        const transfertsId = [];
         querySnapshot.forEach((doc) => {
-            transfertsList.push(doc.data());
+            transfertsId.push(doc.data().id);
         });
         //setTransfertList(cities);
         //console.log("Current Transfert length: ", transfertsId.length);
         //res.status(200).json(transfertsList);
-        res.status(200).json(transfertsList);
+        res.status(200).json(transfertsId);
         //console.log("DOC UID serverSide:", transfertsList.length);
 
     });

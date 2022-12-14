@@ -18,18 +18,13 @@ import OneTransfert from '../../../components/Dashboard/Transfert/OneTransfert';
 export default function OneTransferInProgressPage({ id, firebase, firestore, user, storage, logo }) {
     //const {params} = paths;
     // Render post...
-    const router = useRouter();
     const [transfert, setTransfert] = useState(DEFAULT_TRANSFERT);
-    const [code, setCode] = useState(DEFAULT_TRANSFERT.code);
-    const [state, setState] = useState(getTransfertStateString(user, DEFAULT_TRANSFERT));
 
     useEffect(() => {
         firestore.collection(COLLECTION_TRANSFERT).doc(id)
             .onSnapshot((doc) => {
                 const _transfert = doc.data();
                 setTransfert(_transfert);
-                //setCode(formatCode(_transfert.code));
-                //console.log("Current cities in CA: ", doc.data());
             });
     }, [firestore]);
 
@@ -40,14 +35,14 @@ export default function OneTransferInProgressPage({ id, firebase, firestore, use
                 <meta name="description" content={`Transfert ${transfert.id}`} />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <OneTransfert id={id} firestore={firestore} user={user} />
+            <OneTransfert id={id} firestore={firestore} user={user} transfert={transfert} />
         </Dashboard>
     )
 }
 
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths({ }) {
-    const res = await axios.get("http://localhost:3000//api/transferts/getinprogress?userType=Admin");
+    const res = await axios.get(`${process.env.ADDRESS_SERVER}api/transferts/getinprogress?userType=Admin`);
     console.log('AXIOS transfert', res.data);
     //console.log('OKKKKAY TESt', okay);
     const transferts = res.data;

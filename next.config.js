@@ -66,6 +66,9 @@ module.exports = withPWA({
 
     FIREBASE_ADMIN_DATABASE: process.env.NODE_ENV === "production" ? 
     process.env.NEXT_PUBLIC_FIREBASE_ADMIN_DATABASE : process.env.NEXT_TEST_FIREBASE_ADMIN_DATABASE, 
+
+    ADDRESS_SERVER: process.env.NODE_ENV === "production" ? 
+    process.env.NEXT_PUBLIC_ADRESS_SERVER : process.env.NEXT_TEST_ADRESS_SERVER, 
 /*
     
 

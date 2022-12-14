@@ -11,23 +11,12 @@ import { COLLECTION_TRANSFERT, DEFAULT_TRANSFERT } from '../../../constants';
 import { getTransfertStateString } from '../../../functions/firestore/TransfertFunctions';
 import Dashboard from '../Dashboard';
 
-export default function OneTransfert({ id, firebase, firestore, user, storage, logo }) {
+export default function OneTransfert({ transfert, firebase, firestore, user, storage, logo }) {
     //const {params} = paths;
     // Render post...
     const router = useRouter();
-    const [transfert, setTransfert] = useState(DEFAULT_TRANSFERT);
-    const [code, setCode] = useState(DEFAULT_TRANSFERT.code);
-    const [state, setState] = useState(getTransfertStateString(user, DEFAULT_TRANSFERT));
-
-    useEffect(() => {
-        firestore.collection(COLLECTION_TRANSFERT).doc(id)
-            .onSnapshot((doc) => {
-                const _transfert = doc.data();
-                setTransfert(_transfert);
-                setCode(formatCode(_transfert.code));
-                //console.log("Current cities in CA: ", doc.data());
-            });
-    }, [firestore]);
+    //const [transfert, setTransfert] = useState(DEFAULT_TRANSFERT);
+    const [code, setCode] = useState(transfert.code);
 
     function formatCode(code) {
         let _code = code.toString().substring(0, 3);
