@@ -148,7 +148,7 @@ export default function OneTransfert({ transfert, firebase, user, storage, logo 
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths({ }) {
     const res = await axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getall`, {
-        userType:"Admin",
+        userType: "Admin",
     });
     console.log('AXIOS transfert', res.data);
     //console.log('OKKKKAY TESt', okay);
@@ -167,7 +167,9 @@ export async function getStaticPaths({ }) {
 // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps(props) {
     const { params } = props;
-    const res = await axios.get(`${process.env.ADDRESS_SERVER}api/transferts/getone?id=${params.id}`);
+    const res = await axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getone`, {
+        id: params.id
+    });
     console.log('AXIOS transfert', params.id);
     const transfert = res.data;
     console.log('AXIOS ONE transfert', transfert);
