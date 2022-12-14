@@ -36,7 +36,6 @@ export default function OneTransfertNoValidPage({ id, firebase, firestore, user,
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <OneTransfert id={id} firestore={firestore} user={user} transfert={transfert} />
-
         </Dashboard>
     )
 }

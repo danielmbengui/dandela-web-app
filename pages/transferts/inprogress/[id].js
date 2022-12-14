@@ -43,6 +43,10 @@ export default function OneTransferInProgressPage({ id, firebase, firestore, use
 export async function getStaticPaths({ }) {
     const res = await axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getinprogresslistpaths`, {
         userType: "Admin",
+    }).then((response) => {
+        return (response);
+    }).catch(() => {
+        return ([]);
     });
     console.log('AXIOS transfert', res.data);
     //console.log('OKKKKAY TESt', okay);
@@ -59,7 +63,7 @@ export async function getStaticPaths({ }) {
 }
 
 // `getStaticPaths` requires using `getStaticProps`
-export async function getStaticProps(props) {
+export function getStaticProps(props) {
     const { params } = props;
     //const res = await axios.get(`http://localhost:3000//api/transferts/getone?id=${params.id}`);
     //console.log('AXIOS transfert', params.id);
