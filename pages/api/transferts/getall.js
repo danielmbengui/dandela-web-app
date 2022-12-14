@@ -6,11 +6,11 @@ export default function handler(req, res) {
     if (!req.uid){
         
     firestore.collection(COLLECTION_TRANSFERT).where("valide", "==", true)
-    .onSnapshot((querySnapshot) => {
+    .get()
+    .then((querySnapshot) => {
         const transfertsList = [];
         querySnapshot.forEach((doc) => {
             transfertsList.push(doc.data());
-            
         });
         //setTransfertList(cities);
         //console.log("Current Transfert length: ", transfertsId.length);

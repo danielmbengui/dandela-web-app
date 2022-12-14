@@ -6,7 +6,8 @@ export default function handler(req, res) {
     if (req.query.userType == 'Admin'){
         
     firestore.collection(COLLECTION_TRANSFERT).where("valide", "==", false)
-    .onSnapshot((querySnapshot) => {
+    .get()
+    .then((querySnapshot) => {
         const transfertsList = [];
         querySnapshot.forEach((doc) => {
             transfertsList.push(doc.data());
