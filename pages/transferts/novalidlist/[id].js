@@ -42,7 +42,9 @@ export default function OneTransfertNoValidPage({ id, firebase, firestore, user,
 }
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths({ }) {
-    const res = await axios.get(`${process.env.ADDRESS_SERVER}api/transferts/getnovalidlistpaths?userType=Admin`);
+    const res = await axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getnovalidlistpaths`, {
+        userType: "Admin",
+    });
     console.log('AXIOS transfert', res.data);
     //console.log('OKKKKAY TESt', okay);
     const transfertsId = res.data;
