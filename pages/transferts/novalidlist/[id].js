@@ -12,7 +12,7 @@ import { myLoader } from '../../../functions/ImageLoader';
 import UndoIcon from '@mui/icons-material/Undo';
 import CloseIcon from '@mui/icons-material/Close';
 import { COLLECTION_TRANSFERT, DEFAULT_TRANSFERT } from '../../../constants';
-import { getTransfertStateString } from '../../../functions/firestore/TransfertFunctions';
+import { getTransfertsNoValidList, getTransfertStateString } from '../../../functions/firestore/TransfertFunctions';
 import OneTransfert from '../../../components/Dashboard/Transfert/OneTransfert';
 
 export default function OneTransfertNoValidPage({ id, firebase, firestore, user, storage, logo }) {
@@ -41,12 +41,10 @@ export default function OneTransfertNoValidPage({ id, firebase, firestore, user,
 }
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths({ }) {
-    const res = await axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getnovalidlistpaths`, {
-        userType: "Admin",
-    });
+    const res = await getTransfertsNoValidList();
     console.log('AXIOS transfert', res.data);
     //console.log('OKKKKAY TESt', okay);
-    const transfertsId = res.data;
+    const transfertsId = res.data.transfertsId;
 
     const paths = transfertsId.map((id) => ({
         params: { id: id },
@@ -54,7 +52,7 @@ export async function getStaticPaths({ }) {
 
     return {
         paths,
-        fallback: false, // can also be true or 'blocking'
+        fallback: true, // can also be true or 'blocking'
     }
 }
 

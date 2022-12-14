@@ -57,8 +57,24 @@ export const getTransfertStateString = (user, transfert) => {
     return ("Inconnu");
 }
 
-export async function getTr() {
+export async function getTransfertsInProgressList() {
     const res = await axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getinprogresslistpaths`, {
         userType: "Admin",
+    }).then((response) => {
+        return (response);
+    }).catch(() => {
+        return ([]);
     });
+    return (res);
+}
+
+export async function getTransfertsNoValidList() {
+    const res = await axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getnovalidlistpaths`, {
+        userType: "Admin",
+    }).then((response) => {
+        return (response);
+    }).catch(() => {
+        return ([]);
+    });
+    return (res);
 }

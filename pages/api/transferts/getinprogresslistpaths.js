@@ -27,12 +27,12 @@ export default async function handler(req, res) {
                 //setTransfertList(cities);
                 //console.log("Current Transfert length: ", transfertsId.length);
                 //res.status(200).json(transfertsList);
-                res.status(200).json(transfertsId);
+                res.status(200).json({transfertsId:transfertsId, success:true});
                 //console.log("DOC UID serverSide:", transfertsList.length);
 
             });
     } else {
-        res.status(200).json([])
+        res.status(200).json({transfertsId:[], success:false})
     }
 
 }
