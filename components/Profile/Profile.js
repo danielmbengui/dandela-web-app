@@ -20,7 +20,8 @@ import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import styles from './Profile.module.css';
 //import { Configuration, OpenAIApi } from "openai";
 //import axios from 'axios';
-import { responsiveProperty } from '@mui/material/styles/cssUtils';
+import VerifiedIcon from '@mui/icons-material/Verified';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 const { Configuration, OpenAIApi } = require("openai");
 
 const fontFamilyMain = [
@@ -126,6 +127,7 @@ export default function Profile({ logo, firebase, firestore, user, handleUser, s
   const storageRef = storage.ref();
   const uid = user ? user.uid : '';
   const phoneNumber = user ? user.phoneNumber : '';
+  const userType = user ? user.type : '';
   const [displayName, setDisplayName] = useState(user ? user.displayName : '');
   const [errorName, setErrorName] = useState(false);
   const [password, setPassword] = useState('');
@@ -385,6 +387,19 @@ console.log("FFFFIRST TEST: ", playerJson);
               disabled
               //defaultValue={displayName}
               value={phoneNumber}
+              //helperText="Incorrect entry."
+              //theme={theme}
+              //placeholder={"Name"}
+            />
+            <TexFieldCustom
+              fullWidth
+              //error={false}
+              id="userType"
+              label="Type utilisateur"
+              //required
+              disabled
+              //defaultValue={displayName}
+              value={userType}
               //helperText="Incorrect entry."
               //theme={theme}
               //placeholder={"Name"}

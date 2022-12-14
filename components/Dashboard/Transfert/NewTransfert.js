@@ -2,23 +2,22 @@ import { TextFieldCustom } from "../../MyComponents/TextFieldCustom";
 
 
 
-export default function NewTransfert(props){
 
-    return(
-        <>
-            <TextFieldCustom
-              fullWidth
-              error={false}
-              id="name"
-              label={'Nom'}
-              required
-              //defaultValue="Hello World"
-              //value={displayName}
-              //onChange={onChangeName}
-              helperText={"Incorrect entry."}
-              //theme={theme}
-              placeholder={"Nom"}
-            />
-        </>
-    )
-}
+    const NewTransfert = () => {
+      return (
+        <div>
+          <h1>Création de produit</h1>
+          <form>
+            <label htmlFor="name">Nom du produit :</label>
+            <input type="text" id="name" />
+    
+            <label htmlFor="description">Description du produit :</label>
+            <textarea id="description" />
+    
+            <button type="submit">Créer le produit</button>
+          </form>
+        </div>
+      );
+    };
+    
+    export default NewTransfert;    

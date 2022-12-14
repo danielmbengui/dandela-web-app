@@ -3,7 +3,6 @@ import { COLLECTION_USER } from "../../constants";
 
 export function getUserFirestore(phoneNumber, handleUser){
     const docRef = firestore.collection(COLLECTION_USER).doc(phoneNumber);
-
       docRef.get().then((doc) => {
         if (doc.exists) {
           console.log("Document data:", doc.data());
@@ -44,7 +43,6 @@ export function getUserFirestoreSnapshot(phoneNumber){
 
 export function setUserFirestoreSnapshot(phoneNumber, handleUser){
     var docRef = firestore.collection(COLLECTION_USER).doc(phoneNumber);
-
       docRef.onSnapshot((doc) => {
         console.log("Current data: ", doc.data());
         if (doc.exists) {

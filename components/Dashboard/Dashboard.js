@@ -41,6 +41,7 @@ import SettingsComponent from './Menu/SettingsComponent';
 import MenuDashboard from './Menu/MenuDashboard';
 import Footer from './Footer';
 import BarApp from './BarApp/BarApp';
+import { COMPANY_NAME } from '../../constants';
 //import logo from "/img/logo.png";
 const logo = "/img/logo.png";
 
@@ -79,24 +80,26 @@ function Dashboard(props) {
             <Divider />
             <ProfileComponent profilePage={pages.profile} />
             <Divider />
-            <TransfertComponent openSub={true} pages={{
-                newtransfert:pages.newtransfert,
-                alltransfert:pages.alltransfert,
-            }} 
+            <TransfertComponent user={user} openSub={true} pages={{
+                newtransfert: pages.newtransfert,
+                inprogress: pages.inprogress,
+                novalid: pages.novalid,
+                alltransfert: pages.alltransfert,
+            }}
                 newtransfertPage={pages.newtransfert} />
             <Divider />
             <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                   <Link href="/about" key={text + index}>
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                   </Link>
+                    <Link href="/about" key={text + index}>
+                        <ListItem key={text} disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                </ListItemIcon>
+                                <ListItemText primary={text} />
+                            </ListItemButton>
+                        </ListItem>
+                    </Link>
                 ))}
             </List>
             <Divider />
@@ -112,6 +115,15 @@ function Dashboard(props) {
                     </ListItem>
                 ))}
             </List>
+            <Typography sx={{
+                fontFamily: 'ChangaOneRegular',
+                fontSize: 'medium',
+                fontWeight: 'medium',
+                lineHeight: '20px',
+                color: 'var(--text-primary)',
+            }}>
+                © 2023  {COMPANY_NAME}
+            </Typography>
         </div>
     );
 
@@ -140,6 +152,7 @@ function Dashboard(props) {
                     }}
                     sx={{
                         display: { xs: 'block', md: 'none' },
+                        width: '100%',
                         '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
                     }}
                 >
@@ -149,6 +162,7 @@ function Dashboard(props) {
                     variant="permanent"
                     sx={{
                         display: { xs: 'none', md: 'block' },
+                        width: '100%',
                         '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
                     }}
                     open
@@ -159,9 +173,14 @@ function Dashboard(props) {
 
             <Box
                 component="main"
-                sx={{ flexGrow: 1, p: 3, width: { md: `calc(100% - ${drawerWidth}px)` } }}
+                sx={{ flexGrow: 1, p: 1, width: { md: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
+                <Grid container direction={'row'} justifyContent={'center'} alignItems={'center'}>
+                <Grid item>
+                    <h3>{title}</h3>
+                </Grid>
+            </Grid>
                 {children}
                 <Typography paragraph>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

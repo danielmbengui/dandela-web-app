@@ -6,36 +6,34 @@ import Image from "next/image";
 import { styled, useTheme } from '@mui/material/styles';
 import { COMPANY_NAME } from '../../constants';
 import styles from './Footer.module.css';
+import { myLoader } from '../../functions/ImageLoader';
 
-//const logo = "/img/logo.png";
-const logoBlack = "/img/logos/logo-black.png";
-const logoWhite = "/img/logos/logo-white.png";
+const logo = "/img/logo.png";
+//const logoBlack = "/img/logos/logo-black.png";
+//const logoWhite = "/img/logos/logo-white.png";
 
 export default function Footer() {
     const theme = useTheme();
-    const logo = theme.palette.mode == 'dark' ? logoWhite : logoBlack;
+    //const logo = theme.palette.mode == 'dark' ? logoWhite : logoBlack;
 
     return (
-        <footer className={styles.footer} style={{
+        <Container sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: '10vh',
+            
         }}>
-            <Container sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1vh',
-                
-            }}>
-                © 2023  {COMPANY_NAME}
-            </Container>
             <Image
-                src={logo}
-                alt="Vercel Logo"
-                width={72}
-                height={16}
-                style={{
-                    maxWidth: "100%",
-                    height: "auto",
-                }} />
-        </footer>
+                        src={logo}
+                        width={70}
+                        height={70}
+                        alt="logo"
+                        priority
+                        quality={100}
+                        loader={myLoader}
+                        
+                    />
+        </Container>
     );
 }

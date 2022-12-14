@@ -24,22 +24,52 @@ import { useTheme } from '@mui/material/styles';
 import Link from 'next/link';
 
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import ApprovalIcon from '@mui/icons-material/Approval';
+import { USER_TYPE_ADMIN, USER_TYPE_EMPLOYE_ANGOLA } from '../../../constants';
 
 export default function TransfertComponent(props) {
-    const {openSub, pages, newtransfertPage} = props;
+    const {user, openSub, pages, newtransfertPage} = props;
     const theme = useTheme();
     const [open, setOpen] = useState(openSub);
+
+    const menu = createMenu();
+
+    function createMenu() {
+        const menu = [];
+        if (user) {
+            if (user.type !== USER_TYPE_EMPLOYE_ANGOLA) {
+                menu.push({ icon: <AddCircleIcon />, label: 'Nouveau', link: '/transferts/new', active: pages.newtransfert});
+            }
+            menu.push({ icon: <CurrencyExchangeIcon />, label: 'En cours', link: '/transferts/inprogress', active: pages.inprogress });
+            if (user.type === USER_TYPE_ADMIN) {
+                menu.push({ icon: <ApprovalIcon />, label: 'À valider', link: '/transferts/novalidlist', active: pages.novalid});
+            }
+        }
+        return menu;
+    }
 
     const data = {
         title: 'Transferts',
         subtitle: "Créer, voir, statistiques",
-        menu: [
+        menu: createMenu(),
+        /*
+        [  
             { icon: <AddCircleIcon />, label: 'Nouveau', link: '/transferts/new', active: pages.newtransfert},
-            { icon: <Dns />, label: 'En cours', link: '', active: false },
+            { icon: <Dns />, label: 'En cours', link: '/transferts/inprogress', active: pages.inprogress },
             { icon: <PermMedia />, label: 'Tous', link: '/transferts/all', active: pages.alltransfert },
             { icon: <Public />, label: 'Statistics', link: '/', active: false },
+            
         ],
+        */
     };
+
+    useEffect(() => {
+        if (user) {
+            menu.push({ icon: <AddCircleIcon />, label: 'Nouveau', link: '/transferts/new', active: pages.newtransfert});
+
+        }
+    })
 
     return (
         <Box
