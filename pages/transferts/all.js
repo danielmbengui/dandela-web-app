@@ -11,7 +11,7 @@ export default function AllTransfertsPage({logo, user, firebase, firestore, stor
             <meta name="description" content="Voir tous les transferts" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
-            <AllTransfert firestore={firestore} />
+            <AllTransfert firestore={firestore} user={user} />
         </Dashboard>
     )
 }

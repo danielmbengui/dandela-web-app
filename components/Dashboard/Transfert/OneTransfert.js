@@ -16,8 +16,6 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
     // Render post...
     const router = useRouter();
     //const [transfert, setTransfert] = useState(DEFAULT_TRANSFERT);
-    const [code, setCode] = useState(transfert.code);
-
     function formatCode(code) {
         let _code = code.toString().substring(0, 3);
         _code += "-";
@@ -48,7 +46,7 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
                     </Grid>
                     <Grid item xs={6} md={9}>
                         <Typography>
-                            {code}
+                            {formatCode(transfert.code)}
                         </Typography>
                     </Grid>
                 </Grid>

@@ -8,11 +8,11 @@ export default function Document() {
             <link rel="icon" href="/favicon.ico" />
 <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
 
-            <meta name="application-name" content="PWA App" />
+            <meta name="application-name" content="Dandela Web App" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-<meta name="apple-mobile-web-app-title" content="PWA App" />
-<meta name="description" content="Best PWA App in the world" />
+<meta name="apple-mobile-web-app-title" content="Dandela Web App" />
+<meta name="description" content="Dandela Web App, the link between you and your family" />
 <meta name="format-detection" content="telephone=no" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="msapplication-config" content="/icons/browserconfig.xml" />
@@ -33,17 +33,17 @@ export default function Document() {
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:url" content="https://yourdomain.com" />
-<meta name="twitter:title" content="PWA App" />
-<meta name="twitter:description" content="Best PWA App in the world" />
-<meta name="twitter:image" content="https://yourdomain.com/icons/android-chrome-192x192.png" />
-<meta name="twitter:creator" content="@DavidWShadow" />
+<meta name="twitter:url" content="https://webapp.dandela.com" />
+<meta name="twitter:title" content="Dandela Web App, the link between you and your family" />
+<meta name="twitter:description" content="Dandela Web App, the link between you and your family" />
+<meta name="twitter:image" content="https://webapp.dandela.com/img/logo.png" />
+<meta name="twitter:creator" content="@DrillDev" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="PWA App" />
-<meta property="og:description" content="Best PWA App in the world" />
-<meta property="og:site_name" content="PWA App" />
-<meta property="og:url" content="https://yourdomain.com" />
-<meta property="og:image" content="https://yourdomain.com/icons/apple-touch-icon.png" />
+<meta property="og:title" content="Dandela Web App" />
+<meta property="og:description" content="Dandela Web App, the link between you and your family" />
+<meta property="og:site_name" content="Dandela Web App" />
+<meta property="og:url" content="https://webapp.dandela.com" />
+<meta property="og:image" content="https://webapp.dandela.com/img/logo.png" />
             </Head>
             <body>
                 <Main />

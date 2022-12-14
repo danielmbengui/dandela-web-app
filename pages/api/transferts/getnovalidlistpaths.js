@@ -14,6 +14,7 @@ const cors = initMiddleware(
 export default async function handler(req, res) {
     //console.log('REEEEQ', req.query);
     await cors(req, res);
+    console.log("YEEEEES", req.body);
     if (req.body.userType == 'Admin') {
         firestore.collection(COLLECTION_TRANSFERT).where("valide", "==", false)
             .get()
