@@ -147,7 +147,9 @@ export default function OneTransfert({ transfert, firebase, user, storage, logo 
 
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths({ }) {
-    const res = await axios.get(`${process.env.ADDRESS_SERVER}api/transferts/getall`);
+    const res = await axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getall`, {
+        userType:"Admin",
+    });
     console.log('AXIOS transfert', res.data);
     //console.log('OKKKKAY TESt', okay);
     const transferts = res.data;
