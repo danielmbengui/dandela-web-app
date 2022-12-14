@@ -15,22 +15,24 @@ export default async function handler(req, res) {
     //console.log('REEEEQ', req.query);
     await cors(req, res);
     if (req.body.userType == 'Admin') {
-        firestore.collection(COLLECTION_TRANSFERT).where("valide", "==", false)
+        firestore.collection(COLLECTION_TRANSFERT).where("valide", "==", true)
             .get()
             .then((querySnapshot) => {
                 const transfertsId = [];
                 querySnapshot.forEach((doc) => {
-                    transfertsId.push(doc.data().id);
+                    const transfert = doc.data();
+                    if (!transfert.recu_expediteur || !transfert.recu_destinataire || !transfert.recu_agence)
+                        transfertsId.push(doc.data().id);
                 });
                 //setTransfertList(cities);
-                //console.log("Current Transfert length: ", transfertsId);
+                //console.log("Current Transfert length: ", transfertsId.length);
                 //res.status(200).json(transfertsList);
                 res.status(200).json(transfertsId);
                 //console.log("DOC UID serverSide:", transfertsList.length);
 
             });
     } else {
-        res.status(200).json([]);
+        res.status(200).json([])
     }
 
 }

@@ -6,7 +6,8 @@ export default function handler(req, res) {
     //console.log('REEEEQ', req.query);
     if (id) {
         firestore.collection(COLLECTION_TRANSFERT).doc(id)
-            .onSnapshot((doc) => {
+        .get()
+            .then((doc) => {
 
                 //setTransfertList(cities);
                 //console.log("Current Transfert length: ", transfertsId.length);
@@ -16,6 +17,6 @@ export default function handler(req, res) {
 
             });
     } else {
-        res.status(200).json({ name: 'meeeeerde' })
+        res.status(200).json({})
     }
 }
