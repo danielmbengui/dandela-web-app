@@ -88,7 +88,7 @@ function Dashboard(props) {
             }}
                 newtransfertPage={pages.newtransfert} />
             <Divider />
-            <List>
+            <List sx={{display:'none'}}>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <Link href="/about" key={text + index}>
                         <ListItem key={text} disablePadding>
@@ -102,8 +102,8 @@ function Dashboard(props) {
                     </Link>
                 ))}
             </List>
-            <Divider />
-            <List>
+            <Divider sx={{display:'none'}} />
+            <List sx={{display:'none'}}>
                 {['All mail', 'Trash', 'Spam'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
@@ -115,11 +115,13 @@ function Dashboard(props) {
                     </ListItem>
                 ))}
             </List>
-            <Divider />
-            <Typography sx={{
+            <Divider sx={{display:'none'}} />
+            <Grid container sx={{height:'100%'}} direction={'row'} justifyContent={'center'} alignItems={'flex-end'}>
+                <Grid>
+                <Typography sx={{
                 fontFamily: 'ChangaOneRegular',
-                fontSize: 'medium',
-                fontWeight: 'medium',
+                fontSize: 'large',
+                //fontWeight: 'medium',
                 lineHeight: '20px',
                 color: 'var(--text-primary)',
                 marginTop: '5vh',
@@ -127,6 +129,8 @@ function Dashboard(props) {
             }}>
                 © 2023  {COMPANY_NAME}
             </Typography>
+                </Grid>
+            </Grid>
         </div>
     );
 
@@ -137,13 +141,13 @@ function Dashboard(props) {
     const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
-        <Box sx={{ display: user ? 'flex' : 'none', }}>
+        <Box sx={{ display: user ? 'flex' : 'none', bgcolor:'var(--menu-background)'}}>
             <CssBaseline />
             <BarApp user={user} storage={storage} drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
             <Box
                 component="nav"
                 sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 } }}
-                aria-label="mailbox folders"
+                aria-label="my dashboard"
             >
                 <Drawer
                     container={container}
@@ -157,7 +161,7 @@ function Dashboard(props) {
                         display: { xs: 'block', md: 'none' },
                         width: '100%',
                         height: '100%',
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, },
                     }}
                 >
                     {drawer}

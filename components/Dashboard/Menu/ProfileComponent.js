@@ -50,7 +50,7 @@ export default function ProfileComponent({ firebase, drawerWidth, profilePage })
                     }}
                 >
                     <ListItemIcon sx={{ color: 'inherit' }}>
-                        <People fontSize='medium' sx={{
+                        <People fontSize='large' sx={{
                             /*
 color: profilePage ? 'var(--text-secondary)' : 'var(--text-primary)',
                             '&:hover': {

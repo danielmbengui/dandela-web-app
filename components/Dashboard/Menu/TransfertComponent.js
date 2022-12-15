@@ -39,11 +39,11 @@ export default function TransfertComponent(props) {
         const menu = [];
         if (user) {
             if (user.type !== USER_TYPE_EMPLOYE_ANGOLA) {
-                menu.push({ icon: <AddCircleIcon />, label: 'Nouveau', link: '/transferts/new', active: pages.newtransfert});
+                menu.push({ icon: <AddCircleIcon fontSize='large' />, label: 'Nouveau', link: '/transferts/new', active: pages.newtransfert});
             }
-            menu.push({ icon: <CurrencyExchangeIcon />, label: 'En cours', link: '/transferts/inprogress', active: pages.inprogress });
+            menu.push({ icon: <CurrencyExchangeIcon fontSize='large' />, label: 'En cours', link: '/transferts/inprogress', active: pages.inprogress });
             if (user.type === USER_TYPE_ADMIN) {
-                menu.push({ icon: <ApprovalIcon />, label: 'À valider', link: '/transferts/novalidlist', active: pages.novalid});
+                menu.push({ icon: <ApprovalIcon fontSize='large' />, label: 'À valider', link: '/transferts/novalidlist', active: pages.novalid});
             }
         }
         return menu;
@@ -95,18 +95,20 @@ export default function TransfertComponent(props) {
                 <ListItemText
                     primary={data.title}
                     primaryTypographyProps={{
-                        fontSize: 15,
+                        fontSize: 'x-large',
                         fontWeight: 'medium',
+                        fontFamily:'ChangaOneRegular',
                         lineHeight: '20px',
-                        mb: '2px',
+                        mb: '1vh',
                         color: theme.palette.primary.main,
                     }}
 
                     secondary={data.subtitle}
                     secondaryTypographyProps={{
                         noWrap: true,
-                        fontSize: 12,
+                        fontSize: 'large',
                         lineHeight: '16px',
+                        fontFamily:'ChangaOneRegular',
                         color: open ? 'rgba(0,0,0,0)' : 'var(--text-primary)',
                         //color: open ? 'rgba(0,0,0,0)' : 'rgba(255,255,255,0.5)',
                     }}
@@ -139,12 +141,12 @@ export default function TransfertComponent(props) {
                             
                             }}
                         >
-                            <ListItemIcon sx={{ color: 'inherit' }}>
+                            <ListItemIcon sx={{ color: 'inherit', }}>
                                 {item.icon}
                             </ListItemIcon>
                             <ListItemText
                                 primary={item.label}
-                                primaryTypographyProps={{ fontSize: 14, fontWeight: 'medium' }}
+                                primaryTypographyProps={{ fontSize: 'x-large', fontFamily:'ChangaOneRegular', }}
                             />
                         </ListItemButton>
                     </Link>

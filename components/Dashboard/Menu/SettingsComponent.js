@@ -58,8 +58,10 @@ export default function SettingsComponent({firebase, settingsPage}) {
                     primary="Déconnecter"
                     primaryTypographyProps={{
                         //color: '',
-                        fontWeight: 'medium',
-                        variant: 'body2',
+                        fontSize:'large',
+                        //fontWeight: 'medium',
+                        fontFamily: 'ChangaOneRegular',
+                        //variant: 'body2',
                     }}
                 />
             </ListItemButton>
