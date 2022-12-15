@@ -12,7 +12,7 @@ import { myLoader } from '../../../functions/ImageLoader';
 import UndoIcon from '@mui/icons-material/Undo';
 import CloseIcon from '@mui/icons-material/Close';
 import { COLLECTION_TRANSFERT, DEFAULT_TRANSFERT } from '../../../constants';
-import { getTransfertsNoValidList, getTransfertStateString } from '../../../functions/firestore/TransfertFunctions';
+import { getTransfertsAllList, getTransfertsNoValidList, getTransfertStateString } from '../../../functions/firestore/TransfertFunctions';
 import OneTransfert from '../../../components/Dashboard/Transfert/OneTransfert';
 
 export default function OneTransfertNoValidPage({ id, firebase, firestore, user, storage, logo }) {
@@ -41,7 +41,7 @@ export default function OneTransfertNoValidPage({ id, firebase, firestore, user,
 }
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths({ }) {
-    const transfertsId = await getTransfertsNoValidList();
+    const transfertsId = await getTransfertsAllList();
     console.log('AXIOS transfert', transfertsId);
     //console.log('OKKKKAY TESt', okay);
     //const transfertsId = res;

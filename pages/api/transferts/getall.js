@@ -13,7 +13,7 @@ const cors = initMiddleware(
 
 export default async function handler(req, res) {
     await cors(req, res);
-    if (req.body.userType == 'Admin'){
+    if (firestore){
         
     firestore.collection(COLLECTION_TRANSFERT).where("valide", "==", true)
     .get()

@@ -12,7 +12,7 @@ import { myLoader } from '../../../functions/ImageLoader';
 import UndoIcon from '@mui/icons-material/Undo';
 import CloseIcon from '@mui/icons-material/Close';
 import { COLLECTION_TRANSFERT, DEFAULT_TRANSFERT } from '../../../constants';
-import { getTransfertsInProgressList, getTransfertStateString } from '../../../functions/firestore/TransfertFunctions';
+import { getTransfertsAllList, getTransfertsInProgressList, getTransfertStateString } from '../../../functions/firestore/TransfertFunctions';
 import OneTransfert from '../../../components/Dashboard/Transfert/OneTransfert';
 
 export default function OneTransferInProgressPage({ id, firebase, firestore, user, storage, logo }) {
@@ -41,7 +41,7 @@ export default function OneTransferInProgressPage({ id, firebase, firestore, use
 }
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths({ }) {
-    const transfertsId = await getTransfertsInProgressList();
+    const transfertsId = await getTransfertsAllList();
     console.log('AXIOS transfert', transfertsId);
     //console.log('OKKKKAY TESt', okay);
     //const transfertsId = res.data.success ? res.data.transfertsId : [];
@@ -57,7 +57,7 @@ export async function getStaticPaths({ }) {
 }
 
 // `getStaticPaths` requires using `getStaticProps`
-export function getStaticProps(props) {
+export async function getStaticProps(props) {
     const { params } = props;
     //const res = await axios.get(`http://localhost:3000//api/transferts/getone?id=${params.id}`);
     //console.log('AXIOS transfert', params.id);

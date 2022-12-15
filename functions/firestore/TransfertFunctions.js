@@ -57,8 +57,17 @@ export const getTransfertStateString = (user, transfert) => {
     return ("Inconnu");
 }
 
-export async function getTransfertsInProgressList() {
-    const res = await axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getinprogresslistpaths`, {
+export function getTransfertsAllList() {
+    const res = axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getalllistpaths`).then((response) => {
+        return (response.data.transfertsId);
+    }).catch(() => {
+        return ([]);
+    });
+    return (res);
+}
+
+export function getTransfertsInProgressList() {
+    const res = axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getinprogresslistpaths`, {
         userType: "Admin",
     }).then((response) => {
         return (response.data.transfertsId);
@@ -68,8 +77,8 @@ export async function getTransfertsInProgressList() {
     return (res);
 }
 
-export async function getTransfertsNoValidList() {
-    const res = await axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getnovalidlistpaths`, {
+export function getTransfertsNoValidList() {
+    const res = axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getnovalidlistpaths`, {
         userType: "Admin",
     }).then((response) => {
         return (response.data.transfertsId);
