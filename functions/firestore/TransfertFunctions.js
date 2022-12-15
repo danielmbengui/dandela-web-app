@@ -61,7 +61,7 @@ export async function getTransfertsInProgressList() {
     const res = await axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getinprogresslistpaths`, {
         userType: "Admin",
     }).then((response) => {
-        return (response);
+        return (response.data.transfertsId);
     }).catch(() => {
         return ([]);
     });
@@ -72,7 +72,7 @@ export async function getTransfertsNoValidList() {
     const res = await axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getnovalidlistpaths`, {
         userType: "Admin",
     }).then((response) => {
-        return (response);
+        return (response.data.transfertsId);
     }).catch(() => {
         return ([]);
     });
