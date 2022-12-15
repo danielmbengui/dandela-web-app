@@ -58,7 +58,9 @@ export const getTransfertStateString = (user, transfert) => {
 }
 
 export function getTransfertsAllList() {
-    const res = axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getalllistpaths`).then((response) => {
+    const res = axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getalllistpaths`, {
+        
+    }).then((response) => {
         return (response.data.transfertsId);
     }).catch(() => {
         return ([]);
