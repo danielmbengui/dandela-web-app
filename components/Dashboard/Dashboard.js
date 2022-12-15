@@ -201,7 +201,7 @@ function Dashboard(props) {
                 </Grid>
             </Grid>
                 {children}
-                <Typography paragraph>
+                <Typography sx={{display:'none'}} paragraph>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
                     enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
@@ -215,7 +215,7 @@ function Dashboard(props) {
                     consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
                     sapien faucibus et molestie ac.
                 </Typography>
-                <Typography paragraph>
+                <Typography sx={{display:'none'}} paragraph>
                     Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
                     eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
                     neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
@@ -228,7 +228,9 @@ function Dashboard(props) {
                     eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
                     posuere sollicitudin aliquam ultrices sagittis orci a.
                 </Typography>
+                <div style={{marginTop: '30vh'}}>
                 <Footer />
+                </div>
             </Box>
         </Box>
     );

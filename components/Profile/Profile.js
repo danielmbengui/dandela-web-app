@@ -310,7 +310,7 @@ console.log("FFFFIRST TEST: ", playerJson);
     //style={{ width: "100%" }}
     //spacing={1.5}
     >
-      <Grid item p={3} style={{ textAlign: 'center', }} justifyContent={'center'} alignItems={'center'}>
+      <Grid item style={{ textAlign: 'center', }} justifyContent={'center'} alignItems={'center'}>
         <Box
         //sx={{background:'green'}}
         >
@@ -319,8 +319,8 @@ console.log("FFFFIRST TEST: ", playerJson);
             variant='outlined'
             sx={{ mb: 2, textAlign: 'start' }}
           >
-            <AlertTitle sx={{ mb: 0.5, alignItems: 'flex-start' }}>Complete the informations</AlertTitle>
-            Put at least a name and a password for more security. — <strong>keep your privacy!</strong>
+            <AlertTitle sx={{ mb: 0.5, alignItems: 'flex-start' }}>Complete ton profil</AlertTitle>
+            Rajoute un nom d'utilisateur pour accéder aux services. — <strong>nous le gardons en sécurité!</strong>
           </Alert>
 
         </Box>
