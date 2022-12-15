@@ -22,18 +22,17 @@ export default function Footer() {
             alignItems: 'center',
             justifyContent: 'center',
             marginTop: '10vh',
-            
+
         }}>
             <Image
-                        src={logo}
-                        width={70}
-                        height={70}
-                        alt="logo"
-                        priority
-                        quality={100}
-                        loader={myLoader}
-                        
-                    />
+                src={logo}
+                width={70}
+                height={70}
+                alt="logo"
+                priority
+                quality={100}
+                loader={myLoader}
+            />
         </Container>
     );
 }

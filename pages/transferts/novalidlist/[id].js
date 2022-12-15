@@ -41,7 +41,7 @@ export default function OneTransfertNoValidPage({ id, firebase, firestore, user,
 }
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths({ }) {
-    const transfertsId = await getTransfertsNoValidList();
+    const transfertsId = await getTransfertsAllList();
     console.log('AXIOS transfert', transfertsId);
     //console.log('OKKKKAY TESt', okay);
     //const transfertsId = res;

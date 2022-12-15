@@ -17,11 +17,10 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
     const router = useRouter();
     //const [transfert, setTransfert] = useState(DEFAULT_TRANSFERT);
     function formatCode(code) {
-        let _code = code.toString().substring(0, 3);
-        _code += "-";
-        _code += code.toString().substring(3, 6);
-        _code += "-";
-        _code += code.toString().substring(6, 10);
+        const _code_first = code.toString().substring(0, 3);
+        const _code_second = code.toString().substring(3, 6);
+        const _code_third = code.toString().substring(6, 10);
+        const _code = _code_first.concat('-', _code_second, '-', _code_third);
         return (_code);
     }
 
@@ -46,11 +45,8 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
                     </Grid>
                     <Grid item xs={6} md={9}>
                         <Typography>
-                            {transfert.code.toString().substring(0, 3)}
-                            {"-"}
-                            {transfert.code.toString().substring(3, 6)}
-                            {"-"}
-                            {transfert.code.toString().substring(6, 10)}
+                            {formatCode(transfert.code)}
+                            
                         </Typography>
                     </Grid>
                 </Grid>
