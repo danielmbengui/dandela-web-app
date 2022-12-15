@@ -73,10 +73,10 @@ function Dashboard(props) {
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const drawer = (
-        <div style={{ textAlign: 'center', backgroundColor: theme.palette.background.paper.main }}>
+        <div style={{ textAlign: 'center', backgroundColor: 'var(--menu-background)' }}>
             <SwitchThemeComponent />
             <Divider />
-            <SettingsComponent firebase={firebase} />
+            <SettingsComponent firebase={firebase} settingsPage={pages.settings} />
             <Divider />
             <ProfileComponent profilePage={pages.profile} />
             <Divider />
@@ -115,12 +115,15 @@ function Dashboard(props) {
                     </ListItem>
                 ))}
             </List>
+            <Divider />
             <Typography sx={{
                 fontFamily: 'ChangaOneRegular',
                 fontSize: 'medium',
                 fontWeight: 'medium',
                 lineHeight: '20px',
                 color: 'var(--text-primary)',
+                marginTop: '5vh',
+                marginBottom: '5vh',
             }}>
                 © 2023  {COMPANY_NAME}
             </Typography>
@@ -153,6 +156,7 @@ function Dashboard(props) {
                     sx={{
                         display: { xs: 'block', md: 'none' },
                         width: '100%',
+                        height: '100%',
                         '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
                     }}
                 >
@@ -163,6 +167,7 @@ function Dashboard(props) {
                     sx={{
                         display: { xs: 'none', md: 'block' },
                         width: '100%',
+                        height: '100%',
                         '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
                     }}
                     open
@@ -178,7 +183,7 @@ function Dashboard(props) {
                 <Toolbar />
                 <Grid container direction={'row'} justifyContent={'center'} alignItems={'center'}>
                 <Grid item>
-                    <h3>{title}</h3>
+                    <h1>{title}</h1>
                 </Grid>
             </Grid>
                 {children}

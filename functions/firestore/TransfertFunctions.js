@@ -59,7 +59,7 @@ export const getTransfertStateString = (user, transfert) => {
 
 export function getTransfertsAllList() {
     const res = axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getalllistpaths`, {
-        
+
     }).then((response) => {
         return (response.data.transfertsId);
     }).catch(() => {
@@ -88,4 +88,12 @@ export function getTransfertsNoValidList() {
         return ([]);
     });
     return (res);
+}
+
+export function formatTransfertCode(code) {
+    const _code_first = code.toString().substring(0, 3);
+    const _code_second = code.toString().substring(3, 6);
+    const _code_third = code.toString().substring(6, 10);
+    const _code = _code_first.concat('-', _code_second, '-', _code_third);
+    return (_code);
 }

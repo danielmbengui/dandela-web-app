@@ -8,7 +8,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { COLLECTION_TRANSFERT, DEFAULT_TRANSFERT } from '../../../constants';
-import { getTransfertStateString } from '../../../functions/firestore/TransfertFunctions';
+import { formatTransfertCode, getTransfertStateString } from '../../../functions/firestore/TransfertFunctions';
 import Dashboard from '../Dashboard';
 
 export default function OneTransfert({ transfert, firebase, firestore, user, storage, logo }) {
@@ -16,13 +16,7 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
     // Render post...
     const router = useRouter();
     //const [transfert, setTransfert] = useState(DEFAULT_TRANSFERT);
-    function formatCode(code) {
-        const _code_first = code.toString().substring(0, 3);
-        const _code_second = code.toString().substring(3, 6);
-        const _code_third = code.toString().substring(6, 10);
-        const _code = _code_first.concat('-', _code_second, '-', _code_third);
-        return (_code);
-    }
+    
 
     console.log('PATTTTTHS', transfert);
 
@@ -45,7 +39,7 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
                     </Grid>
                     <Grid item xs={6} md={9}>
                         <Typography>
-                            {formatCode(transfert.code)}
+                            {formatTransfertCode(transfert.code)}
                             
                         </Typography>
                     </Grid>

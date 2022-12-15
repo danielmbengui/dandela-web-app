@@ -12,7 +12,7 @@ import { myLoader } from '../../../functions/ImageLoader';
 import UndoIcon from '@mui/icons-material/Undo';
 import CloseIcon from '@mui/icons-material/Close';
 import { COLLECTION_TRANSFERT, DEFAULT_TRANSFERT } from '../../../constants';
-import { getTransfertsAllList, getTransfertsInProgressList, getTransfertStateString } from '../../../functions/firestore/TransfertFunctions';
+import { formatTransfertCode, getTransfertsAllList, getTransfertsInProgressList, getTransfertStateString } from '../../../functions/firestore/TransfertFunctions';
 import OneTransfert from '../../../components/Dashboard/Transfert/OneTransfert';
 
 export default function OneTransferInProgressPage({ id, firebase, firestore, user, storage, logo }) {
@@ -29,10 +29,10 @@ export default function OneTransferInProgressPage({ id, firebase, firestore, use
     }, [firestore]);
 
     return (
-        <Dashboard pages={{ inprogress: true, }} title={`Transfert n°${transfert.id}`} firebase={firebase} user={user} storage={storage}>
+        <Dashboard pages={{ inprogress: true, }} title={`Transfert ${formatTransfertCode(transfert.code)}`} firebase={firebase} user={user} storage={storage}>
             <Head>
                 <title>Dandela Web App - Transfert</title>
-                <meta name="description" content={`Transfert ${transfert.id}`} />
+                <meta name="description" content={`Transfert ${formatTransfertCode(transfert.code)}`} />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <OneTransfert id={id} firestore={firestore} user={user} transfert={transfert} />

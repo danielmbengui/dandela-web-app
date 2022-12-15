@@ -22,8 +22,9 @@ import Dns from '@mui/icons-material/Dns';
 import Public from '@mui/icons-material/Public';
 import { useTheme } from '@mui/material/styles';
 import Link from 'next/link';
+import { Container, Stack } from '@mui/material';
 
-export default function SettingsComponent({firebase}) {
+export default function SettingsComponent({firebase, settingsPage}) {
     const theme = useTheme();
 
     return (
@@ -62,20 +63,29 @@ export default function SettingsComponent({firebase}) {
                     }}
                 />
             </ListItemButton>
-            <Tooltip title="Paramètres" >
+            <Link href="/settings">
+            <Stack sx={{
+                bgcolor: settingsPage ? 'var(--primary)' : '',
+                cursor: 'pointer',
+                height: '100%',
+                '&:hover': {
+                    bgcolor: 'var(--primary)',
+                },
+            }}>
+            <Tooltip title="Paramètres"  >
                 <IconButton
                     size="large"
                     sx={{
                         '& svg': {
                             //color: 'rgba(255,255,255,0.8)',
-                            color: 'var(--text-primary)',
+                            //color: 'var(--text-primary)',
                             transition: '0.2s',
                             transform: 'translateX(0) rotate(0)',
                         },
-                        '&:hover, &:focus': {
-                            bgcolor: 'unset',
+                        '&:hover': {
                             '& svg:first-of-type': {
                                 transform: 'translateX(-4px) rotate(-20deg)',
+                                color: 'var(--text-secondary)',
                             },
                             '& svg:last-of-type': {
                                 right: 0,
@@ -93,10 +103,12 @@ export default function SettingsComponent({firebase}) {
                         },
                     }}
                 >
-                    <Settings />
-                    <ArrowRight sx={{ position: 'absolute', right: 4, opacity: 0 }} />
+                    <Settings sx={{color: 'var(--text-primary)'}} />
+                    <ArrowRight sx={{ position: 'absolute', right: 4, opacity: 0, color: 'var(--text-secondary)' }} />
                 </IconButton>
             </Tooltip>
+            </Stack>
+            </Link>
         </ListItem>
     );
 }

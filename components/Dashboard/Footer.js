@@ -17,22 +17,29 @@ export default function Footer() {
     //const logo = theme.palette.mode == 'dark' ? logoWhite : logoBlack;
 
     return (
-        <Container sx={{
+        <footer className={styles.footer} >
+            <Container sx={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop: '10vh',
+            marginTop: '3vh',
+            marginBottom: '3vh',
 
         }}>
             <Image
                 src={logo}
-                width={70}
+                width={72}
                 height={70}
                 alt="logo"
                 priority
                 quality={100}
                 loader={myLoader}
+                style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                  }}
             />
         </Container>
+        </footer>
     );
 }
