@@ -183,7 +183,7 @@ function Dashboard(props) {
                 <Toolbar />
                 <Grid container direction={'row'} justifyContent={'center'} alignItems={'center'}>
                 <Grid item>
-                    <h1>{title}</h1>
+                    <h1 style={{fontFamily:'ChangaOneRegular'}}>{title}</h1>
                 </Grid>
             </Grid>
                 {children}

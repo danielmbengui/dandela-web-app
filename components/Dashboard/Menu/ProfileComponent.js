@@ -63,8 +63,9 @@ color: profilePage ? 'var(--text-secondary)' : 'var(--text-primary)',
                     <ListItemText
                         primary={'Profil'}
                         primaryTypographyProps={{
-                            fontSize: 14,
-                            fontWeight: 'bold',
+                            fontSize: 'x-large',
+                            //fontWeight: 'bold',
+                            fontFamily: 'ChangaOneRegular'
                             /*
                             color: profilePage ? 'var(--text-secondary)' : 'var(--text-primary)',
                             '&:hover': {
