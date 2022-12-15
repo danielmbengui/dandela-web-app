@@ -116,7 +116,7 @@ function Dashboard(props) {
                 ))}
             </List>
             <Divider sx={{display:'none'}} />
-            <Grid container sx={{height:'100%'}} direction={'row'} justifyContent={'center'} alignItems={'flex-end'}>
+            <Grid container sx={{height:'100%', bgcolor: 'var(--menu-background)'}} direction={'row'} justifyContent={'center'} alignItems={'flex-end'}>
                 <Grid>
                 <Typography sx={{
                 fontFamily: 'ChangaOneRegular',
@@ -142,7 +142,7 @@ function Dashboard(props) {
 
     return (
         <Box sx={{ display: user ? 'flex' : 'none', bgcolor:'var(--menu-background)'}}>
-            <CssBaseline />
+            <CssBaseline sx={{bgcolor:'var(--menu-background)'}} />
             <BarApp user={user} storage={storage} drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
             <Box
                 component="nav"
@@ -182,7 +182,11 @@ function Dashboard(props) {
 
             <Box
                 component="main"
-                sx={{ flexGrow: 1, p: 1, width: { md: `calc(100% - ${drawerWidth}px)` } }}
+                sx={{ 
+                    flexGrow: 1, p: 1, 
+                    width: { md: `calc(100% - ${drawerWidth}px)` },
+                    bgcolor: 'var(--background-color)',
+                 }}
             >
                 <Toolbar />
                 <Grid container direction={'row'} justifyContent={'center'} alignItems={'center'}>

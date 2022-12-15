@@ -22,10 +22,10 @@ export default function Settings(props) {
               Salut {user && <span>{user.displayName}!</span>}
             </h1>
             </Grid>
-            <Grid item xs={12} mb={5}>
+            <Grid item xs={12} mb={{xs:5, sm:4, md:0}}>
               <Typography sx={{fontFamily: 'ChangaOneRegular', fontSize: 'x-large'}}>
-              Voir ton profil :{' '}
-              <code className={styles.code}><Link href="/profile">/profil</Link></code>
+              Voir profil :{' '}
+              <Link href="/profile"><code className={styles.code}>/profil</code></Link>
               </Typography>
             </Grid>
           </Grid>
