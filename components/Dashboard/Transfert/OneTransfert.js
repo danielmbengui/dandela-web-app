@@ -46,7 +46,11 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
                     </Grid>
                     <Grid item xs={6} md={9}>
                         <Typography>
-                            {formatCode(transfert.code)}
+                            {transfert.code.toString().substring(0, 3)}
+                            {"-"}
+                            {transfert.code.toString().substring(3, 6)}
+                            {"-"}
+                            {transfert.code.toString().substring(6, 10)}
                         </Typography>
                     </Grid>
                 </Grid>
