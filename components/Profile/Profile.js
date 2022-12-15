@@ -320,7 +320,7 @@ console.log("FFFFIRST TEST: ", playerJson);
             sx={{ mb: 2, textAlign: 'start' }}
           >
             <AlertTitle sx={{ mb: 0.5, alignItems: 'flex-start' }}>Complete ton profil</AlertTitle>
-            Rajoute un nom d'utilisateur pour accéder aux services. — <strong>nous le gardons en sécurité!</strong>
+            {"Rajoute un nom d'utilisateur pour accéder aux services. —"} <strong>nous le gardons en sécurité!</strong>
           </Alert>
 
         </Box>
