@@ -78,8 +78,6 @@ function Dashboard(props) {
             <Divider />
             <SettingsComponent firebase={firebase} settingsPage={pages.settings} />
             <Divider />
-            <ProfileComponent profilePage={pages.profile} />
-            <Divider />
             <TransfertComponent user={user} openSub={true} pages={{
                 newtransfert: pages.newtransfert,
                 inprogress: pages.inprogress,
@@ -87,6 +85,8 @@ function Dashboard(props) {
                 alltransfert: pages.alltransfert,
             }}
                 newtransfertPage={pages.newtransfert} />
+            <Divider />
+            <ProfileComponent profilePage={pages.profile} />
             <Divider />
             <List sx={{display:'none'}}>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -146,7 +146,9 @@ function Dashboard(props) {
             <BarApp user={user} storage={storage} drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
             <Box
                 component="nav"
-                sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 } }}
+                sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 },
+                bgcolor:'var(--menu-background)'
+             }}
                 aria-label="my dashboard"
             >
                 <Drawer
@@ -159,9 +161,11 @@ function Dashboard(props) {
                     }}
                     sx={{
                         display: { xs: 'block', md: 'none' },
+                        bgcolor:'var(--menu-background)',
                         width: '100%',
                         height: '100%',
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, },
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, 
+                        bgcolor:'var(--menu-background)', height:'100%'},
                     }}
                 >
                     {drawer}
@@ -170,9 +174,11 @@ function Dashboard(props) {
                     variant="permanent"
                     sx={{
                         display: { xs: 'none', md: 'block' },
+                        bgcolor:'var(--menu-background)',
                         width: '100%',
                         height: '100%',
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth,
+                        bgcolor:'var(--menu-background)', height:'100%' },
                     }}
                     open
                 >
