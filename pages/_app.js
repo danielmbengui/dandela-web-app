@@ -33,16 +33,15 @@ function MyApp({ Component, pageProps, }) {
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [userFirebase, setUserFirebase] = useState(null);
   const [screenMode, setScreenMode] = useState(DEFAULT_SCREEN_MODE);
-
   /*
+
   firebase.auth().signOut().then(() => {
     // Sign-out successful.
   }).catch((error) => {
     // An error happened.
   });
-  */
-  
 
+  */
   const hash = hashResult("123456");
   console.log("HAAAASH", hash);
   console.log("ADMIN KEY", process.env.FIREBASE_ADMIN_PRIVATE_KEY_ID);
@@ -109,10 +108,8 @@ function MyApp({ Component, pageProps, }) {
     <ThemeModeProvider screenMode={screenMode}>
         <Head>
           <title>Dandela Web App</title>
-          <meta
-            name='viewport'
-            content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
-          />
+          <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />
+                <meta name="theme-color" content="#094397" />
         </Head>
         <Component {...pageProps}
           logo={logo} links={links}
@@ -122,7 +119,6 @@ function MyApp({ Component, pageProps, }) {
           userFirebase={userFirebase} handleUserFirebase={handleUserFirebase}
           uid={uid} 
           />
-     
     </ThemeModeProvider>
     </Provider>
 

@@ -6,7 +6,7 @@ import NewTransfert from '../../components/Dashboard/Transfert/NewTransfert';
 
 export default function AllTransfertsPage({logo, user, firebase, firestore, storage, userFirebase, handleUserFirebase, handleUser, auth, dashboard, screenMode}) {
     return(
-        <Dashboard pages={{ newtransfert: true, }} title={"Nouveau"} firebase={firebase} user={user} storage={storage}>
+        <Dashboard pages={{ newtransfert: true, }} title={"Nouveau transfert"} firebase={firebase} user={user} storage={storage}>
              <Head>
             <title>Dandela Web App - Tous les transferts</title>
             <meta name="description" content="Voir tous les transferts" />
