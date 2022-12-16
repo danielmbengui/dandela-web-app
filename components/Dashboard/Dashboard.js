@@ -79,7 +79,7 @@ function Dashboard(props) {
             <Divider />
             <SettingsComponent firebase={firebase} settingsPage={pages.settings} />
             <Divider />
-            <TransfertComponent user={user} openSub={true} pages={{
+            <TransfertComponent user={user} openSub={pages.newtransfert || pages.inprogress || pages.novalid || pages.alltransfert} pages={{
                 newtransfert: pages.newtransfert,
                 inprogress: pages.inprogress,
                 novalid: pages.novalid,
@@ -89,7 +89,7 @@ function Dashboard(props) {
             <Divider />
             {
                 user && user.type === USER_TYPE_ADMIN && <>
-                <AdminComponent  user={user} openSub={true} pages={{
+                <AdminComponent  user={user} openSub={pages.users || pages.countries || pages.statistics} pages={{
                     users: pages.users,
                     countries: pages.countries,
                     statistics: pages.statistics,

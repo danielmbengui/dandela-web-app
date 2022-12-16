@@ -88,12 +88,23 @@ export function setUserFirestoreSnapshot(phoneNumber, handleUser){
                 console.log("No document for user USER_TYPE");
                 const userType = await getUserTypeFirestore(user.type_id);
                 docRef.collection(COLLECTION_USER_TYPE).doc(user.type_id).set(userType)
-                    .then((docRef) => {
-                        console.log("Document written with ID: ", docRef.id);
+                    .then((doc) => {
+                        console.log("Document written with ID: ", doc);
+                        docRef.update({
+                            type: userType.name
+                        })
+                        .then(() => {
+                            console.log("Document successfully updated!");
+                        })
+                        .catch((error) => {
+                            // The document probably doesn't exist.
+                            console.error("Error updating document: ", error);
+                        });
                     })
                     .catch((error) => {
                         console.error("Error adding document: ", error);
                     });
+                    
             }
           }).catch((error) => {
 
@@ -108,8 +119,18 @@ export function setUserFirestoreSnapshot(phoneNumber, handleUser){
                 console.log("No document for user COUNTRY");
                 const country = await getCountryFirestore(user.country_id);
                 docRef.collection(COLLECTION_COUNTRY).doc(user.country_id).set(country)
-                    .then((docRef) => {
-                        console.log("Document written with ID: ", docRef.id);
+                    .then((doc) => {
+                        console.log("Document written with ID: ", doc);
+                        docRef.update({
+                            country: country.name
+                        })
+                        .then(() => {
+                            console.log("Document successfully updated!");
+                        })
+                        .catch((error) => {
+                            // The document probably doesn't exist.
+                            console.error("Error updating document: ", error);
+                        });
                     })
                     .catch((error) => {
                         console.error("Error adding document: ", error);

@@ -51,7 +51,7 @@ export default function TransfertComponent(props) {
 
     const data = {
         title: 'Transferts',
-        subtitle: "Créer, voir, statistiques",
+        subtitle: "Nouveau, voir, modifier",
         menu: createMenu(),
         /*
         [  
