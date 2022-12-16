@@ -31,7 +31,7 @@ export default function Footer() {
                 width={72}
                 height={70}
                 alt="logo"
-                priority
+                //priority
                 quality={100}
                 loader={myLoader}
                 style={{

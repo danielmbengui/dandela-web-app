@@ -41,7 +41,8 @@ import SettingsComponent from './Menu/SettingsComponent';
 import MenuDashboard from './Menu/MenuDashboard';
 import Footer from './Footer';
 import BarApp from './BarApp/BarApp';
-import { COMPANY_NAME } from '../../constants';
+import { COMPANY_NAME, USER_TYPE_ADMIN } from '../../constants';
+import AdminComponent from './Menu/AdminComponent';
 //import logo from "/img/logo.png";
 const logo = "/img/logo.png";
 
@@ -86,6 +87,18 @@ function Dashboard(props) {
             }}
                 newtransfertPage={pages.newtransfert} />
             <Divider />
+            {
+                user && user.type === USER_TYPE_ADMIN && <>
+                <AdminComponent  user={user} openSub={true} pages={{
+                    users: pages.users,
+                    countries: pages.countries,
+                    statistics: pages.statistics,
+                }}
+                    newtransfertPage={pages.newtransfert} />
+                    <Divider />
+                </>
+            }
+            
             <ProfileComponent profilePage={pages.profile} />
             <Divider />
             <List sx={{display:'none'}}>
