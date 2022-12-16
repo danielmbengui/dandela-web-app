@@ -7,7 +7,7 @@ export default function Document() {
                 <meta name="description" content="Created by Daniel Slaver Mbengui" />
                 <link rel="icon" href="/favicon.ico" />
                 <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
-                <link rel="manifest" href="/manifest.json" />
+
                 <meta name="application-name" content="Dandela Web App" />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -27,6 +27,8 @@ export default function Document() {
 
                 <link rel="icon" type="image/ico" sizes="32x32" href="/favicon32x32.ico" />
                 <link rel="icon" type="image/ico" sizes="16x16" href="/favicon16x16.ico" />
+                <link rel="manifest" href="/manifest.json" />
+                <meta name="theme-color" content="#094397" />
                 <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#5bbad5" />
                 <link rel="shortcut icon" href="/favicon32x32.ico" />
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
