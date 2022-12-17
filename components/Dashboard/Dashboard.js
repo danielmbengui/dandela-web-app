@@ -71,8 +71,10 @@ function Dashboard(props) {
     const themeMode = useContext(ThemeModeProviderContext);
     const [mode, setMode] = useState(theme.palette.mode);
     const [checked, setChecked] = useState(theme.palette.mode === 'dark' ? true : false);
+    const [showInstallApp, setShowInstallApp] = useState(<></>);
 
     const [mobileOpen, setMobileOpen] = useState(false);
+    const container = window !== undefined ? () => window().document.body : undefined;
 
     const drawer = (
         <div style={{ textAlign: 'center', backgroundColor: 'var(--menu-background)' }}>
@@ -152,7 +154,7 @@ function Dashboard(props) {
         setMobileOpen(!mobileOpen);
     };
 
-    const container = window !== undefined ? () => window().document.body : undefined;
+    
 
     return (
         <Box sx={{ display: user ? 'flex' : 'none', bgcolor:'var(--menu-background)'}}>
@@ -209,7 +211,7 @@ function Dashboard(props) {
                  }}
             >
                 <Toolbar />
-                <InstallApp />
+<InstallApp />
                 <Grid container direction={'row'} justifyContent={'center'} alignItems={'center'}>
                 <Grid item>
                     <h1 style={{fontFamily:'ChangaOneRegular'}}>{title}</h1>

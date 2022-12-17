@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Dashboard from '../../components/Dashboard/Dashboard';
 import InProgressTransfert from '../../components/Dashboard/Transfert/All/InProgressTransfert';
+import InstallApp from '../../components/InstallApp/InstallApp';
 
 export default function InProgressPage({logo, user, firebase, firestore, storage, userFirebase, handleUserFirebase, handleUser, auth, dashboard, screenMode}) {
     return(

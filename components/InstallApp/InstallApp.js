@@ -20,7 +20,9 @@ const InstallApp = () => {
           <div className={styles.grid}>
             <div className={styles.card}>
               <p style={{paddingBottom: '2vh',}}>Installer l&apos;application sur mobile/ordinateur.</p>
-              <MaterialUIButton  variant="contained" onClick={onClick}>
+              <MaterialUIButton  variant="contained" onClick={() => {
+                onClick();
+              }}>
               Install
             </MaterialUIButton>
             </div>
@@ -28,7 +30,7 @@ const InstallApp = () => {
           </Grid>
         </Grid>
       )}
-      callback={(data) => console.log(data)}
+      callback={(data) => console.log('RESULT InstallApp', data)}
     />
   )
 }
