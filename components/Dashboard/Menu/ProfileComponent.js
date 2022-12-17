@@ -29,7 +29,7 @@ export default function ProfileComponent({ firebase, drawerWidth, profilePage })
 
     return (
         <Link
-            href={'/profile'} key={'ProfileComponent'}
+            href={'/profil'} key={'ProfileComponent'}
             style={{ textDecoration: 'none' }}
             sx={{ py: 0, minHeight: 32, color: 'rgba(255,255,255,.8)', }}
         >

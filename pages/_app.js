@@ -15,6 +15,7 @@ import AppProvider, { AppContext } from "../context/AppProvider";
 import initAuth from '../initAuth' // the module you created above
 import { DEFAULT_SCREEN_MODE } from "../constants";
 import { getUserFirestore, getUserFirestoreSnapshot, setUserFirestoreSnapshot } from "../functions/firestore/UserFunctions";
+import Install from "../components/Install";
 
 
 initAuth();
@@ -26,7 +27,7 @@ const links = {
   errorlogin: "/account/errorlogin",
 }
 
-function MyApp({ Component, pageProps, }) {
+export default function App({ Component, pageProps, }) {
   //const { state } = useContext(AppContext);
   const [uid, setUid] = useState(null);
   const [user, setUser] = useState(null);
@@ -123,5 +124,3 @@ function MyApp({ Component, pageProps, }) {
 
   )
 }
-
-export default MyApp

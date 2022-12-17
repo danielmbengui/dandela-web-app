@@ -29,7 +29,7 @@ export default function Login(){
                                 console.log("Document successfully written!");
                                 //handleUser(_user);
                             });
-                            window.location.href = "/profile";
+                            window.location.href = "/profil";
                         } else {
                             // doc.data() will be undefined in this case
                             console.log("No such document!");
