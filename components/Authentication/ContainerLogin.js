@@ -6,6 +6,7 @@ import { myLoader } from '../../functions/ImageLoader';
 import { ThemeModeProviderContext } from '../../context/ThemeProvider';
 import { useDispatch } from 'react-redux';
 import { updateScreenMode } from '../../redux/user/userActions';
+import InstallApp from '../InstallApp/InstallApp';
 
 const srcLogo = "/img/logo.png";
 

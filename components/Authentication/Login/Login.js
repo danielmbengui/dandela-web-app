@@ -3,6 +3,7 @@ import { Grid } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import { firestore } from '../../../config.firebase';
 import firebase from '../../../config.firebase';
+import InstallApp from '../../InstallApp/InstallApp';
 
 export default function Login(){
     const theme = useTheme();

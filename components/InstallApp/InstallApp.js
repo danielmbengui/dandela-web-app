@@ -2,6 +2,14 @@ import React from 'react';
 import PWAInstallerPrompt from 'react-pwa-installer-prompt';
 import { Button, Grid } from '@mui/material';
 import styles from './InstallApp.module.css';
+import { styled } from '@mui/material/styles';
+
+const MaterialUIButton = styled(Button)(() => ({
+  backgroundColor: 'var(--primary)',
+  fontFamily: 'ChangaOneRegular',
+  color: 'var(text-secondary)',
+
+}));
 
 const InstallApp = () => {
   return (
@@ -12,11 +20,9 @@ const InstallApp = () => {
           <div className={styles.grid}>
             <div className={styles.card}>
               <p style={{paddingBottom: '2vh',}}>Installer l&apos;application sur mobile/ordinateur.</p>
-              <Button className={styles.button} variant="contained" color='primary' onClick={onClick} sx={{
-
-              }}>
+              <MaterialUIButton  variant="contained" onClick={onClick}>
               Install
-            </Button>
+            </MaterialUIButton>
             </div>
             </div>
           </Grid>

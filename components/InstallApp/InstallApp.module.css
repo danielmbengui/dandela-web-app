@@ -11,9 +11,9 @@
     margin: 1rem;
     padding: 1.5rem;
     text-align: center;
-    color: black;
+    color: var(--text-primary);
     text-decoration: none;
-    background-color: var(--primary);
+    background-color: var(--card-background);
     border-radius: 10px;
     transition: color 0.15s ease, border-color 0.15s ease;
     max-width: 300px;
@@ -21,11 +21,7 @@
     font-family: 'ChangaOneRegular';
 }
 
-.button {
-    background-color: black;
-    font-family: 'ChangaOneRegular';
-    color: white;
-}
+
 
 .card:hover,
 .card:focus,
