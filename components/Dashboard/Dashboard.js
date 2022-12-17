@@ -48,6 +48,7 @@ import InstallApp from '../InstallApp/InstallApp';
 const logo = "/img/logo.png";
 
 
+
 const drawerWidth = 240;
 
 const Navigation = styled(List)({
@@ -65,7 +66,7 @@ const Navigation = styled(List)({
 });
 
 function Dashboard(props) {
-    const { window, children, firebase, auth, content, pages, currentOpen, title, user, storage } = props;
+    const { windowDashboard, children, firebase, auth, content, pages, currentOpen, title, user, storage } = props;
     const dispatch = useDispatch();
     const theme = useTheme();
     const themeMode = useContext(ThemeModeProviderContext);
@@ -74,7 +75,9 @@ function Dashboard(props) {
     const [showInstallApp, setShowInstallApp] = useState(<></>);
 
     const [mobileOpen, setMobileOpen] = useState(false);
-    const container = window !== undefined ? () => window().document.body : undefined;
+    const container = undefined;
+
+    
 
     const drawer = (
         <div style={{ textAlign: 'center', backgroundColor: 'var(--menu-background)' }}>
@@ -168,7 +171,7 @@ function Dashboard(props) {
                 aria-label="my dashboard"
             >
                 <Drawer
-                    container={container}
+                    //container={container}
                     variant="temporary"
                     open={mobileOpen}
                     onClose={handleDrawerToggle}
@@ -211,7 +214,7 @@ function Dashboard(props) {
                  }}
             >
                 <Toolbar />
-<InstallApp />
+                <InstallApp />
                 <Grid container direction={'row'} justifyContent={'center'} alignItems={'center'}>
                 <Grid item>
                     <h1 style={{fontFamily:'ChangaOneRegular'}}>{title}</h1>
@@ -258,7 +261,7 @@ Dashboard.propTypes = {
      * Injected by the documentation to work in an iframe.
      * You won't need it on your project.
      */
-    window: PropTypes.func,
+    windowDashboard: PropTypes.func,
 };
 
 export default Dashboard;

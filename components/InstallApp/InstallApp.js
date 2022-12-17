@@ -8,10 +8,9 @@ const MaterialUIButton = styled(Button)(() => ({
   backgroundColor: 'var(--primary)',
   fontFamily: 'ChangaOneRegular',
   color: 'var(text-secondary)',
-
 }));
 
-const InstallApp = () => {
+export default function InstallApp(){
   return (
     <PWAInstallerPrompt
       render={({ onClick }) => (
@@ -20,9 +19,7 @@ const InstallApp = () => {
           <div className={styles.grid}>
             <div className={styles.card}>
               <p style={{paddingBottom: '2vh',}}>Installer l&apos;application sur mobile/ordinateur.</p>
-              <MaterialUIButton  variant="contained" onClick={() => {
-                onClick();
-              }}>
+              <MaterialUIButton  variant="contained" onClick={onClick}>
               Install
             </MaterialUIButton>
             </div>
@@ -34,4 +31,3 @@ const InstallApp = () => {
     />
   )
 }
-export default InstallApp;

@@ -46,6 +46,7 @@ export default function App({ Component, pageProps, }) {
   const hash = hashResult("123456");
   console.log("HAAAASH", hash);
   console.log("ADMIN KEY", process.env.FIREBASE_ADMIN_PRIVATE_KEY_ID);
+
   
   /*
   useEffect(() => {
@@ -110,6 +111,7 @@ export default function App({ Component, pageProps, }) {
         <Head>
           <title>Dandela Web App</title>
           <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />
+
         </Head>
         <Component {...pageProps}
           logo={logo} links={links}
