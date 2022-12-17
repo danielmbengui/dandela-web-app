@@ -11,7 +11,7 @@ const InstallApp = () => {
           <Grid item>
           <div className={styles.grid}>
             <div className={styles.card}>
-              <p style={{paddingBottom: '2vh',}}>Installer l'application sur mobile/ordinateur.</p>
+              <p style={{paddingBottom: '2vh',}}>Installer l&apos;application sur mobile/ordinateur.</p>
               <Button className={styles.button} variant="contained" color='primary' onClick={onClick} sx={{
 
               }}>
