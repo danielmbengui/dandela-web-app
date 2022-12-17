@@ -15,7 +15,7 @@ import AppProvider, { AppContext } from "../context/AppProvider";
 import initAuth from '../initAuth' // the module you created above
 import { DEFAULT_SCREEN_MODE } from "../constants";
 import { getUserFirestore, getUserFirestoreSnapshot, setUserFirestoreSnapshot } from "../functions/firestore/UserFunctions";
-import Install from "../components/Install";
+import Install from "../components/InstallApp/InstallApp";
 
 
 initAuth();

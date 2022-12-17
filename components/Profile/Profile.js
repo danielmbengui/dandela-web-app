@@ -22,6 +22,7 @@ import styles from './Profile.module.css';
 //import axios from 'axios';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import InstallApp from '../InstallApp/InstallApp';
 const { Configuration, OpenAIApi } = require("openai");
 
 const fontFamilyMain = [

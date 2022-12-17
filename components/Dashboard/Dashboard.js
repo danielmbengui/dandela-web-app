@@ -43,6 +43,7 @@ import Footer from './Footer';
 import BarApp from './BarApp/BarApp';
 import { COMPANY_NAME, USER_TYPE_ADMIN } from '../../constants';
 import AdminComponent from './Menu/AdminComponent';
+import InstallApp from '../InstallApp/InstallApp';
 //import logo from "/img/logo.png";
 const logo = "/img/logo.png";
 
@@ -208,11 +209,12 @@ function Dashboard(props) {
                  }}
             >
                 <Toolbar />
+                <InstallApp />
                 <Grid container direction={'row'} justifyContent={'center'} alignItems={'center'}>
                 <Grid item>
                     <h1 style={{fontFamily:'ChangaOneRegular'}}>{title}</h1>
                 </Grid>
-            </Grid>
+                </Grid>
                 {children}
                 <Typography sx={{display:'none'}} paragraph>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

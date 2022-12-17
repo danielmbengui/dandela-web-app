@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Image from "next/image";
 import Link from 'next/link';
 import { COMPANY_NAME } from '../../../constants';
+import InstallApp from '../../InstallApp/InstallApp';
 import styles from './Settings.module.css';
 
 const logo = '/img/logo.png';
@@ -25,7 +26,7 @@ export default function Settings(props) {
             <Grid item xs={12} mb={{xs:5, sm:4, md:0}}>
               <Typography sx={{fontFamily: 'ChangaOneRegular', fontSize: 'x-large'}}>
               Voir profil :{' '}
-              <Link href="/profile"><code className={styles.code}>/profil</code></Link>
+              <Link href="/profil"><code className={styles.code}>/profil</code></Link>
               </Typography>
             </Grid>
           </Grid>
