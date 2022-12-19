@@ -29,7 +29,7 @@ import ApprovalIcon from '@mui/icons-material/Approval';
 import { USER_TYPE_ADMIN, USER_TYPE_EMPLOYE_ANGOLA } from '../../../constants';
 
 export default function TransfertComponent(props) {
-    const {user, openSub, pages, newtransfertPage} = props;
+    const {user, openSub, pages, newtransfertPage, isAdmin} = props;
     const theme = useTheme();
     const [open, setOpen] = useState(openSub);
 
@@ -42,7 +42,7 @@ export default function TransfertComponent(props) {
                 menu.push({ icon: <AddCircleIcon fontSize='large' />, label: 'Nouveau', link: '/transferts/new', active: pages.newtransfert});
             }
             menu.push({ icon: <CurrencyExchangeIcon fontSize='large' />, label: 'En cours', link: '/transferts/inprogress', active: pages.inprogress });
-            if (user.type === USER_TYPE_ADMIN) {
+            if (isAdmin) {
                 menu.push({ icon: <ApprovalIcon fontSize='large' />, label: 'À valider', link: '/transferts/novalidlist', active: pages.novalid});
             }
         }

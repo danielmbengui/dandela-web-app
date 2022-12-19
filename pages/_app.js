@@ -5,7 +5,7 @@ import '../styles/firebaseui.css';
 import { firestore, storage } from "../config.firebase";
 import firebase from "../config.firebase";
 import store from "../redux/store";
-import { Provider } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 //import {hashResult} from "../functions/HashResult";
 import hashResult from "../functions/ConvertToHash";
 import Head from "next/head";
@@ -16,6 +16,7 @@ import initAuth from '../initAuth' // the module you created above
 import { DEFAULT_SCREEN_MODE } from "../constants";
 import { getUserFirestore, getUserFirestoreSnapshot, setUserFirestoreSnapshot } from "../functions/firestore/UserFunctions";
 import Install from "../components/InstallApp/InstallApp";
+import { updateUser } from "../redux/user/userActions";
 
 
 initAuth();
@@ -34,6 +35,10 @@ export default function App({ Component, pageProps, }) {
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [userFirebase, setUserFirebase] = useState(null);
   const [screenMode, setScreenMode] = useState(DEFAULT_SCREEN_MODE);
+
+  const handleProfilPhotoURL = (_profilPhotoURL) => {
+    setProfilPhotoURL(_profilPhotoURL);
+  }
   /*
 
   firebase.auth().signOut().then(() => {
@@ -115,11 +120,11 @@ export default function App({ Component, pageProps, }) {
         </Head>
         <Component {...pageProps}
           logo={logo} links={links}
-          phoneNumber={phoneNumber}
+          phoneNumber={user ? user.phoneNumber : ''}
           firebase={firebase} firestore={firestore} storage={storage}
           user={user} handleUser={handleUser}
           userFirebase={userFirebase} handleUserFirebase={handleUserFirebase}
-          uid={uid} 
+          uid={uid}
           />
     </ThemeModeProvider>
     </Provider>

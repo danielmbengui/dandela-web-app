@@ -32,6 +32,10 @@
     "background_color": "#ffffff",
     "start_url": "/",
     "scope": "/",
+    "related_applications": [{
+      "platform": "webapp",
+      "url": "https://webapp.dandela.com/manifest.json"
+    }],
     "display": "standalone",
     "orientation": "portrait"
   }

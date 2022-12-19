@@ -28,27 +28,10 @@ import { Button, Grid } from '@mui/material';
 import styles from './BarApp.module.css';
 
 export default function BarApp(props) {
-    const { user, storage, drawerWidth, mobileOpen, setMobileOpen } = props;
-    const storageRef = storage.ref();
-    const [photoURL, setPhotoURL] = useState(null);
+    const { user, storage, drawerWidth, mobileOpen, setMobileOpen, photoURL } = props;
+    //const storageRef = storage.ref();
+    //const [photoURL, setPhotoURL] = useState(null);
     //const [mobileOpen, setMobileOpen] = useState(false);
-
-    useEffect(() => {
-        if (user) {
-          if (user.photoURL) {
-            var profileImgRef = storageRef.child(`${user.phoneNumber}/profile`);
-            profileImgRef.getDownloadURL()
-              .then((url) => {
-                setPhotoURL(url);
-              })
-              .catch((error) => {
-                // Handle any errors
-                setPhotoURL('');
-                console.log('Error URL');
-              });
-          }
-        }
-      }, [user])
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);

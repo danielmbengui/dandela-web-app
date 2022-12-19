@@ -13,6 +13,7 @@ module.exports = withPWA({
   nextConfig,
   env: {
     customKey: process.env.NODE_ENV === "production" ? 'my-value-prod' : 'my-value-dev',
+    httpsEnable: process.env.NODE_ENV === "production" ? true : false,
     FIREBASE_API_KEY: process.env.NODE_ENV === "production" ? 
     process.env.NEXT_PUBLIC_FIREBASE_API_KEY : process.env.NEXT_TEST_FIREBASE_API_KEY,
 

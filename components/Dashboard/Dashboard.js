@@ -28,7 +28,7 @@ import Stack from '@mui/material/Stack';
 import { Button, Grid } from '@mui/material';
 import Image from 'next/image';
 
-import { updateUser } from '../../redux/user/userActions';
+import { connectUser, updateUser } from '../../redux/user/userActions';
 import { updateScreenMode } from '../../redux/user/userActions';
 import { useDispatch, useSelector } from "react-redux";
 import PermanentBackdrop from '../Loading/PermanentBackdrop';
@@ -65,19 +65,81 @@ const Navigation = styled(List)({
     },
 });
 
+
+
 function Dashboard(props) {
-    const { windowDashboard, children, firebase, auth, content, pages, currentOpen, title, user, storage } = props;
+    const { windowDashboard, children, firebase, auth, content, pages, currentOpen, title, storage } = props;
     const dispatch = useDispatch();
     const theme = useTheme();
     const themeMode = useContext(ThemeModeProviderContext);
     const [mode, setMode] = useState(theme.palette.mode);
     const [checked, setChecked] = useState(theme.palette.mode === 'dark' ? true : false);
-    const [showInstallApp, setShowInstallApp] = useState(<></>);
+    const [showInstallApp, setShowInstallApp] = useState(true);
 
     const [mobileOpen, setMobileOpen] = useState(false);
     const container = undefined;
+  const user = useSelector((state) => state.user);
+  const [isAdmin, setIsAdmin] = useState(false);
 
+  const storageRef = storage.ref();
+    const [photoURL, setPhotoURL] = useState(null);
+    //const [mobileOpen, setMobileOpen] = useState(false);
+
+    useEffect(() => {
+        if (user) {
+          if (user.photoURL) {
+            var profileImgRef = storageRef.child(`${user.photoURL}`);
+            profileImgRef.getDownloadURL()
+              .then((url) => {
+                setPhotoURL(url);
+              })
+              .catch((error) => {
+                // Handle any errors
+                setPhotoURL('');
+                console.log('Error URL');
+              });
+          }
+        }
+      }, [user.photoURL]);
     
+      const handlePhotoURL = (_photoURL) => {
+            setPhotoURL(photoURL);
+      }
+
+  const updateUserInfo = () => {
+    dispatch(connectUser());
+  }
+  useEffect(() => {
+    updateUserInfo();
+    setIsAdmin(user.type === USER_TYPE_ADMIN ? true : false);
+    console.log("USER_REDUX Dashboard", user);
+    setShowInstallApp(true);
+  }, [user.uid, user.phoneNumber, user.type]);
+
+    useEffect(() => {
+        async function related(){
+        const relatedApps = await navigator.getInstalledRelatedApps();
+        const PWAisInstalled = relatedApps.length > 0;
+        console.log('PWA INSTALLEEEEEEEEED', PWAisInstalled ? 'true' : 'false');
+
+        }
+        related();
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            console.log('display-mode is standalone');
+        }else{
+            console.log("DOOOOOOOOOOOONT MATCH");
+            window.addEventListener('appinstalled', (evt) => {
+                console.log('a2hs installed');
+              });
+        }
+        window.addEventListener('appinstalled', () => {
+            //setShowInstallApp(false);
+            console.log("INSTALLEEEEEEEEEEEED!!!!!!")
+        });
+        return () => {
+          window.removeEventListener('appinstalled', console.log("REMOVED"));
+        }
+      }, []);
 
     const drawer = (
         <div style={{ textAlign: 'center', backgroundColor: 'var(--menu-background)' }}>
@@ -85,7 +147,7 @@ function Dashboard(props) {
             <Divider />
             <SettingsComponent firebase={firebase} settingsPage={pages.settings} />
             <Divider />
-            <TransfertComponent user={user} openSub={pages.newtransfert || pages.inprogress || pages.novalid || pages.alltransfert} pages={{
+            <TransfertComponent user={user} isAdmin={isAdmin} openSub={pages.newtransfert || pages.inprogress || pages.novalid || pages.alltransfert} pages={{
                 newtransfert: pages.newtransfert,
                 inprogress: pages.inprogress,
                 novalid: pages.novalid,
@@ -94,7 +156,7 @@ function Dashboard(props) {
                 newtransfertPage={pages.newtransfert} />
             <Divider />
             {
-                user && user.type === USER_TYPE_ADMIN && <>
+                isAdmin && <>
                 <AdminComponent  user={user} openSub={pages.users || pages.countries || pages.statistics} pages={{
                     users: pages.users,
                     countries: pages.countries,
@@ -162,7 +224,7 @@ function Dashboard(props) {
     return (
         <Box sx={{ display: user ? 'flex' : 'none', bgcolor:'var(--menu-background)'}}>
             <CssBaseline sx={{bgcolor:'var(--menu-background)'}} />
-            <BarApp user={user} storage={storage} drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+            <BarApp user={user} photoURL={photoURL} handlePhotoURL={handlePhotoURL} storage={storage} drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
             <Box
                 component="nav"
                 sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 },
@@ -214,7 +276,9 @@ function Dashboard(props) {
                  }}
             >
                 <Toolbar />
+                <div style={{display:showInstallApp ? 'block' : 'none'}}>
                 <InstallApp />
+                </div>
                 <Grid container direction={'row'} justifyContent={'center'} alignItems={'center'}>
                 <Grid item>
                     <h1 style={{fontFamily:'ChangaOneRegular'}}>{title}</h1>

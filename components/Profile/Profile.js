@@ -23,6 +23,7 @@ import styles from './Profile.module.css';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import InstallApp from '../InstallApp/InstallApp';
+import { COLLECTION_USER, USER_LINK_PHOTO_URL } from '../../constants';
 const { Configuration, OpenAIApi } = require("openai");
 
 const fontFamilyMain = [
@@ -42,7 +43,7 @@ const fontFamilyMain = [
 const TexFieldCustom = styled(TextField)(({ theme }) => ({
   '& .MuiInputLabel-root': {
     fontFamily: fontFamilyMain,
-    color:'var(--primary)',
+    color: 'var(--primary)',
   },
   '& .MuiInputBase-root': {
     color: 'var(--primary)',
@@ -136,7 +137,7 @@ export default function Profile({ logo, firebase, firestore, user, handleUser, s
   const [photoFile, setPhotoFile] = useState(null);
 
   useEffect(() => {
-    setErrorName(user ? (user.displayName == '' ? true : false ) : true);
+    setErrorName(user ? (user.displayName == '' ? true : false) : true);
   }, [user]);
 
   const onChangeName = (e) => {
@@ -185,9 +186,9 @@ console.log("FFFFIRST TEST: ", playerJson);
   useEffect(() => {
     if (user) {
       setDisplayName(user.displayName);
-      setPassword(user.password);
+      //setPassword(user.password);
       if (user.photoURL) {
-        var profileImgRef = storageRef.child(`${user.phoneNumber}/profile`);
+        var profileImgRef = storageRef.child(`${user.photoURL}`);
         profileImgRef.getDownloadURL()
           .then((url) => {
             setPhotoURL(url);
@@ -209,8 +210,10 @@ console.log("FFFFIRST TEST: ", playerJson);
         const files = event.target.files;
         const srcUploaded = reader.result;
         setPhotoURL(srcUploaded);
+        setPhotoFile(files[0]);
+        /*
         if (user) {
-          var profileImgRef = storageRef.child(`${user.phoneNumber}/profile`);
+          var profileImgRef = storageRef.child(`${user.phoneNumber}${USER_LINK_PHOTO_URL}`);
           var metadata = {
             contentType: files[0].type,
           };
@@ -226,7 +229,7 @@ console.log("FFFFIRST TEST: ", playerJson);
 
           const userRef = firestore.collection("USER").doc(user.phoneNumber);
           userRef.update({
-            photoURL: `${user.phoneNumber}/profile`,
+            photoURL: `${user.phoneNumber}${USER_LINK_PHOTO_URL}`,
           })
             .then(() => {
               console.log("Document successfully updated!");
@@ -237,8 +240,10 @@ console.log("FFFFIRST TEST: ", playerJson);
               console.error("Error updating document: ", error);
               //window.location.href = '/login/errorlogin';
             });
+            
         }
-        
+        */
+
         //setPhotoFile(files[0]);
       });
       reader.readAsDataURL(this.files[0]);
@@ -252,55 +257,63 @@ console.log("FFFFIRST TEST: ", playerJson);
     padding: '1.5vw',
   }));
 
-  const clickContinue = () => {
-    const userRef = firestore.collection("USER").doc(user.phoneNumber);
-    const _userFirebase = JSON.parse(JSON.stringify(user));
-    const _user = firebase.auth().currentUser;
-    _userFirebase.displayName = displayName;
-    //_userFirebase.password = hashResult('123456');
-    _userFirebase.photoURL = photoURL;
-
-    if (photoURL && photoFile) {
-      var profileImgRef = storageRef.child(`${user.phoneNumber}/profile`);
-      var metadata = {
-        contentType: photoFile.type,
-      };
-      profileImgRef.put(photoFile, metadata).then((snapshot) => {
-        console.log('Uploaded a blob or file! Snapshot:', snapshot);
-        _userFirebase.photoURL = `${user.phoneNumber}/profile`;
+  const clickModifyUser = () => {
+    const userFirebase = firebase.auth().currentUser;
+    const userApp = JSON.parse(JSON.stringify(user));
+    userApp.displayName = displayName;
+    userApp.photoURL = userApp.phoneNumber + USER_LINK_PHOTO_URL;
+    if (userFirebase) {
+      userFirebase.updateProfile({
+        displayName: displayName,
+        photoURL: userApp.photoURL,
+      }).then(() => {
+        // Update successful
+        // ...
+        // Set the "capital" field of the city 'DC'
+        firestore.collection(COLLECTION_USER).doc(userApp.phoneNumber).update({
+          displayName: displayName,
+          photoURL: userApp.photoURL,
+          verified: true
+        })
+          .then(() => {
+            console.log("Document successfully updated!");
+            //window.location.href = '/about';
+            if (photoURL && photoFile) {
+              var profileImgRef = storageRef.child(`${userApp.photoURL}`);
+              var metadata = {
+                contentType: photoFile.type,
+              };
+              profileImgRef.put(photoFile, metadata).then((snapshot) => {
+                console.log('Uploaded a blob or file! Snapshot:', snapshot);
+                //userApp.photoURL = `${user.phoneNumber}${USER_LINK_PHOTO_URL}`;
+                //setPhotoURL(userApp.photoURL);
+                profileImgRef.getDownloadURL()
+                .then((url) => {
+                  setPhotoURL(url);
+                  userApp.profilPhotoURL = photoURL;
+                })
+                .catch((error) => {
+                  // Handle any errors
+                  setPhotoURL('');
+                  console.log('Error URL');
+                });
+              });
+              
+            }
+          })
+          .catch((error) => {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+            //window.location.href = '/login/errorlogin';
+          });
+      }).catch((error) => {
+        // An error occurred
+        // ...
       });
     }
-
-    userRef.update({
-      displayName: 'Claaav',
-      photoURL: _userFirebase.photoURL,
-      password: _userFirebase.password,
-      verified: true
-    })
-      .then(() => {
-        console.log("Document successfully updated!");
-        //window.location.href = '/about';
-      })
-      .catch((error) => {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-        //window.location.href = '/login/errorlogin';
-      });
-
-    _user.updateProfile({
-      displayName: _userFirebase.displayName,
-      photoURL: _userFirebase.photoURL,
-    }).then(() => {
-      // Update successful
-      // ...
-      // Set the "capital" field of the city 'DC'
-
-    }).catch((error) => {
-      // An error occurred
-      // ...
-    });
-    handleUser(_userFirebase);
-    window.location.href = '/about';
+    userApp.editingPhotoUrl = false;
+    handleUser(userApp);
+    //window.location.href = '/about';
   }
 
   return (
@@ -375,9 +388,9 @@ console.log("FFFFIRST TEST: ", playerJson);
               disabled
               //defaultValue={displayName}
               value={uid}
-              //helperText="Incorrect entry."
-              //theme={theme}
-              //placeholder={"Name"}
+            //helperText="Incorrect entry."
+            //theme={theme}
+            //placeholder={"Name"}
             />
             <TexFieldCustom
               fullWidth
@@ -388,9 +401,9 @@ console.log("FFFFIRST TEST: ", playerJson);
               disabled
               //defaultValue={displayName}
               value={phoneNumber}
-              //helperText="Incorrect entry."
-              //theme={theme}
-              //placeholder={"Name"}
+            //helperText="Incorrect entry."
+            //theme={theme}
+            //placeholder={"Name"}
             />
             <TexFieldCustom
               fullWidth
@@ -401,16 +414,16 @@ console.log("FFFFIRST TEST: ", playerJson);
               disabled
               //defaultValue={displayName}
               value={userType}
-              //helperText="Incorrect entry."
-              //theme={theme}
-              //placeholder={"Name"}
+            //helperText="Incorrect entry."
+            //theme={theme}
+            //placeholder={"Name"}
             />
 
             <Grid container pt={3} justifyContent={'center'}>
               <Button variant='contained' onClick={() => {
                 //setDisplayName('Claav');
                 //setPassword('123456');
-                clickContinue();
+                clickModifyUser();
               }
 
 

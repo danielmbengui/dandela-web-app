@@ -1,19 +1,37 @@
+import { DEFAULT_SCREEN_MODE } from "../../constants";
+
 const initialState = {
   loading: false,
+  uid: '',
   phoneNumber:'',
-  isConnected: null,
-  screenMode: 'dark',
+  photoURL: "",
+  profilPhotoURL: "",
+  editingPhotoUrl: false,
+  type: "",
+  connected: false,
+  authorized: false,
+  verified: false,
   errorMsg: "",
+  screenMode: DEFAULT_SCREEN_MODE,
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "UPDATE_NETWORK":
+    case "UPDATE_UID":
     return {
       ...state,
-      networkId: action.payload.networkId,
+      networkId: action.payload.uid,
     };
-
+    case "UPDATE_PHONE_NUMBER":
+    return {
+      ...state,
+      networkId: action.payload.phoneNumber,
+    };
+    case "UPDATE_IS_CONNECTED":
+    return {
+      ...state,
+      networkId: action.payload.connected,
+    };
     case "UPDATE_SCREEN_MODE":
     return {
       ...state,
@@ -33,15 +51,21 @@ const userReducer = (state = initialState, action) => {
     return {
       ...state,
       phoneNumber: action.payload.phoneNumber,
-      isConnected: action.payload.isConnected,
+      connected: action.payload.connected,
     };
     case "UPDATE_USER":
       return {
         ...state,
         loading: false,
+        editingPhotoUrl:false,
+        uid: action.payload.uid,
         phoneNumber: action.payload.phoneNumber,
-        isConnected: action.payload.isConnected,
-        screenMode: action.payload.screenMode,
+        photoURL: action.payload.photoURL,
+        type: action.payload.type,
+        connected: action.payload.connected,
+        //screenMode: action.payload.screenMode,
+        authorized: action.payload.authorized,
+        verified: action.payload.verified,
       };
     case "CONNECTION_REQUEST":
       return {

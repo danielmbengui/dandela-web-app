@@ -1,5 +1,6 @@
 // ./initAuth.js
 import { init } from 'next-firebase-auth'
+import { APP_NAME } from './constants';
 //import adminFirebaseConfig from './config.admin.firebase';
 
 const initAuth = () => {
@@ -43,7 +44,7 @@ const initAuth = () => {
     measurementId: process.env.FIREBASE_MEASUREMENT_ID,
     },
     cookies: {
-      name: 'Dandela Web App', // required
+      name: APP_NAME, // required
       // Keys are required unless you set `signed` to `false`.
       // The keys cannot be accessible on the client side.
       keys: [
@@ -55,7 +56,7 @@ const initAuth = () => {
       overwrite: true,
       path: '/',
       sameSite: 'strict',
-      secure: false, // set this to false in local (non-HTTPS) development
+      secure: process.env.httpsEnable, // set this to false in local (non-HTTPS) development
       signed: false,
     },
     onVerifyTokenError: (err) => {

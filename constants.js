@@ -20,6 +20,14 @@ export const USER_TYPE_ADMIN = "Admin";
 export const USER_TYPE_EMPLOYE_ANGOLA = "Employé Angola";
 export const USER_TYPE_EMPLOYE_EUROPE = "Employé Europe";
 export const USER_TYPE_CLIENT = "Client";
+export const USER_LINK_PHOTO_URL = "/profil";
 export const TRANSFERT_STATE_NO_VALID = "Non valide";
 export const TRANSFERT_STATE_IN_PROGRESS = "En cours";
 export const TRANSFERT_STATE_FINISHED = "Terminé";
+
+/* --------------- STORAGE -------------- */
+export const STORAGE_UID = 'uid';
+export const STORAGE_PHONE_NUMBER = 'phoneNumber';
+export const STORAGE_IS_CONNECTED = 'isConnected';
+
+export const STORAGE_SCREEN_MODE = 'screenMode';

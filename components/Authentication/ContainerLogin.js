@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
-import { AppBar, FormControlLabel, Grid, Switch, Toolbar, Typography } from "@mui/material";
+import { AppBar, FormControlLabel, Grid, Stack, Switch, Toolbar, Typography } from "@mui/material";
 import Image from "next/image";
 import { myLoader } from '../../functions/ImageLoader';
 import { ThemeModeProviderContext } from '../../context/ThemeProvider';
@@ -92,32 +92,33 @@ export default function ContainerLogin({ children }) {
     }
 
     return (
-        <>
+        <Stack style={{maxWidth:'100%', width:'100%'}} direction={'column'}>
             <AppBarLogin checked={checked} onChangeMode={onChangeMode} />
             <Grid container
                 direction={'column'}
                 justifyContent={'center'}
                 alignItems={'center'}
                 mt={5}
-                columns={{ xs: 12 }}
-                pb={10}
+                //columns={{ xs: 12 }}
+                //pb={5}
+                //sx={{bgcolor: 'red'}}
             >
-                <Grid item p={5} style={{ display: 'block' }} xs={12}>
+<Grid item p={3} style={{ display: 'block', bgcolor: 'red' }} >
                     <Image
                         src={srcLogo}
-                        width={100}
-                        height={100}
+                        width={72}
+                        height={72}
                         alt="logo"
                         priority
                         quality={100}
                         loader={myLoader}
+                        style={{
+                            maxWidth: '100%'
+                        }}
                     />
                 </Grid>
-
-                <Grid item xs={12}>
-                    {children}
-                </Grid>
             </Grid>
-        </>
+            {children}
+        </Stack>
     )
 };

@@ -1,12 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Grid } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import { firestore } from '../../../config.firebase';
 import firebase from '../../../config.firebase';
 import InstallApp from '../../InstallApp/InstallApp';
+import PermanentBackdrop from '../../Loading/PermanentBackdrop';
+import { COLLECTION_USER, USER_LINK_PHOTO_URL } from '../../../constants';
+import Link from 'next/link';
+import ErrorLogin from './ErrorLogin';
+import { useDispatch, useSelector } from 'react-redux';
+import { connectUser } from '../../../redux/user/userActions';
 
-export default function Login(){
+export default function Login(props) {
     const theme = useTheme();
+    const dispatch = useDispatch();
+    const [uid, setUid] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [isConnected, setIsConnected] = useState(false);
+    const userRedux = useSelector((state) => state.user);
+
+    const connectUserInfo = () => {
+        dispatch(connectUser());
+    }
+    useEffect(() => {
+        connectUserInfo();
+        console.log("USER_REDUX looooooooooogin", userRedux);
+    }, [userRedux.photoURL]);
+
+    /*
+        const onChangeMode = (event) => {
+            themeMode.toggleColorMode();
+            setChecked(event.target.checked ? true : false);
+            dispatch(updateScreenMode(event.target.checked ? 'dark' : 'light'));
+        }
+        */
     useEffect(() => {
         var firebaseui = require('firebaseui');
         var uiConfig = {
@@ -17,25 +44,23 @@ export default function Login(){
                     // or whether we leave that to developer to handle.
                     //handleUser(auth.currentUser);
                     var userFirebase = authResult.user;
-                    var docRef = firestore.collection("USER").doc(userFirebase.phoneNumber);
+                    var docRef = firestore.collection(COLLECTION_USER).doc(userFirebase.phoneNumber);
 
                     docRef.get().then((doc) => {
-                        if (doc.exists) {
-                            console.log("Document data:", doc.data());
+                        if (!doc.exists) {
+                            window.location.href = "/authentication/errorlogin";
+                        } else {
                             const _user = JSON.parse(JSON.stringify(doc.data()));
                             _user.phoneNumber = userFirebase.phoneNumber;
                             _user.uid = userFirebase.uid;
-                            
-                            firestore.collection("USER").doc(_user.phoneNumber).set(_user).then(() => {
-                                console.log("Document successfully written!");
-                                //handleUser(_user);
+
+                            firestore.collection(COLLECTION_USER).doc(userFirebase.phoneNumber).update({
+                                phoneNumber: userFirebase.phoneNumber,
+                                uid: userFirebase.uid,
+                                photoURL: userFirebase.phoneNumber + USER_LINK_PHOTO_URL,
+                            }).then(() => {
+                                //window.location.href = "/profil";
                             });
-                            window.location.href = "/profil";
-                        } else {
-                            // doc.data() will be undefined in this case
-                            console.log("No such document!");
-                            //handleUser(null);
-                            window.location.href = "/authentication/errorlogin";
                         }
                     }).catch((error) => {
                         console.log("Error getting document:", error);
@@ -57,11 +82,12 @@ export default function Login(){
                     // The widget is rendered.
                     // Hide the loader.
                     document.getElementById('loader').style.display = 'none';
+
                 }
             },
             // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
             signInFlow: 'popup',
-            signInSuccessUrl: '/about',
+            signInSuccessUrl: '/profil',
             signInOptions: [
                 // Leave the lines as is for the providers you want to offer your users.
                 {
@@ -114,11 +140,20 @@ export default function Login(){
             direction={'column'}
             justifyContent={'center'}
             alignItems={'center'}
-            pb={5}
+            //columns={{xs:12}}
+            pb={10}
+            //pl={1}
+            sx={{
+
+                //bgcolor: 'cyan'
+            }}
         >
-            <Grid item p={0} style={{ textAlign: 'center' }}>
+            <Grid item p={0} style={{ textAlign: 'center', }}>
                 <div id="firebaseui-auth-container"></div>
-                <div id="loader">Loading...</div>
+                {/* <div id="loader">Loading...</div> */}
+                <div id="loader">
+                    <PermanentBackdrop />
+                </div>
             </Grid>
         </Grid>
     );
