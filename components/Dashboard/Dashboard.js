@@ -109,31 +109,6 @@ function Dashboard(props) {
       }
       
 
-  const updateUserInfo = () => {
-    dispatch(connectUser());
-  }
-  /*
-  useEffect(() => {
-    console.log("USER_PROVIDER USer_context", userContext);
-  }, [userContext]);
-  */
-
-  useEffect(() => {
-    updateUserInfo();
-    console.log("USER_REDUX Dashboard", user);
-    setShowInstallApp(true);
-  }, [user.uid, user.phoneNumber, user.displayName, user.type]);
-
-  useEffect(() => {
-    if (user.photoURL ){
-        updateProfilPhotoURL(user.photoURL);
-    }
-  }, [user.photoURL, user.profilPhotoURL]);
-
-  useEffect(() => {
-    setIsAdmin(user.type === USER_TYPE_ADMIN);
-  }, [user.type]);
-
     useEffect(() => {
         async function related(){
         const relatedApps = await navigator.getInstalledRelatedApps();

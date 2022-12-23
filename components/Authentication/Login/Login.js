@@ -9,7 +9,6 @@ import { COLLECTION_USER, USER_LINK_PHOTO_URL } from '../../../constants';
 import Link from 'next/link';
 import ErrorLogin from './ErrorLogin';
 import { useDispatch, useSelector } from 'react-redux';
-import { connectUser } from '../../../redux/user/userActions';
 import { useUserContext } from '../../../context/UserProvider';
 
 export default function Login(props) {

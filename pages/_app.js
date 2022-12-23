@@ -36,64 +36,9 @@ export default function App({ Component, pageProps, }) {
   const [userFirebase, setUserFirebase] = useState(null);
   const [screenMode, setScreenMode] = useState(DEFAULT_SCREEN_MODE);
 
-  /*
-
-  firebase.auth().signOut().then(() => {
-    // Sign-out successful.
-  }).catch((error) => {
-    // An error happened.
-  });
-
-  */
   const hash = hashResult("123456");
   console.log("HAAAASH", hash);
   console.log("ADMIN KEY", process.env.FIREBASE_ADMIN_PRIVATE_KEY_ID);
-/*
-  useEffect(() => {
-    if (window.localStorage.getItem('screenMode') !== null) {
-      //_screenMode = window.localStorage.getItem('screenMode');
-      setScreenMode(window.localStorage.getItem('screenMode'));
-      console.log('STORAGE aaaaap', window.localStorage.getItem('screenMode'))
-    }
-  })
-  */
-
-
-  /*
-  useEffect(() => {
-    if( window.localStorage.getItem('screenMode') ){
-      setScreenMode(window.localStorage.getItem('screenMode'));
-      console.log('SECREEEN MODE storage', window.localStorage.getItem('screenMode'))
-    }
-    //screenMode
-  }, [screenMode])
-  */
-/*
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        //var uid = user.uid;
-        //var docRef = firestore.collection("USER").doc(user.phoneNumber);
-        setUid(user.id);
-        setPhoneNumber(user.phoneNumber);
-        console.log("onAuthStateChanged user", user.phoneNumber);
-        // ...
-      } else {
-        // User is signed out
-        // ...
-        //setUid(null);
-        console.log("onAuthStateChanged user", "null");
-        setUid(null);
-        setPhoneNumber(null);
-        //window.location.href = "/";
-      }
-
-    });
-  }, []);
-*/
-
 
   const handleUser = (pUser) => {
     setUser(pUser);
