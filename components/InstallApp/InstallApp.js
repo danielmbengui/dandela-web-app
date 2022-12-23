@@ -11,6 +11,7 @@ const MaterialUIButton = styled(Button)(() => ({
 }));
 
 export default function InstallApp(){
+
   return (
     <PWAInstallerPrompt
       render={({ onClick }) => (

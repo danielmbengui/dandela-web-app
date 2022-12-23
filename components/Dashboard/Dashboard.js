@@ -82,16 +82,18 @@ function Dashboard(props) {
   //const user = useSelector((state) => state.user);
   const [user, setUser] = useUserContext();
   const [isAdmin, setIsAdmin] = useState(user ? user.type === USER_TYPE_ADMIN : false);
+  const [contentInstall, setContentInstall] = useState(<></>);
     //const [mobileOpen, setMobileOpen] = useState(false);
 
     useEffect(() => {
         if (user) {
             setIsAdmin(user.type === USER_TYPE_ADMIN);
+            setContentInstall(<InstallApp />);
         }
     }, [user])
 
 
-
+/*
     useEffect(() => {
         async function related(){
         const relatedApps = await navigator.getInstalledRelatedApps();
@@ -116,6 +118,7 @@ function Dashboard(props) {
           window.removeEventListener('appinstalled', console.log("REMOVED"));
         }
       }, []);
+      */
 
     const drawer = (
         <div style={{ textAlign: 'center', backgroundColor: 'var(--menu-background)' }}>
@@ -263,9 +266,7 @@ function Dashboard(props) {
                  }}
             >
                 <Toolbar />
-                <div style={{display:showInstallApp ? 'block' : 'none'}}>
-                <InstallApp />
-                </div>
+                {contentInstall}
                 <Grid container direction={'row'} justifyContent={'center'} alignItems={'center'}>
                 <Grid item>
                     <h1 style={{fontFamily:'ChangaOneRegular'}}>{title}</h1>

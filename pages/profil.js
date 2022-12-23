@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Profile from '../components/Profile/Profile';
 import Dashboard from '../components/Dashboard/Dashboard';
 import { useUserContext } from '../context/UserProvider';
+import InstallApp from '../components/InstallApp/InstallApp';
 
 export default function ProfilPage({logo, user, firebase, firestore, storage, userFirebase, handleUserFirebase, handleUser, auth, dashboard, screenMode}) {
 
