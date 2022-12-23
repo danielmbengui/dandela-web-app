@@ -11,7 +11,7 @@ export default function InProgressPage({logo, user, firebase, firestore, storage
             <meta name="description" content="Voir tous les transferts" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
-            <NoValidTransfertList firestore={firestore} user={user} />
+            <NoValidTransfertList firestore={firestore} />
         </Dashboard>
     )
 }

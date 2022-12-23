@@ -17,12 +17,13 @@ import { Card, Grid, Stack, Typography } from '@mui/material';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import Avatar from '@mui/material/Avatar';
 import { border } from '@mui/system';
+import { useUserContext } from '../../../../context/UserProvider';
 
 
-export default function NoValidTransfertList({ firestore, user }) {
+export default function NoValidTransfertList({ firestore }) {
     const theme = useTheme();
     const [transfertList, setTransfertList] = useState([]);
-
+    const [user, setUser] = useUserContext();
 
 
     useEffect(() => {

@@ -15,6 +15,7 @@ export default async function handler(req, res) {
     await cors(req, res);
     try {
         firestore.collection(COLLECTION_TRANSFERT)
+            //.where("id", "!=", "")
             .get()
             .then((querySnapshot) => {
                 const transfertsId = [];

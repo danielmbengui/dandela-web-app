@@ -14,11 +14,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import { COLLECTION_TRANSFERT, DEFAULT_TRANSFERT } from '../../../constants';
 import { formatTransfertCode, getTransfertsAllList, getTransfertsInProgressList, getTransfertStateString } from '../../../functions/firestore/TransfertFunctions';
 import OneTransfert from '../../../components/Dashboard/Transfert/OneTransfert';
+import { useUserContext } from '../../../context/UserProvider';
 
-export default function OneTransferInProgressPage({ id, firebase, firestore, user, storage, logo }) {
+export default function OneTransferInProgressPage({ id, firebase, firestore, storage, logo }) {
     //const {params} = paths;
     // Render post...
     const [transfert, setTransfert] = useState(DEFAULT_TRANSFERT);
+    const [user, setUser] = useUserContext();
 
     useEffect(() => {
         firestore.collection(COLLECTION_TRANSFERT).doc(id)
