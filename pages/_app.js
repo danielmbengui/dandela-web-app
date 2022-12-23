@@ -48,7 +48,7 @@ export default function App({ Component, pageProps, }) {
   const hash = hashResult("123456");
   console.log("HAAAASH", hash);
   console.log("ADMIN KEY", process.env.FIREBASE_ADMIN_PRIVATE_KEY_ID);
-
+/*
   useEffect(() => {
     if (window.localStorage.getItem('screenMode') !== null) {
       //_screenMode = window.localStorage.getItem('screenMode');
@@ -56,6 +56,7 @@ export default function App({ Component, pageProps, }) {
       console.log('STORAGE aaaaap', window.localStorage.getItem('screenMode'))
     }
   })
+  */
 
 
   /*
@@ -67,7 +68,7 @@ export default function App({ Component, pageProps, }) {
     //screenMode
   }, [screenMode])
   */
-
+/*
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -91,12 +92,7 @@ export default function App({ Component, pageProps, }) {
 
     });
   }, []);
-
-  useEffect(() => {
-    if (phoneNumber) {
-      setUserFirestoreSnapshot(phoneNumber, handleUser);
-    }
-  }, [phoneNumber]);
+*/
 
 
   const handleUser = (pUser) => {
