@@ -31,25 +31,8 @@ import { connectUser } from '../../../redux/user/userActions';
 import { useUserContext } from '../../../context/UserProvider';
 
 export default function BarApp(props) {
-    const {  storage, drawerWidth, mobileOpen, setMobileOpen, userContext } = props;
-    //const storageRef = storage.ref();
-    const [photoURL, setPhotoURL] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    //const [mobileOpen, setMobileOpen] = useState(false);
-    //const dispatch = useDispatch();
+    const {  drawerWidth, mobileOpen, setMobileOpen } = props;
     const [user, setUser] = useUserContext();
-
-    
-
-    useEffect(() => {
-        //setUser();
-        if (user.profilPhotoURL !== '') {
-            setPhotoURL(user.profilPhotoURL);
-            console.log("USER BarApp", user);
-        }else {
-            setPhotoURL('');
-        }
-    }, [user]);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);

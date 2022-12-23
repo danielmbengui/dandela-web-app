@@ -83,18 +83,13 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   //borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function Profile({ logo, firebase, firestore, handleUser, storage }) {
+export default function Profile({ firebase, firestore, storage }) {
   const theme = useTheme();
-  const dispatch = useDispatch();
   //const user = useSelector((state) => state.user);
   const [user, setUser] = useUserContext();
   const storageRef = storage.ref();
-  const [uid, setUid] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [userType, setUserType] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [errorName, setErrorName] = useState(false);
-  const [password, setPassword] = useState('');
   const [photoURL, setPhotoURL] = useState(null);
   const [photoFile, setPhotoFile] = useState(null);
 
@@ -283,8 +278,6 @@ console.log("FFFFIRST TEST: ", playerJson);
             .then((url) => {
               profilPhotoURL = url;
               setPhotoURL(url);
-              updateProfilPhotoURL(userApp.photoURL);
-              dispatch(connectUser());
               userApp.profilPhotoURL = url;
               setUser(userApp);
               firestore.collection(COLLECTION_USER).doc(userApp.phoneNumber).update({
@@ -320,8 +313,8 @@ console.log("FFFFIRST TEST: ", playerJson);
         // ...
       });
     }
-    userApp.editingPhotoUrl = false;
-    handleUser(userApp);
+    //userApp.editingPhotoUrl = false;
+    //handleUser(userApp);
     setUser(userApp);
     //window.location.href = '/about';
   }

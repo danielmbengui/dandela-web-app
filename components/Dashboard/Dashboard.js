@@ -82,32 +82,9 @@ function Dashboard(props) {
   //const user = useSelector((state) => state.user);
   const [user, setUser] = useUserContext();
   const [isAdmin, setIsAdmin] = useState(user.type === USER_TYPE_ADMIN);
-
-  const storageRef = storage.ref();
-    const [photoURL, setPhotoURL] = useState(null);
     //const [mobileOpen, setMobileOpen] = useState(false);
-/*
-    useEffect(() => {
-        if (user) {
-          if (user.photoURL) {
-            var profileImgRef = storageRef.child(`${user.photoURL}`);
-            profileImgRef.getDownloadURL()
-              .then((url) => {
-                setPhotoURL(url);
-              })
-              .catch((error) => {
-                // Handle any errors
-                setPhotoURL('');
-                console.log('Error URL');
-              });
-          }
-        }
-      }, [user.photoURL]);
-    */
-      const handlePhotoURL = (_photoURL) => {
-            setPhotoURL(photoURL);
-      }
-      
+
+
 
     useEffect(() => {
         async function related(){
@@ -225,7 +202,7 @@ function Dashboard(props) {
             {
                 user.authorized && <>
                 <CssBaseline sx={{bgcolor:'var(--menu-background)'}} />
-            <BarApp user={user} photoURL={photoURL} handlePhotoURL={handlePhotoURL} storage={storage} drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+            <BarApp user={user} storage={storage} drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
             <Box
                 component="nav"
                 sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 },
