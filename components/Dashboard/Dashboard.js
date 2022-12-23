@@ -83,12 +83,25 @@ function Dashboard(props) {
   const [user, setUser] = useUserContext();
   const [isAdmin, setIsAdmin] = useState(user ? user.type === USER_TYPE_ADMIN : false);
   const [contentInstall, setContentInstall] = useState(<></>);
+
+
+  const [contentError, setContentError] = useState(<></>);
     //const [mobileOpen, setMobileOpen] = useState(false);
 
     useEffect(() => {
         if (user) {
             setIsAdmin(user.type === USER_TYPE_ADMIN);
             setContentInstall(<InstallApp />);
+
+            setTimeout(() => {
+                if (!user.authorized) {
+                    setContentError(<ContainerLogin>
+                        <ErrorLogin phoneNumber={user.phoneNumber} />
+                    </ContainerLogin>);
+                }else{
+                    setContentError(<></>)
+                }
+            }, 3000);
         }
     }, [user])
 
@@ -201,18 +214,17 @@ function Dashboard(props) {
     
 
     return (
-        <Box sx={{ display: user ? 'flex' : 'none', bgcolor:'var(--menu-background)'}}>
+        <Box sx={{ display: user ? 'flex' : 'none', bgcolor: user.authorized ? 'var(--menu-background)' : 'var(--background-color)'}}>
             {
-                !user && <PermanentBackdrop />
-            }
-            {
-                user && !user.authorized && <ContainerLogin>
-                    <ErrorLogin phoneNumber={user.phoneNumber} />
-                </ContainerLogin>
+                (!user.uid || !user.phoneNumber || !user.authorized) && <PermanentBackdrop />
             }
 
             {
-                user && user.authorized && <>
+                contentError
+            }
+
+            {
+                user.authorized && <>
                 <CssBaseline sx={{bgcolor:'var(--menu-background)'}} />
             <BarApp user={user} storage={storage} drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
             <Box

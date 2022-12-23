@@ -12,7 +12,7 @@ const [showUserPhone, setShowUserPhone] = useState('unknow');
 const [user, setUser] = useUserContext();
 
 useEffect(() => {
-  if (user) {
+  if (user && user.phoneNumber) {
     setShowUserPhone(user.phoneNumber);
     /*
     firebase.auth().signOut().then(() => {

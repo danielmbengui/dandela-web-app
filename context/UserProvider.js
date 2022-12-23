@@ -16,7 +16,8 @@ const UserContext = createContext();
 export default function UserProvider({ children }) {
     const dispatch = useDispatch();
     //const user = useSelector((state) => state.user);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(DEFAULT_USER);
+    const [_user, _setUser] = useState(DEFAULT_USER);
 
     //const [user, setUser] = useState(null);
     const [uid, setUid] = useState(null);
@@ -40,6 +41,7 @@ export default function UserProvider({ children }) {
                 // ...
                 //setUid(null);
                 console.log("onAuthStateChanged user", "null");
+                console.log("onAuthStateChanged USER", _user);
                 //setUid(null);
                 setPhoneNumber(null);
                 setConnected(false);
@@ -126,15 +128,16 @@ export default function UserProvider({ children }) {
         if (phoneNumber && connected) {
             initUserSnapshot(phoneNumber);
         } else {
-            setUser(null);
+            setUser(DEFAULT_USER);
         }
     }, [phoneNumber]);
 
     function initUserSnapshot(phoneNumber) {
+        var user = DEFAULT_USER;
         const unsubscribe = firestore.collection(COLLECTION_USER).doc(phoneNumber)
             //.withConverter(userConverter)
             .onSnapshot(async (doc) => {
-                var user = DEFAULT_USER;
+                
                 if (doc.exists) {
                     // Convert to City object
                     user = new User(doc.data());
@@ -147,7 +150,7 @@ export default function UserProvider({ children }) {
                     user = new User({ phoneNumber: phoneNumber });
                     //user.phoneNumber = phoneNumber;
                     console.log("USEEEEEER Clas NULL", user);
-
+                    unsubscribe();
                 }
                 setUser(user);
             })/*.catch((error) => {
@@ -155,10 +158,13 @@ export default function UserProvider({ children }) {
                 setUser(DEFAULT_USER);
             });
             */
-        if (!phoneNumber || !connected) {
+            console.log("USEEEEEER Clas GENERAL", user)
+            /*
+        if (!firebase.auth().currentUser) {
             unsubscribe();
-            setUser(null);
+            setUser(DEFAULT_USER);
         }
+        */
     }
 
     return (

@@ -112,9 +112,11 @@ export default function Profile({ firebase, firestore, storage }) {
   useEffect(() => {
     if (user) {
       setPhotoURL(user.profilPhotoURL);
+      setDisplayName(user.displayName);
       console.log("USER Profile", user);
     }else {
       setPhotoURL('');
+      setDisplayName('');
     }
   }, [user]);
 
