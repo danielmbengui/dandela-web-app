@@ -4,6 +4,8 @@ import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import { AlertTitle, Grid } from '@mui/material';
 import Link from 'next/link';
+import firebase from '../../../config.firebase';
+
 
 export default function ErrorFirebase({phoneNumber}) {
 
@@ -24,14 +26,23 @@ export default function ErrorFirebase({phoneNumber}) {
                         <AlertTitle sx={{ mb: 0.5, alignItems: 'flex-start' }}>Error</AlertTitle>
                         Some unrecoverable error occurred during sign-in with this number: {phoneNumber ? phoneNumber : 'unknown'}. — <strong>retry to connect!</strong>
                     </Alert>
-                    <Link href="/">
-                        <Button
+                    <Button
                             color='primary'
                             variant="outlined"
+                            onClick={() => {
+                                firebase.auth().signOut().then(() => {
+                                  // Sign-out successful.
+                                  //location.href = "/";
+                                  window.location.href = "/";
+                                  console.log("Disconnected !!!");
+                                }).catch((error) => {
+                                  // An error happened.
+                                  console.log("ERROR Disconnected !!!");
+                                });
+                              }}
                         >
                             Go to Login
                         </Button>
-                    </Link>
                 </Box>
             </Grid>
         </Grid>

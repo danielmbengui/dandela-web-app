@@ -5,13 +5,15 @@ import Button from '@mui/material/Button';
 import { AlertTitle, Grid } from '@mui/material';
 import Link from 'next/link';
 import firebase from '../../../config.firebase';
+import { useUserContext } from '../../../context/UserProvider';
 
-export default function ErrorLogin({phoneNumber}) {
+export default function ErrorLogin() {
 const [showUserPhone, setShowUserPhone] = useState('unknow');
+const [user, setUser] = useUserContext();
 
 useEffect(() => {
-  if (phoneNumber) {
-    setShowUserPhone(phoneNumber);
+  if (user.phoneNumber) {
+    setShowUserPhone(user.phoneNumber);
     /*
     firebase.auth().signOut().then(() => {
       // Sign-out successful.
@@ -24,7 +26,7 @@ useEffect(() => {
     });
     */
   }
-}, [phoneNumber])
+}, [user.phoneNumber])
 
   return (
    <>
@@ -43,17 +45,26 @@ useEffect(() => {
           sx={{ mb: 2, textAlign: 'start' }}
         >
             <AlertTitle sx={{ mb: 0.5, alignItems: 'flex-start' }}>Action prohibited</AlertTitle>
-            This action is not permitted with this number: {showUserPhone}.<br />
+            This action is not permitted with this number: <strong>{showUserPhone}</strong>.<br />
             You can not access to the WebApp sorry — <strong>please contact the owner!</strong>
         </Alert>
-      <Link href='/'>
-      <Button
+        <Button
         color='primary'
         variant="contained"
+        onClick={() => {
+          firebase.auth().signOut().then(() => {
+            // Sign-out successful.
+            //location.href = "/";
+            window.location.href = "/";
+            console.log("Disconnected !!!");
+          }).catch((error) => {
+            // An error happened.
+            console.log("ERROR Disconnected !!!");
+          });
+        }}
         >
         Login
       </Button>
-      </Link>
     </Box>
     </Grid>
 </Grid>

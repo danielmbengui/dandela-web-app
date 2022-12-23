@@ -1,8 +1,9 @@
 import { DEFAULT_SCREEN_MODE } from "../constants";
+import Country from "./CountryClass";
 
 class User {
-    constructor(uid = null, phoneNumber = null, displayName = '', photoURL = '', profilPhotoURL = '',
-        type = '', country = '', verified=false, screenMode=DEFAULT_SCREEN_MODE) {
+    constructor({uid = '', phoneNumber = '', displayName = '', photoURL = '', profilPhotoURL = '',
+        type = '', country_uid = '', verified=false, screenMode=DEFAULT_SCREEN_MODE}) {
             /* FIRESTORE variables */
         this.uid = uid;
         this.phoneNumber = phoneNumber;
@@ -10,11 +11,12 @@ class User {
         this.photoURL = photoURL;
         this.profilPhotoURL = profilPhotoURL;
         this.type = type;
-        this.country = country;
+        this.country_uid = country_uid;
+        this.country = new Country({});
         this.verified = verified;
         this.screenMode = screenMode;
         /* CUSTOM variables */
-        this.authorized = uid && phoneNumber && verified;
+        this.authorized = phoneNumber && verified;
         
     }
     toString() {
@@ -25,7 +27,8 @@ class User {
             "PHOTO URL: " + this.photoURL,
             "PROFIL PHOTO URL: " + this.profilPhotoURL,
             "TYPE: " + this.type,
-            "COUNTRY: " + this.country,
+            "COUNTRY UID: " + this.country_uid,
+            "COUNTRY: " + this.country.toString(),
             "VERIFIED: " + this.verified,
             "AUTHORIZED: " + this.authorized,
             "SCREENMODE: " + this.screenMode
@@ -34,7 +37,7 @@ class User {
 }
 
 // Firestore data converter
-const userConverter = {
+export const userConverter = {
     toFirestore: function(user) {
         return {
             uid: user.uid,
@@ -43,15 +46,15 @@ const userConverter = {
             photoURL: user.photoURL,
             profilPhotoURL: user.profilPhotoURL,
             type: user.type,
-            country: user.country,
+            country_uid: user.country_uid,
             verified: user.verified,
             screenMode: user.screenMode,
             };
     },
     fromFirestore: function(snapshot, options){
         const data = snapshot.data(options);
-        return new User(data.uid, data.phoneNumber, data.displayName, data.photoURL, data.profilPhotoURL, 
-            data.type, data.country, data.verified, data.screenMode);
+        return new User({uid:data.uid, phoneNumber: data.phoneNumber, displayName: data.displayName, photoURL: data.photoURL,
+            profilPhotoURL: data.profilPhotoURL, type: data.type, country_uid: data.country_uid, verified: data.verified, screenMode: data.screenMode});
         /*
 uid = null, phoneNumber = null, displayName = '', photoURL = '', profilPhotoURL = '',
         verified=false, screenMode=DEFAULT_SCREEN_MODE
@@ -60,4 +63,3 @@ uid = null, phoneNumber = null, displayName = '', photoURL = '', profilPhotoURL 
 };
 
 export default User;
-export {userConverter};

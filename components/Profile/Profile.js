@@ -396,7 +396,7 @@ console.log("FFFFIRST TEST: ", playerJson);
               //width:'60%',
             }}>
         <AccordionSummaryCustom aria-controls="panel1d-content" id="panel1d-header">
-          <Typography sx={{fontFamily: fontFamilyMain}}>Plus d'informations</Typography>
+          <Typography sx={{fontFamily: fontFamilyMain}}>Plus d&apos;informations</Typography>
         </AccordionSummaryCustom>
         <AccordionDetailsCustom>
 
@@ -434,7 +434,7 @@ console.log("FFFFIRST TEST: ", playerJson);
               //required
               disabled
               //defaultValue={displayName}
-              value={user.country}
+              value={user.country.name}
             //helperText="Incorrect entry."
             //theme={theme}
             //placeholder={"Name"}

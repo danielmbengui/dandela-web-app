@@ -241,7 +241,15 @@ function Dashboard(props) {
 
     return (
         <Box sx={{ display: user ? 'flex' : 'none', bgcolor:'var(--menu-background)'}}>
-            <CssBaseline sx={{bgcolor:'var(--menu-background)'}} />
+            {
+                !user.authorized && <ContainerLogin>
+                    <ErrorLogin phoneNumber={user.phoneNumber} />
+                </ContainerLogin>
+            }
+
+            {
+                user.authorized && <>
+                <CssBaseline sx={{bgcolor:'var(--menu-background)'}} />
             <BarApp user={user} photoURL={photoURL} handlePhotoURL={handlePhotoURL} storage={storage} drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
             <Box
                 component="nav"
@@ -334,6 +342,8 @@ function Dashboard(props) {
                 <Footer />
                 </div>
             </Box>
+                </>
+            }
         </Box>
     );
 }

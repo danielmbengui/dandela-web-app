@@ -10,6 +10,7 @@ import Link from 'next/link';
 import ErrorLogin from './ErrorLogin';
 import { useDispatch, useSelector } from 'react-redux';
 import { connectUser } from '../../../redux/user/userActions';
+import { useUserContext } from '../../../context/UserProvider';
 
 export default function Login(props) {
     const theme = useTheme();
@@ -19,6 +20,9 @@ export default function Login(props) {
     const [isConnected, setIsConnected] = useState(false);
     const userRedux = useSelector((state) => state.user);
 
+    const [user, setUser] = useUserContext();
+
+    /*
     const connectUserInfo = () => {
         dispatch(connectUser());
     }
@@ -26,6 +30,7 @@ export default function Login(props) {
         connectUserInfo();
         console.log("USER_REDUX looooooooooogin", userRedux);
     }, [userRedux.photoURL]);
+    */
 
     /*
         const onChangeMode = (event) => {
@@ -50,6 +55,7 @@ export default function Login(props) {
                         if (!doc.exists) {
                             window.location.href = "/authentication/errorlogin";
                         } else {
+                            /*
                             const _user = JSON.parse(JSON.stringify(doc.data()));
                             _user.phoneNumber = userFirebase.phoneNumber;
                             _user.uid = userFirebase.uid;
@@ -61,6 +67,11 @@ export default function Login(props) {
                             }).then(() => {
                                 //window.location.href = "/profil";
                             });
+                            */
+                            //const _user = JSON.parse(JSON.stringify(user));
+                            //_user.authorized = true;
+                            //setUser(_user);
+                            window.location.href = "/profil";
                         }
                     }).catch((error) => {
                         console.log("Error getting document:", error);

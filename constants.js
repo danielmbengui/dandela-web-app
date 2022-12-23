@@ -1,3 +1,6 @@
+import Country from "./classes/CountryClass";
+import Currency from "./classes/CurrencyClass";
+
 export const COMPANY_NAME = 'Dandela';
 export const APP_NAME = 'Dandela Web App';
 export const DEFAULT_SCREEN_MODE = 'light';
@@ -5,13 +8,29 @@ export const COLLECTION_USER = 'USER';
 export const COLLECTION_USER_TYPE = 'USER_TYPE';
 export const COLLECTION_TRANSFERT = 'TRANSFERT';
 export const COLLECTION_COUNTRY = 'COUNTRY';
+export const COLLECTION_CURRENCY = 'CURRENCY';
+
+export const DEFAULT_CURRENCY = {
+    uid: '',
+    name: '',
+    symbol: '',
+};
+export const DEFAULT_COUNTRY = {
+    uid: '',
+    name: '',
+    code: '',
+    symbol: '',
+    currency_uid: '',
+    currency: new Currency({}),
+};
 export const DEFAULT_USER = {
     uid: '',
     phoneNumber: '',
     displayName: '',
     photoURL: '',
     profilPhotoURL: '',
-    country: '',
+    country_uid: '',
+    country: new Country({}),
     type: '',
     verified: false,
     connected: false,
