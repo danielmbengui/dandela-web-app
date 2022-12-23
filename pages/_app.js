@@ -10,7 +10,7 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import hashResult from "../functions/ConvertToHash";
 import Head from "next/head";
 import ThemeModeProvider from "../context/ThemeProvider";
-import { UserProvider } from "../context/UserProvider";
+import UserProvider from "../context/UserProvider";
 import AppProvider, { AppContext } from "../context/AppProvider";
 import initAuth from '../initAuth' // the module you created above
 import { DEFAULT_SCREEN_MODE } from "../constants";
@@ -36,9 +36,6 @@ export default function App({ Component, pageProps, }) {
   const [userFirebase, setUserFirebase] = useState(null);
   const [screenMode, setScreenMode] = useState(DEFAULT_SCREEN_MODE);
 
-  const handleProfilPhotoURL = (_profilPhotoURL) => {
-    setProfilPhotoURL(_profilPhotoURL);
-  }
   /*
 
   firebase.auth().signOut().then(() => {
@@ -52,7 +49,15 @@ export default function App({ Component, pageProps, }) {
   console.log("HAAAASH", hash);
   console.log("ADMIN KEY", process.env.FIREBASE_ADMIN_PRIVATE_KEY_ID);
 
-  
+  useEffect(() => {
+    if (window.localStorage.getItem('screenMode') !== null) {
+      //_screenMode = window.localStorage.getItem('screenMode');
+      setScreenMode(window.localStorage.getItem('screenMode'));
+      console.log('STORAGE aaaaap', window.localStorage.getItem('screenMode'))
+    }
+  })
+
+
   /*
   useEffect(() => {
     if( window.localStorage.getItem('screenMode') ){
@@ -85,14 +90,6 @@ export default function App({ Component, pageProps, }) {
       }
 
     });
-
-    if( window.localStorage.getItem('screenMode') !== null ){
-      //_screenMode = window.localStorage.getItem('screenMode');
-      setScreenMode(window.localStorage.getItem('screenMode'));
-      console.log('STORAGE aaaaap', window.localStorage.getItem('screenMode'))
-    }else{
-      
-    }
   }, []);
 
   useEffect(() => {
@@ -109,25 +106,26 @@ export default function App({ Component, pageProps, }) {
   const handleUserFirebase = (_user) => {
     setUserFirebase(_user);
   }
-  
+
   return (
     <Provider store={store}>
-    <ThemeModeProvider screenMode={screenMode}>
-        <Head>
-          <title>Dandela Web App</title>
-          <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />
+      <UserProvider >
+      <ThemeModeProvider screenMode={screenMode}>
+          <Head>
+            <title>Dandela Web App</title>
+            <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />
 
-        </Head>
-        <Component {...pageProps}
-          logo={logo} links={links}
-          phoneNumber={user ? user.phoneNumber : ''}
-          firebase={firebase} firestore={firestore} storage={storage}
-          user={user} handleUser={handleUser}
-          userFirebase={userFirebase} handleUserFirebase={handleUserFirebase}
-          uid={uid}
+          </Head>
+          <Component {...pageProps}
+            logo={logo} links={links}
+            phoneNumber={user ? user.phoneNumber : ''}
+            firebase={firebase} firestore={firestore} storage={storage}
+            user={user} handleUser={handleUser}
+            userFirebase={userFirebase} handleUserFirebase={handleUserFirebase}
+            uid={uid}
           />
-    </ThemeModeProvider>
+      </ThemeModeProvider>
+      </UserProvider>
     </Provider>
-
   )
 }

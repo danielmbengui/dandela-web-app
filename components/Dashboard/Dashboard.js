@@ -28,7 +28,7 @@ import Stack from '@mui/material/Stack';
 import { Button, Grid } from '@mui/material';
 import Image from 'next/image';
 
-import { connectUser, updateUser } from '../../redux/user/userActions';
+import { connectUser, updateProfilPhotoURL, updateUser } from '../../redux/user/userActions';
 import { updateScreenMode } from '../../redux/user/userActions';
 import { useDispatch, useSelector } from "react-redux";
 import PermanentBackdrop from '../Loading/PermanentBackdrop';
@@ -44,6 +44,7 @@ import BarApp from './BarApp/BarApp';
 import { COMPANY_NAME, USER_TYPE_ADMIN } from '../../constants';
 import AdminComponent from './Menu/AdminComponent';
 import InstallApp from '../InstallApp/InstallApp';
+import { useUserContext } from '../../context/UserProvider';
 //import logo from "/img/logo.png";
 const logo = "/img/logo.png";
 
@@ -68,7 +69,7 @@ const Navigation = styled(List)({
 
 
 function Dashboard(props) {
-    const { windowDashboard, children, firebase, auth, content, pages, currentOpen, title, storage } = props;
+    const { windowDashboard, children, firebase, auth, content, pages, currentOpen, title, storage, } = props;
     const dispatch = useDispatch();
     const theme = useTheme();
     const themeMode = useContext(ThemeModeProviderContext);
@@ -78,13 +79,14 @@ function Dashboard(props) {
 
     const [mobileOpen, setMobileOpen] = useState(false);
     const container = undefined;
-  const user = useSelector((state) => state.user);
-  const [isAdmin, setIsAdmin] = useState(false);
+  //const user = useSelector((state) => state.user);
+  const [user, setUser] = useUserContext();
+  const [isAdmin, setIsAdmin] = useState(user.type === USER_TYPE_ADMIN);
 
   const storageRef = storage.ref();
     const [photoURL, setPhotoURL] = useState(null);
     //const [mobileOpen, setMobileOpen] = useState(false);
-
+/*
     useEffect(() => {
         if (user) {
           if (user.photoURL) {
@@ -101,20 +103,36 @@ function Dashboard(props) {
           }
         }
       }, [user.photoURL]);
-    
+    */
       const handlePhotoURL = (_photoURL) => {
             setPhotoURL(photoURL);
       }
+      
 
   const updateUserInfo = () => {
     dispatch(connectUser());
   }
+  /*
+  useEffect(() => {
+    console.log("USER_PROVIDER USer_context", userContext);
+  }, [userContext]);
+  */
+
   useEffect(() => {
     updateUserInfo();
-    setIsAdmin(user.type === USER_TYPE_ADMIN ? true : false);
     console.log("USER_REDUX Dashboard", user);
     setShowInstallApp(true);
-  }, [user.uid, user.phoneNumber, user.type]);
+  }, [user.uid, user.phoneNumber, user.displayName, user.type]);
+
+  useEffect(() => {
+    if (user.photoURL ){
+        updateProfilPhotoURL(user.photoURL);
+    }
+  }, [user.photoURL, user.profilPhotoURL]);
+
+  useEffect(() => {
+    setIsAdmin(user.type === USER_TYPE_ADMIN);
+  }, [user.type]);
 
     useEffect(() => {
         async function related(){

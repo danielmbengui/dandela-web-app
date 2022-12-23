@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { COLLECTION_USER, DEFAULT_SCREEN_MODE, STORAGE_IS_CONNECTED, STORAGE_PHONE_NUMBER, STORAGE_SCREEN_MODE, STORAGE_UID, USER_LINK_PHOTO_URL } from "../../constants";
-import firebase, { firestore } from '../../config.firebase';
+import { COLLECTION_USER, DEFAULT_SCREEN_MODE, STORAGE_IS_CONNECTED, STORAGE_PHONE_NUMBER, STORAGE_PROFIL_PHOTO_URL, STORAGE_SCREEN_MODE, STORAGE_UID, USER_LINK_PHOTO_URL } from "../../constants";
+import firebase, { firestore, storage } from '../../config.firebase';
 
 const connectRequest = () => {
   return {
@@ -34,9 +34,40 @@ const updatePhoneNumberRedux = (payload) => {
     payload: payload,
   };
 };
-const updateIsConnectedRedux = (payload) => {
+const updateDisplayNameRedux = (payload) => {
   return {
-    type: "UPDATE_IS_CONNECTED",
+    type: "UPDATE_DISPLAY_NAME",
+    payload: payload,
+  };
+};
+const updatePhotoURLRedux = (payload) => {
+  return {
+    type: "UPDATE_PHOTO_URL",
+    payload: payload,
+  };
+};
+const updateProfilPhotoURLRedux = (payload) => {
+  return {
+    type: "UPDATE_PROFIL_PHOTO_URL",
+    payload: payload,
+  };
+};
+const updateTypeRedux = (payload) => {
+  return {
+    type: "UPDATE_TYPE",
+    payload: payload,
+  };
+};
+const updateVerifiedRedux = (payload) => {
+  return {
+    type: "UPDATE_VERIFIED",
+    payload: payload,
+  };
+};
+
+const updateConnectedRedux = (payload) => {
+  return {
+    type: "UPDATE_CONNECTED",
     payload: payload,
   };
 };
@@ -83,43 +114,65 @@ export const connectUser = () => {
       _screenMode = window.localStorage.getItem(STORAGE_SCREEN_MODE);
     }
     dispatch(updateScreenModeUser({ screenMode: _screenMode }));
-    
+
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log("FIREBASE AUTH reddux test function", user.phoneNumber);
         const uid = user.uid;
         const phoneNumber = user.phoneNumber;
+        const displayName = user.displayName;
         const photoURL = user.phoneNumber + USER_LINK_PHOTO_URL;
 
-        firestore.collection(COLLECTION_USER).doc(phoneNumber).get().then((doc) => {
+        firestore.collection(COLLECTION_USER).doc(phoneNumber).onSnapshot((doc) => {
           if (doc.exists) {
             const _user = doc.data();
             firestore.collection(COLLECTION_USER).doc(phoneNumber).update({
               phoneNumber: phoneNumber,
               uid: uid,
+              displayName:displayName,
               photoURL: photoURL,
             }).then(() => {
-              
-              //window.location.href = "/profil";
-              dispatch(
-                updateUserRequest({
-                  uid: uid,
-                  phoneNumber: phoneNumber,
-                  photoURL: photoURL,
-                  type: _user.type,
-                  connected: true,
-                  //screenMode: _screenMode,
-                  authorized: true,
-                  verified: _user.verified,
+              const storageRef = storage.ref();
+              //const [mobileOpen, setMobileOpen] = useState(false);
+
+              var profileImgRef = storageRef.child(`${photoURL}`);
+              let profilPhotoURL = '';
+              profileImgRef.getDownloadURL()
+                .then((url) => {
+                  profilPhotoURL = url;
+                  console.log("URRRRRRL PHOTO", profilPhotoURL);
+                  dispatch(
+                    updateUserRequest({
+                      uid: uid,
+                      phoneNumber: phoneNumber,
+                      displayName: displayName,
+                      photoURL: photoURL,
+                      profilPhotoURL: url,
+                      type: _user.type,
+                      connected: true,
+                      //screenMode: _screenMode,
+                      authorized: true,
+                      verified: _user.verified,
+                    })
+                  );
                 })
-              );
+                .catch((error) => {
+                  // Handle any errors
+                  profilPhotoURL = '';
+                  console.log("ERRRROR PHOTO")
+                });
+
+              //window.location.href = "/profil";
+
             });
           } else {
             dispatch(
               updateUserRequest({
                 uid: uid,
                 phoneNumber: phoneNumber,
+                displayName: displayName,
                 photoURL: "",
+                profilPhotoURL: "",
                 type: "",
                 connected: true,
                 //screenMode: _screenMode,
@@ -131,14 +184,16 @@ export const connectUser = () => {
               errorMsg: "The user is not authorized",
             }));
           }
-        }).catch((error) => {
+        })/*.catch((error) => {
           console.log("Error getting document:", error);
           //window.location.href = "/authentication/errorlogin";
           dispatch(
             updateUserRequest({
               uid: uid,
               phoneNumber: phoneNumber,
+              displayName: displayName,
               photoURL: "",
+              profilPhotoURL: "",
               type: "",
               connected: true,
               //screenMode: _screenMode,
@@ -150,6 +205,7 @@ export const connectUser = () => {
             errorMsg: "The user is not authorized",
           }));
         });
+        */
         // ...
       } else {
         console.log("NIIIK reddux test function");
@@ -157,7 +213,9 @@ export const connectUser = () => {
           updateUserRequest({
             uid: '',
             phoneNumber: '',
+            displayName: '',
             photoURL: "",
+            profilPhotoURL: "",
             type: "",
             connected: false,
             //screenMode: _screenMode,
@@ -188,7 +246,7 @@ export const updateUser = () => {
       }
       _screenMode = window.localStorage.getItem(STORAGE_SCREEN_MODE);
     }
-    let phoneNumber = '';
+
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log("FIREBASE AUTH reddux test function", user.phoneNumber);
@@ -256,6 +314,7 @@ export const updateUser = () => {
             loading: false,
             uid: '',
             phoneNumber: '',
+            displayName: '',
             connected: false,
             screenMode: _screenMode,
             authorized: false,
@@ -293,6 +352,28 @@ export const updatePhoneNumber = (_phoneNumber) => {
   };
 };
 
+export const updateProfilPhotoURL = (photoURL) => {
+  return async (dispatch) => {
+    const storageRef = storage.ref();
+    //const [mobileOpen, setMobileOpen] = useState(false);
+
+    var profileImgRef = storageRef.child(`${photoURL}`);
+    let profilPhotoURL = '';
+    profileImgRef.getDownloadURL()
+      .then((url) => {
+        profilPhotoURL = url;
+        console.log("URRRRRRL PHOTO", profilPhotoURL);
+        if (typeof (Storage) !== "undefined") {
+          window.localStorage.setItem(STORAGE_PROFIL_PHOTO_URL, url);
+        }
+        dispatch(updateProfilPhotoURLRedux({ profilPhotoURL: url }));
+      });
+    //let _isConnected = _account !== null ? true: false;
+    //window.localStorage.removeItem(STORAGE_SCREEN_MODE);
+
+  };
+};
+
 export const updateIsConnected = (_isConnected) => {
   return async (dispatch) => {
     //let _isConnected = _account !== null ? true: false;
@@ -300,7 +381,7 @@ export const updateIsConnected = (_isConnected) => {
     if (typeof (Storage) !== "undefined") {
       window.localStorage.setItem(STORAGE_IS_CONNECTED, _isConnected);
     }
-    dispatch(updateIsConnectedRedux({ connected: _isConnected }));
+    dispatch(updateConnectedRedux({ connected: _isConnected }));
   };
 };
 

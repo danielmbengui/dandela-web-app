@@ -26,12 +26,30 @@ import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 import { Button, Grid } from '@mui/material';
 import styles from './BarApp.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { connectUser } from '../../../redux/user/userActions';
+import { useUserContext } from '../../../context/UserProvider';
 
 export default function BarApp(props) {
-    const { user, storage, drawerWidth, mobileOpen, setMobileOpen, photoURL } = props;
+    const {  storage, drawerWidth, mobileOpen, setMobileOpen, userContext } = props;
     //const storageRef = storage.ref();
-    //const [photoURL, setPhotoURL] = useState(null);
+    const [photoURL, setPhotoURL] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     //const [mobileOpen, setMobileOpen] = useState(false);
+    //const dispatch = useDispatch();
+    const [user, setUser] = useUserContext();
+
+    
+
+    useEffect(() => {
+        //setUser();
+        if (user.profilPhotoURL !== '') {
+            setPhotoURL(user.profilPhotoURL);
+            console.log("USER BarApp", user);
+        }else {
+            setPhotoURL('');
+        }
+    }, [user]);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -70,9 +88,9 @@ export default function BarApp(props) {
                             >
                                 <MenuIcon />
                             </IconButton>
-                            <Avatar id="avatar-user" className={styles['fullscreen']} src={photoURL} sx={{ width: 40, height: 40 }} />
+                            <Avatar id="avatar-user" className={styles['fullscreen']} src={user.profilPhotoURL} sx={{ width: 40, height: 40 }} />
                             <Typography variant="h8" noWrap component="div" className='evidence' sx={{ fontWeight: 'bold' }}>
-                                {user ? user.phoneNumber : ''}
+                                {user.phoneNumber}
                             </Typography>
                         </Stack>
                     </Grid>

@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head'
 import Profile from '../components/Profile/Profile';
 import Dashboard from '../components/Dashboard/Dashboard';
+import { useUserContext } from '../context/UserProvider';
 
 export default function ProfilPage({logo, user, firebase, firestore, storage, userFirebase, handleUserFirebase, handleUser, auth, dashboard, screenMode}) {
-    return(
+
+
+  return(
         <Dashboard pages={{ profile: true, }} title={"Profil"} firebase={firebase} user={user} storage={storage}>
              <Head>
             <title>Dandela Web App - Profile</title>

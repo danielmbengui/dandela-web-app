@@ -5,6 +5,19 @@ export const COLLECTION_USER = 'USER';
 export const COLLECTION_USER_TYPE = 'USER_TYPE';
 export const COLLECTION_TRANSFERT = 'TRANSFERT';
 export const COLLECTION_COUNTRY = 'COUNTRY';
+export const DEFAULT_USER = {
+    uid: '',
+    phoneNumber: '',
+    displayName: '',
+    photoURL: '',
+    profilPhotoURL: '',
+    country: '',
+    type: '',
+    verified: false,
+    connected: false,
+    authorized: false,
+    screenMode: DEFAULT_SCREEN_MODE,
+};
 export const DEFAULT_TRANSFERT = {
     id: '',
     code: '',
@@ -28,6 +41,8 @@ export const TRANSFERT_STATE_FINISHED = "Terminé";
 /* --------------- STORAGE -------------- */
 export const STORAGE_UID = 'uid';
 export const STORAGE_PHONE_NUMBER = 'phoneNumber';
+export const STORAGE_DISPLAY_NAME = 'displayName';
+export const STORAGE_PROFIL_PHOTO_URL = 'profilPhotoURL';
 export const STORAGE_IS_CONNECTED = 'isConnected';
 
 export const STORAGE_SCREEN_MODE = 'screenMode';

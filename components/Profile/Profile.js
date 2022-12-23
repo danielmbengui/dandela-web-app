@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+import MuiAccordion from '@mui/material/Accordion';
+import MuiAccordionSummary from '@mui/material/AccordionSummary';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
@@ -9,7 +13,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import { AlertTitle, Avatar, Badge, FormHelperText, Grid, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import InputLabel from '@mui/material/InputLabel';
@@ -24,7 +27,13 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import InstallApp from '../InstallApp/InstallApp';
 import { COLLECTION_USER, USER_LINK_PHOTO_URL } from '../../constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { connectUser, updateProfilPhotoURL } from '../../redux/user/userActions';
+import { useUserContext } from '../../context/UserProvider';
 const { Configuration, OpenAIApi } = require("openai");
+
+import { TextFieldCustom } from '../MyComponents/TextFieldCustom';
+import { AccordionCustom, AccordionDetailsCustom, AccordionSummaryCustom } from '../MyComponents/AccordionCustom';
 
 const fontFamilyMain = [
   'ChangaOneRegular',
@@ -40,105 +49,97 @@ const fontFamilyMain = [
   '"Segoe UI Symbol"',
 ].join(',');
 
-const TexFieldCustom = styled(TextField)(({ theme }) => ({
-  '& .MuiInputLabel-root': {
-    fontFamily: fontFamilyMain,
-    color: 'var(--primary)',
-  },
-  '& .MuiInputBase-root': {
-    color: 'var(--primary)',
-    /*
-  borderRadius: 4,
-  position: 'relative',
-  backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
-  border: '1px solid #ced4da',
-  fontSize: 16,
-  width: 'auto',
-  padding: '10px 12px',
-  color:theme.palette.primary.main,
-  
-  transition: theme.transitions.create([
-    'border-color',
-    'background-color',
-    'box-shadow',
-  ]),
-  */
-    // Use the system font instead of the default Roboto font.
-    fontFamily: fontFamilyMain,
-    /*
-    '&:focus': {
-      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-      //borderColor: theme.palette.primary.main,
-      border: `1px solid ${theme.palette.primary.main}`,
-    },
-    */
 
-  },
-  '&:focus': {
-    boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-    //borderColor: theme.palette.primary.main,
-    border: `1px solid ${theme.palette.primary.main}`,
+const Accordion = styled((props) => (
+  <MuiAccordion disableGutters elevation={0} square {...props} />
+))(({ theme }) => ({
+  border: `1px solid ${theme.palette.divider}`,
+  '&:before': {
+    display: 'none',
   },
 }));
 
-const BootstrapInput = styled(InputBase)(({ theme }) => ({
-  'label + &': {
-    marginTop: theme.spacing(3),
+const AccordionSummary = styled((props) => (
+  <MuiAccordionSummary
+    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
+    {...props}
+  />
+))(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, .05)'
+      : 'rgba(0, 0, 0, .03)',
+  flexDirection: 'row-reverse',
+  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+    transform: 'rotate(90deg)',
   },
-  '& .placeholder': {
-    color: 'red',
-  },
-  '& .MuiInputBase-input': {
-    borderRadius: 4,
-    position: 'relative',
-    backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
-    border: '1px solid #ced4da',
-    fontSize: 16,
-    width: 'auto',
-    padding: '10px 12px',
-    color: theme.palette.primary.main,
-    transition: theme.transitions.create([
-      'border-color',
-      'background-color',
-      'box-shadow',
-    ]),
-    // Use the system font instead of the default Roboto font.
-    fontFamily: [
-      'ChangaOneRegular',
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
-    '&:focus': {
-      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-      //borderColor: theme.palette.primary.main,
-      border: `1px solid ${theme.palette.primary.main}`,
-    },
+  '& .MuiAccordionSummary-content': {
+    marginLeft: theme.spacing(1),
   },
 }));
 
-export default function Profile({ logo, firebase, firestore, user, handleUser, storage }) {
+const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+  padding: theme.spacing(2),
+  //borderTop: '1px solid rgba(0, 0, 0, .125)',
+}));
+
+export default function Profile({ logo, firebase, firestore, handleUser, storage }) {
   const theme = useTheme();
+  const dispatch = useDispatch();
+  //const user = useSelector((state) => state.user);
+  const [user, setUser] = useUserContext();
   const storageRef = storage.ref();
-  const uid = user ? user.uid : '';
-  const phoneNumber = user ? user.phoneNumber : '';
-  const userType = user ? user.type : '';
-  const [displayName, setDisplayName] = useState(user ? user.displayName : '');
+  const [uid, setUid] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [userType, setUserType] = useState('');
+  const [displayName, setDisplayName] = useState('');
   const [errorName, setErrorName] = useState(false);
   const [password, setPassword] = useState('');
   const [photoURL, setPhotoURL] = useState(null);
   const [photoFile, setPhotoFile] = useState(null);
 
+  const [expanded, setExpanded] = useState(true);
+
+  const handleExpanded = (expanded) => {
+    //console.log("EVENT Acoordeon", event.expanded);
+    setExpanded(expanded);
+  };
+  /*
+  const updateUserInfo = () => {
+    dispatch(connectUser());
+  }
+  useEffect(() => {
+    updateUserInfo();
+    console.log("USER_REDUX Dashboard", user);
+    //setShowInstallApp(true);
+  }, [user.uid, user.phoneNumber, user.type]);
+*/
+  useEffect(() => {
+    if (user) {
+      setPhotoURL(user.profilPhotoURL);
+      setDisplayName(user.displayName);
+      setUid(user.uid);
+      setPhoneNumber(user.phoneNumber);
+      setUserType(user.type);
+      setPhotoURL(user.profilPhotoURL);
+      console.log("USER Profile", user);
+    }else {
+      setPhotoURL('');
+      setDisplayName('');
+      setUid('');
+      setPhoneNumber('');
+      setUserType('');
+      setPhotoURL(null);
+    }
+  }, [user]);
+
+  
+
+/*
   useEffect(() => {
     setErrorName(user ? (user.displayName == '' ? true : false) : true);
   }, [user]);
+  */
 
   const onChangeName = (e) => {
     setDisplayName(e.target.value);
@@ -182,7 +183,7 @@ useEffect(() => {
 console.log("FFFFIRST TEST: ", playerJson);
 })
 */
-
+/*
   useEffect(() => {
     if (user) {
       setDisplayName(user.displayName);
@@ -201,6 +202,7 @@ console.log("FFFFIRST TEST: ", playerJson);
       }
     }
   }, [user])
+  */
 
   useEffect(() => {
     const image_input = document.querySelector("#image-input");
@@ -248,7 +250,7 @@ console.log("FFFFIRST TEST: ", playerJson);
       });
       reader.readAsDataURL(this.files[0]);
     });
-  });
+  }, []);
 
   const SmallAvatar = styled(Avatar)(({ theme }) => ({
     width: 30,
@@ -267,45 +269,52 @@ console.log("FFFFIRST TEST: ", playerJson);
         displayName: displayName,
         photoURL: userApp.photoURL,
       }).then(() => {
+        if (photoURL && photoFile) {
+          var profileImgRef = storageRef.child(`${userApp.photoURL}`);
+          var profilPhotoURL = '';
+          var metadata = {
+            contentType: photoFile.type,
+          };
+          profileImgRef.put(photoFile, metadata).then((snapshot) => {
+            console.log('Uploaded a blob or file! Snapshot:', snapshot);
+            //userApp.photoURL = `${user.phoneNumber}${USER_LINK_PHOTO_URL}`;
+            //setPhotoURL(userApp.photoURL);
+            profileImgRef.getDownloadURL()
+            .then((url) => {
+              profilPhotoURL = url;
+              setPhotoURL(url);
+              updateProfilPhotoURL(userApp.photoURL);
+              dispatch(connectUser());
+              userApp.profilPhotoURL = url;
+              setUser(userApp);
+              firestore.collection(COLLECTION_USER).doc(userApp.phoneNumber).update({
+                displayName: displayName,
+                photoURL: userApp.photoURL,
+                profilPhotoURL: url,
+                verified: true
+              })
+                .then(() => {
+                  console.log("Document successfully updated!");
+                  //window.location.href = '/about';
+                  
+                })
+                .catch((error) => {
+                  // The document probably doesn't exist.
+                  console.error("Error updating document: ", error);
+                  //window.location.href = '/login/errorlogin';
+                });
+            })
+            .catch((error) => {
+              // Handle any errors
+              setPhotoURL('');
+              console.log('Error URL');
+            });
+          }); 
+        }
         // Update successful
         // ...
         // Set the "capital" field of the city 'DC'
-        firestore.collection(COLLECTION_USER).doc(userApp.phoneNumber).update({
-          displayName: displayName,
-          photoURL: userApp.photoURL,
-          verified: true
-        })
-          .then(() => {
-            console.log("Document successfully updated!");
-            //window.location.href = '/about';
-            if (photoURL && photoFile) {
-              var profileImgRef = storageRef.child(`${userApp.photoURL}`);
-              var metadata = {
-                contentType: photoFile.type,
-              };
-              profileImgRef.put(photoFile, metadata).then((snapshot) => {
-                console.log('Uploaded a blob or file! Snapshot:', snapshot);
-                //userApp.photoURL = `${user.phoneNumber}${USER_LINK_PHOTO_URL}`;
-                //setPhotoURL(userApp.photoURL);
-                profileImgRef.getDownloadURL()
-                .then((url) => {
-                  setPhotoURL(url);
-                  userApp.profilPhotoURL = photoURL;
-                })
-                .catch((error) => {
-                  // Handle any errors
-                  setPhotoURL('');
-                  console.log('Error URL');
-                });
-              });
-              
-            }
-          })
-          .catch((error) => {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-            //window.location.href = '/login/errorlogin';
-          });
+        
       }).catch((error) => {
         // An error occurred
         // ...
@@ -313,6 +322,7 @@ console.log("FFFFIRST TEST: ", playerJson);
     }
     userApp.editingPhotoUrl = false;
     handleUser(userApp);
+    setUser(userApp);
     //window.location.href = '/about';
   }
 
@@ -334,7 +344,7 @@ console.log("FFFFIRST TEST: ", playerJson);
             sx={{ mb: 2, textAlign: 'start' }}
           >
             <AlertTitle sx={{ mb: 0.5, alignItems: 'flex-start' }}>Complete ton profil</AlertTitle>
-            {"Rajoute un nom d'utilisateur pour accéder aux services. —"} <strong>nous le gardons en sécurité!</strong>
+            {"Ajoute un nom d'utilisateur et une photo de profil pour accéder aux services. —"} <strong>nous le gardons en sécurité!</strong>
           </Alert>
 
         </Box>
@@ -342,7 +352,7 @@ console.log("FFFFIRST TEST: ", playerJson);
       <Grid container spacing={1.5} direction={'column'} justifyContent={'center'} alignItems={'center'}
         //sx={{background:'yellow',}}
         pl={1} pr={1}
-        columns={{ xs: 12 }}
+        columns={{ xs: 12, md:6 }}
       >
         <Grid item mb={3} xs>
           <Badge
@@ -361,17 +371,18 @@ console.log("FFFFIRST TEST: ", playerJson);
           <input id="image-input" type="file" accept="image/jpeg, image/png, image/jpg" style={{ display: 'none' }} />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} md={6}>
           <Stack direction={'column'} justifyContent={'center'} alignItems={'stretch'}
             spacing={2}
           //sx={{background:'cyan'}}
           >
-            <TexFieldCustom
-              fullWidth
+            <TextFieldCustom
+              //fullWidth
               error={errorName}
               id="name"
               label={'Nom'}
               required
+              //controlled
               //defaultValue="Hello World"
               value={displayName}
               onChange={onChangeName}
@@ -379,20 +390,30 @@ console.log("FFFFIRST TEST: ", playerJson);
               //theme={theme}
               placeholder={"Nom"}
             />
-            <TexFieldCustom
+            <AccordionCustom expanded={expanded} onChange={() => {
+              handleExpanded(expanded ? false : true);
+            }}  sx={{
+              //width:'60%',
+            }}>
+        <AccordionSummaryCustom aria-controls="panel1d-content" id="panel1d-header">
+          <Typography sx={{fontFamily: fontFamilyMain}}>Plus d'informations</Typography>
+        </AccordionSummaryCustom>
+        <AccordionDetailsCustom>
+
+        <Stack 
+        direction={'column'}
+        justifyContent={'center'} 
+        alignItems={'stretch'}
+            spacing={2}
+        >
+<TextFieldCustom
               fullWidth
-              //error={false}
               id="uid"
               label="ID utilisateur"
-              //required
               disabled
-              //defaultValue={displayName}
-              value={uid}
-            //helperText="Incorrect entry."
-            //theme={theme}
-            //placeholder={"Name"}
+              value={user.uid}
             />
-            <TexFieldCustom
+            <TextFieldCustom
               fullWidth
               //error={false}
               id="phoneNumber"
@@ -400,12 +421,25 @@ console.log("FFFFIRST TEST: ", playerJson);
               //required
               disabled
               //defaultValue={displayName}
-              value={phoneNumber}
+              value={user.phoneNumber}
             //helperText="Incorrect entry."
             //theme={theme}
             //placeholder={"Name"}
             />
-            <TexFieldCustom
+            <TextFieldCustom
+              fullWidth
+              //error={false}
+              id="userCountry"
+              label="Pays"
+              //required
+              disabled
+              //defaultValue={displayName}
+              value={user.country}
+            //helperText="Incorrect entry."
+            //theme={theme}
+            //placeholder={"Name"}
+            />
+                        <TextFieldCustom
               fullWidth
               //error={false}
               id="userType"
@@ -413,11 +447,16 @@ console.log("FFFFIRST TEST: ", playerJson);
               //required
               disabled
               //defaultValue={displayName}
-              value={userType}
+              value={user.type}
             //helperText="Incorrect entry."
             //theme={theme}
             //placeholder={"Name"}
             />
+        </Stack>
+        </AccordionDetailsCustom>
+      </AccordionCustom>
+
+            
 
             <Grid container pt={3} justifyContent={'center'}>
               <Button variant='contained' onClick={() => {

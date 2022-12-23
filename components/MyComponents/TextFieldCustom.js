@@ -21,9 +21,11 @@ const fontFamilyMain = [
     '& .MuiInputLabel-root': {
       fontFamily: fontFamilyMain,
       color:'var(--primary)',
+      'borderColor': 'red',
     },
     '& .MuiInputBase-root': {
       color: 'var(--primary)',
+      'borderColor': 'red',
       /*
     borderRadius: 4,
     position: 'relative',

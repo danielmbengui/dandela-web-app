@@ -1,5 +1,5 @@
-import { firestore } from "../../config.firebase";
-import { COLLECTION_COUNTRY, COLLECTION_USER, COLLECTION_USER_TYPE } from "../../constants";
+import { firestore, storage } from "../../config.firebase";
+import { COLLECTION_COUNTRY, COLLECTION_USER, COLLECTION_USER_TYPE, DEFAULT_USER } from "../../constants";
 import { getCountryFirestore } from "./CountryFunctions";
 
 export function getUserFirestore(phoneNumber, handleUser){
@@ -159,11 +159,17 @@ docUserTypeRef.doc(user.user_type_id).onSnapshot((doc) => {
           */
           //console.log("Document data USER_TYPE:", doc.data().collection("USER_TYPE"));
           // Set with cityConverter
-          handleUser(doc.data());
+          
+                //user.profilPhotoURL = profilPhotoURL;
+                const _user = JSON.parse(JSON.stringify(user));
+                
+                console.log("USERFUNCTIONNNNNS user", user)
+                console.log("USERFUNCTIONNNNNS _user", _user)
+          handleUser(_user);
         } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
-          handleUser(null);
+          handleUser(DEFAULT_USER);
           //window.location.href = "/account/errorlogin";
         }
     });

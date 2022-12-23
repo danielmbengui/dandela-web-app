@@ -10,11 +10,11 @@ export const ThemeModeProviderContext = createContext({ toggleColorMode: () => {
 
 export default function ThemeModeProvider({children, screenMode}) {
     //let screenMode = 'light';
-    const user = useSelector((state) => state.user);
+    const [user, setUser] = useUserContext();
     const dispatch = useDispatch();
     //dispatch(updateUser());
     //dispatch(updateScreenMode(event.target.checked ? 'dark' : 'light'));
-    const [mode, setMode] = useState(screenMode);
+    const [mode, setMode] = useState(user.screenMode);
     
     //const [primaryDecimal, setPrimaryDecimal] = useState("var(--blue-dandela-decimal)");
 
@@ -31,34 +31,19 @@ export default function ThemeModeProvider({children, screenMode}) {
       dispatch(updateUser());
     }
     useEffect(() => {
-      updateUserInfo();
+      //updateUserInfo();
+      //setMode(user.screenMode);
+      //const _screenMode = mode;
       setMode(user.screenMode);
-      document.documentElement.setAttribute("data-theme", user.screenMode);
-      console.log('USEEEEEER theme', user.screenMode)
-    }, [mode, user.screenMode]);
+      //document.documentElement.setAttribute("data-theme", screenMode);
+      console.log('Initial SCREEEN MODE theme', user.screenMode);
+    }, [user.screenMode]);
     
-    
-
     useEffect( () => {
-      /*
-      let _screenMode = DEFAULT_SCREEN_MODE;
-      if( window.localStorage.getItem('screenMode') !== null ){
-        _screenMode = window.localStorage.getItem('screenMode');
-      }
-      */
-      
-      
-      
-      //setMode(_screenMode);
-      //console.log('USEEEEEER theme', user.screenMode)
-      //document.documentElement.setAttribute("data-theme", mode);
-      //setMode(_screenMode);
-      //document.documentElement.setAttribute("data-theme", mode);
-        //document.documentElement.setAttribute("data-theme", mode);
-        //dispatch(updateScreenMode(mode));
-        console.log('SECREEEN MODE theme', mode)
-        
+      document.documentElement.setAttribute("data-theme", mode);
+        console.log('Change SCREEEN MODE theme', mode);
       }, [mode]);
+      
 
 
       
