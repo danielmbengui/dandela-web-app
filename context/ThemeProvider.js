@@ -4,7 +4,7 @@ import { useUserContext } from './UserProvider';
 import { useDispatch, useSelector } from "react-redux";
 import { updateScreenMode } from '../redux/user/userActions';
 import { updateUser } from '../redux/user/userActions';
-import { DEFAULT_SCREEN_MODE } from '../constants';
+import { DEFAULT_SCREEN_MODE, STORAGE_SCREEN_MODE } from '../constants';
 
 export const ThemeModeProviderContext = createContext({ toggleColorMode: () => {} });
 
@@ -14,7 +14,7 @@ export default function ThemeModeProvider({children}) {
     const dispatch = useDispatch();
     //dispatch(updateUser());
     //dispatch(updateScreenMode(event.target.checked ? 'dark' : 'light'));
-    const [mode, setMode] = useState(user && user.screenMode ? user.screenMode : DEFAULT_SCREEN_MODE);
+    const [mode, setMode] = useState(DEFAULT_SCREEN_MODE);
     
     //const [primaryDecimal, setPrimaryDecimal] = useState("var(--blue-dandela-decimal)");
 
@@ -35,21 +35,25 @@ export default function ThemeModeProvider({children}) {
       //setMode(user.screenMode);
       //const _screenMode = mode;
       if (user) {
-        setMode(user.screenMode);
+        let _screenMode = DEFAULT_SCREEN_MODE;
+    if (typeof (Storage) !== "undefined") {
+      if (window.localStorage.getItem(STORAGE_SCREEN_MODE) === null) {
+        window.localStorage.setItem(STORAGE_SCREEN_MODE, _screenMode);
+      }
+      _screenMode = window.localStorage.getItem(STORAGE_SCREEN_MODE);
+    }
+        setMode(_screenMode);
       //document.documentElement.setAttribute("data-theme", screenMode);
-      console.log('Initial SCREEEN MODE theme', user.screenMode);
+      console.log('Initial SCREEEN MODE theme', _screenMode);
       }
     }, [user]);
     
     useEffect( () => {
       document.documentElement.setAttribute("data-theme", mode);
+      window.localStorage.setItem(STORAGE_SCREEN_MODE, mode);
         console.log('Change SCREEEN MODE theme', mode);
       }, [mode]);
       
-
-
-      
-
     const themeMode = useMemo(
       () => ({
         toggleColorMode: () => {

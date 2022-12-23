@@ -91,17 +91,6 @@ function Dashboard(props) {
     useEffect(() => {
         if (user) {
             setIsAdmin(user.type === USER_TYPE_ADMIN);
-            setContentInstall(<InstallApp />);
-
-            setTimeout(() => {
-                if (!user.authorized) {
-                    setContentError(<ContainerLogin>
-                        <ErrorLogin phoneNumber={user.phoneNumber} />
-                    </ContainerLogin>);
-                }else{
-                    setContentError(<></>)
-                }
-            }, 3000);
         }
     }, [user])
 
@@ -220,13 +209,10 @@ function Dashboard(props) {
             }
 
             {
-                contentError
-            }
-
-            {
                 user.authorized && <>
                 <CssBaseline sx={{bgcolor:'var(--menu-background)'}} />
             <BarApp user={user} storage={storage} drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+            <InstallApp />
             <Box
                 component="nav"
                 sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 },

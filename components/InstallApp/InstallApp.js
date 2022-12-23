@@ -28,7 +28,13 @@ export default function InstallApp(){
           </Grid>
         </Grid>
       )}
-      callback={(data) => console.log('RESULT InstallApp', data)}
+      callback={(data) => (
+        <>
+        {console.log('RESULT InstallApp', data)}
+        <span>MEEEEEEEEERDE</span>   
+        </>
+        
+      )}
     />
   )
 }

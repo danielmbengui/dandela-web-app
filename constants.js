@@ -35,7 +35,6 @@ export const DEFAULT_USER = {
     verified: false,
     connected: false,
     authorized: false,
-    screenMode: DEFAULT_SCREEN_MODE,
 };
 export const DEFAULT_TRANSFERT = {
     id: '',
