@@ -12,7 +12,7 @@ const [showUserPhone, setShowUserPhone] = useState('unknow');
 const [user, setUser] = useUserContext();
 
 useEffect(() => {
-  if (user.phoneNumber) {
+  if (user) {
     setShowUserPhone(user.phoneNumber);
     /*
     firebase.auth().signOut().then(() => {
@@ -25,8 +25,10 @@ useEffect(() => {
       console.log("ERROR Disconnected !!!");
     });
     */
+  }else {
+    setShowUserPhone('unknow');
   }
-}, [user.phoneNumber])
+}, [user])
 
   return (
    <>

@@ -23,9 +23,11 @@ import Public from '@mui/icons-material/Public';
 import { useTheme } from '@mui/material/styles';
 import Link from 'next/link';
 import { Container, Stack } from '@mui/material';
+import { useUserContext } from '../../../context/UserProvider';
 
 export default function SettingsComponent({firebase, settingsPage}) {
     const theme = useTheme();
+    const [user, setUser] = useUserContext();
 
     return (
         <ListItem component="div" disablePadding>
@@ -33,6 +35,7 @@ export default function SettingsComponent({firebase, settingsPage}) {
                 onClick={() => {
                     firebase.auth().signOut().then(() => {
                         // Sign-out successful.
+                        setUser(null);
                         location.href = "/";
                         console.log("Disconnected !!!");
                     }).catch((error) => {

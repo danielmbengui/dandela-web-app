@@ -8,13 +8,13 @@ import { DEFAULT_SCREEN_MODE } from '../constants';
 
 export const ThemeModeProviderContext = createContext({ toggleColorMode: () => {} });
 
-export default function ThemeModeProvider({children, screenMode}) {
+export default function ThemeModeProvider({children}) {
     //let screenMode = 'light';
     const [user, setUser] = useUserContext();
     const dispatch = useDispatch();
     //dispatch(updateUser());
     //dispatch(updateScreenMode(event.target.checked ? 'dark' : 'light'));
-    const [mode, setMode] = useState(user.screenMode);
+    const [mode, setMode] = useState(user && user.screenMode ? user.screenMode : DEFAULT_SCREEN_MODE);
     
     //const [primaryDecimal, setPrimaryDecimal] = useState("var(--blue-dandela-decimal)");
 
@@ -34,10 +34,12 @@ export default function ThemeModeProvider({children, screenMode}) {
       //updateUserInfo();
       //setMode(user.screenMode);
       //const _screenMode = mode;
-      setMode(user.screenMode);
+      if (user) {
+        setMode(user.screenMode);
       //document.documentElement.setAttribute("data-theme", screenMode);
       console.log('Initial SCREEEN MODE theme', user.screenMode);
-    }, [user.screenMode]);
+      }
+    }, [user]);
     
     useEffect( () => {
       document.documentElement.setAttribute("data-theme", mode);

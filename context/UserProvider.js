@@ -16,7 +16,7 @@ const UserContext = createContext();
 export default function UserProvider({ children }) {
     const dispatch = useDispatch();
     //const user = useSelector((state) => state.user);
-    const [user, setUser] = useState(DEFAULT_USER);
+    const [user, setUser] = useState(null);
 
     //const [user, setUser] = useState(null);
     const [uid, setUid] = useState(null);
@@ -125,7 +125,7 @@ export default function UserProvider({ children }) {
         if (phoneNumber && connected) {
             initUserSnapshot(phoneNumber);
         } else {
-            setUser(DEFAULT_USER);
+            setUser(null);
         }
     }, [phoneNumber]);
 
@@ -156,7 +156,7 @@ export default function UserProvider({ children }) {
             */
             if (!phoneNumber || !connected) {
                 unsubscribe();
-                setUser(DEFAULT_USER);
+                setUser(null);
             }
     }
 

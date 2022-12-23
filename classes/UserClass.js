@@ -1,9 +1,9 @@
-import { DEFAULT_SCREEN_MODE } from "../constants";
+import { DEFAULT_SCREEN_MODE, USER_TYPE_ADMIN } from "../constants";
 import Country from "./CountryClass";
 
 class User {
-    constructor({uid = '', phoneNumber = '', displayName = '', photoURL = '', profilPhotoURL = '',
-        type = '', country_uid = '', verified=false, screenMode=DEFAULT_SCREEN_MODE}) {
+    constructor({uid = null, phoneNumber = null, displayName = null, photoURL = null, profilPhotoURL = null,
+        type = null, country_uid = null, verified=null, screenMode=DEFAULT_SCREEN_MODE}) {
             /* FIRESTORE variables */
         this.uid = uid;
         this.phoneNumber = phoneNumber;
@@ -17,7 +17,7 @@ class User {
         this.screenMode = screenMode;
         /* CUSTOM variables */
         this.authorized = phoneNumber && verified;
-        
+        this.isAdmin = type === USER_TYPE_ADMIN;
     }
     toString() {
         return [
@@ -31,6 +31,7 @@ class User {
             "COUNTRY: " + this.country.toString(),
             "VERIFIED: " + this.verified,
             "AUTHORIZED: " + this.authorized,
+            "IS ADMIN: " + this.isAdmin,
             "SCREENMODE: " + this.screenMode
         ].join(', ');
     }

@@ -67,10 +67,10 @@ export default function Login(props) {
                                 //window.location.href = "/profil";
                             });
                             */
-                            //const _user = JSON.parse(JSON.stringify(user));
-                            //_user.authorized = true;
-                            //setUser(_user);
-                            window.location.href = "/profil";
+                            const _user = JSON.parse(JSON.stringify(user));
+                            _user.authorized = true;
+                            setUser(_user);
+                            //window.location.href = "/profil";
                         }
                     }).catch((error) => {
                         console.log("Error getting document:", error);

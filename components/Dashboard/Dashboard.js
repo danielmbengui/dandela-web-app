@@ -81,8 +81,14 @@ function Dashboard(props) {
     const container = undefined;
   //const user = useSelector((state) => state.user);
   const [user, setUser] = useUserContext();
-  const [isAdmin, setIsAdmin] = useState(user.type === USER_TYPE_ADMIN);
+  const [isAdmin, setIsAdmin] = useState(user ? user.type === USER_TYPE_ADMIN : false);
     //const [mobileOpen, setMobileOpen] = useState(false);
+
+    useEffect(() => {
+        if (user) {
+            setIsAdmin(user.type === USER_TYPE_ADMIN);
+        }
+    }, [user])
 
 
 
@@ -194,13 +200,16 @@ function Dashboard(props) {
     return (
         <Box sx={{ display: user ? 'flex' : 'none', bgcolor:'var(--menu-background)'}}>
             {
-                !user.authorized && <ContainerLogin>
+                !user && <PermanentBackdrop />
+            }
+            {
+                user && !user.authorized && <ContainerLogin>
                     <ErrorLogin phoneNumber={user.phoneNumber} />
                 </ContainerLogin>
             }
 
             {
-                user.authorized && <>
+                user && user.authorized && <>
                 <CssBaseline sx={{bgcolor:'var(--menu-background)'}} />
             <BarApp user={user} storage={storage} drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
             <Box
