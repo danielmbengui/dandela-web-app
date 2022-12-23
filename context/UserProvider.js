@@ -47,6 +47,7 @@ export default function UserProvider({ children }) {
             }
 
         });
+
     }, []);
 
     async function getCurrency(currency_uid) {
@@ -143,10 +144,10 @@ export default function UserProvider({ children }) {
                     //setUser(_user);
                 } else {
                     console.log("No such document USER class!");
-                    user = new User({phoneNumber: phoneNumber});
+                    user = new User({ phoneNumber: phoneNumber });
                     //user.phoneNumber = phoneNumber;
                     console.log("USEEEEEER Clas NULL", user);
-                    
+
                 }
                 setUser(user);
             })/*.catch((error) => {
@@ -154,10 +155,10 @@ export default function UserProvider({ children }) {
                 setUser(DEFAULT_USER);
             });
             */
-            if (!phoneNumber || !connected) {
-                unsubscribe();
-                setUser(null);
-            }
+        if (!phoneNumber || !connected) {
+            unsubscribe();
+            setUser(null);
+        }
     }
 
     return (

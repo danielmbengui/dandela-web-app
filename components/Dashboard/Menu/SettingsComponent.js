@@ -35,7 +35,7 @@ export default function SettingsComponent({firebase, settingsPage}) {
                 onClick={() => {
                     firebase.auth().signOut().then(() => {
                         // Sign-out successful.
-                        setUser(null);
+                        //setUser(null);
                         location.href = "/";
                         console.log("Disconnected !!!");
                     }).catch((error) => {
