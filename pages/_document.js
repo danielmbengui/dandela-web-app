@@ -31,7 +31,7 @@ export default function Document() {
                 <meta name="theme-color" content="#094397" />
                 <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#5bbad5" />
                 <link rel="shortcut icon" href="/favicon32x32.ico" />
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=optional" />
 
                 <meta name="twitter:card" content="summary" />
                 <meta name="twitter:url" content="https://webapp.dandela.com" />

@@ -22,6 +22,7 @@ export default function OneTransferInProgressPage({ id, firebase, firestore, sto
     const [transfert, setTransfert] = useState(DEFAULT_TRANSFERT);
     const [user, setUser] = useUserContext();
 
+    /*
     useEffect(() => {
         firestore.collection(COLLECTION_TRANSFERT).doc(id)
             .onSnapshot((doc) => {
@@ -29,6 +30,7 @@ export default function OneTransferInProgressPage({ id, firebase, firestore, sto
                 setTransfert(_transfert);
             });
     }, [firestore]);
+    */
 
     return (
         <Dashboard pages={{ inprogress: true, }} title={`Transfert ${formatTransfertCode(transfert.code)}`} firebase={firebase} user={user} storage={storage}>
@@ -42,6 +44,7 @@ export default function OneTransferInProgressPage({ id, firebase, firestore, sto
     )
 }
 // Generates `/posts/1` and `/posts/2`
+/*
 export async function getStaticPaths({ }) {
     const transfertsUid = await getTransfertsAllList();
     console.log('AXIOS transfert', transfertsUid);
@@ -73,3 +76,4 @@ export async function getStaticProps(props) {
         props: { id },
     }
 }
+*/

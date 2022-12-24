@@ -1,4 +1,5 @@
 import Cors from 'cors';
+import Transfert, { transfertConverter } from '../../../classes/TransfertClass';
 import { firestore } from "../../../config.firebase"
 import { COLLECTION_TRANSFERT } from "../../../constants";
 import initMiddleware from '../../../functions/init-middleware';
@@ -16,11 +17,13 @@ export default async function handler(req, res) {
     try {
         firestore.collection(COLLECTION_TRANSFERT)
             //.where("uid", "!=", "")
+            .withConverter(transfertConverter)
             .get()
             .then((querySnapshot) => {
                 const transfertsUid = [];
                 querySnapshot.forEach((doc) => {
-                    transfertsUid.push(doc.data().uid);
+                    const transfert = new Transfert(doc.data());
+                    transfertsUid.push(transfert.uid);
                 });
                 //setTransfertList(cities);
                 //console.log("Current Transfert length: ", transfertsId.length);

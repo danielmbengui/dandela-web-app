@@ -86,7 +86,7 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
                     >
                         <Typography>Valide : </Typography> {transfert.valide ? <CheckCircleIcon color="success" /> : <CancelIcon color="error" />}
                     </Stack>
-                    <span>{transfert ? transfert.receiver.toUpperCase() : ''}</span>
+                    <span>{transfert ? transfert.receiver.toString().toUpperCase() : ''}</span>
 
                 </Grid>
 
