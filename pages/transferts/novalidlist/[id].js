@@ -19,7 +19,7 @@ export default function OneTransfertNoValidPage({ id, firebase, firestore, user,
     //const {params} = paths;
     // Render post...
     const [transfert, setTransfert] = useState(DEFAULT_TRANSFERT);
-
+/*
     useEffect(() => {
         firestore.collection(COLLECTION_TRANSFERT).doc(id)
             .onSnapshot((doc) => {
@@ -27,6 +27,7 @@ export default function OneTransfertNoValidPage({ id, firebase, firestore, user,
                 setTransfert(_transfert);
             });
     }, [firestore]);
+    */
 
     return (
         <Dashboard pages={{ novalid: true, }} title={`Transfert n°${formatTransfertCode(transfert.code)}`} firebase={firebase} user={user} storage={storage}>
@@ -40,6 +41,7 @@ export default function OneTransfertNoValidPage({ id, firebase, firestore, user,
     )
 }
 // Generates `/posts/1` and `/posts/2`
+/*
 export async function getStaticPaths({ }) {
     const transfertsId = await getTransfertsAllList();
     console.log('AXIOS transfert', transfertsId);
@@ -70,3 +72,4 @@ export async function getStaticProps(props) {
         props: { id },
     }
 }
+*/
