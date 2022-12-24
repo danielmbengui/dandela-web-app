@@ -7,7 +7,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
 
 export default function AllTransfertsPage({langage, setLangage, logo, user, firebase, firestore, storage, userFirebase, handleUserFirebase, handleUser, auth, dashboard, screenMode}) {
-    const { t, i18n } = useTranslation('common')
+    const { t, i18n } = useTranslation('transferts/new')
     useEffect(() => {
         onChangeLanguage(langage);
       }, [langage]);
@@ -17,7 +17,7 @@ export default function AllTransfertsPage({langage, setLangage, logo, user, fire
       };
 
     return(
-        <Dashboard langage={langage} setLangage={setLangage} pages={{ newtransfert: true, }} title={"Nouveau transfert"} firebase={firebase} user={user} storage={storage}>
+        <Dashboard langage={langage} setLangage={setLangage} pages={{ newtransfert: true, }} title={t('NewTransfert')} firebase={firebase} user={user} storage={storage}>
              <Head>
             <title>Dandela Web App - Tous les transferts</title>
             <meta name="description" content="Voir tous les transferts" />
@@ -34,6 +34,7 @@ export async function getStaticProps({ locale }) {
         ...(await serverSideTranslations(locale, [
           'common',
           'profil',
+          'transferts/new',
           //'footer',
         ], null, ['en', 'fr', 'pt'])),
         // Will be passed to the page component as props

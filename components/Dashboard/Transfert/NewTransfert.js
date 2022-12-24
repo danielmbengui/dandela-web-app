@@ -1,5 +1,6 @@
 import { Button, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Transfert, { transfertConverter } from "../../../classes/TransfertClass";
 import { COLLECTION_TRANSFERT, USER_TYPE_ADMIN } from "../../../constants";
 import { useUserContext } from "../../../context/UserProvider";
@@ -11,6 +12,8 @@ import { TextFieldCustom } from "../../MyComponents/TextFieldCustom";
 
 
 export default function NewTransfert({firestore}) {
+  const { t, i18n } = useTranslation('transferts/new');
+
   const [user, setUser] = useUserContext();
   const [receiver, setReceiver] = useState('');
   const [amount, setAmount] = useState('');
@@ -52,9 +55,7 @@ transfert.amount = amount;
 transfert.receipt_receiver = false;
 transfert.receipt_dandela = false;
 transfert.receipt_sender = false;
-transfert.valide = isTransfertValide,
-console.log("UID", uid)
-console.log("TRansfert", transfert)
+transfert.valide = isTransfertValide;
 // later...
 newTransfertRef.withConverter(transfertConverter).set(transfert);
  }
@@ -75,7 +76,7 @@ newTransfertRef.withConverter(transfertConverter).set(transfert);
         //fullWidth
         //error={errorName}
         id="dest"
-        label={'Destinataire'}
+        label={t('Receiver')}
         required
         //controlled
         //defaultValue="Hello World"
@@ -83,13 +84,13 @@ newTransfertRef.withConverter(transfertConverter).set(transfert);
         onChange={onChangeReceiver}
         //helperText={errorName ? "Incorrect entry." : ''}
         //theme={theme}
-        placeholder={"Destinataire"}
+        placeholder={t('Receiver')}
       />
       <TextFieldCustom
         //fullWidth
         //error={errorName}
         id="amount"
-        label={'Montant'}
+        label={t('Amount')}
         required
         type={'number'}
         //controlled
@@ -98,7 +99,7 @@ newTransfertRef.withConverter(transfertConverter).set(transfert);
         onChange={onChangeAmount}
         //helperText={errorName ? "Incorrect entry." : ''}
         //theme={theme}
-        placeholder={"Montant"}
+        placeholder={t('Amount')}
       />
     </Stack>
 
@@ -106,7 +107,7 @@ newTransfertRef.withConverter(transfertConverter).set(transfert);
     variant="contained"
     onClick={addTransfert}
     >
-      Ajouter
+      {t('Add')}
     </Button>
     
     </>

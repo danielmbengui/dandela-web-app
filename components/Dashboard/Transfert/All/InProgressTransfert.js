@@ -22,6 +22,7 @@ import Transfert, { transfertConverter } from '../../../../classes/TransfertClas
 import SlideInDialog from '../../../MyComponents/SlideInDialog';
 import TitleDialog from '../../../MyComponents/TitleDialog';
 import OneTransfertDialog from '../OneTransfertDialog';
+import { useTranslation } from 'react-i18next';
 
 
 export default function InProgressTransfert({ firestore, }) {

@@ -11,7 +11,7 @@ import styles from './Settings.module.css';
 const logo = '/img/logo.png';
 export default function Settings(props) {
   const [user, setUser] = useUserContext();
-  
+
   return (
     <Container sx={{maxWidth: '100%', fontFamily:'ChangaOneRegular'}}>
           <Head>
@@ -20,7 +20,7 @@ export default function Settings(props) {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Grid container direction={'column'} justifyContent={'center'} alignItems={'center'}>
-            <Grid item>
+            <Grid item sx={{display:'none'}}>
             <h1 className={styles.subtitle}>
               Salut {user && <span>{user.displayName}!</span>}
             </h1>

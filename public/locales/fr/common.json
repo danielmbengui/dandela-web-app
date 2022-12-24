@@ -21,5 +21,8 @@
     "menuAdminCountries": "Pays",
     "menuAdminStatistics": "Statistiques",
     "menuProfile": "Profil",
-    "menuChooseLangage": "Langues"
+    "menuChooseLangage": "Langues",
+    "langFrench": "Français",
+    "langEnglish": "Anglais",
+    "langPortuguese": "Portugais"
 }
