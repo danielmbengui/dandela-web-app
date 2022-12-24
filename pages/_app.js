@@ -17,7 +17,7 @@ import { DEFAULT_SCREEN_MODE } from "../constants";
 import { getUserFirestore, getUserFirestoreSnapshot, setUserFirestoreSnapshot } from "../functions/firestore/UserFunctions";
 import Install from "../components/InstallApp/InstallApp";
 import { updateUser } from "../redux/user/userActions";
-
+import { appWithTranslation } from 'next-i18next'
 
 initAuth();
 
@@ -28,7 +28,7 @@ const links = {
   errorlogin: "/account/errorlogin",
 }
 
-export default function App({ Component, pageProps, }) {
+const App = ({ Component, pageProps, }) => {
   //const { state } = useContext(AppContext);
   const [uid, setUid] = useState(null);
   const [user, setUser] = useState(null);
@@ -70,3 +70,5 @@ export default function App({ Component, pageProps, }) {
     </Provider>
   )
 }
+
+export default appWithTranslation(App)

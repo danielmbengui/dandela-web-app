@@ -1,13 +1,9 @@
-const nextTranslate = require('next-translate');
+const { i18n } = require('./next-i18next.config')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
 }
-
-const nextTrasnlate = nextTranslate({
-  reactStrictMode: true,
-});
 
 //module.exports = nextConfig
 
@@ -17,7 +13,8 @@ const withPWA = require('next-pwa')({
 
 module.exports = withPWA({
   nextConfig,
-  nextTrasnlate,
+  //nextTranslateModule,
+  i18n,
   env: {
     customKey: process.env.NODE_ENV === "production" ? 'my-value-prod' : 'my-value-dev',
     httpsEnable: process.env.NODE_ENV === "production" ? true : false,

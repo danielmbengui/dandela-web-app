@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import useTranslation from 'next-translate/useTranslation';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
@@ -85,6 +86,8 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 export default function Profile({ firebase, firestore, storage }) {
   const theme = useTheme();
+  const {t} = useTranslation("common");
+  console.log("TTTTTTZTTTT", t("profil"));
   //const user = useSelector((state) => state.user);
   const [user, setUser] = useUserContext();
   const storageRef = storage.ref();
@@ -415,7 +418,7 @@ console.log("FFFFIRST TEST: ", playerJson);
               fullWidth
               //error={false}
               id="userCountry"
-              label="Pays"
+              label={t('profil')}
               //required
               disabled
               //defaultValue={displayName}
