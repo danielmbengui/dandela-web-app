@@ -16,7 +16,7 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
     // Render post...
     const router = useRouter();
     //const [transfert, setTransfert] = useState(DEFAULT_TRANSFERT);
-    
+
 
     console.log('PATTTTTHS', transfert);
 
@@ -40,7 +40,7 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
                     <Grid item xs={6} md={9}>
                         <Typography>
                             {formatTransfertCode(transfert.code)}
-                            
+
                         </Typography>
                     </Grid>
                 </Grid>
@@ -86,7 +86,7 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
                     >
                         <Typography>Valide : </Typography> {transfert.valide ? <CheckCircleIcon color="success" /> : <CancelIcon color="error" />}
                     </Stack>
-                    <span>{transfert.receiver.toUpperCase()}</span>
+                    <span>{transfert ? transfert.receiver.toUpperCase() : ''}</span>
 
                 </Grid>
 
@@ -123,7 +123,7 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
                 justifyContent={'start'}
                 alignItems={'center'}
             >
-                                <span style={{ marginRight: '1vw' }}>RECU ANGOLA : </span> {transfert.receipt_receiver ? <CheckCircleIcon color="success" /> : <CancelIcon color="error" />}
+                <span style={{ marginRight: '1vw' }}>RECU ANGOLA : </span> {transfert.receipt_receiver ? <CheckCircleIcon color="success" /> : <CancelIcon color="error" />}
 
             </Stack>
             <Stack
@@ -131,7 +131,7 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
                 justifyContent={'start'}
                 alignItems={'center'}
             >
-                                <span style={{ marginRight: '1vw' }}>RECU AGENCE : </span> {transfert.receipt_dandela ? <CheckCircleIcon color="success" /> : <CancelIcon color="error" />}
+                <span style={{ marginRight: '1vw' }}>RECU AGENCE : </span> {transfert.receipt_dandela ? <CheckCircleIcon color="success" /> : <CancelIcon color="error" />}
 
             </Stack>
             <Stack
@@ -139,7 +139,7 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
                 justifyContent={'start'}
                 alignItems={'center'}
             >
-                                <span style={{ marginRight: '1vw' }}>RECU EXPEDITEUR : </span> {transfert.receipt_sender ? <CheckCircleIcon color="success" /> : <CancelIcon color="error" />}
+                <span style={{ marginRight: '1vw' }}>RECU EXPEDITEUR : </span> {transfert.receipt_sender ? <CheckCircleIcon color="success" /> : <CancelIcon color="error" />}
 
             </Stack>
         </Container>

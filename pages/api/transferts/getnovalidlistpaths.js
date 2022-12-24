@@ -21,7 +21,7 @@ export default async function handler(req, res) {
             .then((querySnapshot) => {
                 const transfertsId = [];
                 querySnapshot.forEach((doc) => {
-                    transfertsId.push(doc.data().id);
+                    transfertsId.push(doc.data().uid);
                 });
                 //setTransfertList(cities);
                 //console.log("Current Transfert length: ", transfertsId);

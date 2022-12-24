@@ -24,7 +24,7 @@ export default async function handler(req, res) {
                 querySnapshot.forEach((doc) => {
                     const transfert = doc.data();
                     if (!transfert.recu_expediteur || !transfert.recu_destinataire || !transfert.recu_agence)
-                        transfertsId.push(doc.data().id);
+                        transfertsId.push(doc.data().uid);
                 });
                 //setTransfertList(cities);
                 //console.log("Current Transfert length: ", transfertsId.length);
