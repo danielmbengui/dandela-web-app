@@ -18,18 +18,18 @@ export default async function handler(req, res) {
             //.where("uid", "!=", "")
             .get()
             .then((querySnapshot) => {
-                const transfertsId = [];
+                const transfertsUid = [];
                 querySnapshot.forEach((doc) => {
-                    transfertsId.push(doc.data().uid);
+                    transfertsUid.push(doc.data().uid);
                 });
                 //setTransfertList(cities);
                 //console.log("Current Transfert length: ", transfertsId.length);
                 //res.status(200).json(transfertsList);
-                res.status(200).json({transfertsId: transfertsId, success: true});
+                res.status(200).json({transfertsUid: transfertsUid, success: true});
                 //console.log("DOC UID serverSide:", transfertsList.length);
 
             });
     } catch(error) {
-        res.status(500).json({transfertsId: [], success: false})
+        res.status(500).json({transfertsUid: [], success: false})
     }
 }

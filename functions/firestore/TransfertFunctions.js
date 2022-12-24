@@ -61,7 +61,7 @@ export function getTransfertsAllList() {
     const res = axios.post(`${process.env.ADDRESS_SERVER}api/transferts/getalllistpaths`, {
 
     }).then((response) => {
-        return (response.data.transfertsId);
+        return (response.data.transfertsUid);
     }).catch(() => {
         return ([]);
     });

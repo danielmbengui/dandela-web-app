@@ -43,13 +43,13 @@ export default function OneTransferInProgressPage({ id, firebase, firestore, sto
 }
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths({ }) {
-    const transfertsId = await getTransfertsAllList();
-    console.log('AXIOS transfert', transfertsId);
+    const transfertsUid = await getTransfertsAllList();
+    console.log('AXIOS transfert', transfertsUid);
     //console.log('OKKKKAY TESt', okay);
     //const transfertsId = res.data.success ? res.data.transfertsId : [];
 
-    const paths = transfertsId.map((uid) => ({
-        params: { id: uid },
+    const paths = transfertsUid.map((id) => ({
+        params: { id: id },
     }))
 
     return {
