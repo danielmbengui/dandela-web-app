@@ -23,8 +23,11 @@ import Public from '@mui/icons-material/Public';
 import { useTheme } from '@mui/material/styles';
 import Link from 'next/link';
 import { Container } from '@mui/material';
+import { useTranslation } from 'next-i18next'
 
 export default function ProfileComponent({ firebase, drawerWidth, profilePage }) {
+    const { t } = useTranslation('common');
+
     const theme = useTheme();
 
     return (
@@ -61,7 +64,7 @@ color: profilePage ? 'var(--text-secondary)' : 'var(--text-primary)',
                         />
                     </ListItemIcon>
                     <ListItemText
-                        primary={'Profil'}
+                        primary={t('menuProfile')}
                         primaryTypographyProps={{
                             fontSize: 'x-large',
                             //fontWeight: 'bold',

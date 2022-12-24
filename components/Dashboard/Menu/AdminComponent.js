@@ -30,27 +30,29 @@ import { USER_TYPE_ADMIN, USER_TYPE_EMPLOYE_ANGOLA } from '../../../constants';
 import PersonIcon from '@mui/icons-material/Person';
 import PublicIcon from '@mui/icons-material/Public';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import { useTranslation } from 'react-i18next';
 
 export default function AdminComponent(props) {
     const {user, openSub, pages, newtransfertPage} = props;
     const theme = useTheme();
     const [open, setOpen] = useState(openSub);
+    const { t } = useTranslation('common');
 
     const menu = createMenu();
 
     function createMenu() {
         const menu = [];
         if (user) {
-            menu.push({ icon: <PersonIcon fontSize='large' />, label: 'Utilisateurs', link: '/transferts/new', active: pages.users});
-            menu.push({ icon: <PublicIcon fontSize='large' />, label: 'Pays', link: '/transferts/inprogress', active: pages.countries });
-            menu.push({ icon: <QueryStatsIcon fontSize='large' />, label: 'Statistiques', link: '/transferts/inprogress', active: pages.statistics });
+            menu.push({ icon: <PersonIcon fontSize='large' />, label: t('menuAdminUsers'), link: '/transferts/new', active: pages.users});
+            menu.push({ icon: <PublicIcon fontSize='large' />, label: t('menuAdminCountries'), link: '/transferts/inprogress', active: pages.countries });
+            menu.push({ icon: <QueryStatsIcon fontSize='large' />, label: t('menuAdminStatistics'), link: '/transferts/inprogress', active: pages.statistics });
         }
         return menu;
     }
 
     const data = {
-        title: 'Admin',
-        subtitle: "Utilisateurs, pays, type modifier les informations",
+        title: t('menuAdmin'),
+        subtitle: t('menuAdminSubtitle'),
         menu: createMenu(),
         /*
         [  

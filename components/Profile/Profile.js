@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next'
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
@@ -86,7 +86,8 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 export default function Profile({ firebase, firestore, storage }) {
   const theme = useTheme();
-  const {t} = useTranslation("common");
+  const {t} = useTranslation("profil");
+  //const {g} = useTranslation("common");
   console.log("TTTTTTZTTTT", t("profil"));
   //const user = useSelector((state) => state.user);
   const [user, setUser] = useUserContext();
@@ -329,10 +330,12 @@ console.log("FFFFIRST TEST: ", playerJson);
           <Alert
             severity='warning'
             variant='outlined'
-            sx={{ mb: 2, textAlign: 'start' }}
+            sx={{ mb: 2, textAlign: 'start',
+          display: user.displayName && user.profilPhotoURL ? 'none' : 'block',
+          }}
           >
-            <AlertTitle sx={{ mb: 0.5, alignItems: 'flex-start' }}>Complete ton profil</AlertTitle>
-            {"Ajoute un nom d'utilisateur et une photo de profil pour accéder aux services. —"} <strong>nous le gardons en sécurité!</strong>
+            <AlertTitle sx={{ mb: 0.5, alignItems: 'flex-start' }}>{t('completeProfile')}</AlertTitle>
+            {t('message')} {" —"} <strong>{t('security')}!</strong>
           </Alert>
 
         </Box>
@@ -368,7 +371,7 @@ console.log("FFFFIRST TEST: ", playerJson);
               //fullWidth
               error={errorName}
               id="name"
-              label={'Nom'}
+              label={t('Name')}
               required
               //controlled
               //defaultValue="Hello World"
@@ -376,7 +379,7 @@ console.log("FFFFIRST TEST: ", playerJson);
               onChange={onChangeName}
               helperText={errorName ? "Incorrect entry." : ''}
               //theme={theme}
-              placeholder={"Nom"}
+              placeholder={t('Name')}
             />
             <AccordionCustom expanded={expanded} onChange={() => {
               handleExpanded(expanded ? false : true);
@@ -384,7 +387,7 @@ console.log("FFFFIRST TEST: ", playerJson);
               //width:'60%',
             }}>
         <AccordionSummaryCustom aria-controls="panel1d-content" id="panel1d-header">
-          <Typography sx={{fontFamily: fontFamilyMain}}>Plus d&apos;informations</Typography>
+          <Typography sx={{fontFamily: fontFamilyMain}}>{t('informations')}</Typography>
         </AccordionSummaryCustom>
         <AccordionDetailsCustom>
 
@@ -397,7 +400,7 @@ console.log("FFFFIRST TEST: ", playerJson);
 <TextFieldCustom
               fullWidth
               id="uid"
-              label="ID utilisateur"
+              label={t('Id')}
               disabled
               value={user.uid}
             />
@@ -405,7 +408,7 @@ console.log("FFFFIRST TEST: ", playerJson);
               fullWidth
               //error={false}
               id="phoneNumber"
-              label="Téléphone"
+              label={t('Phone')}
               //required
               disabled
               //defaultValue={displayName}
@@ -418,11 +421,11 @@ console.log("FFFFIRST TEST: ", playerJson);
               fullWidth
               //error={false}
               id="userCountry"
-              label={t('profil')}
+              label={t('Country')}
               //required
               disabled
               //defaultValue={displayName}
-              value={user.country.name}
+              value={t(`${user.country.name}`)}
             //helperText="Incorrect entry."
             //theme={theme}
             //placeholder={"Name"}
@@ -431,11 +434,11 @@ console.log("FFFFIRST TEST: ", playerJson);
               fullWidth
               //error={false}
               id="userType"
-              label="Type utilisateur"
+              label={t('Type')}
               //required
               disabled
               //defaultValue={displayName}
-              value={user.type}
+              value={t(`${user.type}`)}
             //helperText="Incorrect entry."
             //theme={theme}
             //placeholder={"Name"}
@@ -455,7 +458,7 @@ console.log("FFFFIRST TEST: ", playerJson);
 
 
               }>
-                Modifier
+                {t('edit')}
               </Button>
             </Grid>
           </Stack>

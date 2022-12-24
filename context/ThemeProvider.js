@@ -8,13 +8,13 @@ import { DEFAULT_SCREEN_MODE, STORAGE_SCREEN_MODE } from '../constants';
 
 export const ThemeModeProviderContext = createContext({ toggleColorMode: () => {} });
 
-export default function ThemeModeProvider({children}) {
+export default function ThemeModeProvider({children, screenMode}) {
     //let screenMode = 'light';
     const [user, setUser] = useUserContext();
     const dispatch = useDispatch();
     //dispatch(updateUser());
     //dispatch(updateScreenMode(event.target.checked ? 'dark' : 'light'));
-    const [mode, setMode] = useState(DEFAULT_SCREEN_MODE);
+    const [mode, setMode] = useState(screenMode);
     
     //const [primaryDecimal, setPrimaryDecimal] = useState("var(--blue-dandela-decimal)");
 
@@ -30,6 +30,7 @@ export default function ThemeModeProvider({children}) {
     const updateUserInfo = () => {
       dispatch(updateUser());
     }
+    
     useEffect(() => {
       //updateUserInfo();
       //setMode(user.screenMode);

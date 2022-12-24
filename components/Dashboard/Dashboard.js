@@ -41,11 +41,15 @@ import SettingsComponent from './Menu/SettingsComponent';
 import MenuDashboard from './Menu/MenuDashboard';
 import Footer from './Footer';
 import BarApp from './BarApp/BarApp';
-import { COMPANY_NAME, USER_TYPE_ADMIN } from '../../constants';
+import { COMPANY_NAME, LANGAGE_ENGLISH, LANGAGE_FRENCH, LANGAGE_PORTUGUESE, STORAGE_LANGAGE, USER_TYPE_ADMIN } from '../../constants';
 import AdminComponent from './Menu/AdminComponent';
 import InstallApp from '../InstallApp/InstallApp';
 import { useUserContext } from '../../context/UserProvider';
 //import logo from "/img/logo.png";
+import { useTranslation } from 'next-i18next';
+import { US, GB, FR, PT } from 'country-flag-icons/react/3x2';
+import styles from './Dashboard.module.css';
+
 const logo = "/img/logo.png";
 
 
@@ -69,7 +73,8 @@ const Navigation = styled(List)({
 
 
 function Dashboard(props) {
-    const { windowDashboard, children, firebase, auth, content, pages, currentOpen, title, storage, } = props;
+    const { t, i18n } = useTranslation('common');
+    const { langage, setLangage, windowDashboard, children, firebase, auth, content, pages, currentOpen, title, storage, } = props;
     const dispatch = useDispatch();
     const theme = useTheme();
     const themeMode = useContext(ThemeModeProviderContext);
@@ -79,48 +84,57 @@ function Dashboard(props) {
 
     const [mobileOpen, setMobileOpen] = useState(false);
     const container = undefined;
-  //const user = useSelector((state) => state.user);
-  const [user, setUser] = useUserContext();
-  const [isAdmin, setIsAdmin] = useState(user ? user.type === USER_TYPE_ADMIN : false);
-  const [contentInstall, setContentInstall] = useState(<></>);
+    //const user = useSelector((state) => state.user);
+    const [user, setUser] = useUserContext();
+    const [isAdmin, setIsAdmin] = useState(user ? user.type === USER_TYPE_ADMIN : false);
+    const [contentInstall, setContentInstall] = useState(<></>);
 
 
-  const [contentError, setContentError] = useState(<></>);
+    const [contentError, setContentError] = useState(<></>);
+
     //const [mobileOpen, setMobileOpen] = useState(false);
 
     useEffect(() => {
         if (user) {
             setIsAdmin(user.type === USER_TYPE_ADMIN);
         }
-    }, [user])
+    }, [user]);
+
+    console.log("TRANSLATE", t('profil'))
+
+    const onChangeLanguage = (_language) => {
+        i18n.changeLanguage(_language);
+        setLangage(_language);
+        window.localStorage.setItem(STORAGE_LANGAGE, _language);
+    };
 
 
-/*
-    useEffect(() => {
-        async function related(){
-        const relatedApps = await navigator.getInstalledRelatedApps();
-        const PWAisInstalled = relatedApps.length > 0;
-        console.log('PWA INSTALLEEEEEEEEED', PWAisInstalled ? 'true' : 'false');
-
-        }
-        related();
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            console.log('display-mode is standalone');
-        }else{
-            console.log("DOOOOOOOOOOOONT MATCH");
-            window.addEventListener('appinstalled', (evt) => {
-                console.log('a2hs installed');
-              });
-        }
-        window.addEventListener('appinstalled', () => {
-            //setShowInstallApp(false);
-            console.log("INSTALLEEEEEEEEEEEED!!!!!!")
-        });
-        return () => {
-          window.removeEventListener('appinstalled', console.log("REMOVED"));
-        }
-      }, []);
-      */
+    /*
+        useEffect(() => {
+            async function related(){
+            const relatedApps = await navigator.getInstalledRelatedApps();
+            const PWAisInstalled = relatedApps.length > 0;
+            console.log('PWA INSTALLEEEEEEEEED', PWAisInstalled ? 'true' : 'false');
+    
+            }
+            related();
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                console.log('display-mode is standalone');
+            }else{
+                console.log("DOOOOOOOOOOOONT MATCH");
+                window.addEventListener('appinstalled', (evt) => {
+                    console.log('a2hs installed');
+                  });
+            }
+            window.addEventListener('appinstalled', () => {
+                //setShowInstallApp(false);
+                console.log("INSTALLEEEEEEEEEEEED!!!!!!")
+            });
+            return () => {
+              window.removeEventListener('appinstalled', console.log("REMOVED"));
+            }
+          }, []);
+          */
 
     const drawer = (
         <div style={{ textAlign: 'center', backgroundColor: 'var(--menu-background)' }}>
@@ -138,19 +152,61 @@ function Dashboard(props) {
             <Divider />
             {
                 isAdmin && <>
-                <AdminComponent  user={user} openSub={pages.users || pages.countries || pages.statistics} pages={{
-                    users: pages.users,
-                    countries: pages.countries,
-                    statistics: pages.statistics,
-                }}
-                    newtransfertPage={pages.newtransfert} />
+                    <AdminComponent user={user} openSub={pages.users || pages.countries || pages.statistics} pages={{
+                        users: pages.users,
+                        countries: pages.countries,
+                        statistics: pages.statistics,
+                    }}
+                        newtransfertPage={pages.newtransfert} />
                     <Divider />
                 </>
             }
-            
+
             <ProfileComponent profilePage={pages.profile} />
             <Divider />
-            <List sx={{display:'none'}}>
+            <Grid container mt={5} direction={'column'} justifyContent={'center'} alignItems={'center'} spacing={1}>
+                <Grid item>
+                    <Typography sx={{ fontFamily: 'ChangaOneRegular' }}>{t('menuChooseLangage')}</Typography>
+                </Grid>
+                <Grid item>
+                    <Stack direction={'row'} spacing={3}>
+                        <FR
+                            //className={styles.dashboard}
+                            onClick={() => { onChangeLanguage(LANGAGE_FRENCH); }}
+                            title={t('langFrench')}
+                            style={{
+                                cursor: 'pointer',
+                                border: langage === 'fr' ? '3px solid var(--primary)' : '',
+                                width: '50px',
+                                height: '50px'
+                            }}
+                        />
+                        <GB
+                            className={styles.dashboard}
+                            onClick={() => { onChangeLanguage(LANGAGE_ENGLISH); }}
+                            title={t('langEnglish')}
+                            style={{
+                                cursor: 'pointer',
+                                border: langage === 'en' ? '3px solid var(--primary)' : '',
+                                width: '50px',
+                                height: '50px'
+                            }}
+                        />
+                        <PT
+                            className={styles.dashboard}
+                            onClick={() => { onChangeLanguage(LANGAGE_PORTUGUESE); }}
+                            title={t('langPortuguese')}
+                            style={{
+                                cursor: 'pointer',
+                                border: langage === 'pt' ? '3px solid var(--primary)' : '',
+                                width: '50px',
+                                height: '50px'
+                            }}
+                        />
+                    </Stack>
+                </Grid>
+            </Grid>
+            <List sx={{ display: 'none' }}>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <Link href="/about" key={text + index}>
                         <ListItem key={text} disablePadding>
@@ -164,8 +220,8 @@ function Dashboard(props) {
                     </Link>
                 ))}
             </List>
-            <Divider sx={{display:'none'}} />
-            <List sx={{display:'none'}}>
+            <Divider sx={{ display: 'none' }} />
+            <List sx={{ display: 'none' }}>
                 {['All mail', 'Trash', 'Spam'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
@@ -177,20 +233,20 @@ function Dashboard(props) {
                     </ListItem>
                 ))}
             </List>
-            <Divider sx={{display:'none'}} />
-            <Grid container sx={{height:'100%', bgcolor: 'var(--menu-background)'}} direction={'row'} justifyContent={'center'} alignItems={'flex-end'}>
+            <Divider sx={{ display: 'none' }} />
+            <Grid container sx={{ height: '100%', bgcolor: 'var(--menu-background)' }} direction={'row'} justifyContent={'center'} alignItems={'flex-end'}>
                 <Grid>
-                <Typography sx={{
-                fontFamily: 'ChangaOneRegular',
-                fontSize: 'large',
-                //fontWeight: 'medium',
-                lineHeight: '20px',
-                color: 'var(--text-primary)',
-                marginTop: '5vh',
-                marginBottom: '5vh',
-            }}>
-                © 2023  {COMPANY_NAME}
-            </Typography>
+                    <Typography sx={{
+                        fontFamily: 'ChangaOneRegular',
+                        fontSize: 'large',
+                        //fontWeight: 'medium',
+                        lineHeight: '20px',
+                        color: 'var(--text-primary)',
+                        marginTop: '5vh',
+                        marginBottom: '5vh',
+                    }}>
+                        © 2023  {COMPANY_NAME}
+                    </Typography>
                 </Grid>
             </Grid>
         </div>
@@ -200,108 +256,113 @@ function Dashboard(props) {
         setMobileOpen(!mobileOpen);
     };
 
-    
+
 
     return (
-        <Box sx={{ display: user ? 'flex' : 'none', bgcolor: user.authorized ? 'var(--menu-background)' : 'var(--background-color)'}}>
+        <Box sx={{ display: user ? 'flex' : 'none', bgcolor: user.authorized ? 'var(--menu-background)' : 'var(--background-color)' }}>
             {
                 (!user.uid || !user.phoneNumber || !user.authorized) && <PermanentBackdrop />
             }
 
             {
                 user.authorized && <>
-                <CssBaseline sx={{bgcolor:'var(--menu-background)'}} />
-            <BarApp user={user} storage={storage} drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
-            
-            <Box
-                component="nav"
-                sx={{ width: { xs: 0, md: drawerWidth }, flexShrink: { sm: 0 },
-                bgcolor:'var(--menu-background)'
-             }}
-                aria-label="my dashboard"
-            >
-                <Drawer
-                    //container={container}
-                    variant='temporary'
-                    open={mobileOpen}
-                    onClose={handleDrawerToggle}
-                    ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
-                    }}
-                    sx={{
-                        display: { xs: 'block', md: 'none' },
-                        bgcolor:'var(--menu-background)',
-                        //width: '100%',
-                        //height: '100%',
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth-60, 
-                        bgcolor:'var(--menu-background)', height:'100%'},
-                    }}
-                >
-                    {drawer}
-                </Drawer>
-                <Drawer
-                    variant="permanent"
-                    sx={{
-                        display: { xs: 'none', md: 'block' },
-                        bgcolor:'var(--menu-background)',
-                        width: '100%',
-                        height: '100%',
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth,
-                        bgcolor:'var(--menu-background)', height:'100%' },
-                    }}
-                    open
-                >
-                    {drawer}
-                </Drawer>
-            </Box>
+                    <CssBaseline sx={{ bgcolor: 'var(--menu-background)' }} />
+                    <BarApp user={user} storage={storage} drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
 
-            <Box
-                component="main"
-                sx={{ 
-                    flexGrow: 1, p: 1, 
-                    width: { xs: `calc(100% - ${drawerWidth-60}px)`, md: `calc(100% - ${drawerWidth}px)` },
-                    bgcolor: 'var(--background-color)',
-                 }}
-            >
-                <Toolbar />
-                <InstallApp />
-                <Grid container direction={'row'} justifyContent={'center'} alignItems={'center'}>
-                <Grid item>
-                    <h1 style={{fontFamily:'ChangaOneRegular'}}>{title}</h1>
-                </Grid>
-                </Grid>
-                {children}
-                <Typography sx={{display:'none'}} paragraph>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-                    enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-                    imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-                    Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-                    Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                    adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-                    nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-                    leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-                    feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-                    consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-                    sapien faucibus et molestie ac.
-                </Typography>
-                <Typography sx={{display:'none'}} paragraph>
-                    Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-                    eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-                    neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-                    tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-                    sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-                    tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-                    gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-                    et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-                    tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-                    eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-                    posuere sollicitudin aliquam ultrices sagittis orci a.
-                </Typography>
-                <div style={{marginTop: '30vh'}}>
-                <Footer />
-                </div>
-            </Box>
+                    <Box
+                        component="nav"
+                        sx={{
+                            width: { xs: 0, md: drawerWidth }, flexShrink: { sm: 0 },
+                            bgcolor: 'var(--menu-background)'
+                        }}
+                        aria-label="my dashboard"
+                    >
+                        <Drawer
+                            //container={container}
+                            variant='temporary'
+                            open={mobileOpen}
+                            onClose={handleDrawerToggle}
+                            ModalProps={{
+                                keepMounted: true, // Better open performance on mobile.
+                            }}
+                            sx={{
+                                display: { xs: 'block', md: 'none' },
+                                bgcolor: 'var(--menu-background)',
+                                //width: '100%',
+                                //height: '100%',
+                                '& .MuiDrawer-paper': {
+                                    boxSizing: 'border-box', width: drawerWidth - 60,
+                                    bgcolor: 'var(--menu-background)', height: '100%'
+                                },
+                            }}
+                        >
+                            {drawer}
+                        </Drawer>
+                        <Drawer
+                            variant="permanent"
+                            sx={{
+                                display: { xs: 'none', md: 'block' },
+                                bgcolor: 'var(--menu-background)',
+                                width: '100%',
+                                height: '100%',
+                                '& .MuiDrawer-paper': {
+                                    boxSizing: 'border-box', width: drawerWidth,
+                                    bgcolor: 'var(--menu-background)', height: '100%'
+                                },
+                            }}
+                            open
+                        >
+                            {drawer}
+                        </Drawer>
+                    </Box>
+
+                    <Box
+                        component="main"
+                        sx={{
+                            flexGrow: 1, p: 1,
+                            width: { xs: `calc(100% - ${drawerWidth - 60}px)`, md: `calc(100% - ${drawerWidth}px)` },
+                            bgcolor: 'var(--background-color)',
+                        }}
+                    >
+                        <Toolbar />
+                        <InstallApp />
+                        <Grid container direction={'row'} justifyContent={'center'} alignItems={'center'}>
+                            <Grid item>
+                                <h1 style={{ fontFamily: 'ChangaOneRegular' }}>{title}</h1>
+                            </Grid>
+                        </Grid>
+                        {children}
+                        <Typography sx={{ display: 'none' }} paragraph>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
+                            enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
+                            imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
+                            Convallis convallis tellus id interdum velit laoreet id donec ultrices.
+                            Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
+                            adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
+                            nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
+                            leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
+                            feugiat vivamus at augue. At augue eget arcu dictum varius duis at
+                            consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
+                            sapien faucibus et molestie ac.
+                        </Typography>
+                        <Typography sx={{ display: 'none' }} paragraph>
+                            Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
+                            eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
+                            neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
+                            tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
+                            sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
+                            tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
+                            gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
+                            et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
+                            tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
+                            eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
+                            posuere sollicitudin aliquam ultrices sagittis orci a.
+                        </Typography>
+                        <div style={{ marginTop: '30vh' }}>
+                            <Footer />
+                        </div>
+                    </Box>
                 </>
             }
         </Box>
@@ -315,5 +376,17 @@ Dashboard.propTypes = {
      */
     windowDashboard: PropTypes.func,
 };
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, [
+                'common',
+                //'footer',
+            ], null, ['en', 'fr', 'pt'])),
+            // Will be passed to the page component as props
+        },
+    }
+}
 
 export default Dashboard;

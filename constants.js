@@ -4,6 +4,10 @@ import Currency from "./classes/CurrencyClass";
 export const COMPANY_NAME = 'Dandela';
 export const APP_NAME = 'Dandela Web App';
 export const DEFAULT_SCREEN_MODE = 'light';
+export const DEFAULT_LANGAGE = 'fr';
+export const LANGAGE_FRENCH = 'fr';
+export const LANGAGE_ENGLISH = 'en';
+export const LANGAGE_PORTUGUESE = 'pt';
 export const COLLECTION_USER = 'USER';
 export const COLLECTION_USER_TYPE = 'USER_TYPE';
 export const COLLECTION_TRANSFERT = 'TRANSFERT';
@@ -64,3 +68,4 @@ export const STORAGE_PROFIL_PHOTO_URL = 'profilPhotoURL';
 export const STORAGE_IS_CONNECTED = 'isConnected';
 
 export const STORAGE_SCREEN_MODE = 'screenMode';
+export const STORAGE_LANGAGE = 'lang';

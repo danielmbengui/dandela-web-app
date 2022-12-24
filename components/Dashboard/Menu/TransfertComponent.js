@@ -27,11 +27,14 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import ApprovalIcon from '@mui/icons-material/Approval';
 import { USER_TYPE_ADMIN, USER_TYPE_EMPLOYE_ANGOLA } from '../../../constants';
+import { useTranslation } from 'react-i18next';
 
 export default function TransfertComponent(props) {
     const {user, openSub, pages, newtransfertPage, isAdmin} = props;
     const theme = useTheme();
     const [open, setOpen] = useState(openSub);
+    const { t } = useTranslation('common');
+
 
     const menu = createMenu();
 
@@ -39,19 +42,19 @@ export default function TransfertComponent(props) {
         const menu = [];
         if (user) {
             if (user.type !== USER_TYPE_EMPLOYE_ANGOLA) {
-                menu.push({ icon: <AddCircleIcon fontSize='large' />, label: 'Nouveau', link: '/transferts/new', active: pages.newtransfert});
+                menu.push({ icon: <AddCircleIcon fontSize='large' />, label: t('menuTransfertsNew'), link: '/transferts/new', active: pages.newtransfert});
             }
-            menu.push({ icon: <CurrencyExchangeIcon fontSize='large' />, label: 'En cours', link: '/transferts/inprogress', active: pages.inprogress });
+            menu.push({ icon: <CurrencyExchangeIcon fontSize='large' />, label: t('menuTransfertsInProgress'), link: '/transferts/inprogress', active: pages.inprogress });
             if (isAdmin) {
-                menu.push({ icon: <ApprovalIcon fontSize='large' />, label: 'À valider', link: '/transferts/novalidlist', active: pages.novalid});
+                menu.push({ icon: <ApprovalIcon fontSize='large' />, label: t('menuTransfertsToValidate'), link: '/transferts/novalidlist', active: pages.novalid});
             }
         }
         return menu;
     }
 
     const data = {
-        title: 'Transferts',
-        subtitle: "Nouveau, voir, modifier",
+        title: t('menuTransferts'),
+        subtitle: t('menuTransfertsSubtitle'),
         menu: createMenu(),
         /*
         [  

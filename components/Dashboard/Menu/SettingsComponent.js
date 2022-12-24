@@ -24,10 +24,13 @@ import { useTheme } from '@mui/material/styles';
 import Link from 'next/link';
 import { Container, Stack } from '@mui/material';
 import { useUserContext } from '../../../context/UserProvider';
+import { useTranslation } from 'react-i18next';
 
 export default function SettingsComponent({firebase, settingsPage}) {
     const theme = useTheme();
     const [user, setUser] = useUserContext();
+    const { t } = useTranslation('common');
+
 
     return (
         <ListItem component="div" disablePadding>
@@ -37,12 +40,12 @@ export default function SettingsComponent({firebase, settingsPage}) {
                         // Sign-out successful.
                         //setUser(null);
                         location.href = "/";
-                        console.log("Disconnected !!!");
+                        //console.log("Disconnected !!!");
                     }).catch((error) => {
                         // An error happened.
-                        console.log("ERROR Disconnected !!!");
+                        //console.log("ERROR Disconnected !!!");
                     });
-                    console.log("CLICK Disconnected !!!");
+                    //console.log("CLICK Disconnected !!!");
                 }}
                 sx={{
                     height: 56,
@@ -58,7 +61,7 @@ export default function SettingsComponent({firebase, settingsPage}) {
                     }}  />
                 </ListItemIcon>
                 <ListItemText
-                    primary="Déconnecter"
+                    primary={t('menuDisconnect')}
                     primaryTypographyProps={{
                         //color: '',
                         fontSize:'large',
@@ -77,7 +80,7 @@ export default function SettingsComponent({firebase, settingsPage}) {
                     bgcolor: 'var(--primary)',
                 },
             }}>
-            <Tooltip title="Paramètres"  >
+            <Tooltip title={t('menuSettings')}  >
                 <IconButton
                     size="large"
                     sx={{

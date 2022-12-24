@@ -13,7 +13,7 @@ import ThemeModeProvider from "../context/ThemeProvider";
 import UserProvider from "../context/UserProvider";
 import AppProvider, { AppContext } from "../context/AppProvider";
 import initAuth from '../initAuth' // the module you created above
-import { DEFAULT_SCREEN_MODE } from "../constants";
+import { DEFAULT_LANGAGE, DEFAULT_SCREEN_MODE, STORAGE_LANGAGE, STORAGE_SCREEN_MODE } from "../constants";
 import { getUserFirestore, getUserFirestoreSnapshot, setUserFirestoreSnapshot } from "../functions/firestore/UserFunctions";
 import Install from "../components/InstallApp/InstallApp";
 import { updateUser } from "../redux/user/userActions";
@@ -35,7 +35,28 @@ const App = ({ Component, pageProps, }) => {
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [userFirebase, setUserFirebase] = useState(null);
   const [screenMode, setScreenMode] = useState(DEFAULT_SCREEN_MODE);
+  const [langage, setLangage] = useState(DEFAULT_LANGAGE);
 
+  useEffect(() => {
+    let _screenMode = DEFAULT_SCREEN_MODE;
+    if (typeof (Storage) !== "undefined") {
+      if (window.localStorage.getItem(STORAGE_SCREEN_MODE) === null) {
+        window.localStorage.setItem(STORAGE_SCREEN_MODE, _screenMode);
+      }
+      _screenMode = window.localStorage.getItem(STORAGE_SCREEN_MODE);
+    }
+    setScreenMode(_screenMode);
+    console.log("SCREENMODE _app", _screenMode)
+    let _langage = DEFAULT_LANGAGE;
+    if (typeof (Storage) !== "undefined") {
+      if (window.localStorage.getItem(STORAGE_LANGAGE) === null) {
+        window.localStorage.setItem(STORAGE_LANGAGE, _langage);
+      }
+      _langage = window.localStorage.getItem(STORAGE_LANGAGE);
+    }
+    setLangage(_langage);
+    console.log("LANGAGE _app", _langage)
+  }, [])
   const hash = hashResult("123456");
   console.log("HAAAASH", hash);
   console.log("ADMIN KEY", process.env.FIREBASE_ADMIN_PRIVATE_KEY_ID);
@@ -58,6 +79,7 @@ const App = ({ Component, pageProps, }) => {
 
           </Head>
           <Component {...pageProps}
+          langage={langage} setLangage={setLangage}
             logo={logo} links={links}
             phoneNumber={user ? user.phoneNumber : ''}
             firebase={firebase} firestore={firestore} storage={storage}
@@ -70,5 +92,7 @@ const App = ({ Component, pageProps, }) => {
     </Provider>
   )
 }
+
+
 
 export default appWithTranslation(App)

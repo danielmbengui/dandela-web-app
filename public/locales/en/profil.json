@@ -1,0 +1,22 @@
+{
+    "profile": "profile",
+    "Profile": "Profile",
+    "completeProfile": "Complete your profile",
+    "message": "Add an user name and a choose a picture to access to the services.",
+    "security": "we keep it safe",
+    "name": "name",
+    "Name": "Name",
+    "informations": "More informations",
+    "id": "user id",
+    "Id": "User ID",
+    "phone": "phone",
+    "Phone": "Phone",
+    "country": "country",
+    "Country": "Country",
+    "type": "user type",
+    "Type": "User type",
+    "edit": "edit",
+    "Edit": "Edit",
+    "Suisse": "Switzerland",
+    "Admin": "Administrator"
+}
