@@ -93,7 +93,7 @@ export default function Profile({ firebase, firestore, storage }) {
   const [photoURL, setPhotoURL] = useState(null);
   const [photoFile, setPhotoFile] = useState(null);
 
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
 
   const handleExpanded = (expanded) => {
     //console.log("EVENT Acoordeon", event.expanded);

@@ -19,12 +19,16 @@ import Avatar from '@mui/material/Avatar';
 import { border } from '@mui/system';
 import { useUserContext } from '../../../../context/UserProvider';
 import Transfert, { transfertConverter } from '../../../../classes/TransfertClass';
+import TitleDialog from '../../../MyComponents/TitleDialog';
+import OneTransfertDialog from '../OneTransfertDialog';
 
 
 export default function NoValidTransfertList({ firestore }) {
     const theme = useTheme();
     const [transfertList, setTransfertList] = useState([]);
     const [user, setUser] = useUserContext();
+    const [transfert, setTransfert] = useState(null);
+    const [showTransfert, setShowTransfert] = useState(false);
 
 
     useEffect(() => {
@@ -56,8 +60,12 @@ export default function NoValidTransfertList({ firestore }) {
                     {
                         transfertList.map((item, index) => {
                             return (
-                                <Link key={item.uid + index} href={`/transferts/novalidlist/${item.uid}`}
-                                    style={{ textDecoration: 'none' }}
+                                <div key={item.uid + index}
+                                onClick={() => {
+                                    setTransfert(item);
+                                    setShowTransfert(true);
+                                    console.log("CLIIIIICK", item, )
+                                }}
                                 >
                                     <ListItem disablePadding>
                                         <ListItemButton>
@@ -92,12 +100,13 @@ export default function NoValidTransfertList({ firestore }) {
                                     {
                                         index !== transfertList.length - 1 && <Divider />
                                     }
-                                </Link>
+                                </div>
                             )
                         })
                     }
                 </List>
             </Card>
+            <OneTransfertDialog user={user} transfert={transfert} showTransfert={showTransfert} setShowTransfert={setShowTransfert} />
         </Box>
     );
 }

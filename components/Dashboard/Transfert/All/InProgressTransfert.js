@@ -21,6 +21,7 @@ import { useUserContext } from '../../../../context/UserProvider';
 import Transfert, { transfertConverter } from '../../../../classes/TransfertClass';
 import SlideInDialog from '../../../MyComponents/SlideInDialog';
 import TitleDialog from '../../../MyComponents/TitleDialog';
+import OneTransfertDialog from '../OneTransfertDialog';
 
 
 export default function InProgressTransfert({ firestore, }) {
@@ -104,7 +105,7 @@ export default function InProgressTransfert({ firestore, }) {
                 </List>
             </Card>
             <SlideInDialog />
-            <TitleDialog user={user} transfert={transfert} showTransfert={showTransfert} setShowTransfert={setShowTransfert} />
+            <OneTransfertDialog user={user} transfert={transfert} showTransfert={showTransfert} setShowTransfert={setShowTransfert} />
         </Box>
     );
 }

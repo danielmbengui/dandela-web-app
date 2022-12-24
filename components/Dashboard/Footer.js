@@ -34,7 +34,12 @@ export default function Footer() {
                 //priority
                 quality={100}
                 loader={myLoader}
-                
+                style={{
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    width: 72,
+                    height: 70,
+                  }}
             />
         </Container>
         </footer>

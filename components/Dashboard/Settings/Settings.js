@@ -4,12 +4,14 @@ import Head from 'next/head'
 import Image from "next/image";
 import Link from 'next/link';
 import { COMPANY_NAME } from '../../../constants';
+import { useUserContext } from '../../../context/UserProvider';
 import InstallApp from '../../InstallApp/InstallApp';
 import styles from './Settings.module.css';
 
 const logo = '/img/logo.png';
 export default function Settings(props) {
-  const {user} = props;
+  const [user, setUser] = useUserContext();
+  
   return (
     <Container sx={{maxWidth: '100%', fontFamily:'ChangaOneRegular'}}>
           <Head>
