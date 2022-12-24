@@ -50,7 +50,7 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
                         Destinataire
                     </Grid>
                     <Grid item xs={6} md={9} >
-                        <Typography>{transfert.destinataire}</Typography>
+                        <Typography>{transfert.receiver}</Typography>
                     </Grid>
                 </Grid>
                 <Divider />
@@ -59,7 +59,7 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
                         Montant
                     </Grid>
                     <Grid item xs={6} md={9}>
-                        <Typography>{transfert.montant}</Typography>
+                        <Typography>{transfert.amount}</Typography>
                     </Grid>
                 </Grid>
                 <Divider />
@@ -77,7 +77,7 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
                     Destinataire
                 </Grid>
                 <Grid item xs={6}>
-                    <Typography>ID : {transfert.id}</Typography>
+                    <Typography>UID : {transfert.uid}</Typography>
                     <Typography>Code : {transfert.code}</Typography>
                     <Stack
                         direction={'row'}
@@ -86,14 +86,14 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
                     >
                         <Typography>Valide : </Typography> {transfert.valide ? <CheckCircleIcon color="success" /> : <CancelIcon color="error" />}
                     </Stack>
-                    <span>{transfert.destinataire.toUpperCase()}</span>
+                    <span>{transfert.receiver.toUpperCase()}</span>
 
                 </Grid>
 
             </Grid>
             <div>
-                ID : {
-                    transfert.id
+                UID : {
+                    transfert.uid
                 }
             </div>
             <div>
@@ -103,27 +103,44 @@ export default function OneTransfert({ transfert, firebase, firestore, user, sto
             </div>
             <div>
                 DESTINATAIRE : {
-                    transfert.destinataire
+                    transfert.receiver
                 }
             </div>
             <div>
                 MONTANT : {
-                    transfert.montant
+                    transfert.amount
                 }
             </div>
-            <Stack
-                direction={'row'}
-                justifyContent={'start'}
-                alignItems={'center'}
-            >
-                <span style={{ marginRight: '1vw' }}>RECU ANGOLA : </span> {transfert.recu_angola ? <CheckCircleIcon color="success" /> : <CancelIcon color="error" />}
-            </Stack>
             <Stack
                 direction={'row'}
                 justifyContent={'start'}
                 alignItems={'center'}
             >
                 <span style={{ marginRight: '1vw' }}>VALIDE : </span> {transfert.valide ? <CheckCircleIcon color="success" /> : <CancelIcon color="error" />}
+            </Stack>
+            <Stack
+                direction={'row'}
+                justifyContent={'start'}
+                alignItems={'center'}
+            >
+                                <span style={{ marginRight: '1vw' }}>RECU ANGOLA : </span> {transfert.receipt_receiver ? <CheckCircleIcon color="success" /> : <CancelIcon color="error" />}
+
+            </Stack>
+            <Stack
+                direction={'row'}
+                justifyContent={'start'}
+                alignItems={'center'}
+            >
+                                <span style={{ marginRight: '1vw' }}>RECU AGENCE : </span> {transfert.receipt_dandela ? <CheckCircleIcon color="success" /> : <CancelIcon color="error" />}
+
+            </Stack>
+            <Stack
+                direction={'row'}
+                justifyContent={'start'}
+                alignItems={'center'}
+            >
+                                <span style={{ marginRight: '1vw' }}>RECU EXPEDITEUR : </span> {transfert.receipt_sender ? <CheckCircleIcon color="success" /> : <CancelIcon color="error" />}
+
             </Stack>
         </Container>
     )

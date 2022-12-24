@@ -18,48 +18,56 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import Avatar from '@mui/material/Avatar';
 import { border } from '@mui/system';
 import { useUserContext } from '../../../../context/UserProvider';
+import Transfert, { transfertConverter } from '../../../../classes/TransfertClass';
+import SlideInDialog from '../../../MyComponents/SlideInDialog';
+import TitleDialog from '../../../MyComponents/TitleDialog';
 
 
 export default function InProgressTransfert({ firestore, }) {
     const theme = useTheme();
     const [transfertList, setTransfertList] = useState([]);
     const [user, setUser] = useUserContext();
-
+    const [transfert, setTransfert] = useState(null);
+    const [showTransfert, setShowTransfert] = useState(false);
 
     useEffect(() => {
         if (user) {
-            firestore.collection(COLLECTION_TRANSFERT).where("valide", "==", true)
+            firestore.collection(COLLECTION_TRANSFERT)
+            .withConverter(transfertConverter)
+            .where("valide", "==", true)
                 .onSnapshot((querySnapshot) => {
-                    var cities = [];
                     const transferts = [];
                     querySnapshot.forEach((doc) => {
-                        const transfert = doc.data();
+                        const transfert = new Transfert(doc.data());
+                        console.log("DOC UID:", transfert);
                         if (isTransfertInProgress(user, transfert)) {
                             transferts.push(transfert);
                         }
-                        cities.push(doc.data());
-                        console.log("DOC UID:", doc.id);
                     });
                     setTransfertList(transferts);
-                    console.log("Current cities in CA: ", transferts.join(", "));
+                    console.log("Current cities in CA: ", transferts.length);
                 });
         }
     }, [user]);
 
     return (
         <Box sx={{ width: '100%', bgcolor: 'var(--background-color)' }}>
-            <Card elevation={5} sx={{ padding: 1 }}>
+            <Card elevation={5} sx={{ padding: 1, mb: 3 }}>
                 <List sx={{ width: '100%', }}>
                     {
                         transfertList.map((item, index) => {
                             return (
-                                <Link key={item.id + index} href={`/transferts/inprogress/${item.id}`}
-                                    style={{ textDecoration: 'none' }}
+                                <div key={item.uid + index}
+                                onClick={() => {
+                                    setTransfert(item);
+                                    setShowTransfert(true);
+                                    console.log("CLIIIIICK", item, )
+                                }}
                                 >
                                     <ListItem disablePadding>
                                         <ListItemButton>
                                             <ListItemText
-                                                primary={`${item.destinataire}`}
+                                                primary={`${item.receiver}`}
                                                 primaryTypographyProps={{
                                                     fontFamily: 'ChangaOneRegular',
                                                     fontSize: 'large',
@@ -80,7 +88,7 @@ export default function InProgressTransfert({ firestore, }) {
                                                         fontFamily: 'ChangaOneRegular',
                                                         color: 'var(--text-primary)',
                                                     }}>
-                                                        {item.montant}
+                                                        {item.amount}
                                                     </Typography>
                                                 </Avatar>
                                             </ListItemIcon>
@@ -89,12 +97,14 @@ export default function InProgressTransfert({ firestore, }) {
                                     {
                                         index !== transfertList.length-1 && <Divider />
                                     }
-                                </Link>
+                                </div>
                             )
                         })
                     }
                 </List>
             </Card>
+            <SlideInDialog />
+            <TitleDialog user={user} transfert={transfert} showTransfert={showTransfert} setShowTransfert={setShowTransfert} />
         </Box>
     );
 }

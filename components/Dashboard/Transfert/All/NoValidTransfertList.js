@@ -18,6 +18,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import Avatar from '@mui/material/Avatar';
 import { border } from '@mui/system';
 import { useUserContext } from '../../../../context/UserProvider';
+import Transfert, { transfertConverter } from '../../../../classes/TransfertClass';
 
 
 export default function NoValidTransfertList({ firestore }) {
@@ -28,17 +29,19 @@ export default function NoValidTransfertList({ firestore }) {
 
     useEffect(() => {
         if (user) {
-            firestore.collection(COLLECTION_TRANSFERT).where("valide", "==", false)
+            firestore.collection(COLLECTION_TRANSFERT)
+            .withConverter(transfertConverter)
+            .where("valide", "==", false)
                 .onSnapshot((querySnapshot) => {
                     var cities = [];
                     const transferts = [];
                     querySnapshot.forEach((doc) => {
-                        const transfert = doc.data();
+                        const transfert = new Transfert(doc.data());
                         if (!isTransfertValide(transfert)) {
                             transferts.push(transfert);
                         }
                         cities.push(doc.data());
-                        console.log("DOC UID:", doc.id);
+                        console.log("DOC UID:", doc.uid);
                     });
                     setTransfertList(transferts);
                     console.log("Current cities in CA: ", transferts.join(", "));
@@ -53,13 +56,13 @@ export default function NoValidTransfertList({ firestore }) {
                     {
                         transfertList.map((item, index) => {
                             return (
-                                <Link key={item.id + index} href={`/transferts/novalidlist/${item.id}`}
+                                <Link key={item.uid + index} href={`/transferts/novalidlist/${item.uid}`}
                                     style={{ textDecoration: 'none' }}
                                 >
                                     <ListItem disablePadding>
                                         <ListItemButton>
                                             <ListItemText
-                                                primary={`${item.destinataire}`}
+                                                primary={`${item.receiver}`}
                                                 primaryTypographyProps={{
                                                     fontFamily: 'ChangaOneRegular',
                                                     fontSize: 'large',
@@ -80,14 +83,14 @@ export default function NoValidTransfertList({ firestore }) {
                                                         fontFamily: 'ChangaOneRegular',
                                                         color: 'var(--text-primary)',
                                                     }}>
-                                                        {item.montant}
+                                                        {item.amount}
                                                     </Typography>
                                                 </Avatar>
                                             </ListItemIcon>
                                         </ListItemButton>
                                     </ListItem>
                                     {
-                                        index !== transfertList.length-1 && <Divider />
+                                        index !== transfertList.length - 1 && <Divider />
                                     }
                                 </Link>
                             )

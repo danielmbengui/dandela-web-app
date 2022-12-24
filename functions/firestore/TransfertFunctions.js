@@ -10,16 +10,16 @@ export const isTransfertValide = (transfert) => {
 
 export const isTransfertInProgress = (user, transfert) => {
     if (isTransfertValide(transfert)) {
-        if (user.type === USER_TYPE_EMPLOYE_ANGOLA){
-            if (!transfert.recu_destinataire){
+        if (user.type === USER_TYPE_EMPLOYE_ANGOLA) {
+            if (!transfert.receipt_receiver) {
                 return (true);
             }
-        }else if (user.type === USER_TYPE_CLIENT){
-            if (!transfert.recu_destinataire || !transfert.recu_expediteur){
+        } else if (user.type === USER_TYPE_CLIENT) {
+            if (!transfert.receipt_receiver || !transfert.receipt_sender) {
                 return (true);
             }
-        }else if (user.type === USER_TYPE_ADMIN || user.type == USER_TYPE_EMPLOYE_EUROPE){
-            if (!transfert.recu_destinataire || !transfert.recu_expediteur || !transfert.recu_agence){
+        } else if (user.type === USER_TYPE_ADMIN || user.type == USER_TYPE_EMPLOYE_EUROPE) {
+            if (!transfert.receipt_receiver || !transfert.receipt_sender || !transfert.receipt_dandela) {
                 return (true);
             }
         }
@@ -29,16 +29,16 @@ export const isTransfertInProgress = (user, transfert) => {
 
 export const isTransfertFinished = (user, transfert) => {
     if (isTransfertValide(transfert)) {
-        if (user.type == USER_TYPE_EMPLOYE_ANGOLA){
-            if (transfert.recu_destinataire){
+        if (user.type == USER_TYPE_EMPLOYE_ANGOLA) {
+            if (transfert.receipt_receiver) {
                 return (true);
             }
-        }else if (user.type == USER_TYPE_CLIENT){
-            if (transfert.recu_destinataire && transfert.recu_expediteur){
+        } else if (user.type == USER_TYPE_CLIENT) {
+            if (transfert.receipt_receiver && transfert.receipt_sender) {
                 return (true);
             }
-        }else if (user.type == USER_TYPE_ADMIN || user.type == USER_TYPE_EMPLOYE_EUROPE){
-            if (transfert.recu_destinataire && transfert.recu_expediteur && transfert.recu_agence){
+        } else if (user.type == USER_TYPE_ADMIN || user.type == USER_TYPE_EMPLOYE_EUROPE) {
+            if (transfert.receipt_receiver && transfert.receipt_sender && transfert.receipt_dandela) {
                 return (true);
             }
         }
@@ -47,11 +47,11 @@ export const isTransfertFinished = (user, transfert) => {
 }
 
 export const getTransfertStateString = (user, transfert) => {
-    if (!isTransfertValide(transfert)){
+    if (!isTransfertValide(transfert)) {
         return (TRANSFERT_STATE_NO_VALID);
-    }else if (isTransfertInProgress(user, transfert)){
+    } else if (isTransfertInProgress(user, transfert)) {
         return (TRANSFERT_STATE_IN_PROGRESS);
-    }else if (isTransfertFinished(user, transfert)){
+    } else if (isTransfertFinished(user, transfert)) {
         return (TRANSFERT_STATE_FINISHED);
     }
     return ("Inconnu");
@@ -88,6 +88,19 @@ export function getTransfertsNoValidList() {
         return ([]);
     });
     return (res);
+}
+
+export function createRandomCode() {
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+
+    var code = "";
+    for(let i=0; i < 10; i++) {
+        let random = getRandomInt(10);
+        code += random;
+    }
+    return (code);
 }
 
 export function formatTransfertCode(code) {

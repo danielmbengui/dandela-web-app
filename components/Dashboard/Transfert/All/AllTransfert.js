@@ -15,12 +15,13 @@ export default function AllTransfert({ firestore }) {
     const [transfertList, setTransfertList] = useState([]);
 
     useEffect(() => {
-        firestore.collection(COLLECTION_TRANSFERT).where("valide", "==", true)
+        firestore.collection(COLLECTION_TRANSFERT)
+        .where("valide", "==", true)
             .onSnapshot((querySnapshot) => {
                 var cities = [];
                 querySnapshot.forEach((doc) => {
                     cities.push(doc.data());
-                    console.log("DOC UID:", doc.id);
+                    console.log("DOC UID:", doc.uid);
                 });
                 setTransfertList(cities);
                 console.log("Current cities in CA: ", cities.join(", "));
@@ -34,13 +35,13 @@ export default function AllTransfert({ firestore }) {
                     {
                         transfertList.map((item, index) => {
                             return (
-                                <ListItem disablePadding key={item.id + index}>
-                        <Link href={`/transferts/${item.id}`}>
+                                <ListItem disablePadding key={item.uid + index}>
+                        <Link href={`/transferts/${item.uid}`}>
                         <ListItemButton>
                             <ListItemIcon>
                                 <InboxIcon />
                             </ListItemIcon>
-                            <ListItemText primary={`${item.destinataire} - ${item.montant}`} />
+                            <ListItemText primary={`${item.destinataire} - ${item.amount}`} />
                         </ListItemButton>
                         </Link>
                     </ListItem>

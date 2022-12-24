@@ -35,7 +35,7 @@ export default function OneTransfertNoValidPage({ id, firebase, firestore, user,
                 <meta name="description" content={`Transfert ${formatTransfertCode(transfert.code)}`} />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <OneTransfert id={id} firestore={firestore} user={user} transfert={transfert} />
+            <OneTransfert firestore={firestore} user={user} transfert={transfert} />
         </Dashboard>
     )
 }
@@ -46,8 +46,8 @@ export async function getStaticPaths({ }) {
     //console.log('OKKKKAY TESt', okay);
     //const transfertsId = res;
 
-    const paths = transfertsId.map((id) => ({
-        params: { id: id },
+    const paths = transfertsId.map((uid) => ({
+        params: { id: uid },
     }))
 
     return {
@@ -59,8 +59,8 @@ export async function getStaticPaths({ }) {
 // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps(props) {
     const { params } = props;
-    //const res = await axios.get(`http://localhost:3000//api/transferts/getone?id=${params.id}`);
-    //console.log('AXIOS transfert', params.id);
+    //const res = await axios.get(`http://localhost:3000//api/transferts/getone?uid=${params.uid}`);
+    //console.log('AXIOS transfert', params.uid);
     //const transfert = res.data;
     const id = params.id;
     //console.log('AXIOS ONE transfert', transfert);

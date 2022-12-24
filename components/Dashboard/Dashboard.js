@@ -50,7 +50,7 @@ const logo = "/img/logo.png";
 
 
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const Navigation = styled(List)({
     '& .MuiListItemButton-root': {
@@ -212,17 +212,17 @@ function Dashboard(props) {
                 user.authorized && <>
                 <CssBaseline sx={{bgcolor:'var(--menu-background)'}} />
             <BarApp user={user} storage={storage} drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
-            <InstallApp />
+            
             <Box
                 component="nav"
-                sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 },
+                sx={{ width: { xs: 0, md: drawerWidth }, flexShrink: { sm: 0 },
                 bgcolor:'var(--menu-background)'
              }}
                 aria-label="my dashboard"
             >
                 <Drawer
                     //container={container}
-                    variant="temporary"
+                    variant='temporary'
                     open={mobileOpen}
                     onClose={handleDrawerToggle}
                     ModalProps={{
@@ -231,9 +231,9 @@ function Dashboard(props) {
                     sx={{
                         display: { xs: 'block', md: 'none' },
                         bgcolor:'var(--menu-background)',
-                        width: '100%',
-                        height: '100%',
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, 
+                        //width: '100%',
+                        //height: '100%',
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth-60, 
                         bgcolor:'var(--menu-background)', height:'100%'},
                     }}
                 >
@@ -259,12 +259,12 @@ function Dashboard(props) {
                 component="main"
                 sx={{ 
                     flexGrow: 1, p: 1, 
-                    width: { md: `calc(100% - ${drawerWidth}px)` },
+                    width: { xs: `calc(100% - ${drawerWidth-60}px)`, md: `calc(100% - ${drawerWidth}px)` },
                     bgcolor: 'var(--background-color)',
                  }}
             >
                 <Toolbar />
-                {contentInstall}
+                <InstallApp />
                 <Grid container direction={'row'} justifyContent={'center'} alignItems={'center'}>
                 <Grid item>
                     <h1 style={{fontFamily:'ChangaOneRegular'}}>{title}</h1>

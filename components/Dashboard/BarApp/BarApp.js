@@ -44,8 +44,8 @@ export default function BarApp(props) {
             sx={{
                 background: 'var(--menu-background)',
                 color: "var(--primary)",
-                width: { md: `calc(100% - ${drawerWidth}px)` },
-                ml: { md: `${drawerWidth}px` },
+                width: { xs:'100%', md: `calc(100% - ${drawerWidth}px)` },
+                ml: { xs:0, md: `${drawerWidth}px` },
             }}
         >
             <Toolbar>
