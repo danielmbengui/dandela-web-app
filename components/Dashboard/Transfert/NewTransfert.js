@@ -120,9 +120,6 @@ newTransfertRef.withConverter(transfertConverter).set(transfert);
           // Check whether notification permissions have already been granted;
           // if so, create a notification
           const notification = new Notification("Hi there!");
-          notification.onshow(
-            console.log("sjowed")
-          )
           console.log("PERMISSION notif GRANTED", 'granted')
           // …
         } else if (Notification.permission !== "denied") {
