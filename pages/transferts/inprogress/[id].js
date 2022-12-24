@@ -48,8 +48,8 @@ export async function getStaticPaths({ }) {
     //console.log('OKKKKAY TESt', okay);
     //const transfertsId = res.data.success ? res.data.transfertsId : [];
 
-    const paths = transfertsUid.map((id) => ({
-        params: { id: id },
+    const paths = transfertsUid.map((uid) => ({
+        params: { id: uid },
     }))
 
     return {
