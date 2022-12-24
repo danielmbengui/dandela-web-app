@@ -122,7 +122,7 @@ newTransfertRef.withConverter(transfertConverter).set(transfert);
           const notification = new Notification("Hi there!");
           console.log("PERMISSION notif GRANTED", 'granted')
           // …
-        } else if (Notification.permission !== "denied") {
+        } else if (Notification.permission === "denied") {
           console.log("PERMISSION notif", 'denied')
           // We need to ask the user for permission
           Notification.requestPermission().then((permission) => {
