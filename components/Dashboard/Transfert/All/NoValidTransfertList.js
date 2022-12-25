@@ -13,7 +13,7 @@ import DraftsIcon from '@mui/icons-material/Drafts';
 import { COLLECTION_TRANSFERT, USER_TYPE_ADMIN, USER_TYPE_EMPLOYE_ANGOLA } from '../../../../constants';
 import Link from 'next/link';
 import { isTransfertInProgress, isTransfertValide } from '../../../../functions/firestore/TransfertFunctions';
-import { Card, Grid, Stack, Typography } from '@mui/material';
+import { Card, Container, Grid, Stack, Typography } from '@mui/material';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import Avatar from '@mui/material/Avatar';
 import { border } from '@mui/system';
@@ -29,6 +29,7 @@ export default function NoValidTransfertList({ firestore }) {
     const [user, setUser] = useUserContext();
     const [transfert, setTransfert] = useState(null);
     const [showTransfert, setShowTransfert] = useState(false);
+    const [totalAmountList, setTotalAmountList] = useState(0);
 
 
     useEffect(() => {
@@ -37,17 +38,17 @@ export default function NoValidTransfertList({ firestore }) {
             .withConverter(transfertConverter)
             .where("valide", "==", false)
                 .onSnapshot((querySnapshot) => {
-                    var cities = [];
                     const transferts = [];
+                    var totalAmount = 0;
                     querySnapshot.forEach((doc) => {
                         const transfert = new Transfert(doc.data());
                         if (!isTransfertValide(transfert)) {
                             transferts.push(transfert);
+                            totalAmount += transfert.amount;
                         }
-                        cities.push(doc.data());
-                        console.log("DOC UID:", doc.uid);
                     });
                     setTransfertList(transferts);
+                    setTotalAmountList(totalAmount);
                     console.log("Current cities in CA: ", transferts.join(", "));
                 });
         }
@@ -55,7 +56,7 @@ export default function NoValidTransfertList({ firestore }) {
 
     return (
         <Box sx={{ width: '100%', bgcolor: 'var(--background-color)' }}>
-            <Card elevation={5} sx={{ padding: 1 }}>
+            <Card sx={{ padding: 1, mb: 3, bgcolor: 'var(--card-background)'}}>
                 <List sx={{ width: '100%', }}>
                     {
                         transfertList.map((item, index) => {
@@ -73,8 +74,7 @@ export default function NoValidTransfertList({ firestore }) {
                                                 primary={`${item.receiver}`}
                                                 primaryTypographyProps={{
                                                     fontFamily: 'ChangaOneRegular',
-                                                    fontSize: 'large',
-                                                    fontWeight: 'medium',
+                                                    fontSize: {xs:'large', sm: 'x-large'},                                                    fontWeight: 'medium',
                                                     lineHeight: '20px',
                                                     color: 'var(--text-primary)',
                                                 }}
@@ -83,13 +83,14 @@ export default function NoValidTransfertList({ firestore }) {
                                             <ListItemIcon>
                                                 <Avatar sx={{
                                                     bgcolor: 'transparent',
-                                                    width: 70,
-                                                    height: 24,
+                                                    width: 75,
+                                                    height: 25,
                                                     border: '1px solid var(--primary)',
                                                 }} variant="rounded">
                                                     <Typography sx={{
                                                         fontFamily: 'ChangaOneRegular',
                                                         color: 'var(--text-primary)',
+                                                        fontSize: {xs:'large', sm: 'x-large'},
                                                     }}>
                                                         {item.amount}
                                                     </Typography>
@@ -106,7 +107,34 @@ export default function NoValidTransfertList({ firestore }) {
                     }
                 </List>
             </Card>
-            <OneTransfertDialog user={user} transfert={transfert} showTransfert={showTransfert} setShowTransfert={setShowTransfert} />
+            <Grid container columns={{xs:12, sm:12}} justifyContent={{xs:'center', sm:'end'}} p={2.5} pr={1} sx={{
+                //padding: 1,
+                bgcolor: 'var(--card-background)',
+                borderTop: '3px solid var(--primary)',
+            }}>
+                
+                <Grid item xs={12} sm={6}
+                //sx={{ bgcolor: 'green' }}
+                >
+                    <Avatar sx={{
+                        bgcolor: 'transparent',
+                        //minWidth: 90,
+                        padding: 2,
+                        width: '100%',
+                        height: 25,
+                        border: '1px solid var(--primary)',
+                    }} variant="rounded">
+                        <Typography sx={{
+                            fontFamily: 'ChangaOneRegular',
+                            color: 'var(--text-primary)',
+                            fontSize: {xs:'x-large', sm: 'xx-large'},
+                        }}>
+                            Total : {totalAmountList}
+                        </Typography>
+                    </Avatar>
+                </Grid>
+            </Grid>
+            <OneTransfertDialog firestore={firestore} user={user} transfert={transfert} showTransfert={showTransfert} setShowTransfert={setShowTransfert} />
         </Box>
     );
 }

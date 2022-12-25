@@ -126,6 +126,9 @@ export default function NewTransfert({ langage, firestore, logo }) {
       _transfert.code = createRandomCode();
       _transfert.receiver = receiver;
       _transfert.amount = amount;
+      _transfert.date_create = new Date();
+      _transfert.date_last_edit = new Date();
+      _transfert.date_valide = isTransfertValide ? new Date() : '';
       _transfert.receipt_receiver = false;
       _transfert.receipt_dandela = false;
       _transfert.receipt_sender = false;

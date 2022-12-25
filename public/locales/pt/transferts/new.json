@@ -10,7 +10,7 @@
     "add": "adicionar",
     "Add": "Adicionar",
     "messageErrorReceiver": "Deve conter entre 5 e 30 caracteres.",
-    "messageErrorAmount": "Um valor entre $ 50 e $ 10.000.",
+    "messageErrorAmount": "Um valor entre 50 e 10.000.",
     "messageSucces": "Transferência adicionada com sucesso!",
     "code": "code",
     "Code": "Code"

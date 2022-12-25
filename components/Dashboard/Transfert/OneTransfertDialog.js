@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import Slide from '@mui/material/Slide';
 import { Stack } from '@mui/material';
 import { formatTransfertCode } from '../../../functions/firestore/TransfertFunctions';
+import { COLLECTION_TRANSFERT } from '../../../constants';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -34,7 +35,7 @@ function BootstrapDialogTitle(props) {
   const { children, onClose, ...other } = props;
 
   return (
-    <DialogTitle sx={{ m: 0, p: 2, background: 'var(--card-background)', }} {...other}>
+    <DialogTitle sx={{ m: 0, p: 2, background: 'var(--primary)', }} {...other}>
       {children}
       {onClose ? (
         <IconButton
@@ -44,7 +45,7 @@ function BootstrapDialogTitle(props) {
             position: 'absolute',
             right: 8,
             top: 8,
-            color: 'var(--text-primary)',
+            color: 'var(--background-color)',
           }}
         >
           <CloseIcon />
@@ -60,24 +61,21 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function OneTransfertDialog(props) {
-    const {user, transfert, showTransfert, setShowTransfert} = props;
+    const {transfert, setTransfert, firestore} = props;
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-        setOpen(showTransfert);
-  }, [showTransfert])
+        setOpen(transfert ? true : false);
+  }, [transfert])
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+
   const handleClose = () => {
     setOpen(false);
-    setShowTransfert(false);
+    setTransfert(null);
   };
 
   return (
     <BootstrapDialog
-        //onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
         TransitionComponent={Transition}
@@ -86,27 +84,27 @@ export default function OneTransfertDialog(props) {
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           <Typography sx={{
             display:{xs:'none', sm:'inline-block'},
-            //display:'inline-block',
-            fontSize: 'large',
+            fontSize: 'x-large',
             fontFamily: 'ChangaOneRegular',
             mr:1,
+            color:'var(--background-color)'
         }}
             >Transfert
         </Typography>
         <Typography sx={{
             display:{xs:'inline-block', sm:'none'},
-            //display:'inline-block',
-            fontSize: 'large',
+            fontSize: 'x-large',
             fontFamily: 'ChangaOneRegular',
             mr:1,
+            color:'var(--background-color)'
         }}
-            >Transf.
+            >Transfert
         </Typography>
             <Typography sx={{
             display:'inline-block',
-            fontSize: 'large',
+            fontSize: 'x-large',
             fontFamily: 'ChangaOneRegular',
-        
+            color:'var(--background-color)'
         }}>
             {` ${formatTransfertCode(transfert ? transfert.code : '')}`}
             </Typography>
@@ -135,8 +133,15 @@ export default function OneTransfertDialog(props) {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Save changes
+          <Button autoFocus variant='contained' color='error' onClick={() => {
+            firestore.collection(COLLECTION_TRANSFERT).doc(transfert.uid).delete().then(() => {
+                handleClose();
+                console.log("Document successfully deleted!");
+            }).catch((error) => {
+                console.error("Error removing document: ", error);
+            });
+          }}>
+            Supprimer
           </Button>
         </DialogActions>
       </BootstrapDialog>

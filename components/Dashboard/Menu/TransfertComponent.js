@@ -46,7 +46,7 @@ export default function TransfertComponent(props) {
             }
             menu.push({ icon: <CurrencyExchangeIcon fontSize='large' />, label: t('menuTransfertsInProgress'), link: '/transferts/inprogress', active: pages.inprogress });
             if (isAdmin) {
-                menu.push({ icon: <ApprovalIcon fontSize='large' />, label: t('menuTransfertsToValidate'), link: '/transferts/novalidlist', active: pages.novalid});
+                //menu.push({ icon: <ApprovalIcon fontSize='large' />, label: t('menuTransfertsToValidate'), link: '/transferts/novalidlist', active: pages.novalid});
             }
         }
         return menu;

@@ -97,7 +97,7 @@ function Dashboard(props) {
                 newtransfertPage={pages.newtransfert} />
             <Divider />
             {
-                isAdmin && <>
+                isAdmin && <div style={{display:'none'}}>
                     <AdminComponent user={user} openSub={pages.users || pages.countries || pages.statistics} pages={{
                         users: pages.users,
                         countries: pages.countries,
@@ -105,7 +105,7 @@ function Dashboard(props) {
                     }}
                         newtransfertPage={pages.newtransfert} />
                     <Divider />
-                </>
+                </div>
             }
 
             <ProfileComponent profilePage={pages.profile} />

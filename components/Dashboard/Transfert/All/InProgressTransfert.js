@@ -56,41 +56,41 @@ export default function InProgressTransfert({ firestore, }) {
         }
         const number = 123456.789;
 
-console.log(new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(number));
-// expected output: "123.456,79 €"
+        console.log(new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(number));
+        // expected output: "123.456,79 €"
 
-// the Japanese yen doesn't use a minor unit
-console.log(new Intl.NumberFormat('us-US', { style: 'currency', currency: 'USD' }).format(number));
-// expected output: "￥123,457"
+        // the Japanese yen doesn't use a minor unit
+        console.log(new Intl.NumberFormat('us-US', { style: 'currency', currency: 'USD' }).format(number));
+        // expected output: "￥123,457"
 
-// limit to three significant digits
-console.log(new Intl.NumberFormat('de-CH', { style: 'currency', currency: 'CHF', maximumSignificantDigits: 3 }).format(number));
-// expected output: "1,23,000"
-var value = (100000).toLocaleString(
-    undefined, // leave undefined to use the visitor's browser 
-               // locale or a string like 'en-US' to override it.
-    { minimumFractionDigits: 2 }
-  );
-  console.log("VALUEEEe NUMBER", value);
-  var locales = [
-    undefined,  // Your own browser
-    'en-US',    // United States
-    'de-DE',    // Germany
-    'ru-RU',    // Russia
-    'hi-IN',    // India
-    'de-CH',    // Switzerland
-  ];
-  var n = 100000;
-  var opts = { minimumFractionDigits: 2 };
-  for (var i = 0; i < locales.length; i++) {
-    console.log("LOCAAALES", locales[i], n.toLocaleString(locales[i], opts));
-  }
+        // limit to three significant digits
+        console.log(new Intl.NumberFormat('de-CH', { style: 'currency', currency: 'CHF', maximumSignificantDigits: 3 }).format(number));
+        // expected output: "1,23,000"
+        var value = (100000).toLocaleString(
+            undefined, // leave undefined to use the visitor's browser 
+            // locale or a string like 'en-US' to override it.
+            { minimumFractionDigits: 2 }
+        );
+        console.log("VALUEEEe NUMBER", value);
+        var locales = [
+            undefined,  // Your own browser
+            'en-US',    // United States
+            'de-DE',    // Germany
+            'ru-RU',    // Russia
+            'hi-IN',    // India
+            'de-CH',    // Switzerland
+        ];
+        var n = 100000;
+        var opts = { minimumFractionDigits: 2 };
+        for (var i = 0; i < locales.length; i++) {
+            console.log("LOCAAALES", locales[i], n.toLocaleString(locales[i], opts));
+        }
 
     }, [user]);
 
     return (
         <Box sx={{ width: '100%', bgcolor: 'var(--background-color)' }}>
-            <Card elevation={5} sx={{ padding: 1, mb: 3 }}>
+            <Card sx={{ padding: 1, mb: 3, bgcolor: 'var(--card-background)' }}>
                 <List sx={{ width: '100%', }}>
                     {
                         transfertList.map((item, index) => {
@@ -108,7 +108,7 @@ var value = (100000).toLocaleString(
                                                 primary={`${item.receiver}`}
                                                 primaryTypographyProps={{
                                                     fontFamily: 'ChangaOneRegular',
-                                                    fontSize: 'large',
+                                                    fontSize: {xs:'large', sm: 'x-large'},
                                                     fontWeight: 'medium',
                                                     lineHeight: '20px',
                                                     color: 'var(--text-primary)',
@@ -125,7 +125,7 @@ var value = (100000).toLocaleString(
                                                     <Typography sx={{
                                                         fontFamily: 'ChangaOneRegular',
                                                         color: 'var(--text-primary)',
-                                                        fontSize: 'large'
+                                                        fontSize: {xs:'large', sm: 'x-large'},
                                                     }}>
                                                         {item.amount}
                                                     </Typography>
@@ -142,12 +142,27 @@ var value = (100000).toLocaleString(
                     }
                 </List>
             </Card>
-            <Grid container justifyContent={'end'} p={2.5} pr={1} sx={{ 
+            <Grid container columns={{xs:12, sm:12}} alignItems={'center'} justifyContent={{xs:'center', sm:'end'}} p={2.5} pr={1} sx={{
                 //padding: 1,
                 bgcolor: 'var(--card-background)',
-            borderTop: '3px solid var(--primary)',
-        }}>
-                <Grid item 
+                borderTop: '3px solid var(--primary)',
+            }}>
+                
+                <Grid item xs={12} sm={6}
+                //sx={{ bgcolor: 'green' }}
+                >
+                     <Stack direction={'row'} justifyContent={{xs:'center', sm: 'start'}} alignItems={'center'}>
+                     <Typography sx={{
+                            fontFamily: 'ChangaOneRegular',
+                            color: 'var(--text-primary)',
+                            fontSize: {xs:'x-large', sm: 'xx-large'},
+                            
+                        }}>
+                            Nb : {transfertList.length}
+                        </Typography>
+                     </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6}
                 //sx={{ bgcolor: 'green' }}
                 >
                     <Avatar sx={{
@@ -155,20 +170,20 @@ var value = (100000).toLocaleString(
                         //minWidth: 90,
                         padding: 2,
                         width: '100%',
-                        height: 24,
+                        height: 25,
                         border: '1px solid var(--primary)',
                     }} variant="rounded">
                         <Typography sx={{
                             fontFamily: 'ChangaOneRegular',
                             color: 'var(--text-primary)',
-                            fontSize: 'xx-large'
+                            fontSize: {xs:'x-large', sm: 'xx-large'},
                         }}>
-                            {totalAmountList}
+                            Total : {totalAmountList}
                         </Typography>
                     </Avatar>
                 </Grid>
             </Grid>
-            <OneTransfertDialog user={user} transfert={transfert} showTransfert={showTransfert} setShowTransfert={setShowTransfert} />
+            <OneTransfertDialog firestore={firestore} user={user} transfert={transfert} setTransfert={setTransfert} showTransfert={showTransfert} setShowTransfert={setShowTransfert} />
         </Box>
     );
 }
