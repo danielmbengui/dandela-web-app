@@ -31,10 +31,20 @@ import { useTranslation } from 'next-i18next';
 import { GB, FR, PT } from 'country-flag-icons/react/3x2';
 import styles from './Dashboard.module.css';
 import { updateLangageStorage } from '../../functions/storage/UserStorageFunctions';
+import { Button } from '@mui/material';
 
 const logo = "/img/logo.png";
 
 const drawerWidth = 300;
+
+function requestPermission() {
+    console.log('Requesting permission...');
+    Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        console.log('Notification permission granted.');
+        alert('Notification permission granted.')
+      }
+    })}
 
 function Dashboard(props) {
     const { t, i18n } = useTranslation('common');
@@ -278,6 +288,11 @@ function Dashboard(props) {
                             </Grid>
                         </Grid>
                         {children}
+                        <Button onClick={() => {
+                            requestPermission();
+                        }}>
+                            Notif
+                        </Button>
                         <Typography sx={{ display: 'none' }} paragraph>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                             tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
