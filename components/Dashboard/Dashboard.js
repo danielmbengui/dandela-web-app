@@ -133,6 +133,7 @@ function Dashboard(props) {
                             style={{
                                 cursor: 'pointer',
                                 border: langage === 'fr' ? '3px solid var(--primary)' : '',
+                                borderRadius: '50%',
                                 width: '50px',
                                 height: '50px'
                             }}
@@ -144,6 +145,7 @@ function Dashboard(props) {
                             style={{
                                 cursor: 'pointer',
                                 border: langage === 'en' ? '3px solid var(--primary)' : '',
+                                borderRadius: '50%',
                                 width: '50px',
                                 height: '50px'
                             }}
@@ -155,6 +157,7 @@ function Dashboard(props) {
                             style={{
                                 cursor: 'pointer',
                                 border: langage === 'pt' ? '3px solid var(--primary)' : '',
+                                borderRadius: '50%',
                                 width: '50px',
                                 height: '50px'
                             }}
