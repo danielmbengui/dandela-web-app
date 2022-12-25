@@ -4,9 +4,7 @@ import { AppBar, FormControlLabel, Grid, Stack, Switch, Toolbar, Typography } fr
 import Image from "next/image";
 import { myLoader } from '../../functions/ImageLoader';
 import { ThemeModeProviderContext } from '../../context/ThemeProvider';
-import { useDispatch } from 'react-redux';
-import { updateScreenMode } from '../../redux/user/userActions';
-import InstallApp from '../InstallApp/InstallApp';
+import { updateScreenModeStorage } from '../../functions/storage/UserStorageFunctions';
 
 const srcLogo = "/img/logo.png";
 
@@ -77,7 +75,6 @@ const AppBarLogin = ({ checked, onChangeMode }) => {
 
 export default function ContainerLogin({ children }) {
     const theme = useTheme();
-    const dispatch = useDispatch();
     const themeMode = useContext(ThemeModeProviderContext);
     const [checked, setChecked] = useState(theme.palette.mode === 'dark' ? true : false);
 
@@ -88,7 +85,8 @@ export default function ContainerLogin({ children }) {
     const onChangeMode = (event) => {
         themeMode.toggleColorMode();
         setChecked(event.target.checked ? true : false);
-        dispatch(updateScreenMode(event.target.checked ? 'dark' : 'light'));
+        //dispatch(updateScreenMode(event.target.checked ? 'dark' : 'light'));
+        updateScreenModeStorage(event.target.checked ? 'dark' : 'light');
     }
 
     return (

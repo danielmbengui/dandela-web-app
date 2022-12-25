@@ -101,7 +101,7 @@ const updateNetworkRequest = (payload) => {
   };
 }
 
-export const connectUser = () => {
+const connectUser = () => {
   return async (dispatch) => {
     dispatch(connectRequest());
     //const auth = firebase.auth();
@@ -129,7 +129,7 @@ export const connectUser = () => {
             firestore.collection(COLLECTION_USER).doc(phoneNumber).update({
               phoneNumber: phoneNumber,
               uid: uid,
-              displayName:displayName,
+              displayName: displayName,
               photoURL: photoURL,
             }).then(() => {
               const storageRef = storage.ref();
@@ -232,7 +232,7 @@ export const connectUser = () => {
   }
 }
 
-export const updateUser = () => {
+const updateUser = () => {
   return async (dispatch) => {
     //dispatch(connectRequest());
 
@@ -304,8 +304,6 @@ export const updateUser = () => {
             })
           );
         });
-
-
         // ...
       } else {
         console.log("NIIIK reddux test function");
@@ -322,15 +320,11 @@ export const updateUser = () => {
           })
         );
       }
-
     });
-
-
-
   }
 }
 
-export const updateUid = (_uid) => {
+const updateUid = (_uid) => {
   return async (dispatch) => {
     //let _isConnected = _account !== null ? true: false;
     //window.localStorage.removeItem(STORAGE_SCREEN_MODE);

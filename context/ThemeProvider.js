@@ -1,17 +1,10 @@
 import React, { useState,useMemo, createContext, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { useUserContext } from './UserProvider';
-import { useDispatch, useSelector } from "react-redux";
-import { updateScreenMode } from '../redux/user/userActions';
-import { updateUser } from '../redux/user/userActions';
 import { DEFAULT_SCREEN_MODE, STORAGE_SCREEN_MODE } from '../constants';
 
 export const ThemeModeProviderContext = createContext({ toggleColorMode: () => {} });
 
 export default function ThemeModeProvider({children, screenMode}) {
-    //let screenMode = 'light';
-    const [user, setUser] = useUserContext();
-    const dispatch = useDispatch();
     //dispatch(updateUser());
     //dispatch(updateScreenMode(event.target.checked ? 'dark' : 'light'));
     const [mode, setMode] = useState(screenMode);
@@ -26,17 +19,13 @@ export default function ThemeModeProvider({children, screenMode}) {
     const greyLight = "var(--grey-light)";
     const greyDark = "var(--grey-dark)";
 
-    
-    const updateUserInfo = () => {
-      dispatch(updateUser());
-    }
+
     
     useEffect(() => {
       //updateUserInfo();
       //setMode(user.screenMode);
       //const _screenMode = mode;
-      if (user) {
-        let _screenMode = DEFAULT_SCREEN_MODE;
+      let _screenMode = DEFAULT_SCREEN_MODE;
     if (typeof (Storage) !== "undefined") {
       if (window.localStorage.getItem(STORAGE_SCREEN_MODE) === null) {
         window.localStorage.setItem(STORAGE_SCREEN_MODE, _screenMode);
@@ -46,8 +35,7 @@ export default function ThemeModeProvider({children, screenMode}) {
         setMode(_screenMode);
       //document.documentElement.setAttribute("data-theme", screenMode);
       console.log('Initial SCREEEN MODE theme', _screenMode);
-      }
-    }, [user]);
+    }, [screenMode]);
     
     useEffect( () => {
       document.documentElement.setAttribute("data-theme", mode);

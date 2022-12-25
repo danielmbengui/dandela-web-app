@@ -1,13 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { styled, useTheme } from '@mui/material/styles';
-import { ThemeModeProviderContext } from '../../context/ThemeProvider';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -15,84 +11,37 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
-import Avatar from '@mui/material/Avatar';
-
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
-import { Button, Grid } from '@mui/material';
-import Image from 'next/image';
-
-import { connectUser, updateProfilPhotoURL, updateUser } from '../../redux/user/userActions';
-import { updateScreenMode } from '../../redux/user/userActions';
-import { useDispatch, useSelector } from "react-redux";
+import Grid from '@mui/material/Grid';
 import PermanentBackdrop from '../Loading/PermanentBackdrop';
-import ErrorLogin from '../Authentication/Login/ErrorLogin';
-import ContainerLogin from '../Authentication/ContainerLogin';
 import SwitchThemeComponent from './Menu/SwitchThemeComponent';
 import ProfileComponent from './Menu/ProfileComponent';
 import TransfertComponent from './Menu/TransfertComponent';
 import SettingsComponent from './Menu/SettingsComponent';
-import MenuDashboard from './Menu/MenuDashboard';
 import Footer from './Footer';
 import BarApp from './BarApp/BarApp';
 import { COMPANY_NAME, LANGAGE_ENGLISH, LANGAGE_FRENCH, LANGAGE_PORTUGUESE, STORAGE_LANGAGE, USER_TYPE_ADMIN } from '../../constants';
 import AdminComponent from './Menu/AdminComponent';
 import InstallApp from '../InstallApp/InstallApp';
 import { useUserContext } from '../../context/UserProvider';
-//import logo from "/img/logo.png";
 import { useTranslation } from 'next-i18next';
-import { US, GB, FR, PT } from 'country-flag-icons/react/3x2';
+import { GB, FR, PT } from 'country-flag-icons/react/3x2';
 import styles from './Dashboard.module.css';
+import { updateLangageStorage } from '../../functions/storage/UserStorageFunctions';
 
 const logo = "/img/logo.png";
 
-
-
 const drawerWidth = 300;
-
-const Navigation = styled(List)({
-    '& .MuiListItemButton-root': {
-        paddingLeft: 24,
-        paddingRight: 24,
-    },
-    '& .MuiListItemIcon-root': {
-        minWidth: 0,
-        marginRight: 16,
-    },
-    '& .MuiSvgIcon-root': {
-        fontSize: 20,
-    },
-});
-
-
 
 function Dashboard(props) {
     const { t, i18n } = useTranslation('common');
-    const { langage, setLangage, windowDashboard, children, firebase, auth, content, pages, currentOpen, title, storage, } = props;
-    const dispatch = useDispatch();
-    const theme = useTheme();
-    const themeMode = useContext(ThemeModeProviderContext);
-    const [mode, setMode] = useState(theme.palette.mode);
-    const [checked, setChecked] = useState(theme.palette.mode === 'dark' ? true : false);
-    const [showInstallApp, setShowInstallApp] = useState(true);
-
+    const { langage, setLangage, windowDashboard, children, firebase, pages, title, storage, } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
-    const container = undefined;
-    //const user = useSelector((state) => state.user);
-    const [user, setUser] = useUserContext();
+    const [user, ] = useUserContext();
     const [isAdmin, setIsAdmin] = useState(user ? user.type === USER_TYPE_ADMIN : false);
-    const [contentInstall, setContentInstall] = useState(<></>);
-
-
-    const [contentError, setContentError] = useState(<></>);
-
-    //const [mobileOpen, setMobileOpen] = useState(false);
 
     useEffect(() => {
         if (user) {
@@ -100,14 +49,11 @@ function Dashboard(props) {
         }
     }, [user]);
 
-    console.log("TRANSLATE", t('profil'))
-
     const onChangeLanguage = (_language) => {
         i18n.changeLanguage(_language);
         setLangage(_language);
-        window.localStorage.setItem(STORAGE_LANGAGE, _language);
+        updateLangageStorage(_language);
     };
-
 
     /*
         useEffect(() => {

@@ -4,9 +4,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { useTheme } from '@mui/material/styles';
 import { Switch } from '@mui/material';
-import { updateScreenMode } from '../../../redux/user/userActions';
 import { ThemeModeProviderContext } from '../../../context/ThemeProvider';
-import { useDispatch } from 'react-redux';
+import { updateScreenModeStorage } from '../../../functions/storage/UserStorageFunctions';
 
 const MaterialUISwitch = styled(Switch)(() => ({
     width: 62,
@@ -57,7 +56,6 @@ const MaterialUISwitch = styled(Switch)(() => ({
 
 export default function SwitchThemeComponent({ }) {
     const theme = useTheme();
-    const dispatch = useDispatch();
     const themeMode = useContext(ThemeModeProviderContext);
     const [checked, setChecked] = useState(theme.palette.mode === 'dark' ? true : false);
 
@@ -68,7 +66,8 @@ export default function SwitchThemeComponent({ }) {
     const onChangeMode = (event) => {
         themeMode.toggleColorMode();
         setChecked(event.target.checked ? true : false);
-        dispatch(updateScreenMode(event.target.checked ? 'dark' : 'light'));
+        //dispatch(updateScreenMode(event.target.checked ? 'dark' : 'light'));
+        updateScreenModeStorage(event.target.checked ? 'dark' : 'light');
     }
 
     return (
