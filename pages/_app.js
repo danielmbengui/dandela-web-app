@@ -27,25 +27,37 @@ const links = {
 }
 
 const App = ({ Component, pageProps, }) => {
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(registration) {
+        console.log('Firebase Worker Registered');
+        const firebaseMessage = getMessaging(app);
+
+        getToken(firebaseMessage, { validKey: 'BD8-hxWYnQfSAjjCNgVZXzlUnU4vtcbF7kbpqARzGnTJpUaG9Kn0EpjiKdiCgGnkB1zqovPMRuGS_lwAJig7oD8' }).then((currentToken) => {
+              if (currentToken) {
+                // Send the token to your server and update the UI if necessary
+                // ...
+                console.log('current token for client: ', currentToken);
+          
+              } else {
+                // Show permission request UI
+                console.log('No registration token available. Request permission to generate one.');
+                // ...
+              }
+            }).catch((err) => {
+              console.log('An error occurred while retrieving token. ', err);
+              // ...
+            });
+      }).catch(function(err) {
+        console.log('Service Worker registration failed: ', err);
+      });
+    }
+  })
   //const { state } = useContext(AppContext);
   //firebaseApp = initializeApp(firebaseConfig);
-const firebaseMessage = getMessaging(app);
+  /*
 
-getToken(firebaseMessage, { validKey: 'BD8-hxWYnQfSAjjCNgVZXzlUnU4vtcbF7kbpqARzGnTJpUaG9Kn0EpjiKdiCgGnkB1zqovPMRuGS_lwAJig7oD8' }).then((currentToken) => {
-      if (currentToken) {
-        // Send the token to your server and update the UI if necessary
-        // ...
-        console.log('current token for client: ', currentToken);
-  
-      } else {
-        // Show permission request UI
-        console.log('No registration token available. Request permission to generate one.');
-        // ...
-      }
-    }).catch((err) => {
-      console.log('An error occurred while retrieving token. ', err);
-      // ...
-    });
+    */
 
   const [uid, setUid] = useState(null);
   const [user, setUser] = useState(null);
