@@ -71,7 +71,7 @@ const App = ({ Component, pageProps, }) => {
         //const messaging = firebase.messaging(app);
         //const messaging = getMessaging(app);
         const messaging = firebase.messaging(app);
-        messaging.getToken({ validKey: 'BPqDYGiWcFQB8JC2vsPHWanIWddWXovnrcKjN1pjnGKDzcJVAaTfpz9zx8g-VPBio0Hm-QThDyv9uNCua5Ers9Y' }).then((currentToken) => {
+        getToken(messaging, { validKey: 'BIB5XYcFx-IyTrAqjINKFm2Xz4VBkZb6ec5PL-FH1GTTgGqK7Ro0mxcKM8TIiqFgn12b1AxJ-sb65zLVeampHII' }).then((currentToken) => {
           if (currentToken) {
             // Send the token to your server and update the UI if necessary
             // ...
@@ -104,7 +104,7 @@ const App = ({ Component, pageProps, }) => {
         });
 
         messaging.onMessage((payload) => {
-          console.log('[firebase-messaging-sw.js] Received message 222222', payload);
+          console.log('[firebase-messaging-sw.js] Received message 2222222', payload);
           // Customize notification here
           /*
           const notificationTitle = 'Background Message Title';
