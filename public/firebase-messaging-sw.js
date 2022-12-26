@@ -1,10 +1,10 @@
 // v9 compat packages are API compatible with v8 code
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import 'firebase/compat/storage';
-import "firebase/compat/analytics";
-import "firebase/compat/messaging";
+//import firebase from 'firebase/compat/app';
+//import 'firebase/compat/auth';
+//import 'firebase/compat/firestore';
+//import 'firebase/compat/storage';
+//import "firebase/compat/analytics";
+//import "firebase/compat/messaging";
 import importScripts from 'import-scripts';
 // Your web app's Firebase configuration
 // Give the service worker access to Firebase Messaging.
