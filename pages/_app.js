@@ -71,7 +71,7 @@ const App = ({ Component, pageProps, }) => {
         //const messaging = firebase.messaging(app);
         //const messaging = getMessaging(app);
         const messaging = firebase.messaging(app);
-        getToken(messaging, { validKey: 'BIB5XYcFx-IyTrAqjINKFm2Xz4VBkZb6ec5PL-FH1GTTgGqK7Ro0mxcKM8TIiqFgn12b1AxJ-sb65zLVeampHII' }).then((currentToken) => {
+        messaging.getToken({ validKey: 'BIB5XYcFx-IyTrAqjINKFm2Xz4VBkZb6ec5PL-FH1GTTgGqK7Ro0mxcKM8TIiqFgn12b1AxJ-sb65zLVeampHII' }).then((currentToken) => {
           if (currentToken) {
             // Send the token to your server and update the UI if necessary
             // ...
@@ -117,6 +117,7 @@ const App = ({ Component, pageProps, }) => {
             notificationOptions);
             */
         });
+        
       }
 
     }
