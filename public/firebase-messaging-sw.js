@@ -53,8 +53,8 @@ const app = firebase.initializeApp(firebaseConfig);
 
 // Retrieve an instance of Firebase Messaging so that it can handle background
 // messages.
-const messaging = firebase.messaging(app);
-
+export const messaging = firebase.messaging(app);
+/*
 messaging.onMessage((payload) => {
   console.log('[firebase-messaging-sw.js] Received message ', payload);
   // Customize notification here
@@ -80,4 +80,4 @@ messaging.onBackgroundMessage((payload) => {
   self.registration.showNotification(notificationTitle,
     notificationOptions);
 });
-
+*/

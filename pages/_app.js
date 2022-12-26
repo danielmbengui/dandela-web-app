@@ -16,6 +16,7 @@ import { DEFAULT_LANGAGE, DEFAULT_SCREEN_MODE, STORAGE_LANGAGE, STORAGE_SCREEN_M
 import { appWithTranslation } from 'next-i18next'
 import { getLangageStorage, getScreenModeStorage } from "../functions/storage/UserStorageFunctions";
 import { getMessaging, getToken } from "firebase/messaging";
+import { messaging } from "../public/firebase-messaging-sw";
 require('dotenv').config();
 initAuth();
 
@@ -55,9 +56,9 @@ const App = ({ Component, pageProps, }) => {
         if (isGranted()) {
           setIsNotif(true);
         }
-      }else if (isGranted()) {
+      } else if (isGranted()) {
         setIsNotif(true);
-      }else {
+      } else {
         setIsNotif(false);
       }
     }
@@ -73,7 +74,32 @@ const App = ({ Component, pageProps, }) => {
             // Send the token to your server and update the UI if necessary
             // ...
             console.log('current token for client: ', currentToken);
-  
+            messaging.onMessage((payload) => {
+              console.log('[firebase-messaging-sw.js] Received message ', payload);
+              // Customize notification here
+              const notificationTitle = 'Background Message Title';
+              const notificationOptions = {
+                body: 'Message body.',
+                icon: '/firebase-logo.png'
+              };
+
+              self.registration.showNotification(notificationTitle,
+                notificationOptions);
+            });
+
+            messaging.onBackgroundMessage((payload) => {
+              console.log('[firebase-messaging-sw.js] Received background message ', payload);
+              // Customize notification here
+              const notificationTitle = 'Background Message Title';
+              const notificationOptions = {
+                body: 'Background Message body.',
+                icon: '/firebase-logo.png'
+              };
+
+              self.registration.showNotification(notificationTitle,
+                notificationOptions);
+            });
+
           } else {
             // Show permission request UI
             console.log('No registration token available. Request permission to generate one.');
