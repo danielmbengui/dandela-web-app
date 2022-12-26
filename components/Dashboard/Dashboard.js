@@ -32,6 +32,11 @@ import { GB, FR, PT } from 'country-flag-icons/react/3x2';
 import styles from './Dashboard.module.css';
 import { updateLangageStorage } from '../../functions/storage/UserStorageFunctions';
 import { Button } from '@mui/material';
+//import { getMessaging, getToken } from "firebase/messaging";
+
+//const messaging = getMessaging();
+// Add the public key generated from the console here.
+//getToken(messaging, {vapidKey: "BD8-hxWYnQfSAjjCNgVZXzlUnU4vtcbF7kbpqARzGnTJpUaG9Kn0EpjiKdiCgGnkB1zqovPMRuGS_lwAJig7oD8"});
 
 const logo = "/img/logo.png";
 

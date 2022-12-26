@@ -37,6 +37,8 @@ export default function NoValidTransfertList({ firestore }) {
             firestore.collection(COLLECTION_TRANSFERT)
             .withConverter(transfertConverter)
             .where("valide", "==", false)
+            .where("date_create", "!=", null)
+                .orderBy("date_create", "desc")
                 .onSnapshot((querySnapshot) => {
                     const transferts = [];
                     var totalAmount = 0;
@@ -44,7 +46,7 @@ export default function NoValidTransfertList({ firestore }) {
                         const transfert = new Transfert(doc.data());
                         if (!isTransfertValide(transfert)) {
                             transferts.push(transfert);
-                            totalAmount += transfert.amount;
+                            totalAmount += parseInt(transfert.amount);
                         }
                     });
                     setTransfertList(transferts);
@@ -107,12 +109,26 @@ export default function NoValidTransfertList({ firestore }) {
                     }
                 </List>
             </Card>
-            <Grid container columns={{xs:12, sm:12}} justifyContent={{xs:'center', sm:'end'}} p={2.5} pr={1} sx={{
+            <Grid container columns={{xs:12, sm:12}} alignItems={'center'} justifyContent={{xs:'center', sm:'end'}} p={2.5} pr={1} sx={{
                 //padding: 1,
                 bgcolor: 'var(--card-background)',
                 borderTop: '3px solid var(--primary)',
             }}>
                 
+                <Grid item xs={12} sm={6}
+                //sx={{ bgcolor: 'green' }}
+                >
+                     <Stack direction={'row'} justifyContent={{xs:'center', sm: 'start'}} alignItems={'center'}>
+                     <Typography sx={{
+                            fontFamily: 'ChangaOneRegular',
+                            color: 'var(--text-primary)',
+                            fontSize: {xs:'x-large', sm: 'xx-large'},
+                            
+                        }}>
+                            Nb : {transfertList.length}
+                        </Typography>
+                     </Stack>
+                </Grid>
                 <Grid item xs={12} sm={6}
                 //sx={{ bgcolor: 'green' }}
                 >
@@ -134,7 +150,7 @@ export default function NoValidTransfertList({ firestore }) {
                     </Avatar>
                 </Grid>
             </Grid>
-            <OneTransfertDialog firestore={firestore} user={user} transfert={transfert} showTransfert={showTransfert} setShowTransfert={setShowTransfert} />
+            <OneTransfertDialog firestore={firestore} user={user} transfert={transfert} setTransfert={setTransfert} showTransfert={showTransfert} setShowTransfert={setShowTransfert} />
         </Box>
     );
 }

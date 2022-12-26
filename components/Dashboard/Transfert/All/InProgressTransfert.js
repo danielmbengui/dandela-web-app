@@ -33,21 +33,40 @@ export default function InProgressTransfert({ firestore, }) {
     const [showTransfert, setShowTransfert] = useState(false);
     const [totalAmountList, setTotalAmountList] = useState(0);
 
+    const isInListTransfert = (transfert, list) => {
+        for (let i = 0; i < list.length; i++) {
+            if (transfert.uid === list[i].uid) {
+                return (true);
+            }
+            return (false);
+        }
+    }
+
     useEffect(() => {
         if (user) {
             firestore.collection(COLLECTION_TRANSFERT)
+            //.orderBy("uid")
                 .withConverter(transfertConverter)
                 .where("valide", "==", true)
+                .where("date_create", "!=", null)
+                .orderBy("date_create", "desc")
+                //.orderBy("valide")
+                //.orderBy("date_create", "desc")
                 .onSnapshot((querySnapshot) => {
                     const transferts = [];
+                    var transfertsLength = 0;
                     var totalAmount = 0;
                     querySnapshot.forEach((doc) => {
                         const transfert = new Transfert(doc.data());
                         console.log("DOC UID:", transfert);
                         if (isTransfertInProgress(user, transfert)) {
+                            console.log("DATE create", transfert.date_create.seconds);
+                            
                             transferts.push(transfert);
+                            transfertsLength++;
+                            
                             totalAmount += parseInt(transfert.amount);
-                        }
+                        }                        
                     });
                     setTotalAmountList(totalAmount);
                     setTransfertList(transferts);
@@ -94,6 +113,8 @@ export default function InProgressTransfert({ firestore, }) {
                 <List sx={{ width: '100%', }}>
                     {
                         transfertList.map((item, index) => {
+                            //const date1 = 
+                            console.log("LIST transfert", item.date_create, new Date(item.date_create.seconds * 1000))
                             return (
                                 <div key={item.uid + index}
                                     onClick={() => {
@@ -139,6 +160,18 @@ export default function InProgressTransfert({ firestore, }) {
                                 </div>
                             )
                         })
+                   
+                        /**
+                         * .sort((item, item1) => {
+                            const sorting = parseInt(item) > parseInt(item.date_create) ? 0 : 1;
+                            console.log("item one", item)
+                            console.log("item two", item1)
+                            console.log("sorting", sorting)
+                            
+                            return(sorting);
+                        })
+                         */
+                         
                     }
                 </List>
             </Card>

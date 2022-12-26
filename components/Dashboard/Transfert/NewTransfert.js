@@ -128,11 +128,14 @@ export default function NewTransfert({ langage, firestore, logo }) {
       _transfert.amount = amount;
       _transfert.date_create = new Date();
       _transfert.date_last_edit = new Date();
-      _transfert.date_valide = isTransfertValide ? new Date() : '';
       _transfert.receipt_receiver = false;
+      _transfert.date_receipt_receiver = '';
       _transfert.receipt_dandela = false;
+      _transfert.date_receipt_dandela = '';
       _transfert.receipt_sender = false;
+      _transfert.date_receipt_sender = '';
       _transfert.valide = isTransfertValide;
+      _transfert.date_valide = isTransfertValide ? new Date() : '';
       // later...
       newTransfertRef.withConverter(transfertConverter).set(_transfert);
       initComponents();
