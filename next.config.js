@@ -15,7 +15,10 @@ module.exports = withPWA({
   //nextConfig,
   //webpack5: true,
   webpack: (nextConfig) => {
-    nextConfig.resolve.fallback = { fs: false };
+    nextConfig.resolve.fallback = { 
+      fs: false,
+      //process: false,
+    };
 
     return nextConfig;
   },

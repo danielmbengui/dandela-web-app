@@ -19,6 +19,7 @@
     "cors": "^2.8.5",
     "country-flag-icons": "^1.5.5",
     "crypto": "^1.0.1",
+    "dotenv": "^16.0.3",
     "eslint": "8.27.0",
     "eslint-config-next": "^13.0.4",
     "firebase": "9.14.0",

@@ -16,7 +16,7 @@ import { DEFAULT_LANGAGE, DEFAULT_SCREEN_MODE, STORAGE_LANGAGE, STORAGE_SCREEN_M
 import { appWithTranslation } from 'next-i18next'
 import { getLangageStorage, getScreenModeStorage } from "../functions/storage/UserStorageFunctions";
 import { getMessaging, getToken } from "firebase/messaging";
-
+require('dotenv').config();
 initAuth();
 
 
@@ -26,31 +26,65 @@ const links = {
   errorlogin: "/account/errorlogin",
 }
 
+function requestPermission() {
+  console.log('Requesting permission...');
+  Notification.requestPermission().then((permission) => {
+    if (permission === 'granted') {
+      console.log('Notification permission granted.');
+      //alert('Notification permission granted.');
+      //return (true);
+    }
+  })
+}
+
+function isGranted() {
+  console.log('Requesting granted permission...');
+  if (Notification.permission === "granted") {
+    return (true);
+  }
+  return (false);
+}
+
+
 const App = ({ Component, pageProps, }) => {
+  const [isNotif, setIsNotif] = useState(false);
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('../firebase-messaging-sw.js').then(function(registration) {
+    if (("Notification" in window)) {
+      if (Notification.permission === "default") {
+        requestPermission();
+        if (isGranted()) {
+          setIsNotif(true);
+        }
+      }else if (isGranted()) {
+        setIsNotif(true);
+      }else {
+        setIsNotif(false);
+      }
+    }
+  })
+
+  useEffect(() => {
+    if (isGranted()) {
+      if ('serviceWorker' in navigator) {
         console.log('Firebase Worker Registered');
         const firebaseMessage = getMessaging(app);
-
         getToken(firebaseMessage, { validKey: 'BD8-hxWYnQfSAjjCNgVZXzlUnU4vtcbF7kbpqARzGnTJpUaG9Kn0EpjiKdiCgGnkB1zqovPMRuGS_lwAJig7oD8' }).then((currentToken) => {
-              if (currentToken) {
-                // Send the token to your server and update the UI if necessary
-                // ...
-                console.log('current token for client: ', currentToken);
-          
-              } else {
-                // Show permission request UI
-                console.log('No registration token available. Request permission to generate one.');
-                // ...
-              }
-            }).catch((err) => {
-              console.log('An error occurred while retrieving token. ', err);
-              // ...
-            });
-      }).catch(function(err) {
-        console.log('Service Worker registration failed: ', err);
-      });
+          if (currentToken) {
+            // Send the token to your server and update the UI if necessary
+            // ...
+            console.log('current token for client: ', currentToken);
+  
+          } else {
+            // Show permission request UI
+            console.log('No registration token available. Request permission to generate one.');
+            // ...
+          }
+        }).catch((err) => {
+          console.log('An error occurred while retrieving token. ', err);
+          // ...
+        });
+        
+      }
     }
   })
   //const { state } = useContext(AppContext);
@@ -89,15 +123,15 @@ const App = ({ Component, pageProps, }) => {
   return (
     <Provider store={store}>
       <ThemeModeProvider screenMode={screenMode}>
-      <UserProvider >
-      
+        <UserProvider >
+
           <Head>
             <title>Dandela Web App</title>
             <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />
 
           </Head>
           <Component {...pageProps}
-          langage={langage} setLangage={setLangage}
+            langage={langage} setLangage={setLangage}
             logo={logo} links={links}
             phoneNumber={user ? user.phoneNumber : ''}
             firebase={firebase} firestore={firestore} storage={storage}
@@ -105,7 +139,7 @@ const App = ({ Component, pageProps, }) => {
             userFirebase={userFirebase} handleUserFirebase={handleUserFirebase}
             uid={uid}
           />
-      </UserProvider>
+        </UserProvider>
       </ThemeModeProvider>
     </Provider>
   )
