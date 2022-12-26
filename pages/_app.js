@@ -76,7 +76,7 @@ const App = ({ Component, pageProps, }) => {
             // Send the token to your server and update the UI if necessary
             // ...
             console.log('current token for client: ', currentToken);
-            
+
           } else {
             // Show permission request UI
             console.log('No registration token available. Request permission to generate one.');
@@ -87,24 +87,27 @@ const App = ({ Component, pageProps, }) => {
           console.log('An error occurred while retrieving token. ', err);
           // ...
           //return (null);
-        });   
-        
-        messaging.onMessage((payload) => {
-          console.log('[firebase-messaging-sw.js] Received message ', payload);
-          // Customize notification here
-          const notificationTitle = 'Background Message Title';
-          const notificationOptions = {
-            body: 'Message body.',
-            icon: '/firebase-logo.png'
-          };
-
-          self.registration.showNotification(notificationTitle,
-            notificationOptions);
         });
+
+        if (messaging) {
+          messaging.onMessage((payload) => {
+            console.log('[firebase-messaging-sw.js] Received message ', payload);
+            // Customize notification here
+            const notificationTitle = 'Background Message Title';
+            const notificationOptions = {
+              body: 'Message body.',
+              icon: '/firebase-logo.png'
+            };
+
+            self.registration.showNotification(notificationTitle,
+              notificationOptions);
+          });
+        }
+
       }
-      
+
     }
-  })
+  }, [])
   //const { state } = useContext(AppContext);
   //firebaseApp = initializeApp(firebaseConfig);
   /*
