@@ -15,19 +15,6 @@ importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js')
 // Initialize the Firebase app in the service worker by passing in
 // your app's Firebase config object.
 // https://firebase.google.com/docs/web/setup#config-object
-
-
-firebase.initializeApp({
-  apiKey: 'api-key',
-  authDomain: 'project-id.firebaseapp.com',
-  databaseURL: 'https://project-id.firebaseio.com',
-  projectId: 'project-id',
-  storageBucket: 'project-id.appspot.com',
-  messagingSenderId: 'sender-id',
-  appId: 'app-id',
-  measurementId: 'G-measurement-id',
-});
-
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,
     authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -38,18 +25,22 @@ const firebaseConfig = {
     measurementId: process.env.FIREBASE_MEASUREMENT_ID,
   };
 
+//firebase.initializeApp(firebaseConfig);
+
+
+
 const app = firebase.initializeApp(firebaseConfig);
 
 // Initialize Firebase Cloud Messaging and get a reference to the service
 //const messaging = firebase.messaging();
 //const messaging = getMessaging(app);
-export const firestore = firebase.firestore(app);
+//export const firestore = firebase.firestore(app);
 // Initialize Cloud Storage and get a reference to the service
-export const storage = firebase.storage(app);
+//export const storage = firebase.storage(app);
 //const messaging = firebase.messaging();
 
 
-export default firebase;
+//export default firebase;
 
 // Retrieve an instance of Firebase Messaging so that it can handle background
 // messages.
