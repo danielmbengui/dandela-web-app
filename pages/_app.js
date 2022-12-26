@@ -16,7 +16,7 @@ import { DEFAULT_LANGAGE, DEFAULT_SCREEN_MODE, STORAGE_LANGAGE, STORAGE_SCREEN_M
 import { appWithTranslation } from 'next-i18next'
 import { getLangageStorage, getScreenModeStorage } from "../functions/storage/UserStorageFunctions";
 import { getMessaging, getToken } from "firebase/messaging";
-import { messaging } from "../public/firebase-messaging-sw";
+//import { messaging } from "../public/firebase-messaging-sw";
 require('dotenv').config();
 initAuth();
 
@@ -66,50 +66,43 @@ const App = ({ Component, pageProps, }) => {
 
   useEffect(() => {
     if (isGranted()) {
-      if ('serviceWorker' in navigator) {
+      if (window && 'serviceWorker' in navigator) {
         console.log('Firebase Worker Registered');
-        const firebaseMessage = getMessaging(app);
-        getToken(firebaseMessage, { validKey: 'BD8-hxWYnQfSAjjCNgVZXzlUnU4vtcbF7kbpqARzGnTJpUaG9Kn0EpjiKdiCgGnkB1zqovPMRuGS_lwAJig7oD8' }).then((currentToken) => {
+        //const messaging = firebase.messaging(app);
+        //const messaging = getMessaging(app);
+        const messaging = firebase.messaging(app);
+        getToken(messaging, { validKey: 'BD8-hxWYnQfSAjjCNgVZXzlUnU4vtcbF7kbpqARzGnTJpUaG9Kn0EpjiKdiCgGnkB1zqovPMRuGS_lwAJig7oD8' }).then((currentToken) => {
           if (currentToken) {
             // Send the token to your server and update the UI if necessary
             // ...
             console.log('current token for client: ', currentToken);
-            messaging.onMessage((payload) => {
-              console.log('[firebase-messaging-sw.js] Received message ', payload);
-              // Customize notification here
-              const notificationTitle = 'Background Message Title';
-              const notificationOptions = {
-                body: 'Message body.',
-                icon: '/firebase-logo.png'
-              };
-
-              self.registration.showNotification(notificationTitle,
-                notificationOptions);
-            });
-
-            messaging.onBackgroundMessage((payload) => {
-              console.log('[firebase-messaging-sw.js] Received background message ', payload);
-              // Customize notification here
-              const notificationTitle = 'Background Message Title';
-              const notificationOptions = {
-                body: 'Background Message body.',
-                icon: '/firebase-logo.png'
-              };
-
-              self.registration.showNotification(notificationTitle,
-                notificationOptions);
-            });
-
+            
           } else {
             // Show permission request UI
             console.log('No registration token available. Request permission to generate one.');
             // ...
+            //return (null);
           }
         }).catch((err) => {
           console.log('An error occurred while retrieving token. ', err);
           // ...
+          //return (null);
+        });   
+        
+        messaging.onMessage((payload) => {
+          console.log('[firebase-messaging-sw.js] Received message ', payload);
+          // Customize notification here
+          const notificationTitle = 'Background Message Title';
+          const notificationOptions = {
+            body: 'Message body.',
+            icon: '/firebase-logo.png'
+          };
+
+          self.registration.showNotification(notificationTitle,
+            notificationOptions);
         });
       }
+      
     }
   })
   //const { state } = useContext(AppContext);
