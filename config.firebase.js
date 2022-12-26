@@ -4,7 +4,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
 import "firebase/compat/analytics";
-import "firebase/compat/messaging";
+import "firebase/messaging";
 
 
 
