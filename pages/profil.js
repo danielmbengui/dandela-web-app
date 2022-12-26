@@ -15,13 +15,15 @@ export default function ProfilPage({ langage, setLangage, logo, user, firebase, 
   const { t, i18n } = useTranslation('common');
 console.log("TRANSLATE", t('profil'))
 
-useEffect(() => {
-  onChangeLanguage(langage);
-}, [langage]);
 const onChangeLanguage = (language) => {
   i18n.changeLanguage(language);
   //setLangage(language);
 };
+
+useEffect(() => {
+  onChangeLanguage(langage);
+}, [langage]);
+
 
   return(
         <Dashboard langage={langage} setLangage={setLangage} pages={{ profile: true, }} title={t('menuProfile')} firebase={firebase} user={user} storage={storage}>

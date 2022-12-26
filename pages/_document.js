@@ -8,9 +8,10 @@ export default function Document() {
                 <link rel="icon" href="/favicon.ico" />
                 <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
 
-                <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-                <script defer src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
-                <script defer src="/config.firebase.js"></script>
+                <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+                <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+                <script src="../firebase-messaging-sw.js"></script>
+                <script defer src="../config.firebase.js"></script>
 
                 <meta name="application-name" content="Dandela Web App" />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
