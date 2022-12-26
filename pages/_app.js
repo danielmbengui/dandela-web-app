@@ -71,11 +71,25 @@ const App = ({ Component, pageProps, }) => {
         //const messaging = firebase.messaging(app);
         //const messaging = getMessaging(app);
         const messaging = firebase.messaging(app);
-        getToken(messaging, { validKey: 'BD8-hxWYnQfSAjjCNgVZXzlUnU4vtcbF7kbpqARzGnTJpUaG9Kn0EpjiKdiCgGnkB1zqovPMRuGS_lwAJig7oD8' }).then((currentToken) => {
+        messaging.getToken({ validKey: 'BPqDYGiWcFQB8JC2vsPHWanIWddWXovnrcKjN1pjnGKDzcJVAaTfpz9zx8g-VPBio0Hm-QThDyv9uNCua5Ers9Y' }).then((currentToken) => {
           if (currentToken) {
             // Send the token to your server and update the UI if necessary
             // ...
             console.log('current token for client: ', currentToken);
+            messaging.onMessage((payload) => {
+              console.log('[firebase-messaging-sw.js] Received message ', payload);
+              // Customize notification here
+              /*
+              const notificationTitle = 'Background Message Title';
+              const notificationOptions = {
+                body: 'Message body.',
+                icon: '/firebase-logo.png'
+              };
+  
+              self.registration.showNotification(notificationTitle,
+                notificationOptions);
+                */
+            });
 
           } else {
             // Show permission request UI
@@ -88,22 +102,6 @@ const App = ({ Component, pageProps, }) => {
           // ...
           //return (null);
         });
-
-        if (messaging) {
-          messaging.onMessage((payload) => {
-            console.log('[firebase-messaging-sw.js] Received message ', payload);
-            // Customize notification here
-            const notificationTitle = 'Background Message Title';
-            const notificationOptions = {
-              body: 'Message body.',
-              icon: '/firebase-logo.png'
-            };
-
-            self.registration.showNotification(notificationTitle,
-              notificationOptions);
-          });
-        }
-
       }
 
     }
