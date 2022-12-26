@@ -12,7 +12,7 @@
 // are not available in the service worker.
 //importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js');
 //importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js');
-
+import firebase, { app } from "../config.firebase";
 
 // Initialize the Firebase app in the service worker by passing in
 // your app's Firebase config object.
@@ -31,7 +31,7 @@ const firebaseConfig = {
 
 
 
-const app = firebase.initializeApp(firebaseConfig);
+//const app = firebase.initializeApp(firebaseConfig);
 
 // Initialize Firebase Cloud Messaging and get a reference to the service
 //const messaging = firebase.messaging();
