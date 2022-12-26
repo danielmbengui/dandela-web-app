@@ -32,7 +32,7 @@ const app = firebase.initializeApp(firebaseConfig);
 export const firestore = firebase.firestore(app);
 // Initialize Cloud Storage and get a reference to the service
 export const storage = firebase.storage(app);
-const messaging = firebase.messaging();
+//const messaging = firebase.messaging();
 
 
 export default firebase;
