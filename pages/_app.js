@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import '../styles/globals.css';
 import '../styles/firebaseui.css';
 // Import the functions you need from the SDKs you need
-import { firestore, storage } from "../config.firebase";
+import { app, firebaseConfig, firestore, storage } from "../config.firebase";
 import firebase from "../config.firebase";
 import store from "../redux/store";
 import { Provider, } from "react-redux";
@@ -15,6 +15,7 @@ import initAuth from '../initAuth' // the module you created above
 import { DEFAULT_LANGAGE, DEFAULT_SCREEN_MODE, STORAGE_LANGAGE, STORAGE_SCREEN_MODE } from "../constants";
 import { appWithTranslation } from 'next-i18next'
 import { getLangageStorage, getScreenModeStorage } from "../functions/storage/UserStorageFunctions";
+import { getMessaging, getToken } from "firebase/messaging";
 
 initAuth();
 
@@ -27,6 +28,25 @@ const links = {
 
 const App = ({ Component, pageProps, }) => {
   //const { state } = useContext(AppContext);
+  //firebaseApp = initializeApp(firebaseConfig);
+const firebaseMessage = getMessaging(app);
+
+getToken(firebaseMessage, { validKey: 'BD8-hxWYnQfSAjjCNgVZXzlUnU4vtcbF7kbpqARzGnTJpUaG9Kn0EpjiKdiCgGnkB1zqovPMRuGS_lwAJig7oD8' }).then((currentToken) => {
+      if (currentToken) {
+        // Send the token to your server and update the UI if necessary
+        // ...
+        console.log('current token for client: ', currentToken);
+  
+      } else {
+        // Show permission request UI
+        console.log('No registration token available. Request permission to generate one.');
+        // ...
+      }
+    }).catch((err) => {
+      console.log('An error occurred while retrieving token. ', err);
+      // ...
+    });
+
   const [uid, setUid] = useState(null);
   const [user, setUser] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);

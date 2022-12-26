@@ -4,7 +4,6 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
 import "firebase/compat/analytics";
-import "firebase/compat/messaging";
 
 
 //import "firebase/messaging";
@@ -14,7 +13,7 @@ import "firebase/compat/messaging";
 
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+export const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,
     authDomain: process.env.FIREBASE_AUTH_DOMAIN,
     projectId: process.env.FIREBASE_PROJECT_ID,
@@ -24,14 +23,14 @@ const firebaseConfig = {
     measurementId: process.env.FIREBASE_MEASUREMENT_ID,
   };
 
-const app = firebase.initializeApp(firebaseConfig);
+export const app = firebase.initializeApp(firebaseConfig);
 
 // Initialize Firebase Cloud Messaging and get a reference to the service
 //const messaging = firebase.messaging();
 //const messaging = getMessaging(app);
-export const firestore = firebase.firestore(app);
+export const firestore = firebase.firestore();
 // Initialize Cloud Storage and get a reference to the service
-export const storage = firebase.storage(app);
+export const storage = firebase.storage();
 //const messaging = firebase.messaging();
 
 
