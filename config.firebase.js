@@ -3,10 +3,15 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
-//import "firebase/compat/messaging";
+import "firebase/compat/analytics";
+import "firebase/compat/messaging";
+
+
 //import "firebase/messaging";
 //importScripts("https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js");
-import { getMessaging } from "firebase/messaging";
+//import { getMessaging } from "firebase/compat/messaging";
+//import { getMessaging } from "firebase/messaging";
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -24,9 +29,10 @@ const app = firebase.initializeApp(firebaseConfig);
 // Initialize Firebase Cloud Messaging and get a reference to the service
 //const messaging = firebase.messaging();
 //const messaging = getMessaging(app);
-export const firestore = firebase.firestore();
+export const firestore = firebase.firestore(app);
 // Initialize Cloud Storage and get a reference to the service
-export const storage = firebase.storage();
+export const storage = firebase.storage(app);
+const messaging = firebase.messaging();
 
 
 export default firebase;
