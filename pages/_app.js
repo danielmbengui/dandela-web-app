@@ -29,7 +29,7 @@ const links = {
 const App = ({ Component, pageProps, }) => {
   useEffect(() => {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('../firebase-messaging-sw.js').then(function(registration) {
+      navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(registration) {
         console.log('Firebase Worker Registered');
         const firebaseMessage = getMessaging(app);
 
