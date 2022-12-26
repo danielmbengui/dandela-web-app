@@ -25,6 +25,7 @@
     "firebase-admin": "^11.2.1",
     "firebaseui": "^6.0.1",
     "i18next": "^22.4.6",
+    "import-scripts": "^1.0.0",
     "next": "^13.0.4",
     "next-firebase-auth": "^1.0.0-canary.17",
     "next-i18next": "^13.0.2",
