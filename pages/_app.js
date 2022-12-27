@@ -78,13 +78,15 @@ const showError = () => {
 const App = ({ Component, pageProps, }) => {
   const [isNotif, setIsNotif] = useState(false);
   useEffect(() => {
-   
+
     if (window) {
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
-    
-      gtag('config', 'G-MJ6X1M1YRR');
+
+      gtag('config', 'GT-57Z6PD7');
+      gtag('event', 'conversion', {'send_to': 'AW-599823263/44fACKGKqYYYEJ-ngp4C'});
+
     }
 
     async function initRequestNotif() {
@@ -190,7 +192,8 @@ const App = ({ Component, pageProps, }) => {
             <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />
 
           </Head>
-          <Script async src="https://www.googletagmanager.com/gtag/js?id=G-MJ6X1M1YRR" />
+
+          <Script async src="https://www.googletagmanager.com/gtag/js?id=GT-57Z6PD7" />
           <Component {...pageProps}
             langage={langage} setLangage={setLangage}
             logo={logo} links={links}
