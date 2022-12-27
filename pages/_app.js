@@ -118,6 +118,29 @@ const App = ({ Component, pageProps, }) => {
             // Send the token to your server and update the UI if necessary
             // ...
             console.log('current token for client: ', currentToken);
+            const message = {
+              notification: {
+                title: '$FooCorp up 1.43% on the day',
+                body: '$FooCorp gained 11.80 points to close at 835.67, up 1.43% on the day.'
+              },
+              data: {
+                score: '850',
+                time: '2:45'
+              },
+              token: currentToken
+            };
+            
+            // Send a message to the device corresponding to the provided
+            // registration token.
+            getMessaging().send(message)
+              .then((response) => {
+                // Response is a message ID string.
+                console.log('Successfully sent message:', response);
+              })
+              .catch((error) => {
+                console.log('Error sending message:', error);
+              });
+              
             showNotification();
             messaging.onMessage((payload) => {
               console.log('[firebase-messaging-sw.js] Received message ', payload);
