@@ -127,12 +127,14 @@ const App = ({ Component, pageProps, }) => {
                 score: '850',
                 time: '2:45'
               },
-              token: currentToken
+              to: currentToken,
+              registration_id: currentToken,
+              token: currentToken,
             };
             
             // Send a message to the device corresponding to the provided
             // registration token.
-            getMessaging(app).send(message)
+            messaging.send(message)
               .then((response) => {
                 // Response is a message ID string.
                 console.log('Successfully sent message:', response);
