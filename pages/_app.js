@@ -16,10 +16,11 @@ import { DEFAULT_LANGAGE, DEFAULT_SCREEN_MODE, STORAGE_LANGAGE, STORAGE_SCREEN_M
 import { appWithTranslation } from 'next-i18next'
 import { getLangageStorage, getScreenModeStorage } from "../functions/storage/UserStorageFunctions";
 import { getMessaging, getToken } from "firebase/messaging";
+import axios from "axios";
 //import { messaging } from "../public/firebase-messaging-sw";
 require('dotenv').config();
 initAuth();
-
+import Script from 'next/script'
 
 const logo = "/img/logo.png";
 
@@ -27,9 +28,9 @@ const links = {
   errorlogin: "/account/errorlogin",
 }
 
-function requestPermission() {
+async function requestPermission() {
   console.log('Requesting permission...');
-  Notification.requestPermission().then((permission) => {
+  await Notification.requestPermission().then((permission) => {
     if (permission === 'granted') {
       console.log('Notification permission granted.');
       //alert('Notification permission granted.');
@@ -48,21 +49,21 @@ function isGranted() {
 
 const showNotification = () => {
   // create a new notification
-  
+
   const notification = new Notification('JavaScript Notification API', {
-      body: 'This is a JavaScript Notification API demo',
-      icon: '/favicon.ico'
+    body: 'This is a JavaScript Notification API demo',
+    icon: '/favicon.ico'
   });
 
   // close the notification after 10 seconds
   setTimeout(() => {
-      notification.close();
+    notification.close();
   }, 10 * 1000);
   console.log("SHOW notiiiiiif")
   // navigate to a URL when clicked
   notification.addEventListener('click', () => {
 
-      window.open('https://www.javascripttutorial.net/web-apis/javascript-notification/', '_blank');
+    window.open('https://www.javascripttutorial.net/web-apis/javascript-notification/', '_blank');
   });
 }
 
@@ -77,18 +78,30 @@ const showError = () => {
 const App = ({ Component, pageProps, }) => {
   const [isNotif, setIsNotif] = useState(false);
   useEffect(() => {
-    if (("Notification" in window)) {
-      if (Notification.permission === "default") {
-        requestPermission();
-        if (isGranted()) {
+   
+    if (window) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-599823263');
+    }
+
+    async function initRequestNotif() {
+      if (("Notification" in window)) {
+        if (Notification.permission === "default") {
+          await requestPermission();
+          if (isGranted()) {
+            setIsNotif(true);
+          }
+        } else if (isGranted()) {
           setIsNotif(true);
+        } else {
+          setIsNotif(false);
         }
-      } else if (isGranted()) {
-        setIsNotif(true);
-      } else {
-        setIsNotif(false);
       }
     }
+    initRequestNotif();
   })
 
   useEffect(() => {
@@ -177,6 +190,7 @@ const App = ({ Component, pageProps, }) => {
             <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />
 
           </Head>
+          <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-599823263"/>
           <Component {...pageProps}
             langage={langage} setLangage={setLangage}
             logo={logo} links={links}
