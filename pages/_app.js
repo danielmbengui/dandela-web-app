@@ -46,6 +46,33 @@ function isGranted() {
   return (false);
 }
 
+const showNotification = () => {
+  // create a new notification
+  
+  const notification = new Notification('JavaScript Notification API', {
+      body: 'This is a JavaScript Notification API demo',
+      icon: '/favicon.ico'
+  });
+
+  // close the notification after 10 seconds
+  setTimeout(() => {
+      notification.close();
+  }, 10 * 1000);
+  console.log("SHOW notiiiiiif")
+  // navigate to a URL when clicked
+  notification.addEventListener('click', () => {
+
+      window.open('https://www.javascripttutorial.net/web-apis/javascript-notification/', '_blank');
+  });
+}
+
+// show an error message
+const showError = () => {
+  const error = document.querySelector('.error');
+  error.style.display = 'block';
+  error.textContent = 'You blocked the notifications';
+}
+
 
 const App = ({ Component, pageProps, }) => {
   const [isNotif, setIsNotif] = useState(false);
@@ -76,6 +103,7 @@ const App = ({ Component, pageProps, }) => {
             // Send the token to your server and update the UI if necessary
             // ...
             console.log('current token for client: ', currentToken);
+            showNotification();
             messaging.onMessage((payload) => {
               console.log('[firebase-messaging-sw.js] Received message ', payload);
               // Customize notification here
