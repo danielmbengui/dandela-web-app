@@ -132,7 +132,7 @@ const App = ({ Component, pageProps, }) => {
             
             // Send a message to the device corresponding to the provided
             // registration token.
-            getMessaging().send(message)
+            getMessaging(app).send(message)
               .then((response) => {
                 // Response is a message ID string.
                 console.log('Successfully sent message:', response);
