@@ -81,10 +81,10 @@ const App = ({ Component, pageProps, }) => {
    
     if (window) {
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-      gtag('config', 'AW-599823263');
+  gtag('config', 'G-MJ6X1M1YRR');
     }
 
     async function initRequestNotif() {
@@ -190,7 +190,7 @@ const App = ({ Component, pageProps, }) => {
             <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />
 
           </Head>
-          <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-599823263"/>
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-MJ6X1M1YRR"></script>
           <Component {...pageProps}
             langage={langage} setLangage={setLangage}
             logo={logo} links={links}
