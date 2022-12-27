@@ -102,22 +102,6 @@ const App = ({ Component, pageProps, }) => {
           // ...
           //return (null);
         });
-
-        messaging.onMessage((payload) => {
-          console.log('[firebase-messaging-sw.js] Received message 2222222', payload);
-          // Customize notification here
-          /*
-          const notificationTitle = 'Background Message Title';
-          const notificationOptions = {
-            body: 'Message body.',
-            icon: '/firebase-logo.png'
-          };
-
-          self.registration.showNotification(notificationTitle,
-            notificationOptions);
-            */
-        });
-        
       }
 
     }

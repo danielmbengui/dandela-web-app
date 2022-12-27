@@ -70,7 +70,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 export default function Profile({ firebase, firestore, storage }) {
   const theme = useTheme();
-  const {t} = useTranslation("profil");
+  const { t } = useTranslation("profil");
   //const {g} = useTranslation("common");
   console.log("TTTTTTZTTTT", t("profil"));
   //const user = useSelector((state) => state.user);
@@ -102,19 +102,19 @@ export default function Profile({ firebase, firestore, storage }) {
       setPhotoURL(user.profilPhotoURL);
       setDisplayName(user.displayName);
       console.log("USER Profile", user);
-    }else {
+    } else {
       setPhotoURL('');
       setDisplayName('');
     }
-  }, [user]);
+  }, [user, user.profilPhotoURL]);
 
-  
 
-/*
-  useEffect(() => {
-    setErrorName(user ? (user.displayName == '' ? true : false) : true);
-  }, [user]);
-  */
+
+  /*
+    useEffect(() => {
+      setErrorName(user ? (user.displayName == '' ? true : false) : true);
+    }, [user]);
+    */
 
   const onChangeName = (e) => {
     setDisplayName(e.target.value);
@@ -158,26 +158,26 @@ useEffect(() => {
 console.log("FFFFIRST TEST: ", playerJson);
 })
 */
-/*
-  useEffect(() => {
-    if (user) {
-      setDisplayName(user.displayName);
-      //setPassword(user.password);
-      if (user.photoURL) {
-        var profileImgRef = storageRef.child(`${user.photoURL}`);
-        profileImgRef.getDownloadURL()
-          .then((url) => {
-            setPhotoURL(url);
-          })
-          .catch((error) => {
-            // Handle any errors
-            setPhotoURL('');
-            console.log('Error URL');
-          });
+  /*
+    useEffect(() => {
+      if (user) {
+        setDisplayName(user.displayName);
+        //setPassword(user.password);
+        if (user.photoURL) {
+          var profileImgRef = storageRef.child(`${user.photoURL}`);
+          profileImgRef.getDownloadURL()
+            .then((url) => {
+              setPhotoURL(url);
+            })
+            .catch((error) => {
+              // Handle any errors
+              setPhotoURL('');
+              console.log('Error URL');
+            });
+        }
       }
-    }
-  }, [user])
-  */
+    }, [user])
+    */
 
   useEffect(() => {
     const image_input = document.querySelector("#image-input");
@@ -237,6 +237,7 @@ console.log("FFFFIRST TEST: ", playerJson);
   const clickModifyUser = () => {
     const userFirebase = firebase.auth().currentUser;
     const userApp = JSON.parse(JSON.stringify(user));
+    console.log('click modify',);
     userApp.displayName = displayName;
     userApp.photoURL = userApp.phoneNumber + USER_LINK_PHOTO_URL;
     if (userFirebase) {
@@ -255,39 +256,44 @@ console.log("FFFFIRST TEST: ", playerJson);
             //userApp.photoURL = `${user.phoneNumber}${USER_LINK_PHOTO_URL}`;
             //setPhotoURL(userApp.photoURL);
             profileImgRef.getDownloadURL()
-            .then((url) => {
-              profilPhotoURL = url;
-              setPhotoURL(url);
-              userApp.profilPhotoURL = url;
-              setUser(userApp);
-              firestore.collection(COLLECTION_USER).doc(userApp.phoneNumber).update({
-                displayName: displayName,
-                photoURL: userApp.photoURL,
-                profilPhotoURL: url,
-                verified: true
-              })
-                .then(() => {
-                  console.log("Document successfully updated!");
-                  //window.location.href = '/about';
-                  
+              .then(async (url) => {
+                profilPhotoURL = url;
+                setPhotoURL(url);
+                userApp.profilPhotoURL = url;
+
+                await firestore.collection(COLLECTION_USER).doc(userApp.phoneNumber).update({
+                  displayName: displayName,
+                  photoURL: userApp.photoURL,
+                  profilPhotoURL: url,
+                  verified: true
                 })
-                .catch((error) => {
-                  // The document probably doesn't exist.
-                  console.error("Error updating document: ", error);
-                  //window.location.href = '/login/errorlogin';
-                });
-            })
-            .catch((error) => {
-              // Handle any errors
-              setPhotoURL('');
-              console.log('Error URL');
-            });
-          }); 
+                  .then(() => {
+                    console.log("Document successfully updated!");
+                    //window.location.href = '/about';
+
+                  })
+                  .catch((error) => {
+                    // The document probably doesn't exist.
+                    console.error("Error updating document: ", error);
+                    //window.location.href = '/login/errorlogin';
+                  });
+                setUser(userApp);
+                console.log("url photo!", url);
+              })
+              .catch((error) => {
+                // Handle any errors
+                setPhotoURL('');
+                console.log("Error USER", 'Error URL');
+              });
+          });
+
+
+
         }
         // Update successful
         // ...
         // Set the "capital" field of the city 'DC'
-        
+
       }).catch((error) => {
         // An error occurred
         // ...
@@ -295,6 +301,8 @@ console.log("FFFFIRST TEST: ", playerJson);
     }
     //userApp.editingPhotoUrl = false;
     //handleUser(userApp);
+
+    console.log("USEEEEER aaaaa", userApp)
     setUser(userApp);
     //window.location.href = '/about';
   }
@@ -314,9 +322,10 @@ console.log("FFFFIRST TEST: ", playerJson);
           <Alert
             severity='warning'
             variant='outlined'
-            sx={{ mb: 2, textAlign: 'start',
-          display: user.displayName && user.profilPhotoURL ? 'none' : 'block',
-          }}
+            sx={{
+              mb: 2, textAlign: 'start',
+              display: user.displayName && user.profilPhotoURL ? 'none' : 'block',
+            }}
           >
             <AlertTitle sx={{ mb: 0.5, alignItems: 'flex-start' }}>{t('completeProfile')}</AlertTitle>
             {t('message')} {" —"} <strong>{t('security')}!</strong>
@@ -327,7 +336,7 @@ console.log("FFFFIRST TEST: ", playerJson);
       <Grid container spacing={1.5} direction={'column'} justifyContent={'center'} alignItems={'center'}
         //sx={{background:'yellow',}}
         pl={1} pr={1}
-        columns={{ xs: 12, md:6 }}
+        columns={{ xs: 12, md: 6 }}
       >
         <Grid item mb={3} xs>
           <Badge
@@ -367,71 +376,71 @@ console.log("FFFFIRST TEST: ", playerJson);
             />
             <AccordionCustom expanded={expanded} onChange={() => {
               handleExpanded(expanded ? false : true);
-            }}  sx={{
+            }} sx={{
               //width:'60%',
             }}>
-        <AccordionSummaryCustom aria-controls="panel1d-content" id="panel1d-header">
-          <Typography sx={{fontFamily: fontFamilyMain}}>{t('informations')}</Typography>
-        </AccordionSummaryCustom>
-        <AccordionDetailsCustom>
+              <AccordionSummaryCustom aria-controls="panel1d-content" id="panel1d-header">
+                <Typography sx={{ fontFamily: fontFamilyMain }}>{t('informations')}</Typography>
+              </AccordionSummaryCustom>
+              <AccordionDetailsCustom>
 
-        <Stack 
-        direction={'column'}
-        justifyContent={'center'} 
-        alignItems={'stretch'}
-            spacing={2}
-        >
-<TextFieldCustom
-              fullWidth
-              id="uid"
-              label={t('Id')}
-              disabled
-              value={user.uid}
-            />
-            <TextFieldCustom
-              fullWidth
-              //error={false}
-              id="phoneNumber"
-              label={t('Phone')}
-              //required
-              disabled
-              //defaultValue={displayName}
-              value={user.phoneNumber}
-            //helperText="Incorrect entry."
-            //theme={theme}
-            //placeholder={"Name"}
-            />
-            <TextFieldCustom
-              fullWidth
-              //error={false}
-              id="userCountry"
-              label={t('Country')}
-              //required
-              disabled
-              //defaultValue={displayName}
-              value={t(`${user.country.name}`)}
-            //helperText="Incorrect entry."
-            //theme={theme}
-            //placeholder={"Name"}
-            />
-                        <TextFieldCustom
-              fullWidth
-              //error={false}
-              id="userType"
-              label={t('Type')}
-              //required
-              disabled
-              //defaultValue={displayName}
-              value={t(`${user.type}`)}
-            //helperText="Incorrect entry."
-            //theme={theme}
-            //placeholder={"Name"}
-            />
-        </Stack>
-        </AccordionDetailsCustom>
-      </AccordionCustom>
+                <Stack
+                  direction={'column'}
+                  justifyContent={'center'}
+                  alignItems={'stretch'}
+                  spacing={2}
+                >
+                  <TextFieldCustom
+                    fullWidth
+                    id="uid"
+                    label={t('Id')}
+                    disabled
+                    value={user.uid}
+                  />
+                  <TextFieldCustom
+                    fullWidth
+                    //error={false}
+                    id="phoneNumber"
+                    label={t('Phone')}
+                    //required
+                    disabled
+                    //defaultValue={displayName}
+                    value={user.phoneNumber}
+                  //helperText="Incorrect entry."
+                  //theme={theme}
+                  //placeholder={"Name"}
+                  />
+                  <TextFieldCustom
+                    fullWidth
+                    //error={false}
+                    id="userCountry"
+                    label={t('Country')}
+                    //required
+                    disabled
+                    //defaultValue={displayName}
+                    value={t(`${user.country.name}`)}
+                  //helperText="Incorrect entry."
+                  //theme={theme}
+                  //placeholder={"Name"}
+                  />
+                  <TextFieldCustom
+                    fullWidth
+                    //error={false}
+                    id="userType"
+                    label={t('Type')}
+                    //required
+                    disabled
+                    //defaultValue={displayName}
+                    value={t(`${user.type}`)}
+                  //helperText="Incorrect entry."
+                  //theme={theme}
+                  //placeholder={"Name"}
+                  />
+                </Stack>
+              </AccordionDetailsCustom>
+            </AccordionCustom>
 
-            
+
 
             <Grid container pt={3} justifyContent={'center'}>
               <Button variant='contained' onClick={() => {
