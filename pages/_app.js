@@ -12,7 +12,7 @@ import Head from "next/head";
 import ThemeModeProvider from "../context/ThemeProvider";
 import UserProvider from "../context/UserProvider";
 import initAuth from '../initAuth' // the module you created above
-import { DEFAULT_LANGAGE, DEFAULT_SCREEN_MODE, STORAGE_LANGAGE, STORAGE_SCREEN_MODE } from "../constants";
+import { COLLECTION_USER, DEFAULT_LANGAGE, DEFAULT_SCREEN_MODE, STORAGE_LANGAGE, STORAGE_SCREEN_MODE } from "../constants";
 import { appWithTranslation } from 'next-i18next'
 import { getLangageStorage, getScreenModeStorage } from "../functions/storage/UserStorageFunctions";
 import { getMessaging, getToken } from "firebase/messaging";
@@ -23,6 +23,7 @@ initAuth();
 import Script from 'next/script'
 import { initializeApp } from "firebase-admin/app";
 import { applicationDefault } from "firebase-admin/app";
+import User, { userConverter } from "../classes/UserClass";
 
 const logo = "/img/logo.png";
 
@@ -136,24 +137,40 @@ function App({ Component, pageProps, }) {
         //const messaging = firebase.messaging(app);
         //const messaging = getMessaging(app);
         const messaging = firebase.messaging(app);
-        messaging.getToken({ validKey: 'BNokC6pq_1RHx0D17Tp2KKA7Hz2PuZ7AuAN1gwLQmSCy-heuLpZQsc1FPVnWeXjA9cB4W604jRBDTQIdfvRAA_4' }).then((currentToken) => {
+        messaging.getToken({ validKey: 'BNokC6pq_1RHx0D17Tp2KKA7Hz2PuZ7AuAN1gwLQmSCy-heuLpZQsc1FPVnWeXjA9cB4W604jRBDTQIdfvRAA_4' }).then(async (currentToken) => {
           if (currentToken) {
             // Send the token to your server and update the UI if necessary
             // ...
             console.log('current token for client: ', currentToken);
-            const message = {
-              notification: {
-                title: '$FooCorp up 1.43% on the day',
-                body: '$FooCorp gained 11.80 points to close at 835.67, up 1.43% on the day.'
-              },
-              data: {
-                score: '850',
-                time: '2:45'
-              },
-              to: currentToken,
-              registration_id: currentToken,
-              token: currentToken,
-            };
+            const _user = await firestore.collection(COLLECTION_USER).doc("+41766795115")
+            .withConverter(userConverter)
+            .get().then((doc) => {
+              if( doc.exists) {
+                return (new User(doc.data()));
+              }
+              return (null);
+            });
+            console.log("USER messaging gettoken before", _user);
+            if (!_user.tokens.includes(currentToken)) {
+              _user.addToken(currentToken);
+              firestore.collection(COLLECTION_USER).doc(_user.phoneNumber).update({
+                tokens: _user.tokens,
+              })
+                .then(() => {
+                  console.log("Document successfully updated!");
+                  //window.location.href = '/about';
+  
+                })
+                .catch((error) => {
+                  // The document probably doesn't exist.
+                  console.error("Error updating document: ", error);
+                  //window.location.href = '/login/errorlogin';
+                });
+            }
+            console.log("USER messaging gettoken after", _user);
+            
+            
+              
 
             // Send a message to the device corresponding to the provided
             // registration token.
@@ -168,7 +185,7 @@ function App({ Component, pageProps, }) {
               });
               */
 
-            showNotification();
+            //showNotification();
             messaging.onMessage((payload) => {
               console.log('[firebase-messaging-sw.js] Received message ', payload);
               // Customize notification here
@@ -234,7 +251,6 @@ function App({ Component, pageProps, }) {
     <Provider store={store}>
       <ThemeModeProvider screenMode={screenMode}>
         <UserProvider >
-
           <Head>
             <title>Dandela Web App</title>
             <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />

@@ -44,25 +44,27 @@ export default async function handler(req, res) {
                   score: '850',
                   time: '2:45'
                 },
-                to: currentToken,
-                registration_id: currentToken,
-                token: currentToken,
+                //to: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
+                //registration_id: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
+                token: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
               };
-  
+              getMessaging(adminApp).send(message)
+              .then((response) => {
+                // Response is a message ID string.
+                console.log('Successfully sent message:', response);
+                adminApp.delete('admin');
+              })
+              .catch((error) => {
+                console.log('Error sending message:', error);
+                
+              });
               // Send a message to the device corresponding to the provided
               // registration token.
               /*
-              getMessaging().send(message)
-                .then((response) => {
-                  // Response is a message ID string.
-                  console.log('Successfully sent message:', response);
-                })
-                .catch((error) => {
-                  console.log('Error sending message:', error);
-                });
+             
                 */
 
-        adminApp.delete('admin');
+        
         //console.log('AAAAAAAADMIN', adminApp);
 
 

@@ -3,7 +3,7 @@ import Country from "./CountryClass";
 
 class User {
     constructor({uid = null, phoneNumber = null, displayName = null, photoURL = null, profilPhotoURL = null,
-        type = null, country_uid = null, verified=null}) {
+        type = null, country_uid = null, verified=null, tokens=[]}) {
             /* FIRESTORE variables */
         this.uid = uid;
         this.phoneNumber = phoneNumber;
@@ -14,10 +14,18 @@ class User {
         this.country_uid = country_uid;
         this.country = new Country({});
         this.verified = verified;
+        this.tokens = tokens;
         /* CUSTOM variables */
         this.authorized = phoneNumber && verified;
         this.isAdmin = type === USER_TYPE_ADMIN;
     }
+
+    addToken(token) {
+        if (!this.tokens.includes(token)) {
+            this.tokens.push(token);
+        }
+    }
+
     toString() {
         return [
             "UID: " + this.uid, 
@@ -29,6 +37,7 @@ class User {
             "COUNTRY UID: " + this.country_uid,
             "COUNTRY: " + this.country.toString(),
             "VERIFIED: " + this.verified,
+            "TOKENS: " + this.tokens,
             "AUTHORIZED: " + this.authorized,
             "IS ADMIN: " + this.isAdmin,
         ].join(', ');
@@ -47,12 +56,14 @@ export const userConverter = {
             type: user.type,
             country_uid: user.country_uid,
             verified: user.verified,
+            tokens: user.tokens,
             };
     },
     fromFirestore: function(snapshot, options){
         const data = snapshot.data(options);
         return new User({uid:data.uid, phoneNumber: data.phoneNumber, displayName: data.displayName, photoURL: data.photoURL,
-            profilPhotoURL: data.profilPhotoURL, type: data.type, country_uid: data.country_uid, verified: data.verified});
+            profilPhotoURL: data.profilPhotoURL, type: data.type, country_uid: data.country_uid, verified: data.verified,
+            tokens: data.tokens});
         /*
 uid = null, phoneNumber = null, displayName = '', photoURL = '', profilPhotoURL = '',
         verified=false, screenMode=DEFAULT_SCREEN_MODE
