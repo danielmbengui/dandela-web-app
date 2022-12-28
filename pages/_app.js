@@ -21,6 +21,8 @@ import axios from "axios";
 require('dotenv').config();
 initAuth();
 import Script from 'next/script'
+import { initializeApp } from "firebase-admin/app";
+import { applicationDefault } from "firebase-admin/app";
 
 const logo = "/img/logo.png";
 
@@ -75,17 +77,38 @@ const showError = () => {
 }
 
 
-const App = ({ Component, pageProps, }) => {
+const admin = require("firebase-admin/app");
+
+function App({ Component, pageProps, }) {
+  
+
+  //var serviceAccount = require("path/to/serviceAccountKey.json");
+
+
+  
+  /**
+   * initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  }, 'admin');
+   */
   const [isNotif, setIsNotif] = useState(false);
+  const hash = hashResult("123456");
+  console.log("HAAAASH", hash);
+  console.log("ADMIN KEY", process.env.FIREBASE_ADMIN_PRIVATE_KEY_ID);
+
   useEffect(() => {
 
+  }, [])
+  useEffect(() => {
+
+    //console.log('AAAAAAAADMIN', adminApp);
     if (window) {
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
 
       gtag('config', 'GT-57Z6PD7');
-      gtag('event', 'conversion', {'send_to': 'AW-599823263/44fACKGKqYYYEJ-ngp4C'});
+      gtag('event', 'conversion', { 'send_to': 'AW-599823263/44fACKGKqYYYEJ-ngp4C' });
 
     }
 
@@ -131,10 +154,11 @@ const App = ({ Component, pageProps, }) => {
               registration_id: currentToken,
               token: currentToken,
             };
-            
+
             // Send a message to the device corresponding to the provided
             // registration token.
-            messaging.send(message)
+            /*
+            getMessaging().send(message)
               .then((response) => {
                 // Response is a message ID string.
                 console.log('Successfully sent message:', response);
@@ -142,7 +166,8 @@ const App = ({ Component, pageProps, }) => {
               .catch((error) => {
                 console.log('Error sending message:', error);
               });
-              
+              */
+
             showNotification();
             messaging.onMessage((payload) => {
               console.log('[firebase-messaging-sw.js] Received message ', payload);
@@ -195,9 +220,7 @@ const App = ({ Component, pageProps, }) => {
     setLangage(_langage);
     console.log("LANGAGE _app", _langage)
   }, [])
-  const hash = hashResult("123456");
-  console.log("HAAAASH", hash);
-  console.log("ADMIN KEY", process.env.FIREBASE_ADMIN_PRIVATE_KEY_ID);
+
 
   const handleUser = (pUser) => {
     setUser(pUser);
@@ -232,6 +255,31 @@ const App = ({ Component, pageProps, }) => {
       </ThemeModeProvider>
     </Provider>
   )
+}
+
+export async function getStaticProps(props) {
+  //const { params } = props;
+  //const res = await axios.get(`http://localhost:3000//api/transferts/getone?uid=${params.uid}`);
+  //console.log('AXIOS transfert', params.uid);
+  //const transfert = res.data;
+  const id = 18;
+  const admin = 'aie';
+  /*
+  var admin = require("firebase-admin/app");
+  
+  //var serviceAccount = require("path/to/serviceAccountKey.json");
+  var serviceAccount = require("../dandelawebapp-firebase-adminsdk-e28au-add7b105a3.json");
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  });
+  */
+
+  //console.log('AXIOS ONE transfert', transfert);
+
+  return {
+    // Passed to the page component as props
+    props: { id, admin },
+  }
 }
 
 

@@ -1,43 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect} from 'react';
 import { Grid } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
+import {  useTheme } from '@mui/material/styles';
 import { firestore } from '../../../config.firebase';
 import firebase from '../../../config.firebase';
-import InstallApp from '../../InstallApp/InstallApp';
 import PermanentBackdrop from '../../Loading/PermanentBackdrop';
-import { COLLECTION_USER, USER_LINK_PHOTO_URL } from '../../../constants';
-import Link from 'next/link';
-import ErrorLogin from './ErrorLogin';
-import { useDispatch, useSelector } from 'react-redux';
+import { COLLECTION_USER, } from '../../../constants';
 import { useUserContext } from '../../../context/UserProvider';
 
-export default function Login(props) {
+export default function Login() {
     const theme = useTheme();
-    const dispatch = useDispatch();
-    const [uid, setUid] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [isConnected, setIsConnected] = useState(false);
-    const userRedux = useSelector((state) => state.user);
-
     const [user, setUser] = useUserContext();
 
-    /*
-    const connectUserInfo = () => {
-        dispatch(connectUser());
-    }
-    useEffect(() => {
-        connectUserInfo();
-        console.log("USER_REDUX looooooooooogin", userRedux);
-    }, [userRedux.photoURL]);
-    */
-
-    /*
-        const onChangeMode = (event) => {
-            themeMode.toggleColorMode();
-            setChecked(event.target.checked ? true : false);
-            dispatch(updateScreenMode(event.target.checked ? 'dark' : 'light'));
-        }
-        */
     useEffect(() => {
         var firebaseui = require('firebaseui');
         var uiConfig = {
@@ -54,23 +27,9 @@ export default function Login(props) {
                         if (!doc.exists) {
                             window.location.href = "/authentication/errorlogin";
                         } else {
-                            /*
-                            const _user = JSON.parse(JSON.stringify(doc.data()));
-                            _user.phoneNumber = userFirebase.phoneNumber;
-                            _user.uid = userFirebase.uid;
-
-                            firestore.collection(COLLECTION_USER).doc(userFirebase.phoneNumber).update({
-                                phoneNumber: userFirebase.phoneNumber,
-                                uid: userFirebase.uid,
-                                photoURL: userFirebase.phoneNumber + USER_LINK_PHOTO_URL,
-                            }).then(() => {
-                                //window.location.href = "/profil";
-                            });
-                            */
                             const _user = JSON.parse(JSON.stringify(user));
                             _user.authorized = true;
                             setUser(_user);
-                            //window.location.href = "/profil";
                         }
                     }).catch((error) => {
                         console.log("Error getting document:", error);
@@ -150,17 +109,10 @@ export default function Login(props) {
             direction={'column'}
             justifyContent={'center'}
             alignItems={'center'}
-            //columns={{xs:12}}
             pb={10}
-            //pl={1}
-            sx={{
-
-                //bgcolor: 'cyan'
-            }}
         >
             <Grid item p={0} style={{ textAlign: 'center', }}>
                 <div id="firebaseui-auth-container"></div>
-                {/* <div id="loader">Loading...</div> */}
                 <div id="loader">
                     <PermanentBackdrop />
                 </div>
