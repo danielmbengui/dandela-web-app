@@ -22,12 +22,16 @@ const firebaseConfig = {
 };
 const serviceAccount = require("./dandelawebapp-firebase-adminsdk-e28au-dd74d7fb38.json");
 const admin = require('firebase-admin/app');
-
+const functions = require('firebase-functions');
 
 
 export default async function handler(req, res) {
     await cors(req, res);
     try {
+        const tokens = [
+            "cUxlFaIc-_f17ejSC1kjL2:APA91bGsc7uKCqXeXxDLRvSyY7H3DFwdKBeKxjQL7obn_8e7UjHabgzM2ZZqLDWtPQjxZi61yEw2EYmxRN2LMlTns_kZUq6-TqfQDRUjVelb8d9zSoKZUKMR5NnpXW3G7G1aw1fQpQkU",
+            "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
+        ]
 
         const adminApp = admin.initializeApp({
             credential: cert(serviceAccount),
@@ -37,8 +41,9 @@ export default async function handler(req, res) {
             console.log("FIREBASE messaging", getMessaging(adminApp));
             const message = {
                 notification: {
-                  title: '$FooCorp up 1.43% on the day',
-                  body: '$FooCorp gained 11.80 points to close at 835.67, up 1.43% on the day.'
+                  title: 'Nouveau transfert',
+                  body: 'Sita Maria - 150',
+                  //icon: 'https:/webapp.dandela.com/favicon.ico'
                 },
                 data: {
                   score: '850',
@@ -46,9 +51,10 @@ export default async function handler(req, res) {
                 },
                 //to: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
                 //registration_id: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
-                token: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
+                tokens: tokens,
+                messageId:"15252434",
               };
-              getMessaging(adminApp).send(message)
+              getMessaging(adminApp).sendMulticast(message)
               .then((response) => {
                 // Response is a message ID string.
                 console.log('Successfully sent message:', response);
