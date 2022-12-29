@@ -296,11 +296,16 @@ function Dashboard(props) {
                             </Grid>
                         </Grid>
                         {children}
-                        <Button onClick={() => {
+                        {
+                            /**
+                             * <Button onClick={() => {
                             requestPermission();
                         }}>
-                            Notif
+                          Notif
                         </Button>
+                             */
+                        }
+                          
                         <Typography sx={{ display: 'none' }} paragraph>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                             tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non

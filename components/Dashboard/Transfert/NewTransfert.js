@@ -125,7 +125,7 @@ export default function NewTransfert({ langage, firestore, logo }) {
       _transfert.uid = newTransfertRef.id;
       _transfert.code = createRandomCode();
       _transfert.receiver = receiver;
-      _transfert.amount = amount;
+      _transfert.amount = parseInt(amount);
       _transfert.date_create = new Date();
       _transfert.date_last_edit = new Date();
       _transfert.receipt_receiver = false;

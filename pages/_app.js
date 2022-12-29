@@ -19,7 +19,12 @@ import { getMessaging, getToken } from "firebase/messaging";
 import axios from "axios";
 //import { messaging } from "../public/firebase-messaging-sw";
 require('dotenv').config();
+
+
 initAuth();
+
+
+
 import Script from 'next/script'
 import { initializeApp } from "firebase-admin/app";
 import { applicationDefault } from "firebase-admin/app";
@@ -248,8 +253,7 @@ function App({ Component, pageProps, }) {
   }
 
   return (
-    <Provider store={store}>
-      <ThemeModeProvider screenMode={screenMode}>
+    <ThemeModeProvider screenMode={screenMode}>
         <UserProvider >
           <Head>
             <title>Dandela Web App</title>
@@ -269,7 +273,6 @@ function App({ Component, pageProps, }) {
           />
         </UserProvider>
       </ThemeModeProvider>
-    </Provider>
   )
 }
 

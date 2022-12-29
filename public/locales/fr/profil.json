@@ -18,5 +18,6 @@
     "edit": "modifier",
     "Edit": "Modifier",
     "Suisse": "Suisse",
-    "Admin": "Administrateur"
+    "Admin": "Administrateur",
+    "messageSucces": "Utilisateur modifié avec succès!"
 }

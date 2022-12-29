@@ -31,46 +31,62 @@ export default async function handler(req, res) {
         const tokens = [
             "cUxlFaIc-_f17ejSC1kjL2:APA91bGsc7uKCqXeXxDLRvSyY7H3DFwdKBeKxjQL7obn_8e7UjHabgzM2ZZqLDWtPQjxZi61yEw2EYmxRN2LMlTns_kZUq6-TqfQDRUjVelb8d9zSoKZUKMR5NnpXW3G7G1aw1fQpQkU",
             "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
+            "cKQ-cj4WcckfT3l-lg9X_E:APA91bEuVXurZUvaVHJHR2kTfZo7k44oYFjJiMSxhaU4zqYpleKnexgsIfB0z2M3P2HkYkzEaqksNwYFLkna4Nw6d9d2w2lCl3Xs0P9YTbr5PgVdpay0gpQfkRSoVV0QGwrVuGgIWWKk",
         ]
 
         const adminApp = admin.initializeApp({
             credential: cert(serviceAccount),
         }, 'admin');
-       
-            console.log("FIREBASE asdmin", adminApp);
-            console.log("FIREBASE messaging", getMessaging(adminApp));
-            const message = {
-                notification: {
-                  title: 'Nouveau transfert',
-                  body: 'Sita Maria - 150',
-                  //icon: 'https:/webapp.dandela.com/favicon.ico'
-                },
-                data: {
-                  score: '850',
-                  time: '2:45'
-                },
-                //to: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
-                //registration_id: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
-                tokens: tokens,
-                messageId:"15252434",
-              };
-              getMessaging(adminApp).sendMulticast(message)
-              .then((response) => {
+
+        console.log("FIREBASE asdmin", adminApp);
+        console.log("FIREBASE messaging", getMessaging(adminApp));
+        const message = {
+            notification: {
+                title: 'Nouveau transfert',
+                body: 'Sita Maria - 150',
+                //icon: 'https:/webapp.dandela.com/favicon.ico'
+            },
+            data: {
+                score: '850',
+                time: '2:45'
+            },
+            //to: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
+            //registration_id: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
+            tokens: tokens,
+            //messageId:"15252434",
+        };
+        getMessaging(adminApp).sendMulticast(message)
+            .then((response) => {
                 // Response is a message ID string.
                 console.log('Successfully sent message:', response);
                 adminApp.delete('admin');
-              })
-              .catch((error) => {
+            })
+            .catch((error) => {
                 console.log('Error sending message:', error);
-                
-              });
-              // Send a message to the device corresponding to the provided
-              // registration token.
-              /*
-             
-                */
 
-        
+            });
+            /**
+             * firestore.collection(COLLECTION_USER).doc(_user.phoneNumber).update({
+                tokens: _user.tokens,
+              })
+                .then(() => {
+                  console.log("Document successfully updated!");
+                  //window.location.href = '/about';
+  
+                })
+                .catch((error) => {
+                  // The document probably doesn't exist.
+                  console.error("Error updating document: ", error);
+                  //window.location.href = '/login/errorlogin';
+                });
+             */
+        // Send a message to the device corresponding to the provided
+        // registration token.
+        /*
+       
+          */
+
+
         //console.log('AAAAAAAADMIN', adminApp);
 
 

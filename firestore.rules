@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+   function signedIn() {
+      //return request.auth.uid != null;
+      return true;
+    }
+    /*
+  match /{document=**} {
+      //allow read, write: if  true;
+      allow read, write, get, list, delete, update: if signedIn();
+    }
+    */
+  
+  match /TRANSFERT/{document=**} {
+      allow read, write, get, list, delete, update: if signedIn();
+    }
+     
+     match /USER/{document=**} {
+      allow read, write, get, list, delete, update: if signedIn();
+    }
+    
+     match /COUNTRY/{document=**} {
+      allow read, write, get, list, delete, update: if signedIn();
+    }
+    
+     match /CURRENCY/{document=**} {
+      allow read, write, get, list, delete, update: if signedIn();
+    }
+  }
+}

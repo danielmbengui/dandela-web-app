@@ -7,7 +7,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
 
 export default function InProgressPage({langage, setLangage, logo, user, firebase, firestore, storage, userFirebase, handleUserFirebase, handleUser, auth, dashboard, screenMode}) {
-    const { t, i18n } = useTranslation('transferts/inprogress')
+    const { t, i18n } = useTranslation('transferts/inprogress');
     useEffect(() => {
         onChangeLanguage(langage);
       }, [langage]);

@@ -19,6 +19,8 @@ const { Configuration, OpenAIApi } = require("openai");
 
 import { TextFieldCustom } from '../MyComponents/TextFieldCustom';
 import { AccordionCustom, AccordionDetailsCustom, AccordionSummaryCustom } from '../MyComponents/AccordionCustom';
+import { SnackbarProvider, useSnackbar } from 'notistack';
+
 
 const fontFamilyMain = [
   'ChangaOneRegular',
@@ -34,39 +36,35 @@ const fontFamilyMain = [
   '"Segoe UI Symbol"',
 ].join(',');
 
+function SnackBarCustomBis(props) {
+  const { t } = useTranslation('profil');
+  const { enqueueSnackbar } = useSnackbar();
+  const { user, showSnackBarSuccess, setShowSnackBarSuccess } = props;
 
-const Accordion = styled((props) => (
-  <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
-  border: `1px solid ${theme.palette.divider}`,
-  '&:before': {
-    display: 'none',
-  },
-}));
+  useEffect(() => {
+    if (showSnackBarSuccess) {
+      enqueueSnackbar(t('messageSucces'), { variant: 'success' });
+      enqueueSnackbar(`${t('Phone')} : ${user.phoneNumber}`);
+      setShowSnackBarSuccess(false);
+    }
+  }, [showSnackBarSuccess])
 
-const AccordionSummary = styled((props) => (
-  <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
-    {...props}
-  />
-))(({ theme }) => ({
-  backgroundColor:
-    theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, .05)'
-      : 'rgba(0, 0, 0, .03)',
-  flexDirection: 'row-reverse',
-  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-    transform: 'rotate(90deg)',
-  },
-  '& .MuiAccordionSummary-content': {
-    marginLeft: theme.spacing(1),
-  },
-}));
+  return (
+    <>
+    </>
+  );
+}
 
-const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  padding: theme.spacing(2),
-  //borderTop: '1px solid rgba(0, 0, 0, .125)',
-}));
+const ShowSnackBarSuccess = (props) => {
+  const { user, showSnackBarSuccess, setShowSnackBarSuccess } = props;
+
+  return (
+    <SnackbarProvider maxSnack={3} autoHideDuration={3000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+      <SnackBarCustomBis user={user} showSnackBarSuccess={showSnackBarSuccess} setShowSnackBarSuccess={setShowSnackBarSuccess} />
+    </SnackbarProvider>
+  );
+}
+
 
 export default function Profile({ firebase, firestore, storage }) {
   const theme = useTheme();
@@ -82,6 +80,9 @@ export default function Profile({ firebase, firestore, storage }) {
   const [photoFile, setPhotoFile] = useState(null);
 
   const [expanded, setExpanded] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [userEdit, setUserEdit] = useState(user);
+  const [showSnackBarSuccess, setShowSnackBarSuccess] = useState(false);
 
   const handleExpanded = (expanded) => {
     //console.log("EVENT Acoordeon", event.expanded);
@@ -108,76 +109,14 @@ export default function Profile({ firebase, firestore, storage }) {
     }
   }, [user, user.profilPhotoURL]);
 
-
-
-  /*
-    useEffect(() => {
-      setErrorName(user ? (user.displayName == '' ? true : false) : true);
-    }, [user]);
-    */
-
   const onChangeName = (e) => {
     setDisplayName(e.target.value);
+    if (e.target.value !== user.displayName) {
+      setEditing(true);
+    } else {
+      setEditing(false);
+    }
   }
-
-  /*
-const configuration = new Configuration({
-    organization: "org-pGzvq8dWxPVgP1htPYBS1yBD",
-    apiKey: "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",
-});
-const openai = new OpenAIApi(configuration);
-
-  //const chatGPT = require('chat-gpt');
-
-async function generateResponse() {
-  const response = await openai.listEngines();
-  console.log("CHATGPT response", response);
-  return response;
-}
-
-async function getTest() {
-  //axios.defaults.headers.common["Content-Type"] = "application/json";
-  //axios.defaults.headers.common["Authorization"] = `Bearer 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`;
-  const response = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt: "Say this is a test",
-    max_tokens: 3,
-    temperature: 0,
-    "top_p": 1,
-  "n": 1,
-  "stream": false,
-  "logprobs": null,
-  "stop": "\n",
-  });
-  return (response);
-}
-
-useEffect(() => {
-  generateResponse();
-  const playerJson = getTest();
-console.log("FFFFIRST TEST: ", playerJson);
-})
-*/
-  /*
-    useEffect(() => {
-      if (user) {
-        setDisplayName(user.displayName);
-        //setPassword(user.password);
-        if (user.photoURL) {
-          var profileImgRef = storageRef.child(`${user.photoURL}`);
-          profileImgRef.getDownloadURL()
-            .then((url) => {
-              setPhotoURL(url);
-            })
-            .catch((error) => {
-              // Handle any errors
-              setPhotoURL('');
-              console.log('Error URL');
-            });
-        }
-      }
-    }, [user])
-    */
 
   useEffect(() => {
     const image_input = document.querySelector("#image-input");
@@ -188,6 +127,11 @@ console.log("FFFFIRST TEST: ", playerJson);
         const srcUploaded = reader.result;
         setPhotoURL(srcUploaded);
         setPhotoFile(files[0]);
+        if (srcUploaded !== user.profilPhotoURL) {
+          setEditing(true);
+        } else {
+          setEditing(false);
+        }
         /*
         if (user) {
           var profileImgRef = storageRef.child(`${user.phoneNumber}${USER_LINK_PHOTO_URL}`);
@@ -220,8 +164,6 @@ console.log("FFFFIRST TEST: ", playerJson);
             
         }
         */
-
-        //setPhotoFile(files[0]);
       });
       reader.readAsDataURL(this.files[0]);
     });
@@ -270,7 +212,7 @@ console.log("FFFFIRST TEST: ", playerJson);
                   .then(() => {
                     console.log("Document successfully updated!");
                     //window.location.href = '/about';
-
+                    setShowSnackBarSuccess(true);
                   })
                   .catch((error) => {
                     // The document probably doesn't exist.
@@ -286,9 +228,6 @@ console.log("FFFFIRST TEST: ", playerJson);
                 console.log("Error USER", 'Error URL');
               });
           });
-
-
-
         }
         // Update successful
         // ...
@@ -299,12 +238,10 @@ console.log("FFFFIRST TEST: ", playerJson);
         // ...
       });
     }
-    //userApp.editingPhotoUrl = false;
-    //handleUser(userApp);
-
     console.log("USEEEEER aaaaa", userApp)
     setUser(userApp);
-    //window.location.href = '/about';
+    setShowSnackBarSuccess(false);
+    setEditing(false);
   }
 
   return (
@@ -442,7 +379,9 @@ console.log("FFFFIRST TEST: ", playerJson);
 
 
 
-            <Grid container pt={3} justifyContent={'center'}>
+            <Grid container pt={3} justifyContent={'center'} sx={{
+              display: editing ? 'flex' : 'none'
+            }}>
               <Button variant='contained' onClick={() => {
                 //setDisplayName('Claav');
                 //setPassword('123456');
@@ -458,6 +397,7 @@ console.log("FFFFIRST TEST: ", playerJson);
         </Grid>
 
       </Grid>
+      <ShowSnackBarSuccess user={user} showSnackBarSuccess={showSnackBarSuccess} setShowSnackBarSuccess={setShowSnackBarSuccess} />
     </Grid>
   );
 }

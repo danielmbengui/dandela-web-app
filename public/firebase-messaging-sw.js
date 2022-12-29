@@ -14,6 +14,8 @@
 // are not available in the service worker.
 importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js');
+importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-functions.js');
+
 //importScripts('../.env');
 //import firebase, { app } from "../config.firebase";
 //import "firebase/messaging";
@@ -47,6 +49,20 @@ const firebaseConfig = {
 
 const app = firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging(app);
+/*
+const createTransfert = functions.firestore
+    .document(`TRANSFERT/{uid}`)
+    .onCreate((snap, context) => {
+      // Get an object representing the document
+      // e.g. {'name': 'Marie', 'age': 66}
+      const newValue = snap.data();
+      console.log("NEW CREATE", snap.data());
+      // access a particular field as you would any JS property
+      //const name = newValue.name;
+
+      // perform desired operations ...
+    });
+    */
 // Initialize Firebase Cloud Messaging and get a reference to the service
 //const messaging = firebase.messaging();
 //const messaging = getMessaging(app);

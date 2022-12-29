@@ -28,8 +28,9 @@ import { useTranslation } from 'react-i18next';
 export default function InProgressTransfert({ firestore, }) {
     const theme = useTheme();
     const [transfertList, setTransfertList] = useState([]);
-    const [user, setUser] = useUserContext();
+    const [user,] = useUserContext();
     const [transfert, setTransfert] = useState(null);
+    const [componentTransfert, setComponentTransfert] = useState(<></>);
     const [showTransfert, setShowTransfert] = useState(false);
     const [totalAmountList, setTotalAmountList] = useState(0);
 
@@ -57,16 +58,19 @@ export default function InProgressTransfert({ firestore, }) {
                     var transfertsLength = 0;
                     var totalAmount = 0;
                     querySnapshot.forEach((doc) => {
-                        const transfert = new Transfert(doc.data());
-                        console.log("DOC UID:", transfert);
-                        if (isTransfertInProgress(user, transfert)) {
-                            console.log("DATE create", transfert.date_create.seconds);
+                        const _transfert = new Transfert(doc.data());
+                        console.log("DOC UID:", _transfert);
+                        if (isTransfertInProgress(user, _transfert)) {
+                            console.log("DATE create", _transfert.date_create.seconds);
                             
-                            transferts.push(transfert);
+                            transferts.push(_transfert);
                             transfertsLength++;
                             
-                            totalAmount += parseInt(transfert.amount);
-                        }                        
+                            totalAmount += parseInt(_transfert.amount);
+                        } 
+                        if (transfert && transfert.uid === _transfert.uid) {
+                            setTransfert(_transfert);
+                        }                   
                     });
                     setTotalAmountList(totalAmount);
                     setTransfertList(transferts);
@@ -105,7 +109,7 @@ export default function InProgressTransfert({ firestore, }) {
             console.log("LOCAAALES", locales[i], n.toLocaleString(locales[i], opts));
         }
 
-    }, [user]);
+    }, [user, transfert && transfert.receiver]);
 
     return (
         <Box sx={{ width: '100%', bgcolor: 'var(--background-color)' }}>
@@ -120,6 +124,7 @@ export default function InProgressTransfert({ firestore, }) {
                                     onClick={() => {
                                         setTransfert(item);
                                         setShowTransfert(true);
+                                        setComponentTransfert(<OneTransfertDialog firestore={firestore} uid={item.uid} setComponentTransfert={setComponentTransfert} />);
                                         console.log("CLIIIIICK", item,)
                                     }}
                                 >
@@ -216,7 +221,13 @@ export default function InProgressTransfert({ firestore, }) {
                     </Avatar>
                 </Grid>
             </Grid>
-            <OneTransfertDialog firestore={firestore} user={user} transfert={transfert} setTransfert={setTransfert} showTransfert={showTransfert} setShowTransfert={setShowTransfert} />
+            {componentTransfert}
+            {
+                /**
+                 * <OneTransfertDialog setComponentTransfert={setComponentTransfert} firestore={firestore} user={user} transfert={transfert} setTransfert={setTransfert} showTransfert={showTransfert} setShowTransfert={setShowTransfert} />
+                 */
+            }
+
         </Box>
     );
 }

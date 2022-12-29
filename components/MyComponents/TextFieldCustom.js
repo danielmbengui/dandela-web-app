@@ -17,7 +17,7 @@ const fontFamilyMain = [
     '"Segoe UI Symbol"',
   ].join(',');
   
-  export const TextFieldCustom = styled(TextField)(({ theme }) => ({
+  export const TextFieldCustom = styled(TextField)(({ theme, fontSize }) => ({
     '& .MuiInputLabel-root': {
       fontFamily: fontFamilyMain,
       color:'var(--primary)',
@@ -25,7 +25,6 @@ const fontFamilyMain = [
     },
     '& .MuiInputBase-root': {
       color: 'var(--primary)',
-      'borderColor': 'red',
       /*
     borderRadius: 4,
     position: 'relative',
@@ -44,6 +43,7 @@ const fontFamilyMain = [
     */
       // Use the system font instead of the default Roboto font.
       fontFamily: fontFamilyMain,
+      fontSize: fontSize ? fontSize : 'large'
       /*
       '&:focus': {
         boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
