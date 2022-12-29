@@ -22,7 +22,7 @@ const firebaseConfig = {
 };
 const serviceAccount = require("./dandelawebapp-firebase-adminsdk-e28au-dd74d7fb38.json");
 const admin = require('firebase-admin/app');
-const functions = require('firebase-functions');
+//const functions = require('firebase-functions');
 
 
 export default async function handler(req, res) {
