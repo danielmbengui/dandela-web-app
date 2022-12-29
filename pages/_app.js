@@ -18,8 +18,8 @@ import { getLangageStorage, getScreenModeStorage } from "../functions/storage/Us
 import { getMessaging, getToken } from "firebase/messaging";
 import axios from "axios";
 //import { messaging } from "../public/firebase-messaging-sw";
+//import usePWA from 'react-pwa-install-prompt';
 require('dotenv').config();
-
 
 initAuth();
 

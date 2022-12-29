@@ -25,14 +25,23 @@ import Footer from './Footer';
 import BarApp from './BarApp/BarApp';
 import { COMPANY_NAME, LANGAGE_ENGLISH, LANGAGE_FRENCH, LANGAGE_PORTUGUESE, STORAGE_LANGAGE, USER_TYPE_ADMIN } from '../../constants';
 import AdminComponent from './Menu/AdminComponent';
-import InstallApp from '../InstallApp/InstallApp';
+//import InstallApp from '../InstallApp/InstallApp';
 import { useUserContext } from '../../context/UserProvider';
 import { useTranslation } from 'next-i18next';
 import { GB, FR, PT } from 'country-flag-icons/react/3x2';
 import styles from './Dashboard.module.css';
 import { updateLangageStorage } from '../../functions/storage/UserStorageFunctions';
 import { Button } from '@mui/material';
+import InstallApp from '../InstallApp/InstallApp';
 //import { getMessaging, getToken } from "firebase/messaging";
+import { styled } from '@mui/material/styles';
+
+const MaterialUIButton = styled(Button)(() => ({
+    backgroundColor: 'var(--primary)',
+    fontFamily: 'ChangaOneRegular',
+    color: 'var(text-secondary)',
+}));
+
 
 //const messaging = getMessaging();
 // Add the public key generated from the console here.
@@ -45,24 +54,71 @@ const drawerWidth = 300;
 function requestPermission() {
     console.log('Requesting permission...');
     Notification.requestPermission().then((permission) => {
-      if (permission === 'granted') {
-        console.log('Notification permission granted.');
-        alert('Notification permission granted.')
-      }
-    })}
+        if (permission === 'granted') {
+            console.log('Notification permission granted.');
+            alert('Notification permission granted.')
+        }
+    })
+}
 
 function Dashboard(props) {
     const { t, i18n } = useTranslation('common');
     const { langage, setLangage, windowDashboard, children, firebase, pages, title, storage, } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [user, ] = useUserContext();
+    const [user,] = useUserContext();
     const [isAdmin, setIsAdmin] = useState(user ? user.type === USER_TYPE_ADMIN : false);
+    const [contentInstall, setContentInstall] = useState(<></>);
 
     useEffect(() => {
         if (user) {
             setIsAdmin(user.type === USER_TYPE_ADMIN);
         }
     }, [user]);
+
+    useEffect(() => {
+        if (window && 'serviceWorker' in navigator) {
+            //console.log("navigator", window.navigator);
+            let deferredPrompt;
+            window.addEventListener('beforeinstallprompt', (e) => {
+                // Prevents the default mini-infobar or install dialog from appearing on mobile
+                e.preventDefault();
+                console.log("beforeinstallprompt InstallApp", 'okay');
+                // Save the event because you'll need to trigger it later.
+                deferredPrompt = e;
+                // Show your customized install prompt for your PWA
+                // Your own UI doesn't have to be a single element, you
+                // can have buttons in different locations, or wait to prompt
+                // as part of a critical journey.
+                //showInAppInstallPromotion();
+                setContentInstall(<Grid className={styles.installInstructions} container direction={'column'}>
+                    <Grid item>
+                        <div className={styles.grid}>
+                            <div className={styles.card}>
+                                <p style={{ paddingBottom: '2vh', }}>Installer l&apos;application sur mobile/ordinateur.</p>
+                                <MaterialUIButton variant="contained" onClick={async () => {
+                                    // deferredPrompt is a global variable we've been using in the sample to capture the `beforeinstallevent`
+                                    deferredPrompt.prompt();
+                                    // Find out whether the user confirmed the installation or not
+                                    const { outcome } = await deferredPrompt.userChoice;
+                                    // The deferredPrompt can only be used once.
+                                    deferredPrompt = null;
+                                    // Act on the user's choice
+                                    if (outcome === 'accepted') {
+                                        console.log('User accepted the install prompt.');
+                                    } else if (outcome === 'dismissed') {
+                                        console.log('User dismissed the install prompt');
+                                    }
+                                }}>
+                                    Install
+                                </MaterialUIButton>
+                            </div>
+                        </div>
+                    </Grid>
+                </Grid>)
+            });
+
+        }
+    })
 
     const onChangeLanguage = (_language) => {
         i18n.changeLanguage(_language);
@@ -112,7 +168,7 @@ function Dashboard(props) {
                 newtransfertPage={pages.newtransfert} />
             <Divider />
             {
-                isAdmin && <div style={{display:'none'}}>
+                isAdmin && <div style={{ display: 'none' }}>
                     <AdminComponent user={user} openSub={pages.users || pages.countries || pages.statistics} pages={{
                         users: pages.users,
                         countries: pages.countries,
@@ -289,7 +345,7 @@ function Dashboard(props) {
                         }}
                     >
                         <Toolbar />
-                        <InstallApp />
+                        {contentInstall}
                         <Grid container direction={'row'} justifyContent={'center'} alignItems={'center'}>
                             <Grid item>
                                 <h1 style={{ fontFamily: 'ChangaOneRegular' }}>{title}</h1>
@@ -305,7 +361,7 @@ function Dashboard(props) {
                         </Button>
                              */
                         }
-                          
+
                         <Typography sx={{ display: 'none' }} paragraph>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                             tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
