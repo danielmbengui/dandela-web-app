@@ -13,7 +13,7 @@ import { SnackbarProvider, useSnackbar } from 'notistack';
 function SnackBarCustomBis(props) {
   const { t } = useTranslation('transferts/new');
   const { enqueueSnackbar } = useSnackbar();
-  const { transfert, showSnackBarSuccess, setShowSnackBarSuccess } = props;
+  const { user, transfert, showSnackBarSuccess, setShowSnackBarSuccess } = props;
 
   useEffect(() => {
     if (showSnackBarSuccess) {
@@ -127,15 +127,16 @@ export default function NewTransfert({ langage, firestore, logo }) {
       _transfert.receiver = receiver;
       _transfert.amount = parseInt(amount);
       _transfert.date_create = new Date();
-      _transfert.date_last_edit = new Date();
+      _transfert.user_create_uid = user.uid;
+      _transfert.addDateLastEdit(new Date());
       _transfert.receipt_receiver = false;
       _transfert.date_receipt_receiver = '';
       _transfert.receipt_dandela = false;
       _transfert.date_receipt_dandela = '';
       _transfert.receipt_sender = false;
       _transfert.date_receipt_sender = '';
-      _transfert.valide = isTransfertValide;
-      _transfert.date_valide = isTransfertValide ? new Date() : '';
+      _transfert.valide = user.isAdmin;
+      _transfert.date_valide = user.isAdmin ? new Date() : '';
       // later...
       newTransfertRef.withConverter(transfertConverter).set(_transfert);
       initComponents();

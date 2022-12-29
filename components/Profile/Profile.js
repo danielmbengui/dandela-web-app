@@ -93,9 +93,6 @@ export default function Profile({ firebase, firestore, storage }) {
     dispatch(connectUser());
   }
   useEffect(() => {
-    updateUserInfo();
-    console.log("USER_REDUX Dashboard", user);
-    //setShowInstallApp(true);
   }, [user.uid, user.phoneNumber, user.type]);
 */
   useEffect(() => {

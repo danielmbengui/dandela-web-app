@@ -11,19 +11,22 @@ const UserContext = createContext();
 export default function UserProvider({ children }) {
     const [user, setUser] = useState(DEFAULT_USER);
     const [_user, _setUser] = useState(DEFAULT_USER);
+    const [uid, setUid] = useState(null);
     const [phoneNumber, setPhoneNumber] = useState(null);
     const [connected, setConnected] = useState(false);
 
     useEffect(() => {
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                setPhoneNumber(user.phoneNumber);
+        firebase.auth().onAuthStateChanged((_user) => {
+            if (_user) {
+                setPhoneNumber(_user.phoneNumber);
+                setUid(_user.uid);
                 setConnected(true);
-                console.log("onAuthStateChanged user", user.phoneNumber);
+                console.log("onAuthStateChanged user", _user.phoneNumber);
             } else {
                 console.log("onAuthStateChanged user", "null");
                 console.log("onAuthStateChanged USER", _user);
                 setPhoneNumber(null);
+                setUid(null);
                 setConnected(false);
             }
         });
@@ -57,23 +60,28 @@ export default function UserProvider({ children }) {
     }
 
     useEffect(() => {
-        if (phoneNumber && connected) {
-            initUserSnapshot(phoneNumber);
+        if (uid) {
+            initUserSnapshot(uid);
         } else {
             setUser(DEFAULT_USER);
         }
-    }, [phoneNumber]);
+    }, [uid]);
 
-    function initUserSnapshot(phoneNumber) {
+    function initUserSnapshot(uid) {
         var user = DEFAULT_USER;
-        const unsubscribe = firestore.collection(COLLECTION_USER).doc(phoneNumber)
+        const unsubscribe = firestore.collection(COLLECTION_USER).doc(uid)
             .withConverter(userConverter)
             .onSnapshot(async (doc) => {
-
                 if (doc.exists) {
                     // Convert to City object
                     user = new User(doc.data());
                     user.country = await getCountry(user.country_uid);
+                    firestore.collection(COLLECTION_USER).doc(uid)
+                    .withConverter(userConverter)
+                    .set(user)
+                    .then((data) => {
+                        console.log("Successfully update!"); 
+                    })
                     // Use a City instance method
                     console.log("USEEEEEER Class", user);
                     //setUser(_user);

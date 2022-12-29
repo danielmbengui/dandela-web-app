@@ -124,7 +124,7 @@ export default function InProgressTransfert({ firestore, }) {
                                     onClick={() => {
                                         setTransfert(item);
                                         setShowTransfert(true);
-                                        setComponentTransfert(<OneTransfertDialog firestore={firestore} uid={item.uid} setComponentTransfert={setComponentTransfert} />);
+                                        setComponentTransfert(<OneTransfertDialog user={user} firestore={firestore} uid={item.uid} setComponentTransfert={setComponentTransfert} />);
                                         console.log("CLIIIIICK", item,)
                                     }}
                                 >
