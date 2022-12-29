@@ -12,7 +12,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Typography from '@mui/material/Typography';
 import Slide from '@mui/material/Slide';
-import { Grid, Stack } from '@mui/material';
+import { Divider, Grid, Stack } from '@mui/material';
 import { formatTransfertCode } from '../../../functions/firestore/TransfertFunctions';
 import { COLLECTION_TRANSFERT } from '../../../constants';
 import { TextFieldCustom } from '../../MyComponents/TextFieldCustom';
@@ -167,6 +167,7 @@ export default function OneTransfertDialog(props) {
               }}>{transfert ? ` ${transfert.receiver}` : ''}</Typography>
             </Grid>
           </Grid>
+          <Divider sx={{color: 'var(--divider-color)'}} />
           <Grid container columns={{ xs: 12 }}
             sx={{
               bgcolor: 'red'
