@@ -253,7 +253,8 @@ function App({ Component, pageProps, }) {
   }
 
   return (
-    <ThemeModeProvider screenMode={screenMode}>
+    <Provider store={store}>
+      <ThemeModeProvider screenMode={screenMode}>
         <UserProvider >
           <Head>
             <title>Dandela Web App</title>
@@ -273,6 +274,7 @@ function App({ Component, pageProps, }) {
           />
         </UserProvider>
       </ThemeModeProvider>
+    </Provider>
   )
 }
 

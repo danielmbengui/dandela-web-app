@@ -38,8 +38,8 @@ export default async function handler(req, res) {
             credential: cert(serviceAccount),
         }, 'admin');
 
-        console.log("FIREBASE asdmin", adminApp);
-        console.log("FIREBASE messaging", getMessaging(adminApp));
+        //console.log("FIREBASE asdmin", adminApp);
+        //console.log("FIREBASE messaging", getMessaging(adminApp));
         const message = {
             notification: {
                 title: 'Nouveau transfert',
