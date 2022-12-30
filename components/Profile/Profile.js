@@ -210,11 +210,6 @@ export default function Profile({ firebase, firestore, storage }) {
                     console.log("Document successfully updated!");
                     //window.location.href = '/about';
                     setShowSnackBarSuccess(true);
-                  })
-                  .catch((error) => {
-                    // The document probably doesn't exist.
-                    console.error("Error updating document: ", error);
-                    //window.location.href = '/login/errorlogin';
                   });
                 setUser(userApp);
                 console.log("url photo!", url);
