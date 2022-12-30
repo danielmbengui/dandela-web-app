@@ -40,13 +40,13 @@ export default function UserProvider({ children }) {
     useEffect(() => {
         async function initRequestNotif() {
             if (("Notification" in window)) {
-                if (Notification.permission !== "denied") {
+                if (Notification.permission === "default") {
                     await requestPermission();
                 }
             }
         }
         initRequestNotif();
-    })
+    }, [])
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged((_user) => {
@@ -108,12 +108,6 @@ export default function UserProvider({ children }) {
                             messaging.onMessage((payload) => {
                                 console.log('[firebase-messaging-sw.js] Received message ', payload);
                             });
-                        } else {
-                            console.log('No registration token available. Request permission to generate one.');
-
-                            if (Notification.permission !== 'denied') {
-                                requestPermission();
-                            }
                         }
                     });
                 }
