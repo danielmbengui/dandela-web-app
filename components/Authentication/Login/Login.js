@@ -21,7 +21,7 @@ export default function Login() {
                     // or whether we leave that to developer to handle.
                     //handleUser(auth.currentUser);
                     var userFirebase = authResult.user;
-                    var docRef = firestore.collection(COLLECTION_USER).doc(userFirebase.phoneNumber);
+                    var docRef = firestore.collection(COLLECTION_USER).doc(userFirebase.uid);
 
                     docRef.get().then((doc) => {
                         if (!doc.exists) {
