@@ -36,24 +36,7 @@ const links = {
   errorlogin: "/account/errorlogin",
 }
 
-async function requestPermission() {
-  console.log('Requesting permission...');
-  await Notification.requestPermission().then((permission) => {
-    if (permission === 'granted') {
-      console.log('Notification permission granted.');
-      //alert('Notification permission granted.');
-      //return (true);
-    }
-  })
-}
 
-function isGranted() {
-  console.log('Requesting granted permission...');
-  if (Notification.permission === "granted") {
-    return (true);
-  }
-  return (false);
-}
 
 const showNotification = () => {
   // create a new notification
@@ -102,124 +85,7 @@ function App({ Component, pageProps, }) {
   console.log("HAAAASH", hash);
   console.log("ADMIN KEY", process.env.FIREBASE_ADMIN_PRIVATE_KEY_ID);
 
-  useEffect(() => {
 
-  }, [])
-  useEffect(() => {
-
-    //console.log('AAAAAAAADMIN', adminApp);
-    if (window) {
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-
-      gtag('config', 'GT-57Z6PD7');
-      gtag('event', 'conversion', { 'send_to': 'AW-599823263/44fACKGKqYYYEJ-ngp4C' });
-
-    }
-
-    async function initRequestNotif() {
-      if (("Notification" in window)) {
-        if (Notification.permission === "default") {
-          await requestPermission();
-          if (isGranted()) {
-            setIsNotif(true);
-          }
-        } else if (isGranted()) {
-          setIsNotif(true);
-        } else {
-          setIsNotif(false);
-        }
-      }
-    }
-    initRequestNotif();
-  })
-
-  useEffect(() => {
-    if (isGranted()) {
-      if (window && 'serviceWorker' in navigator) {
-        console.log('Firebase Worker Registered');
-        //const messaging = firebase.messaging(app);
-        //const messaging = getMessaging(app);
-        const messaging = firebase.messaging(app);
-        messaging.getToken({ validKey: 'BNokC6pq_1RHx0D17Tp2KKA7Hz2PuZ7AuAN1gwLQmSCy-heuLpZQsc1FPVnWeXjA9cB4W604jRBDTQIdfvRAA_4' }).then(async (currentToken) => {
-          if (currentToken) {
-            // Send the token to your server and update the UI if necessary
-            // ...
-            console.log('current token for client: ', currentToken);
-            const _user = await firestore.collection(COLLECTION_USER).doc("Wug9H3cqwCcBjGmrKEGyXX8siUm2")
-              .withConverter(userConverter)
-              .get().then((doc) => {
-                if (doc.exists) {
-                  return (new User(doc.data()));
-                }
-                return (null);
-              });
-            console.log("USER messaging gettoken before", _user);
-            firestore.collection(COLLECTION_USER).doc(_user.uid)
-              .withConverter(userConverter)
-              .update({
-                tokens: firebase.firestore.FieldValue.arrayUnion(currentToken),
-              })
-              .then(() => {
-                console.log("Document successfully updated!");
-                //window.location.href = '/about';
-
-              })
-              .catch((error) => {
-                // The document probably doesn't exist.
-                console.error("Error updating document: ", error);
-                //window.location.href = '/login/errorlogin';
-              });
-            console.log("USER messaging gettoken after", _user);
-
-
-
-
-            // Send a message to the device corresponding to the provided
-            // registration token.
-            /*
-            getMessaging().send(message)
-              .then((response) => {
-                // Response is a message ID string.
-                console.log('Successfully sent message:', response);
-              })
-              .catch((error) => {
-                console.log('Error sending message:', error);
-              });
-              */
-
-            //showNotification();
-            messaging.onMessage((payload) => {
-              console.log('[firebase-messaging-sw.js] Received message ', payload);
-              // Customize notification here
-              /*
-              const notificationTitle = 'Background Message Title';
-              const notificationOptions = {
-                body: 'Message body.',
-                icon: '/firebase-logo.png'
-              };
-  
-              self.registration.showNotification(notificationTitle,
-                notificationOptions);
-                */
-            });
-
-          } else {
-            // Show permission request UI
-            console.log('No registration token available. Request permission to generate one.');
-            // ...
-            //return (null);
-          }
-        }).catch((err) => {
-          console.log('An error occurred while retrieving token. ', err);
-          // ...
-          //return (null);
-        });
-      }
-
-    }
-  }, [])
   //const { state } = useContext(AppContext);
   //firebaseApp = initializeApp(firebaseConfig);
   /*

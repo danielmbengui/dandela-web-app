@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { firestore } from "../config.firebase";
+import { app, firestore } from "../config.firebase";
 import firebase from "../config.firebase";
 import { COLLECTION_COUNTRY, COLLECTION_CURRENCY, COLLECTION_USER, DEFAULT_USER } from "../constants";
 import User, { userConverter } from "../classes/UserClass";
@@ -18,6 +18,36 @@ export default function UserProvider({ children }) {
 
     const [currencySnap, setCurrencySnap] = useState(new Currency({}));
 
+    async function requestPermission() {
+        console.log('Requesting permission...');
+        await Notification.requestPermission().then((permission) => {
+            if (permission === 'granted') {
+                console.log('Notification permission granted.');
+                //alert('Notification permission granted.');
+                //return (true);
+            }
+        })
+    }
+
+    function isGranted() {
+        console.log('Requesting granted permission...');
+        if (Notification.permission === "granted") {
+            return (true);
+        }
+        return (false);
+    }
+
+    useEffect(() => {
+        async function initRequestNotif() {
+            if (("Notification" in window)) {
+                if (Notification.permission !== "denied") {
+                    await requestPermission();
+                }
+            }
+        }
+        initRequestNotif();
+    })
+
     useEffect(() => {
         firebase.auth().onAuthStateChanged((_user) => {
             if (_user) {
@@ -25,6 +55,30 @@ export default function UserProvider({ children }) {
                 setUid(_user.uid);
                 setConnected(true);
                 console.log("onAuthStateChanged user", _user.phoneNumber);
+                if (isGranted()) {
+                    if (window && 'serviceWorker' in navigator) {
+                        console.log('Firebase Worker Registered');
+                        const messaging = firebase.messaging(app);
+                        messaging.getToken({ validKey: 'BNokC6pq_1RHx0D17Tp2KKA7Hz2PuZ7AuAN1gwLQmSCy-heuLpZQsc1FPVnWeXjA9cB4W604jRBDTQIdfvRAA_4' }).then(async (currentToken) => {
+                            if (currentToken) {
+                                firestore.collection(COLLECTION_USER).doc(_user.uid)
+                                    .withConverter(userConverter)
+                                    .update({
+                                        tokens: firebase.firestore.FieldValue.arrayUnion(currentToken),
+                                    });
+                                messaging.onMessage((payload) => {
+                                    console.log('[firebase-messaging-sw.js] Received message ', payload);
+                                });
+                            } else {
+                                console.log('No registration token available. Request permission to generate one.');
+
+                                if (Notification.permission !== 'denied') {
+                                    requestPermission();
+                                }
+                            }
+                        });
+                    }
+                }
             } else {
                 console.log("onAuthStateChanged user", "null");
                 console.log("onAuthStateChanged USER", _user);
@@ -33,6 +87,7 @@ export default function UserProvider({ children }) {
                 setConnected(false);
             }
         });
+
 
     }, []);
 
@@ -68,10 +123,10 @@ export default function UserProvider({ children }) {
         } else {
             setUser(DEFAULT_USER);
         }
-        async function init () {
+        async function init() {
             const _currency = await getCurrencyFirestore("D67e1mNUB4beMUeIYr23");
             const _currencies = await getCurrenciesFirestore();
-            const _isCurrencyFirestore = await isCurrencyFirestore(new Currency({symbol: "CHF"}));
+            const _isCurrencyFirestore = await isCurrencyFirestore(new Currency({ symbol: "CHF" }));
             //addCurrencyFirestore(new Currency({}))
             console.log("UseEffect UserProvider isCurrencyFirestore", _isCurrencyFirestore);
             console.log("UseEffect UserProvider CURRENCIES", _currencies);
@@ -96,11 +151,11 @@ export default function UserProvider({ children }) {
                     user.uid = uid;
                     user.country = await getCountry(user.country_uid);
                     const userRef = firestore.collection(COLLECTION_USER).doc(uid)
-                    .withConverter(userConverter)
-                    .set(user)
-                    .then((data) => {
-                        console.log("Successfully update!"); 
-                    })
+                        .withConverter(userConverter)
+                        .set(user)
+                        .then((data) => {
+                            console.log("Successfully update!");
+                        })
                     // Use a City instance method
                     console.log("USEEEEEER Class", user);
                     //setUser(_user);
