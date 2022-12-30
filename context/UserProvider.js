@@ -87,7 +87,7 @@ export default function UserProvider({ children }) {
 
     function initUserSnapshot(uid) {
         var user = DEFAULT_USER;
-        const unsubscribe = firestore.collection(COLLECTION_USER).doc(uid)
+        const unsubscribe = firestore.collection(COLLECTION_USER).doc(phoneNumber)
             .withConverter(userConverter)
             .onSnapshot(async (doc) => {
                 if (doc.exists) {

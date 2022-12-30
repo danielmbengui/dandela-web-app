@@ -78,7 +78,7 @@ export default function NewTransfert({ firebase, langage, firestore, logo }) {
   const [percent, setPercent] = useState(PERCENT_15);
   const [percents, setPercents] = useState([]);
   const [isTransfertValide, setIsTransfertValide] = useState(false);
-  const [transfert, setTransfert] = useState(new Transfert({percent: PERCENT_15}));
+  const [transfert, setTransfert] = useState(new Transfert({ percent: PERCENT_15 }));
   const [showSnackBarSuccess, setShowSnackBarSuccess] = useState();
 
   function initComponents() {
@@ -89,7 +89,7 @@ export default function NewTransfert({ firebase, langage, firestore, logo }) {
     setErrorAmount(false);
     setMessageAmount('');
     setPercent(PERCENT_15);
-    setTransfert(new Transfert({percent: PERCENT_15}));
+    setTransfert(new Transfert({ percent: PERCENT_15 }));
   }
 
   useEffect(() => {
@@ -103,10 +103,10 @@ export default function NewTransfert({ firebase, langage, firestore, logo }) {
       setIsTransfertValide(true);
     }
     getPercentsSnapshot(setPercents);
-      console.log("PUTAIN DE SelectPercentComponent", percents);
+    console.log("PUTAIN DE SelectPercentComponent", percents);
   }, []);
 
-  
+
 
   useEffect(() => {
     if (errorReceiver)
@@ -160,11 +160,11 @@ export default function NewTransfert({ firebase, langage, firestore, logo }) {
         });
       }
       */
-     setTransfert(_transfert);
+      setTransfert(_transfert);
       setShowSnackBarSuccess(true);
       //initComponents();
       //setTransfert(_transfert);
-      
+
     }
   }
 
@@ -180,6 +180,26 @@ export default function NewTransfert({ firebase, langage, firestore, logo }) {
         spacing={2}
         mb={3}
       >
+        <Grid container columnSpacing={1} direction='row' alignItems={'center'}>
+          <Grid item>
+            <Typography sx={{
+              fontFamily: 'ChangaOneRegular',
+              color: 'var(--primary)',
+              fontSize: 'large'
+            }}>
+              Pourcentage
+            </Typography>
+          </Grid>
+          <Grid item>
+            <SelectPercentComponent
+              percent={percent}
+              setPercent={setPercent}
+              percents={percents}
+              setPercents={setPercents}
+            //disabled 
+            />
+          </Grid>
+        </Grid>
         <TextFieldCustom
           //fullWidth
           error={errorReceiver}
@@ -210,30 +230,7 @@ export default function NewTransfert({ firebase, langage, firestore, logo }) {
           //theme={theme}
           placeholder={t('Amount')}
         />
-        <Grid container columnSpacing={1} direction='row' alignItems={'center'}>
-          <Grid item>
-            <Typography sx={{
-              fontFamily: 'ChangaOneRegular',
-              color: 'var(--primary)',
-              fontSize: 'large'
-            }}>
-            Pourcentage
-            </Typography>
-          </Grid>
-      <Grid item>
-      <SelectPercentComponent 
-      percent={percent}
-      setPercent={setPercent}
-      percents={percents}
-      setPercents={setPercents}
-      transfert={transfert}
-      setTransfert={setTransfert}
-      //disabled 
-      />
-      </Grid>
-        </Grid>
-        <SelectGroupCustom  />
-        
+
       </Stack>
 
       <Button
