@@ -200,7 +200,7 @@ export default function Profile({ firebase, firestore, storage }) {
                 setPhotoURL(url);
                 userApp.profilPhotoURL = url;
 
-                await firestore.collection(COLLECTION_USER).doc(userApp.phoneNumber).update({
+                await firestore.collection(COLLECTION_USER).doc(userApp.uid).update({
                   displayName: displayName,
                   photoURL: userApp.photoURL,
                   profilPhotoURL: url,
