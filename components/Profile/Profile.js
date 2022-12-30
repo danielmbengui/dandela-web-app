@@ -183,44 +183,48 @@ export default function Profile({ firebase, firestore, storage }) {
       userFirebase.updateProfile({
         displayName: displayName,
         photoURL: userApp.photoURL,
-      }).then(() => {
-        if (photoURL && photoFile) {
-          var profileImgRef = storageRef.child(`${userApp.photoURL}`);
-          var profilPhotoURL = '';
-          var metadata = {
-            contentType: photoFile.type,
-          };
-          profileImgRef.put(photoFile, metadata).then((snapshot) => {
-            console.log('Uploaded a blob or file! Snapshot:', snapshot);
-            //userApp.photoURL = `${user.phoneNumber}${USER_LINK_PHOTO_URL}`;
-            //setPhotoURL(userApp.photoURL);
-            profileImgRef.getDownloadURL()
-              .then(async (url) => {
-                profilPhotoURL = url;
-                setPhotoURL(url);
-                userApp.profilPhotoURL = url;
+      }).then(async () => {
+        await firestore.collection(COLLECTION_USER).doc(userApp.uid).update({
+          displayName: displayName,
+          verified: true
+        })
+          .then(() => {
+            if (photoURL && photoFile) {
+              var profileImgRef = storageRef.child(`${userApp.photoURL}`);
+              var profilPhotoURL = '';
+              var metadata = {
+                contentType: photoFile.type,
+              };
+              profileImgRef.put(photoFile, metadata).then((snapshot) => {
+                console.log('Uploaded a blob or file! Snapshot:', snapshot);
+                profileImgRef.getDownloadURL()
+                  .then(async (url) => {
+                    profilPhotoURL = url;
+                    setPhotoURL(url);
+                    userApp.profilPhotoURL = url;
+                    await firestore.collection(COLLECTION_USER).doc(userApp.uid).update({
+                      photoURL: userApp.photoURL,
+                      profilPhotoURL: url,
+                    })
+                      .then(() => {
+                        console.log("Document successfully updated!");
+                        //window.location.href = '/about';
 
-                await firestore.collection(COLLECTION_USER).doc(userApp.uid).update({
-                  displayName: displayName,
-                  photoURL: userApp.photoURL,
-                  profilPhotoURL: url,
-                  verified: true
-                })
-                  .then(() => {
-                    console.log("Document successfully updated!");
-                    //window.location.href = '/about';
-                    setShowSnackBarSuccess(true);
+                      });
+                    setUser(userApp);
+                    console.log("url photo!", url);
+                  })
+                  .catch((error) => {
+                    // Handle any errors
+                    setPhotoURL('');
+                    console.log("Error USER", 'Error URL');
                   });
-                setUser(userApp);
-                console.log("url photo!", url);
-              })
-              .catch((error) => {
-                // Handle any errors
-                setPhotoURL('');
-                console.log("Error USER", 'Error URL');
               });
+            }
+            setShowSnackBarSuccess(true);
           });
-        }
+        //setShowSnackBarSuccess(true);
+
         // Update successful
         // ...
         // Set the "capital" field of the city 'DC'
