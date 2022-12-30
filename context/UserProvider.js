@@ -93,8 +93,9 @@ export default function UserProvider({ children }) {
                 if (doc.exists) {
                     // Convert to City object
                     user = new User(doc.data());
+                    user.uid = uid;
                     user.country = await getCountry(user.country_uid);
-                    firestore.collection(COLLECTION_USER).doc(uid)
+                    const userRef = firestore.collection(COLLECTION_USER).doc(uid)
                     .withConverter(userConverter)
                     .set(user)
                     .then((data) => {
