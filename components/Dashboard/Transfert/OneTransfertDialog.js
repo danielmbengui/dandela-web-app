@@ -24,6 +24,9 @@ import User, { userConverter } from '../../../classes/UserClass';
 import DialogCustom from '../../MyComponents/DialogCustom';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
+import LoadingButton from '@mui/lab/LoadingButton';
+import DialogEditTransfert from '../../MyComponents/DialogEditTransfert';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -79,6 +82,8 @@ export default function OneTransfertDialog(props) {
   const [receiptDandela, setReceiptDandela] = useState(false);
   const [receiptSender, setReceiptSender] = useState(false);
   const [editingMode, setEditingMode] = useState(false);
+  const [loadingEdit, setLoadingEdit] = useState(false);
+  const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
   useEffect(() => {
     firestore.collection(COLLECTION_TRANSFERT).doc(uid)
@@ -101,19 +106,19 @@ export default function OneTransfertDialog(props) {
                 } else {
                   _user.uid = _transfert.user_create_uid;
                   console.log("USER not finnnd", _user.uid);
-                  return (new User({uid: _transfert.user_create_uid}));
+                  return (new User({ uid: _transfert.user_create_uid }));
                 }
               })
           }
           _transfert.user_create = _userCreate;
           console.log("USER FIIIIIINAAAAAL", _userCreate);
           setTransfert(_transfert);
-            setReceiptReceiver(_transfert.receipt_receiver);
-            setReceiptSender(_transfert.receipt_sender);
-            setReceiptDandela(_transfert.receipt_dandela);
-            var _editingReceiver = _transfert.receiptReceiver != receiptReceiver;
-            console.log("REEECEIVER", receiptReceiver)
-            setEditingMode(_editingReceiver);
+          setReceiptReceiver(_transfert.receipt_receiver);
+          setReceiptSender(_transfert.receipt_sender);
+          setReceiptDandela(_transfert.receipt_dandela);
+          var _editingReceiver = _transfert.receiptReceiver != receiptReceiver;
+          console.log("REEECEIVER", receiptReceiver)
+          setEditingMode(_editingReceiver);
 
         } else {
           setTransfert(null);
@@ -131,10 +136,33 @@ export default function OneTransfertDialog(props) {
       setEditingMode(_editReceiver);
     } else {
       setEditingMode(false);
+      setLoadingEdit(false);
+      setShowConfirmationDialog(false);
     }
     console.log("REEEECEIVER 2", receiptReceiver, transfert ? transfert : null)
-  }, [transfert, receiptReceiver])
-  
+  }, [transfert, receiptReceiver]);
+
+  const onActionConfirm = () => {
+    const _transfert = JSON.parse(JSON.stringify(transfert));
+    _transfert.receipt_receiver = receiptReceiver;
+    console.log("click edit transfert", _transfert);
+    firestore.collection(COLLECTION_TRANSFERT).doc(transfert.uid)
+      .withConverter(transfertConverter)
+      .set(_transfert)
+      .then(() => {
+        setTransfert(_transfert);
+        //setReceiptReceiver(_transfert.receipt_receiver);
+        //setReceiptSender(_transfert.receipt_sender);
+        //setReceiptDandela(_transfert.receipt_dandela);
+        setEditingMode(false);
+        setLoadingEdit(false);
+        //console.log("edit success", new Transfert(doc.data()));
+        console.log("Document successfully updated!");
+      }).catch(() => {
+        console.log("edit error",);
+      })
+  }
+
 
   const handleClose = () => {
     setOpen(false);
@@ -304,7 +332,7 @@ export default function OneTransfertDialog(props) {
                     (transfert.user_create.displayName ? transfert.user_create.displayName :
                       (
                         (transfert.user_create.uid ? transfert.user_create.uid : (` ${transfert.user_create_uid}`))
-                      (transfert.user_create.uid ? transfert.user_create.uid : (` ${transfert.user_create_uid}`))
+                          (transfert.user_create.uid ? transfert.user_create.uid : (` ${transfert.user_create_uid}`))
                       )
                     )
                     : ''
@@ -315,6 +343,8 @@ export default function OneTransfertDialog(props) {
 
           <Grid container columns={{ xs: 12 }}
             direction={{ xs: 'column', sm: 'row' }}
+            justifyContent={'center'}
+            alignItems={'center'}
             sx={{
               //bgcolor: 'red'
               border: "3px solid var(--divider-color)",
@@ -339,11 +369,25 @@ export default function OneTransfertDialog(props) {
               //bgcolor: 'green',
               width: '100%'
             }}>
-              <CheckBoxCustom
+              {
+                
+user && user.type === USER_TYPE_EMPLOYE_ANGOLA ? <CheckBoxCustom
+                  //disabled
+                  checked={receiptReceiver}
+                  setChecked={setReceiptReceiver}
+                /> : (transfert && transfert.receipt_receiver ? <CheckCircleIcon color={'success'} /> : <CancelIcon color={'error'} />)
+                
+              }
+              
+              {
+                /*
+                <CheckBoxCustom
                 //disabled
                 checked={receiptReceiver}
                 setChecked={setReceiptReceiver}
               />
+              */
+              }
             </Grid>
           </Grid>
           <Grid container columns={{ xs: 12 }}
@@ -429,27 +473,48 @@ export default function OneTransfertDialog(props) {
         </Typography>
       </DialogContent>
       <DialogActions>
-        <Stack direction={'row'} spacing={1}>
-        <Button 
-        startIcon={<SaveIcon />}
-        variant={'contained'}
-        sx={{display:editingMode ? 'flex' : 'none'}}
-        >
-          Enregistrer
-        </Button>
-        <DialogCustom />
-        <Button autoFocus variant='contained' color='error' onClick={() => {
-          firestore.collection(COLLECTION_TRANSFERT).doc(transfert.uid).delete().then(() => {
-            handleClose();
-            console.log("Document successfully deleted!");
-          }).catch((error) => {
-            console.error("Error removing document: ", error);
-          });
-        }}>
-          Supprimer
-        </Button>
+        <Stack direction={'row'}>
+          <LoadingButton
+            loading={loadingEdit}
+            //loadingIndicator="Loading…"
+            startIcon={<ModeEditIcon />}
+            variant={'contained'}
+            sx={{ display: editingMode ? 'flex' : 'none' }}
+            onClick={() => {
+              setLoadingEdit(true);
+              setShowConfirmationDialog(true);
+            }}
+          >
+            Modifier
+          </LoadingButton>
+          {
+            transfert && <DialogEditTransfert
+              onActionConfirm={onActionConfirm}
+              transfert={transfert}
+              receiptReceiver={receiptReceiver}
+              open={showConfirmationDialog}
+              setOpen={setShowConfirmationDialog}
+              setLoadingEdit={setLoadingEdit}
+            />
+          }
+          {
+            /*
+  <DialogCustom />
+          <Button autoFocus variant='contained' color='error' onClick={() => {
+            firestore.collection(COLLECTION_TRANSFERT).doc(transfert.uid).delete().then(() => {
+              handleClose();
+              console.log("Document successfully deleted!");
+            }).catch((error) => {
+              console.error("Error removing document: ", error);
+            });
+          }}>
+            Supprimer
+          </Button>
+            */
+          }
         </Stack>
       </DialogActions>
+
     </BootstrapDialog>
   );
 }

@@ -15,7 +15,6 @@
 importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js');
 //importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-functions.js');
-
 //importScripts('../.env');
 //import firebase, { app } from "../config.firebase";
 //import "firebase/messaging";
@@ -27,10 +26,6 @@ importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js')
 //importScripts('/__/firebase/9.2.0/firebase-app-compat.js');
 //importScripts('/__/firebase/9.2.0/firebase-messaging-compat.js');
 //importScripts('/__/firebase/init.js');
-
-
-
-
 const firebaseConfig = {
   apiKey: "AIzaSyArSaR9DcR2UpEZxRrIb7FuhnyG5-TfWB8",
   authDomain: "dandelawebapp.firebaseapp.com",
@@ -40,13 +35,7 @@ const firebaseConfig = {
   appId: "1:277196487914:web:91bae7b1a1065c0a51eb93",
   measurementId: "G-MJ6X1M1YRR",
 };
-
-
-
 //firebase.initializeApp(firebaseConfig);
-
-
-
 const app = firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging(app);
 /*
@@ -59,7 +48,6 @@ const createTransfert = functions.firestore
       console.log("NEW CREATE", snap.data());
       // access a particular field as you would any JS property
       //const name = newValue.name;
-
       // perform desired operations ...
     });
     */
@@ -70,10 +58,7 @@ const createTransfert = functions.firestore
 // Initialize Cloud Storage and get a reference to the service
 //export const storage = firebase.storage(app);
 //const messaging = firebase.messaging();
-
-
 //export default firebase;
-
 // Retrieve an instance of Firebase Messaging so that it can handle background
 // messages.
 //const messaging = firebase.messaging(app);
@@ -86,7 +71,6 @@ messaging.onMessage((payload) => {
     body: 'Message body.',
     icon: '/firebase-logo.png'
   };
-
   self.registration.showNotification(notificationTitle,
     notificationOptions);
 });
@@ -97,9 +81,8 @@ messaging.onBackgroundMessage((payload) => {
   const notificationTitle = 'Background Message Title';
   const notificationOptions = {
     body: 'Background Message body.',
-    icon: '/img/logo.png'
+    icon: '/img/logo.png',
   };
-
   self.registration.showNotification(notificationTitle,
     notificationOptions);
 });
