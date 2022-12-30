@@ -5,15 +5,18 @@ import { COLLECTION_COUNTRY, COLLECTION_CURRENCY, COLLECTION_USER, DEFAULT_USER 
 import User, { userConverter } from "../classes/UserClass";
 import Country, { countryConverter } from "../classes/CountryClass";
 import Currency, { currencyConverter } from "../classes/CurrencyClass";
+import { addCurrencyFirestore, getCurrenciesFirestore, getCurrencyFirestore, getCurrencySnapshot, isCurrencyFirestore } from "../lib/firebase-functions/Currency/CurrencyFunctions";
 
 const UserContext = createContext();
 
 export default function UserProvider({ children }) {
     const [user, setUser] = useState(DEFAULT_USER);
-    const [_user, _setUser] = useState(DEFAULT_USER);
+    const [_user, _setUser] = useState(new User({}));
     const [uid, setUid] = useState(null);
     const [phoneNumber, setPhoneNumber] = useState(null);
     const [connected, setConnected] = useState(false);
+
+    const [currencySnap, setCurrencySnap] = useState(new Currency({}));
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged((_user) => {
@@ -65,7 +68,22 @@ export default function UserProvider({ children }) {
         } else {
             setUser(DEFAULT_USER);
         }
+        async function init () {
+            const _currency = await getCurrencyFirestore("D67e1mNUB4beMUeIYr23");
+            const _currencies = await getCurrenciesFirestore();
+            const _isCurrencyFirestore = await isCurrencyFirestore(new Currency({symbol: "CHF"}));
+            //addCurrencyFirestore(new Currency({}))
+            console.log("UseEffect UserProvider isCurrencyFirestore", _isCurrencyFirestore);
+            console.log("UseEffect UserProvider CURRENCIES", _currencies);
+            getCurrencySnapshot("D67e1mNUB4beMUeIYr23", setCurrencySnap);
+            //console.log("UseEffect UserProvider COUNTRY SNAP", currencySnap);
+        }
+        init();
     }, [uid]);
+
+    useEffect(() => {
+        console.log("UseEffect UserProvider CURRENCY SNAP", currencySnap);
+    }, [currencySnap]);
 
     function initUserSnapshot(uid) {
         var user = DEFAULT_USER;

@@ -86,12 +86,12 @@ const showError = () => {
 const admin = require("firebase-admin/app");
 
 function App({ Component, pageProps, }) {
-  
+
 
   //var serviceAccount = require("path/to/serviceAccountKey.json");
 
 
-  
+
   /**
    * initializeApp({
     credential: admin.credential.cert(serviceAccount)
@@ -147,35 +147,34 @@ function App({ Component, pageProps, }) {
             // Send the token to your server and update the UI if necessary
             // ...
             console.log('current token for client: ', currentToken);
-            const _user = await firestore.collection(COLLECTION_USER).doc("+41766795115")
-            .withConverter(userConverter)
-            .get().then((doc) => {
-              if( doc.exists) {
-                return (new User(doc.data()));
-              }
-              return (null);
-            });
+            const _user = await firestore.collection(COLLECTION_USER).doc("Wug9H3cqwCcBjGmrKEGyXX8siUm2")
+              .withConverter(userConverter)
+              .get().then((doc) => {
+                if (doc.exists) {
+                  return (new User(doc.data()));
+                }
+                return (null);
+              });
             console.log("USER messaging gettoken before", _user);
-            if (!_user.tokens.includes(currentToken)) {
-              _user.addToken(currentToken);
-              firestore.collection(COLLECTION_USER).doc(_user.phoneNumber).update({
-                tokens: _user.tokens,
+            firestore.collection(COLLECTION_USER).doc(_user.uid)
+              .withConverter(userConverter)
+              .update({
+                tokens: firebase.firestore.FieldValue.arrayUnion(currentToken),
               })
-                .then(() => {
-                  console.log("Document successfully updated!");
-                  //window.location.href = '/about';
-  
-                })
-                .catch((error) => {
-                  // The document probably doesn't exist.
-                  console.error("Error updating document: ", error);
-                  //window.location.href = '/login/errorlogin';
-                });
-            }
+              .then(() => {
+                console.log("Document successfully updated!");
+                //window.location.href = '/about';
+
+              })
+              .catch((error) => {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+                //window.location.href = '/login/errorlogin';
+              });
             console.log("USER messaging gettoken after", _user);
-            
-            
-              
+
+
+
 
             // Send a message to the device corresponding to the provided
             // registration token.

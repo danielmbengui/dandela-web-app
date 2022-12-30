@@ -13,7 +13,13 @@ export const COLLECTION_USER_TYPE = 'USER_TYPE';
 export const COLLECTION_TRANSFERT = 'TRANSFERT';
 export const COLLECTION_COUNTRY = 'COUNTRY';
 export const COLLECTION_CURRENCY = 'CURRENCY';
+export const COLLECTION_PERCENT = 'PERCENT';
 
+export const DEFAULT_PERCENT = {
+    uid: '',
+    name: '',
+    symbol: '',
+};
 export const DEFAULT_CURRENCY = {
     uid: '',
     name: '',
@@ -59,6 +65,11 @@ export const USER_LINK_PHOTO_URL = "/profil";
 export const TRANSFERT_STATE_NO_VALID = "Non valide";
 export const TRANSFERT_STATE_IN_PROGRESS = "En cours";
 export const TRANSFERT_STATE_FINISHED = "Terminé";
+
+export const PERCENT_0 = 0;
+export const PERCENT_5 = 0.05;
+export const PERCENT_10 = 0.10;
+export const PERCENT_15 = 0.15;
 
 /* --------------- STORAGE -------------- */
 export const STORAGE_UID = 'uid';

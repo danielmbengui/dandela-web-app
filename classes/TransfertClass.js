@@ -1,8 +1,9 @@
 import User from "./UserClass";
 
 class Transfert {
-    constructor({uid = null, code = null, receiver = null, sender = null, amount = null,
-        date_create = null, date_last_edit = [], 
+    constructor({uid = null, code = null, receiver = null, sender = null, 
+        amount = null, percent = null, fees = null, total = null,
+        date_create = null, date_last_edits = [], 
         date_receipt_receiver = null, date_receipt_dandela = null, date_receipt_sender = null,
         date_valide= null,
         receipt_receiver = null, receipt_dandela = null, receipt_sender = null, 
@@ -13,11 +14,14 @@ class Transfert {
         this.code = code;
         this.receiver = receiver;
         this.amount = amount;
+        this.percent = percent;
+        this.fees = fees;
+        this.total = total;
 
         this.date_create = date_create;
         this.user_create_uid = user_create_uid;
         
-        this.date_last_edit = date_last_edit;
+        this.date_last_edits = date_last_edits;
         this.user_edit_uids = user_edit_uids;
 
         this.date_valide = date_valide;
@@ -30,12 +34,12 @@ class Transfert {
         this.valide = valide;
         /* CUSTOM variables */
         this.user_create = new User({});
-        this.user_edit = [];
+        this.user_edits = [];
     }
 
     addDateLastEdit(date) {
-        if (!this.date_last_edit.includes(date)) {
-            this.date_last_edit.push(date);
+        if (!this.date_last_edits.includes(date)) {
+            this.date_last_edits.push(date);
         }
     }
 
@@ -45,8 +49,11 @@ class Transfert {
             "CODE: " + this.code,
             "DESTINATAIRE: " + this.receiver,
             "MONTANT: " + this.amount,
+            "PERCENT: " + this.percent,
+            "FEES: " + this.fees,
+            "TOTAL: " + this.total,
             "DATE CREATION: " + this.date_create,
-            "DATE LAST MODIF: " + this.date_last_edit,
+            "DATE LAST MODIF: " + this.date_last_edits,
             "DATE RECU ANGOLA: " + this.date_receipt_receiver,
             "DATE RECU AGENCE: " + this.date_receipt_dandela,
             "DATE RECU CLIENT: " + this.date_receipt_sender,
@@ -69,8 +76,11 @@ export const transfertConverter = {
             code: transfert.code,
             receiver: transfert.receiver,
             amount: transfert.amount,
+            percent: transfert.percent,
+            fees: transfert.fees,
+            total: transfert.total,
             date_create: transfert.date_create,
-            date_last_edit: transfert.date_last_edit,
+            date_last_edits: transfert.date_last_edits,
             date_receipt_receiver: transfert.date_receipt_receiver,
             date_receipt_dandela: transfert.date_receipt_dandela,
             date_receipt_sender: transfert.date_receipt_sender,
@@ -85,8 +95,9 @@ export const transfertConverter = {
     },
     fromFirestore: function(snapshot, options){
         const data = snapshot.data(options);
-        return new Transfert({uid:data.uid, code: data.code, receiver: data.receiver, amount: data.amount, 
-            date_create: data.date_create, date_last_edit: data.date_last_edit, 
+        return new Transfert({uid:data.uid, code: data.code, receiver: data.receiver, 
+            amount: data.amount,  percent: data.percent, fees: data.fees, total: data.total, 
+            date_create: data.date_create, date_last_edits: data.date_last_edits, 
             date_receipt_receiver: data.date_receipt_receiver, date_receipt_dandela: data.date_receipt_dandela, date_receipt_sender: data.date_receipt_sender,
             date_valide: data.date_valide,
             receipt_receiver: data.receipt_receiver, receipt_dandela: data.receipt_dandela, receipt_sender: data.receipt_sender,

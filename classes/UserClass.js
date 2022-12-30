@@ -12,18 +12,12 @@ class User {
         this.profilPhotoURL = profilPhotoURL;
         this.type = type;
         this.country_uid = country_uid;
-        this.country = new Country({});
         this.verified = verified;
         this.tokens = tokens;
         /* CUSTOM variables */
         this.authorized = phoneNumber && verified;
         this.isAdmin = type === USER_TYPE_ADMIN;
-    }
-
-    addToken(token) {
-        if (!this.tokens.includes(token)) {
-            this.tokens.push(token);
-        }
+        this.country = new Country({});
     }
 
     toString() {

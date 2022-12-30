@@ -1,32 +1,28 @@
-class Currency {
-    constructor({uid = '', name = '', symbol = '',}) {
+class Percent {
+    constructor({uid = null, value = '', }) {
             /* FIRESTORE variables */
             this.uid = uid;
-        this.name = name;
-        this.symbol = symbol;
-        
+        this.value = value;        
     }
     toString() {
         return [
             "UID: " + this.uid, 
-            "NAME: " + this.name, 
-            "SYMBOL: " + this.symbol,
+            "VALUE: " + this.value, 
         ].join(', ');
     }
 }
 
 // Firestore data converter
-export const currencyConverter = {
-    toFirestore: function(currency) {
+export const percentConverter = {
+    toFirestore: function(percent) {
         return {
-            uid: currency.uid,
-            name: currency.name,
-            symbol: currency.symbol,
+            uid: percent.uid,
+            value: percent.value,
             };
     },
     fromFirestore: function(snapshot, options){
         const data = snapshot.data(options);
-        return new Currency({uid: data.uid, name: data.name, symbol: data.symbol,});
+        return new Percent({uid: data.uid, value: data.value,});
         /*
 uid = null, phoneNumber = null, displayName = '', photoURL = '', profilPhotoURL = '',
         verified=false, screenMode=DEFAULT_SCREEN_MODE
@@ -34,4 +30,4 @@ uid = null, phoneNumber = null, displayName = '', photoURL = '', profilPhotoURL 
     }
 };
 
-export default Currency;
+export default Percent;

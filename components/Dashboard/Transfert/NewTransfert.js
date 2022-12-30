@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { Button, Stack } from "@mui/material";
+import { Button, Grid, Stack, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import Transfert, { transfertConverter } from "../../../classes/TransfertClass";
-import { COLLECTION_TRANSFERT, USER_TYPE_ADMIN } from "../../../constants";
+import { COLLECTION_TRANSFERT, DEFAULT_PERCENT, PERCENT_15, USER_TYPE_ADMIN } from "../../../constants";
 import { useUserContext } from "../../../context/UserProvider";
 import { createRandomCode, formatTransfertCode } from "../../../functions/firestore/TransfertFunctions";
 import SlideInDialog from "../../MyComponents/SlideInDialog";
 import SnackBarCustom from "../../MyComponents/SnackBarCustom";
 import { TextFieldCustom } from "../../MyComponents/TextFieldCustom";
 import { SnackbarProvider, useSnackbar } from 'notistack';
+import SelectGroupCustom from "../../MyComponents/SelectGroupCustom";
+import { getPercentSnapshot, getPercentsSnapshot } from "../../../lib/firebase-functions/Percent/PercentFunctions";
+import SelectPercentComponent from "../../MyComponents/SelectPercentComponent";
 
 function SnackBarCustomBis(props) {
   const { t } = useTranslation('transferts/new');
   const { enqueueSnackbar } = useSnackbar();
-  const { user, transfert, showSnackBarSuccess, setShowSnackBarSuccess } = props;
+  const { user, initComponents, transfert, showSnackBarSuccess, setShowSnackBarSuccess } = props;
 
   useEffect(() => {
     if (showSnackBarSuccess) {
       enqueueSnackbar(t('messageSucces'), { variant: 'success' });
       enqueueSnackbar(`${t('Code')} : ${formatTransfertCode(transfert.code)}`);
       setShowSnackBarSuccess(false);
+      initComponents();
     }
   }, [showSnackBarSuccess])
 
@@ -30,18 +34,18 @@ function SnackBarCustomBis(props) {
 }
 
 const ShowSnackBarSuccess = (props) => {
-  const { transfert, showSnackBarSuccess, setShowSnackBarSuccess } = props;
+  const { initComponents, transfert, showSnackBarSuccess, setShowSnackBarSuccess } = props;
 
   return (
     <SnackbarProvider maxSnack={3} autoHideDuration={3000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
-      <SnackBarCustomBis transfert={transfert} showSnackBarSuccess={showSnackBarSuccess} setShowSnackBarSuccess={setShowSnackBarSuccess} />
+      <SnackBarCustomBis initComponents={initComponents} transfert={transfert} showSnackBarSuccess={showSnackBarSuccess} setShowSnackBarSuccess={setShowSnackBarSuccess} />
     </SnackbarProvider>
   );
 }
 
 
 
-export default function NewTransfert({ langage, firestore, logo }) {
+export default function NewTransfert({ firebase, langage, firestore, logo }) {
   const { t } = useTranslation('transferts/new');
 
   const [user, setUser] = useUserContext();
@@ -71,8 +75,10 @@ export default function NewTransfert({ langage, firestore, logo }) {
     setMessageAmount("");
     return (false);
   }
+  const [percent, setPercent] = useState(PERCENT_15);
+  const [percents, setPercents] = useState([]);
   const [isTransfertValide, setIsTransfertValide] = useState(false);
-  const [transfert, setTransfert] = useState(new Transfert({}));
+  const [transfert, setTransfert] = useState(new Transfert({percent: PERCENT_15}));
   const [showSnackBarSuccess, setShowSnackBarSuccess] = useState();
 
   function initComponents() {
@@ -82,22 +88,25 @@ export default function NewTransfert({ langage, firestore, logo }) {
     setAmount('');
     setErrorAmount(false);
     setMessageAmount('');
+    setPercent(PERCENT_15);
+    setTransfert(new Transfert({percent: PERCENT_15}));
   }
-  /*
-  uid: transfert.uid,
-            code: transfert.code,
-            receiver: transfert.receiver,
-            amount: transfert.amount,
-            receipt_receiver: transfert.receipt_receiver,
-            receipt_dandela: transfert.receipt_dandela,
-            receipt_sender: transfert.receipt_sender,
-            valide: transfert.valide,
-  */
+
   useEffect(() => {
     if (user && user.type === USER_TYPE_ADMIN) {
       setIsTransfertValide(true);
     }
   }, [user]);
+
+  useEffect(() => {
+    if (user && user.type === USER_TYPE_ADMIN) {
+      setIsTransfertValide(true);
+    }
+    getPercentsSnapshot(setPercents);
+      console.log("PUTAIN DE SelectPercentComponent", percents);
+  }, []);
+
+  
 
   useEffect(() => {
     if (errorReceiver)
@@ -121,14 +130,18 @@ export default function NewTransfert({ langage, firestore, logo }) {
     if (!_isErrorReceiver && !_isErrorAmount) {
       // Add a new document with a generated id.
       var newTransfertRef = firestore.collection(COLLECTION_TRANSFERT).doc();
-      const _transfert = new Transfert({});
+      const _transfert = JSON.parse(JSON.stringify(transfert));
       _transfert.uid = newTransfertRef.id;
       _transfert.code = createRandomCode();
       _transfert.receiver = receiver;
       _transfert.amount = parseInt(amount);
+      _transfert.percent = parseFloat(percent);
+      _transfert.fees = parseFloat(amount) * parseFloat(percent);
+      _transfert.total = parseFloat(amount) + (parseFloat(amount) * parseFloat(percent));
       _transfert.date_create = new Date();
       _transfert.user_create_uid = user.uid;
-      _transfert.addDateLastEdit(new Date());
+      //_transfert.addDateLastEdit(new Date());
+      //_transfert.date_last_edits = firebase.firestore.FieldValue.arrayUnion(new Date());
       _transfert.receipt_receiver = false;
       _transfert.date_receipt_receiver = '';
       _transfert.receipt_dandela = false;
@@ -139,15 +152,25 @@ export default function NewTransfert({ langage, firestore, logo }) {
       _transfert.date_valide = user.isAdmin ? new Date() : '';
       // later...
       newTransfertRef.withConverter(transfertConverter).set(_transfert);
-      initComponents();
-      setTransfert(_transfert);
+      /*
+      if (user.isAdmin) {
+        newTransfertRef.withConverter(transfertConverter).update({
+          date_last_edits: firebase.firestore.FieldValue.arrayUnion(new Date()),
+          user_edit_uids: firebase.firestore.FieldValue.arrayUnion(user.uid),
+        });
+      }
+      */
+     setTransfert(_transfert);
       setShowSnackBarSuccess(true);
+      //initComponents();
+      //setTransfert(_transfert);
+      
     }
   }
 
   useEffect(() => {
-    console.log("RANDOM code", createRandomCode());
-  })
+    console.log("RANDOM TRansfert", transfert);
+  }, [transfert.percent])
 
   return (
     <>
@@ -187,6 +210,30 @@ export default function NewTransfert({ langage, firestore, logo }) {
           //theme={theme}
           placeholder={t('Amount')}
         />
+        <Grid container columnSpacing={1} direction='row' alignItems={'center'}>
+          <Grid item>
+            <Typography sx={{
+              fontFamily: 'ChangaOneRegular',
+              color: 'var(--primary)',
+              fontSize: 'large'
+            }}>
+            Pourcentage
+            </Typography>
+          </Grid>
+      <Grid item>
+      <SelectPercentComponent 
+      percent={percent}
+      setPercent={setPercent}
+      percents={percents}
+      setPercents={setPercents}
+      transfert={transfert}
+      setTransfert={setTransfert}
+      //disabled 
+      />
+      </Grid>
+        </Grid>
+        <SelectGroupCustom  />
+        
       </Stack>
 
       <Button
@@ -195,7 +242,7 @@ export default function NewTransfert({ langage, firestore, logo }) {
       >
         {t('Add')}
       </Button>
-      <ShowSnackBarSuccess transfert={transfert} showSnackBarSuccess={showSnackBarSuccess} setShowSnackBarSuccess={setShowSnackBarSuccess} />
+      <ShowSnackBarSuccess initComponents={initComponents} transfert={transfert} showSnackBarSuccess={showSnackBarSuccess} setShowSnackBarSuccess={setShowSnackBarSuccess} />
     </>
   );
 };

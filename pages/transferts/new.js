@@ -23,7 +23,7 @@ export default function AllTransfertsPage({langage, setLangage, logo, user, fire
             <meta name="description" content="Voir tous les transferts" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
-            <NewTransfert langage={langage} firestore={firestore} user={user} />
+            <NewTransfert langage={langage} firebase={firebase} firestore={firestore} user={user} />
         </Dashboard>
     )
 }

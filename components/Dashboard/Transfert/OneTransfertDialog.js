@@ -126,6 +126,7 @@ export default function OneTransfertDialog(props) {
     <BootstrapDialog
       aria-labelledby="customized-dialog-title"
       open={open}
+      onClose={handleClose}
       TransitionComponent={Transition}
       keepMounted
     >
