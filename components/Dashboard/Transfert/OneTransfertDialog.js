@@ -21,6 +21,9 @@ import Transfert, { transfertConverter } from '../../../classes/TransfertClass';
 import CheckBoxGroupCustom from '../../MyComponents/CheckBoxGroupCustom';
 import CheckBoxCustom from '../../MyComponents/CheckBoxCustom';
 import User, { userConverter } from '../../../classes/UserClass';
+import DialogCustom from '../../MyComponents/DialogCustom';
+import EditIcon from '@mui/icons-material/Edit';
+import SaveIcon from '@mui/icons-material/Save';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -75,6 +78,7 @@ export default function OneTransfertDialog(props) {
   const [receiptReceiver, setReceiptReceiver] = useState(false);
   const [receiptDandela, setReceiptDandela] = useState(false);
   const [receiptSender, setReceiptSender] = useState(false);
+  const [editingMode, setEditingMode] = useState(false);
 
   useEffect(() => {
     firestore.collection(COLLECTION_TRANSFERT).doc(uid)
@@ -107,15 +111,30 @@ export default function OneTransfertDialog(props) {
             setReceiptReceiver(_transfert.receipt_receiver);
             setReceiptSender(_transfert.receipt_sender);
             setReceiptDandela(_transfert.receipt_dandela);
+            var _editingReceiver = _transfert.receiptReceiver != receiptReceiver;
+            console.log("REEECEIVER", receiptReceiver)
+            setEditingMode(_editingReceiver);
 
         } else {
           setTransfert(null);
           setReceiptReceiver(false);
           setReceiptSender(false);
           setReceiptDandela(false);
+          setEditingMode(false);
         }
       });
   }, [])
+
+  useEffect(() => {
+    if (transfert) {
+      const _editReceiver = transfert.receipt_receiver !== receiptReceiver;
+      setEditingMode(_editReceiver);
+    } else {
+      setEditingMode(false);
+    }
+    console.log("REEEECEIVER 2", receiptReceiver, transfert ? transfert : null)
+  }, [transfert, receiptReceiver])
+  
 
   const handleClose = () => {
     setOpen(false);
@@ -129,6 +148,7 @@ export default function OneTransfertDialog(props) {
       onClose={handleClose}
       TransitionComponent={Transition}
       keepMounted
+      scroll='body'
     >
       <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
         <Typography sx={{
@@ -320,9 +340,10 @@ export default function OneTransfertDialog(props) {
               width: '100%'
             }}>
               <CheckBoxCustom
-                disabled
+                //disabled
                 checked={receiptReceiver}
-                setChecked={setReceiptReceiver} />
+                setChecked={setReceiptReceiver}
+              />
             </Grid>
           </Grid>
           <Grid container columns={{ xs: 12 }}
@@ -408,6 +429,15 @@ export default function OneTransfertDialog(props) {
         </Typography>
       </DialogContent>
       <DialogActions>
+        <Stack direction={'row'} spacing={1}>
+        <Button 
+        startIcon={<SaveIcon />}
+        variant={'contained'}
+        sx={{display:editingMode ? 'flex' : 'none'}}
+        >
+          Enregistrer
+        </Button>
+        <DialogCustom />
         <Button autoFocus variant='contained' color='error' onClick={() => {
           firestore.collection(COLLECTION_TRANSFERT).doc(transfert.uid).delete().then(() => {
             handleClose();
@@ -418,6 +448,7 @@ export default function OneTransfertDialog(props) {
         }}>
           Supprimer
         </Button>
+        </Stack>
       </DialogActions>
     </BootstrapDialog>
   );

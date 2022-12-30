@@ -12,7 +12,12 @@ import { useUserContext } from '../../../context/UserProvider';
 
 export default function BarApp(props) {
     const {  drawerWidth, mobileOpen, setMobileOpen } = props;
-    const [user, setUser] = useUserContext();
+    const [user,] = useUserContext();
+    const [photoURL, setPhotoURL] = useState(user.profilPhotoURL);
+
+    useEffect(() => {
+        setPhotoURL(user.profilPhotoURL);
+    }, [user]);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -51,7 +56,7 @@ export default function BarApp(props) {
                             >
                                 <MenuIcon />
                             </IconButton>
-                            <Avatar id="avatar-user" className={styles['fullscreen']} src={user.profilPhotoURL} sx={{ width: 40, height: 40 }} />
+                            <Avatar id="avatar-user" className={styles['fullscreen']} src={photoURL} sx={{ width: 40, height: 40 }} />
                             <Typography variant="h8" noWrap component="div" className='evidence' sx={{ fontWeight: 'bold' }}>
                                 {user.phoneNumber}
                             </Typography>

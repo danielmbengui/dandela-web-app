@@ -3,7 +3,7 @@ import Country from "./CountryClass";
 
 class User {
     constructor({uid = null, phoneNumber = null, displayName = null, photoURL = null, profilPhotoURL = null,
-        type = null, country_uid = null, verified=null, tokens=[]}) {
+        type = "Client", country_uid = null, verified=null, tokens=[]}) {
             /* FIRESTORE variables */
         this.uid = uid;
         this.phoneNumber = phoneNumber;
