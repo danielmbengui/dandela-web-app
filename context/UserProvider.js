@@ -55,30 +55,6 @@ export default function UserProvider({ children }) {
                 setUid(_user.uid);
                 setConnected(true);
                 console.log("onAuthStateChanged user", _user.phoneNumber);
-                if (isGranted()) {
-                    if (window && 'serviceWorker' in navigator) {
-                        console.log('Firebase Worker Registered');
-                        const messaging = firebase.messaging(app);
-                        messaging.getToken({ validKey: 'BNokC6pq_1RHx0D17Tp2KKA7Hz2PuZ7AuAN1gwLQmSCy-heuLpZQsc1FPVnWeXjA9cB4W604jRBDTQIdfvRAA_4' }).then(async (currentToken) => {
-                            if (currentToken) {
-                                firestore.collection(COLLECTION_USER).doc(_user.uid)
-                                    .withConverter(userConverter)
-                                    .update({
-                                        tokens: firebase.firestore.FieldValue.arrayUnion(currentToken),
-                                    });
-                                messaging.onMessage((payload) => {
-                                    console.log('[firebase-messaging-sw.js] Received message ', payload);
-                                });
-                            } else {
-                                console.log('No registration token available. Request permission to generate one.');
-
-                                if (Notification.permission !== 'denied') {
-                                    requestPermission();
-                                }
-                            }
-                        });
-                    }
-                }
             } else {
                 console.log("onAuthStateChanged user", "null");
                 console.log("onAuthStateChanged USER", _user);
@@ -87,8 +63,6 @@ export default function UserProvider({ children }) {
                 setConnected(false);
             }
         });
-
-
     }, []);
 
     async function getCurrency(currency_uid) {
@@ -120,6 +94,30 @@ export default function UserProvider({ children }) {
     useEffect(() => {
         if (uid) {
             initUserSnapshot(uid);
+            if (isGranted()) {
+                if (window && 'serviceWorker' in navigator) {
+                    console.log('Firebase Worker Registered');
+                    const messaging = firebase.messaging(app);
+                    messaging.getToken({ validKey: 'BNokC6pq_1RHx0D17Tp2KKA7Hz2PuZ7AuAN1gwLQmSCy-heuLpZQsc1FPVnWeXjA9cB4W604jRBDTQIdfvRAA_4' }).then(async (currentToken) => {
+                        if (currentToken) {
+                            firestore.collection(COLLECTION_USER).doc(uid)
+                                .withConverter(userConverter)
+                                .update({
+                                    tokens: firebase.firestore.FieldValue.arrayUnion(currentToken),
+                                });
+                            messaging.onMessage((payload) => {
+                                console.log('[firebase-messaging-sw.js] Received message ', payload);
+                            });
+                        } else {
+                            console.log('No registration token available. Request permission to generate one.');
+
+                            if (Notification.permission !== 'denied') {
+                                requestPermission();
+                            }
+                        }
+                    });
+                }
+            }
         } else {
             setUser(DEFAULT_USER);
         }
