@@ -30,6 +30,10 @@ module.exports = withPWA({
     FIREBASE_API_KEY: process.env.NODE_ENV === "production" ? 
     process.env.NEXT_PUBLIC_FIREBASE_API_KEY : process.env.NEXT_TEST_FIREBASE_API_KEY,
 
+    FIREBASE_VAPID_KEY: process.env.NODE_ENV === "production" ? 
+    process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY : process.env.NEXT_TEST_FIREBASE_VAPID_KEY,
+
+    
     
     FIREBASE_AUTH_DOMAIN: process.env.NODE_ENV === "production" ? 
     process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN : process.env.NEXT_TEST_FIREBASE_AUTH_DOMAIN,

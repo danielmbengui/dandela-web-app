@@ -130,7 +130,7 @@ export default function UserProvider({ children }) {
                 console.log('Firebase Worker Registered');
                 if (isGranted()) {
                     const messaging = firebase.messaging(app);
-                    messaging.getToken({ validKey: 'BNokC6pq_1RHx0D17Tp2KKA7Hz2PuZ7AuAN1gwLQmSCy-heuLpZQsc1FPVnWeXjA9cB4W604jRBDTQIdfvRAA_4' }).then(async (currentToken) => {
+                    messaging.getToken({ vapidKey: process.env.FIREBASE_VAPID_KEY }).then(async (currentToken) => {
                         if (currentToken) {
                             firestore.collection(COLLECTION_USER).doc(uid)
                                 .withConverter(userConverter)
