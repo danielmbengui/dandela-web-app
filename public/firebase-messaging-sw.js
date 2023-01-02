@@ -26,7 +26,7 @@ importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js')
 //importScripts('/__/firebase/9.2.0/firebase-app-compat.js');
 //importScripts('/__/firebase/9.2.0/firebase-messaging-compat.js');
 //importScripts('/__/firebase/init.js');
-/*
+
 const firebaseConfig = {
   apiKey: "AIzaSyArSaR9DcR2UpEZxRrIb7FuhnyG5-TfWB8",
   authDomain: "dandelawebapp.firebaseapp.com",
@@ -36,8 +36,8 @@ const firebaseConfig = {
   appId: "1:277196487914:web:91bae7b1a1065c0a51eb93",
   measurementId: "G-MJ6X1M1YRR",
 };
-*/
 
+/*
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -48,9 +48,11 @@ const firebaseConfig = {
   measurementId: process.env.FIREBASE_MEASUREMENT_ID,
   //databaseURL: "https://dandelawebapp.firebaseio.com",
 };
+*/
 //firebase.initializeApp(firebaseConfig);
 const app = firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging(app);
+//console.log("MESSSSAGIN ervice worker", messaging)
 /*
 const createTransfert = functions.firestore
     .document(`TRANSFERT/{uid}`)
