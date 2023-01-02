@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Head from 'next/head'
-import Image from "next/image";
 import About from '../components/About/About';
-import Menu from '../components/Account/Menu';
-import Dashboard from '../components/Dashboard/Dashboard';
+import Dashboard from '../components/App/Dashboard/Dashboard';
 
 export default function AboutPage({ auth, user, firebase, storage }) {
     return (
