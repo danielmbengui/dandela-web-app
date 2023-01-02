@@ -2,7 +2,7 @@ import Cors from 'cors';
 import Transfert, { transfertConverter } from '../../../classes/TransfertClass';
 import { firestore } from "../../../config.firebase"
 import { COLLECTION_TRANSFERT } from "../../../constants";
-import initMiddleware from '../../../functions/init-middleware';
+import initMiddleware from '../../../lib/functions/init-middleware';
 
 const cors = initMiddleware(
     // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options

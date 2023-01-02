@@ -1,9 +1,9 @@
 import React from 'react';
 import { withAuthUser, AuthAction } from 'next-firebase-auth'
-import PermanentBackdrop from '../components/Loading/PermanentBackdrop';
 import initAuth from '../initAuth';
 import ContainerAuthentication from '../components/App/Authentication/ContainerAuthentication';
 import Login from '../components/App/Authentication/Login/Login';
+import PermanentBackdrop from '../components/App/CustomComponents/PermanentBackdrop';
 
 initAuth();
 

@@ -1,7 +1,7 @@
 import Cors from 'cors';
-import initMiddleware from '../../../functions/init-middleware';
 import { initializeApp, applicationDefault, cert } from 'firebase-admin/app';
 import { getMessaging } from "firebase-admin/messaging";
+import initMiddleware from '../../../lib/functions/init-middleware';
 
 const cors = initMiddleware(
     // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
