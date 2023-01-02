@@ -50,8 +50,9 @@ const firebaseConfig = {
 };
 */
 //firebase.initializeApp(firebaseConfig);
-const app = firebase.initializeApp(firebaseConfig);
-const messaging = firebase.messaging(app);
+//const app = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+const messaging = firebase.messaging();
 //console.log("MESSSSAGIN ervice worker", messaging)
 /*
 const createTransfert = functions.firestore
@@ -96,8 +97,9 @@ messaging.onBackgroundMessage((payload) => {
   const notificationTitle = 'Background Message Title';
   const notificationOptions = {
     body: 'Background Message body.',
-    icon: '/img/logo.png',
+    icon: '/img/logo.png'
   };
+
   self.registration.showNotification(notificationTitle,
     notificationOptions);
 });
