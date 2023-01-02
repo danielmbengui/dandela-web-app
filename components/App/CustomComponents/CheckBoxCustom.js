@@ -53,7 +53,7 @@ export default function CheckBoxCustom(props) {
     const {checked, setChecked, disabled} = props;
   //const [checked, setChecked] = useState(false);
 
-  const handleChange1 = (event) => {
+  const handleChange = (event) => {
     setChecked(event.target.checked);
   };
 
@@ -64,7 +64,7 @@ export default function CheckBoxCustom(props) {
             checkedIcon={<BpCheckedIcon theme={theme} />}
             icon={<BpIcon theme={theme} />}
             //indeterminate={checked[0] !== checked[1] || checked[0] !== checked[2] || checked[1] !== checked[2]}
-            onChange={handleChange1}
+            onChange={handleChange}
           />
   );
 }

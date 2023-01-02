@@ -10,6 +10,7 @@ import SelectPercentCustom from "../../CustomComponents/SelectPercentCustom";
 import SnackBarCustom from "../../CustomComponents/SnackBarCustom";
 import { useRouter } from "next/router";
 import { getPercentsSnapshot } from "../../../../lib/firebase-functions/Percent/PercentFunctions";
+import CheckBoxCustom from "../../CustomComponents/CheckBoxCustom";
 
 
 export default function NewTransfer({ firebase, langage, firestore, logo }) {
@@ -44,6 +45,7 @@ export default function NewTransfer({ firebase, langage, firestore, logo }) {
     }
     const [percent, setPercent] = useState(PERCENT_15);
     const [percents, setPercents] = useState([]);
+    const [special, setSpecial] = useState(false);
     const [isTransfertValide, setIsTransfertValide] = useState(false);
     const [transfert, setTransfert] = useState(new Transfert({ percent: PERCENT_15, code: createRandomCode() }));
     const [showSnackBarSuccess, setShowSnackBarSuccess] = useState();
@@ -60,6 +62,7 @@ export default function NewTransfer({ firebase, langage, firestore, logo }) {
     }, [langage])
 
     function initComponents() {
+        setSpecial(false);
         setReceiver('');
         setErrorReceiver(false);
         setMessageReceiver('');
@@ -90,6 +93,7 @@ export default function NewTransfer({ firebase, langage, firestore, logo }) {
             const _transfert = JSON.parse(JSON.stringify(transfert));
             _transfert.uid = newTransfertRef.id;
             //_transfert.code = createRandomCode();
+
             _transfert.receiver = receiver;
             _transfert.amount = parseInt(amount);
             _transfert.percent = parseFloat(percent);
@@ -106,6 +110,7 @@ export default function NewTransfer({ firebase, langage, firestore, logo }) {
             _transfert.receipt_sender = false;
             _transfert.date_receipt_sender = '';
             _transfert.valide = user.isAdmin;
+            _transfert.special = special;
             _transfert.date_valide = user.isAdmin ? new Date() : '';
             // later...
             newTransfertRef.withConverter(transfertConverter).set(_transfert);
@@ -139,6 +144,7 @@ export default function NewTransfer({ firebase, langage, firestore, logo }) {
                 spacing={2}
                 mb={3}
             >
+
                 <Grid container columnSpacing={1} direction='row' alignItems={'center'}>
                     <Grid item>
                         <Typography sx={{
@@ -189,7 +195,23 @@ export default function NewTransfer({ firebase, langage, firestore, logo }) {
                     //theme={theme}
                     placeholder={t('Amount')}
                 />
-
+                <Grid container columnSpacing={1} direction='row' alignItems={'center'}>
+                    <Grid item>
+                        <Typography sx={{
+                            fontFamily: 'ChangaOneRegular',
+                            color: 'var(--primary)',
+                            fontSize: 'large'
+                        }}>
+                            {t('SpecialCase')}
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <CheckBoxCustom
+                            checked={special}
+                            setChecked={setSpecial}
+                        />
+                    </Grid>
+                </Grid>
             </Stack>
 
             <Button
@@ -201,12 +223,6 @@ export default function NewTransfer({ firebase, langage, firestore, logo }) {
             >
                 {t('Add')}
             </Button>
-            {
-                /*
-              <ShowSnackBarSuccess initComponents={initComponents} transfert={transfert} showSnackBarSuccess={showSnackBarSuccess} setShowSnackBarSuccess={setShowSnackBarSuccess} />
-        
-                */
-            }
             <SnackBarCustom
                 variant={'success'}
                 message={t('messageSucces')}

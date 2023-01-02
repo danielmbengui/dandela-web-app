@@ -112,7 +112,7 @@ export default function SettingsComponent({ firebase, settingsPage }) {
                                     },
                                 }}
                             >
-                                <Settings sx={{ color: 'var(--text-primary)' }} />
+                                <Settings sx={{ color: settingsPage ? 'var(--text-secondary)' : 'var(--text-primary)' }} />
                                 <ArrowRight sx={{ position: 'absolute', right: 4, opacity: 0, color: 'var(--text-secondary)' }} />
                             </IconButton>
                         </Tooltip>

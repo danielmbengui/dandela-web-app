@@ -36,7 +36,7 @@ export default function ProfileComponent({ profilePage }) {
             href={PAGE_LINK_PROFILE}
 
             style={{ textDecoration: 'none' }}
-            //sx={{ py: 0, minHeight: 32, color: 'rgba(255,255,255,.8)', }}
+            sx={{ py: 0, minHeight: 32, color: 'rgba(255,255,255,.8)', }}
         >
             <Container
                 sx={{
@@ -54,9 +54,8 @@ export default function ProfileComponent({ profilePage }) {
                         //backgroundColor: profilePage ? 'var(--primary)' : 'var(--menu-background)',
                     }}
                 >
-                    <ListItemIcon sx={{ color: profilePage ? 'var(--text-secondary)' : 'var(--text-primary)' }}>
+                    <ListItemIcon sx={{ color: 'inherit' }}>
                         <People fontSize='large' sx={{
-                            color:profilePage ? 'var(--text-secondary)' : 'var(--text-primary)'
                             /*
 color: profilePage ? 'var(--text-secondary)' : 'var(--text-primary)',
                             '&:hover': {
