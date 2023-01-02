@@ -7,14 +7,14 @@ import firebase from "../config.firebase";
 import store from "../redux/store";
 import { Provider, } from "react-redux";
 //import {hashResult} from "../functions/HashResult";
-import hashResult from "../functions/ConvertToHash";
+import hashResult from "../lib/functions/ConvertToHash";
 import Head from "next/head";
 import ThemeModeProvider from "../context/ThemeProvider";
 import UserProvider from "../context/UserProvider";
 import initAuth from '../initAuth' // the module you created above
 import { COLLECTION_USER, DEFAULT_LANGAGE, DEFAULT_SCREEN_MODE, STORAGE_LANGAGE, STORAGE_SCREEN_MODE } from "../constants";
 import { appWithTranslation } from 'next-i18next'
-import { getLangageStorage, getScreenModeStorage } from "../functions/storage/UserStorageFunctions";
+import { getLangageStorage, getScreenModeStorage } from "../lib/functions/storage/UserStorageFunctions";
 import { getMessaging, getToken } from "firebase/messaging";
 import axios from "axios";
 //import { messaging } from "../public/firebase-messaging-sw";

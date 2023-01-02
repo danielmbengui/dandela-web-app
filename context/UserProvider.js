@@ -6,6 +6,7 @@ import User, { userConverter } from "../classes/UserClass";
 import Country, { countryConverter } from "../classes/CountryClass";
 import Currency, { currencyConverter } from "../classes/CurrencyClass";
 import { addCurrencyFirestore, getCurrenciesFirestore, getCurrencyFirestore, getCurrencySnapshot, isCurrencyFirestore } from "../lib/firebase-functions/Currency/CurrencyFunctions";
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
 const UserContext = createContext();
 
@@ -17,7 +18,8 @@ export default function UserProvider({ children }) {
     const [connected, setConnected] = useState(false);
 
     const [currencySnap, setCurrencySnap] = useState(new Currency({}));
-
+    console.log("USER_PROVIDER_isMobile", isMobile);
+    console.log("USER_PROVIDER_isBrowser", isBrowser);
     async function requestPermission() {
         console.log('Requesting permission...');
         await Notification.requestPermission().then((permission) => {
@@ -54,9 +56,8 @@ export default function UserProvider({ children }) {
                 setPhoneNumber(_user.phoneNumber);
                 setUid(_user.uid);
                 setConnected(true);
-                console.log("onAuthStateChanged user", _user.phoneNumber);
+                console.log("onAuthStateChanged USER", _user.phoneNumber);
             } else {
-                console.log("onAuthStateChanged user", "null");
                 console.log("onAuthStateChanged USER", _user);
                 setPhoneNumber(null);
                 setUid(null);
@@ -91,49 +92,169 @@ export default function UserProvider({ children }) {
         return (country);
     }
 
-    useEffect(() => {
-        if (uid) {
-            initUserSnapshot(uid);
-            if (isGranted()) {
-                if (window && 'serviceWorker' in navigator) {
-                    console.log('Firebase Worker Registered');
+    async function getUserByUid(_uid) {
+        const _user = await firestore.collection(COLLECTION_USER).doc(_uid)
+            .withConverter(userConverter)
+            .get()
+            .then((doc) => {
+                if (doc.exists) {
+                    return (new User(doc.data()));
+                } else {
+                    return (null);
+                }
+            }).catch(() => {
+                return (null);
+            });
+        return (_user);
+    }
+
+    async function getUserByPhoneNumber(_phoneNumber) {
+        const _user = await firestore.collection(COLLECTION_USER).doc(_phoneNumber)
+            .withConverter(userConverter)
+            .get()
+            .then((doc) => {
+                if (doc.exists) {
+                    return (new User(doc.data()));
+                } else {
+                    return (null);
+                }
+            }).catch(() => {
+                return (null);
+            });
+        return (_user);
+    }
+
+    async function init() {
+        if (uid && phoneNumber) {
+            if (window && 'serviceWorker' in navigator) {
+                console.log('Firebase Worker Registered');
+                if (isGranted()) {
                     const messaging = firebase.messaging(app);
                     messaging.getToken({ validKey: 'BNokC6pq_1RHx0D17Tp2KKA7Hz2PuZ7AuAN1gwLQmSCy-heuLpZQsc1FPVnWeXjA9cB4W604jRBDTQIdfvRAA_4' }).then(async (currentToken) => {
                         if (currentToken) {
-                            console.log("Curennt token", currentToken)
                             firestore.collection(COLLECTION_USER).doc(uid)
                                 .withConverter(userConverter)
                                 .update({
                                     tokens: firebase.firestore.FieldValue.arrayUnion(currentToken),
                                 });
-                            messaging.onMessage((payload) => {
-                                console.log('[firebase-messaging-sw.js] Received message ', payload);
-                            });
                         }
+                    });
+
+                    messaging.onMessage((payload) => {
+                        console.log('[firebase-messaging-sw.js] Received message ', payload);
                     });
                 }
             }
+            console.log("NEW UseEffect", phoneNumber);
+            const userRef = firestore.collection(COLLECTION_USER);
+            userRef.doc(uid)
+                .withConverter(userConverter)
+                .onSnapshot(async (doc) => {
+                    var _user = new User(doc.data());
+                    if (doc.exists) {
+                        _user = new User(doc.data());
+                        _user.country = await getCountry(_user.country_uid);
+                    } else {
+                        _user.uid = uid;
+                        _user.phoneNumber = phoneNumber;
+                        _user = new User({ uid: uid, phoneNumber: phoneNumber });
+                    }
+                    console.log("UUUUSER connected", _user);
+                    setUser(_user);
+                });
         } else {
-            setUser(DEFAULT_USER);
+            console.log("NEW UseEffect ERROR", uid);
+            console.log("NEW UseEffect ERROR", phoneNumber);
+            setUser(new User({}));
         }
-        async function init() {
-            const _currency = await getCurrencyFirestore("D67e1mNUB4beMUeIYr23");
-            const _currencies = await getCurrenciesFirestore();
-            const _isCurrencyFirestore = await isCurrencyFirestore(new Currency({ symbol: "CHF" }));
-            //addCurrencyFirestore(new Currency({}))
-            console.log("UseEffect UserProvider isCurrencyFirestore", _isCurrencyFirestore);
-            console.log("UseEffect UserProvider CURRENCIES", _currencies);
-            getCurrencySnapshot("D67e1mNUB4beMUeIYr23", setCurrencySnap);
-            //console.log("UseEffect UserProvider COUNTRY SNAP", currencySnap);
-        }
-        init();
-    }, [uid]);
+    }
 
     useEffect(() => {
-        console.log("UseEffect UserProvider CURRENCY SNAP", currencySnap);
-    }, [currencySnap]);
 
-    function initUserSnapshot(uid) {
+        init();
+        //console.log("NEW UseEffect", )
+        //console.log("NEW UseEffect", )
+        //console.log("NEW UseEffect", )
+        //console.log("NEW UseEffect", )
+        //console.log("NEW UseEffect", )
+    }, [uid, phoneNumber]);
+
+    /*
+        useEffect(() => {
+            if (uid && phoneNumber) {
+                initUserSnapshot();
+                if (isGranted()) {
+                    if (window && 'serviceWorker' in navigator) {
+                        console.log('Firebase Worker Registered');
+                        const messaging = firebase.messaging(app);
+                        messaging.getToken({ validKey: 'BNokC6pq_1RHx0D17Tp2KKA7Hz2PuZ7AuAN1gwLQmSCy-heuLpZQsc1FPVnWeXjA9cB4W604jRBDTQIdfvRAA_4' }).then(async (currentToken) => {
+                            if (currentToken) {
+                                console.log("Curennt token", currentToken)
+                                const _userUid = await firestore.collection(COLLECTION_USER).doc(uid)
+                                .withConverter(userConverter)
+                                //.where('uid', '==', uid)
+                                .get()
+                                .then((doc) => {
+                                    //console.log("USER_PROVIDER Docs uid", doc);
+                                    firestore.collection(COLLECTION_USER).doc(phoneNumber).delete().then(() => {
+                        console.log("Document successfully deleted!");
+                    }).catch((error) => {
+                        console.error("Error removing document: ", error);
+                    });
+                                    if (doc.exists) {
+                                        console.log("USER_PROVIDER Find with uid", new User(doc.data()));
+                                        return (new User(doc.data()));
+                                    } else {
+                                        console.log("ERROR USER_PROVIDER : Not find or more than 1 with uid", uid);
+                                        return (null);
+                                    }
+                                    
+                                    firestore.collection(COLLECTION_USER).doc(uid)
+                                        .withConverter(userConverter)
+                                        .update({
+                                            tokens: firebase.firestore.FieldValue.arrayUnion(currentToken),
+                                        });
+                                        
+                                });
+    
+                                
+    firestore.collection(COLLECTION_USER).doc(uid)
+                                        .withConverter(userConverter)
+                                        .update({
+                                            tokens: firebase.firestore.FieldValue.arrayUnion(currentToken),
+                                        });
+                                
+                                    
+                                messaging.onMessage((payload) => {
+                                    console.log('[firebase-messaging-sw.js] Received message ', payload);
+                                });
+                            }
+                        });
+                    }
+                }
+            } else {
+                setUser(DEFAULT_USER);
+            }
+            async function init() {
+                const _currency = await getCurrencyFirestore("D67e1mNUB4beMUeIYr23");
+                const _currencies = await getCurrenciesFirestore();
+                const _isCurrencyFirestore = await isCurrencyFirestore(new Currency({ symbol: "CHF" }));
+                //addCurrencyFirestore(new Currency({}))
+                console.log("UseEffect UserProvider isCurrencyFirestore", _isCurrencyFirestore);
+                console.log("UseEffect UserProvider CURRENCIES", _currencies);
+                getCurrencySnapshot("D67e1mNUB4beMUeIYr23", setCurrencySnap);
+                //console.log("UseEffect UserProvider COUNTRY SNAP", currencySnap);
+            }
+            init();
+        }, [uid]);
+        */
+    /*
+        useEffect(() => {
+            console.log("UseEffect UserProvider CURRENCY SNAP", currencySnap);
+        }, [currencySnap]);
+        */
+
+    function initUserSnapshot() {
         var user = DEFAULT_USER;
         const unsubscribe = firestore.collection(COLLECTION_USER).doc(uid)
             .withConverter(userConverter)
@@ -155,7 +276,7 @@ export default function UserProvider({ children }) {
                     //setUser(_user);
                 } else {
                     console.log("No such document USER class!");
-                    user = new User({ phoneNumber: phoneNumber });
+                    user = new User({ uid: uid, phoneNumber: phoneNumber });
                     //user.phoneNumber = phoneNumber;
                     console.log("USEEEEEER Clas NULL", user);
                     unsubscribe();

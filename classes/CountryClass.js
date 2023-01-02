@@ -1,5 +1,3 @@
-import { firestore } from "../config.firebase";
-import { COLLECTION_CURRENCY, DEFAULT_SCREEN_MODE } from "../constants";
 import Currency from "./CurrencyClass";
 
 class Country {
@@ -10,6 +8,7 @@ class Country {
         this.code = code;
         this.symbol = symbol;
         this.currency_uid = currency_uid;
+        /* CUSTOM variables */
         this.currency = new Currency({});
     }
     

@@ -8,6 +8,20 @@ export const DEFAULT_LANGAGE = 'fr';
 export const LANGAGE_FRENCH = 'fr';
 export const LANGAGE_ENGLISH = 'en';
 export const LANGAGE_PORTUGUESE = 'pt';
+
+export const PAGE_LINK_HOME = "/";
+export const PAGE_LINK_ERROR_LOGIN = "/app/authentication/errorlogin";
+export const PAGE_LINK_ERROR_FIREBASE = "/app/authentication/errorfirebase";
+export const PAGE_LINK_PROFILE = "/app/dashboard/profile";
+export const PAGE_LINK_SETTINGS = "/app/dashboard/settings";
+export const PAGE_LINK_NEW_TRANSFER = "/app/dashboard/transfers/new";
+export const PAGE_LINK_INPROGRESS_LIST = "/app/dashboard/transfers/lists/inprogress";
+
+export const NAMESPACE_LANGAGE_COMMON = 'common';
+export const NAMESPACE_LANGAGE_PROFILE = 'profile';
+export const NAMESPACE_LANGAGE_NEW_TRANSFER = 'transferts/new';
+export const NAMESPACE_LANGAGE_INPROGRESS_LIST = 'transferts/inprogress';
+
 export const COLLECTION_USER = 'USER';
 export const COLLECTION_USER_TYPE = 'USER_TYPE';
 export const COLLECTION_TRANSFERT = 'TRANSFERT';
@@ -70,7 +84,6 @@ export const PERCENT_0 = 0;
 export const PERCENT_5 = 0.05;
 export const PERCENT_10 = 0.10;
 export const PERCENT_15 = 0.15;
-
 /* --------------- STORAGE -------------- */
 export const STORAGE_UID = 'uid';
 export const STORAGE_PHONE_NUMBER = 'phoneNumber';

@@ -13,5 +13,7 @@
     "messageErrorAmount": "Un montant entre 50 and 10'000.",
     "messageSucces": "Transfert ajouté avec succès!",
     "code": "code",
-    "Code": "Code"
+    "Code": "Code",
+    "percentage": "pourcentage",
+    "Percentage": "Pourcentage"
 }

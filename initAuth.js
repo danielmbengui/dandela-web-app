@@ -1,12 +1,12 @@
 // ./initAuth.js
 import { init } from 'next-firebase-auth'
-import { APP_NAME } from './constants';
+import { APP_NAME, PAGE_LINK_HOME, PAGE_LINK_PROFILE } from './constants';
 //import adminFirebaseConfig from './config.admin.firebase';
 
 const initAuth = () => {
   init({
-    authPageURL: '/',
-    appPageURL: '/profil',
+    authPageURL: PAGE_LINK_HOME,
+    appPageURL: PAGE_LINK_PROFILE,
     loginAPIEndpoint: '/api/login', // required
     logoutAPIEndpoint: '/api/logout', // required
     onLoginRequestError: (err) => {

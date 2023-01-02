@@ -7,8 +7,9 @@ class Transfert {
         date_receipt_receiver = null, date_receipt_dandela = null, date_receipt_sender = null,
         date_valide= null,
         receipt_receiver = null, receipt_dandela = null, receipt_sender = null, 
-        user_create_uid = null, user_edit_uids = [],
-        valide = null}) {
+        user_create_uid = null, user_edit_uids = [],user_receiver_uid = null,
+        valide = false, special = false,
+    }) {
         /* FIRESTORE variables */
         this.uid = uid;
         this.code = code;
@@ -20,18 +21,22 @@ class Transfert {
 
         this.date_create = date_create;
         this.user_create_uid = user_create_uid;
-        
+
+        this.date_receipt_receiver = date_receipt_receiver;
+        this.user_receiver_uid = user_receiver_uid;
+
         this.date_last_edits = date_last_edits;
         this.user_edit_uids = user_edit_uids;
 
         this.date_valide = date_valide;
-        this.date_receipt_receiver = date_receipt_receiver;
+        
         this.date_receipt_dandela = date_receipt_dandela;
         this.date_receipt_sender = date_receipt_sender;
         this.receipt_receiver = receipt_receiver;
         this.receipt_dandela = receipt_dandela;
         this.receipt_sender = receipt_sender;
         this.valide = valide;
+        this.special = special;
         /* CUSTOM variables */
         this.user_create = new User({});
         this.user_edits = [];
@@ -64,6 +69,8 @@ class Transfert {
             "USER CREATE ID: " + this.user_create_uid,
             "USER EDIT ID: " + this.user_edit_uids,
             "VALIDE: " + this.valide,
+            "SPECIAL: " + this.special,
+            "USER RECEIPT: " + this.user_receiver_uid,
         ].join(', ');
     }
 }
@@ -90,19 +97,21 @@ export const transfertConverter = {
             receipt_sender: transfert.receipt_sender,
             user_create_uid: transfert.user_create_uid,
             user_edit_uids: transfert.user_edit_uids,
+            user_receiver_uid: transfert.user_receiver_uid,
             valide: transfert.valide,
+            special: transfert.special,
             };
     },
     fromFirestore: function(snapshot, options){
         const data = snapshot.data(options);
         return new Transfert({uid:data.uid, code: data.code, receiver: data.receiver, 
-            amount: data.amount,  percent: data.percent, fees: data.fees, total: data.total, 
+            amount: data.amount, percent: data.percent, fees: data.fees, total: data.total, 
             date_create: data.date_create, date_last_edits: data.date_last_edits, 
             date_receipt_receiver: data.date_receipt_receiver, date_receipt_dandela: data.date_receipt_dandela, date_receipt_sender: data.date_receipt_sender,
-            date_valide: data.date_valide,
+            date_valide: data.date_valide, date_valide: data.date_valide,
             receipt_receiver: data.receipt_receiver, receipt_dandela: data.receipt_dandela, receipt_sender: data.receipt_sender,
-            user_create_uid: data.user_create_uid, user_edit_uids: data.user_edit_uids,
-            valide: data.valide,});
+            user_create_uid: data.user_create_uid, user_edit_uids: data.user_edit_uids, user_receiver_uid: data.user_receiver_uid,
+            valide: data.valide, special: data.special,});
     }
 };
 

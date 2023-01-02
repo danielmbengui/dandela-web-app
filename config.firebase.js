@@ -47,7 +47,7 @@ export const adminApp = admin.initializeApp({
 */
 
 //const messaging = admin.messaging();
-console.log("FIREBASE config", app);
+//console.log("FIREBASE config", app);
 //console.log("FIREBASE ADMIN config", admin);
 //console.log("FIREBASE MESSAGING config", messaging);
 /*
@@ -73,13 +73,13 @@ console.log("ADMIN", admin)
 // Initialize Firebase Cloud Messaging and get a reference to the service
 //const messaging = firebase.messaging();
 //const messaging = getMessaging(app);
-export const firestore = firebase.firestore(app);
+export const firestore = firebase.firestore();
 //export const firestore = getFirestore();
 // Initialize Cloud Storage and get a reference to the service
-export const storage = firebase.storage(app);
+export const storage = firebase.storage();
 //export const storage = getStorage();
 //const messaging = firebase.messaging();
-export const database = firebase.database();
+//export const database = firebase.database();
 //export const database = getDatabase();
 
 export default firebase;
