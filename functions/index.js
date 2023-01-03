@@ -33,7 +33,6 @@ exports.createTransfer = functions.firestore
             notification: {
                 title: 'Nouveau transfert',
                 body: `${transfer.receiver} - ${transfer.amount}`,
-                //imageUrl: 'https://webapp.dandela.com/img/logo.png',
             },
             android: {
                 notification: {
