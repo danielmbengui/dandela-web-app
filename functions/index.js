@@ -20,7 +20,6 @@ const message = {
     notification: {
         title: 'Nouveau transfert',
         body: 'Sita Maria - 150',
-        //icon: 'https://webapp.dandela.com/img/logo.png'
     },
     android: {
         notification: {

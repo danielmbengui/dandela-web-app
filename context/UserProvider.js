@@ -142,6 +142,13 @@ export default function UserProvider({ children }) {
 
                     messaging.onMessage((payload) => {
                         console.log('[firebase-messaging-sw.js] Received message ', payload);
+                        const notificationTitle = payload.notification.title;
+                        const notificationOptions = {
+                            body: payload.notification.body,
+                            icon: '/img/logo.png'
+                        };
+                        self.registration.showNotification(notificationTitle,
+                            notificationOptions);
                     });
                 }
             }
