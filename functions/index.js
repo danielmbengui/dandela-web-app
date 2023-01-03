@@ -16,28 +16,7 @@ const deviceToken = "eJrSSFwrGgun-0Yrj9xLha:APA91bE1v8C5TVdZA9OUx0FTOnWVArtB6C4k
 
 //console.log("FIREBASE asdmin", adminApp);
 //console.log("FIREBASE messaging", getMessaging(adminApp));
-const message = {
-    notification: {
-        title: 'Nouveau transfert',
-        body: 'Sita Maria - 150',
-    },
-    android: {
-        notification: {
-            icon: 'https://webapp.dandela.com/img/logo.png',
-            imageUrl: 'https://webapp.dandela.com/img/logo.png',
-            color: '#094397',
-            sound: 'default',
-        }
-      },
-    data: {
-        score: '850',
-        time: '2:45'
-    },
-    //to: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
-    //registration_id: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
-    tokens: tokens,
-    //token: deviceToken
-};
+
 
 
 
@@ -49,6 +28,30 @@ exports.createTransfer = functions.firestore
         // Get an object representing the document
         // e.g. {'name': 'Marie', 'age': 66}
         const newValue = snap.data();
+        const transfer = snap.data();
+        const message = {
+            notification: {
+                title: 'Nouveau transfert',
+                body: `${transfer.receiver} - ${transfer.amount}`,
+                //imageUrl: 'https://webapp.dandela.com/img/logo.png',
+            },
+            android: {
+                notification: {
+                    icon: 'https://webapp.dandela.com/img/logo.png',
+                    imageUrl: 'https://webapp.dandela.com/img/logo.png',
+                    color: '#094397',
+                    sound: 'default',
+                }
+              },
+            data: {
+                score: '850',
+                time: '2:45'
+            },
+            //to: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
+            //registration_id: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
+            tokens: tokens,
+            //token: deviceToken
+        };
 
         // access a particular field as you would any JS property
         //const name = newValue.name;

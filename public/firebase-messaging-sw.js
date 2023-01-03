@@ -91,6 +91,7 @@ messaging.onMessage((payload) => {
     notificationOptions);
 });
 */
+/*
 messaging.onBackgroundMessage((payload) => {
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
   // Customize notification here
@@ -104,5 +105,6 @@ messaging.onBackgroundMessage((payload) => {
   self.registration.showNotification(notificationTitle,
     notificationOptions);
 });
+*/
 
 
