@@ -36,7 +36,6 @@ exports.createTransfer = functions.firestore
             },
             webpush: {
                 headers: {
-                  //image: 'https://foo.bar.pizza-monster.png',
                   icon: 'https://webapp.dandela.com/img/logo.png',
                   image: 'https://webapp.dandela.com/img/logo.png',
                 }

@@ -100,13 +100,6 @@ messaging.onBackgroundMessage((payload) => {
   self.registration.showNotification(title,
     {
       body: body, icon: icon,
-      android: {
-        notification: {
-            icon: icon,
-            color: '#094397',
-            sound: 'default',
-        }
-      },
     });
   // Customize notification here
   /*
