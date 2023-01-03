@@ -97,10 +97,7 @@ messaging.onBackgroundMessage((payload) => {
   const title = payload.notification.title;
   const body = payload.notification.body;
   const icon = '/img/logo.png';
-  self.registration.showNotification(title,
-    {
-      body: body, icon: icon,
-    });
+  self.registration.showNotification(title, {body: body, icon: icon,});
   // Customize notification here
   /*
   const notificationTitle = "Background message title";

@@ -23,11 +23,11 @@ const deviceToken = "eJrSSFwrGgun-0Yrj9xLha:APA91bE1v8C5TVdZA9OUx0FTOnWVArtB6C4k
 // Take the text parameter passed to this HTTP endpoint and insert it into 
 // Firestore under the path /messages/:documentId/original
 exports.createTransfer = functions.firestore
-    .document(`transfert/{uid}`)
+    .document(`TRANSFERT/{uid}`)
     .onCreate((snap, context) => {
         // Get an object representing the document
         // e.g. {'name': 'Marie', 'age': 66}
-        //§1    2-àconst newValue = snap.data();
+        //const newValue = snap.data();
         const transfer = snap.data();
         const message = {
             notification: {
