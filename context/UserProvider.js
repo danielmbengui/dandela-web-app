@@ -146,6 +146,8 @@ export default function UserProvider({ children }) {
                         const notificationOptions = {
                             body: payload.notification.body,
                             icon: '/img/logo.png',
+                            /*
+
                             android: {
                                 notification: {
                                     icon: '/img/logo.png',
@@ -153,6 +155,7 @@ export default function UserProvider({ children }) {
                                     sound: 'default',
                                 }
                               },
+                            */
                         };
                         self.registration.showNotification(notificationTitle,
                             notificationOptions);
