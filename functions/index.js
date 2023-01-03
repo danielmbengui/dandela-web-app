@@ -7,10 +7,12 @@ const messaging = admin.messaging();
 //const messaging = 
 const tokens = [
     "eJrSSFwrGgun-0Yrj9xLha:APA91bE1v8C5TVdZA9OUx0FTOnWVArtB6C4kvbOV749ZSForXZwX5_nuPpl1mA1gsrtejp60KnY4UmeRpEkOtESh3OHVbqDoo1EnvK4QXzCjiezcqwnCLYY0RdLLCFJuEGw_bTtDiH8g",
-    "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
+    "fKvZ5cp6JX3r6TrBy-EDe9:APA91bHfw18tmY5DBWSc9187ebWtCirRRBfhByneXRciot2dvFT1YvcvSTKE5mfQZSqStsTX9rpNGJpr1Y7CVFUZENnV1E4MSQIHSm_fB3eiJNGunxL0NAUV0XOjY6vfzDMhqNtjgsp5",
     // "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
     // "cKQ-cj4WcckfT3l-lg9X_E:APA91bEuVXurZUvaVHJHR2kTfZo7k44oYFjJiMSxhaU4zqYpleKnexgsIfB0z2M3P2HkYkzEaqksNwYFLkna4Nw6d9d2w2lCl3Xs0P9YTbr5PgVdpay0gpQfkRSoVV0QGwrVuGgIWWKk",
 ]
+
+const deviceToken = "eJrSSFwrGgun-0Yrj9xLha:APA91bE1v8C5TVdZA9OUx0FTOnWVArtB6C4kvbOV749ZSForXZwX5_nuPpl1mA1gsrtejp60KnY4UmeRpEkOtESh3OHVbqDoo1EnvK4QXzCjiezcqwnCLYY0RdLLCFJuEGw_bTtDiH8g";
 
 //console.log("FIREBASE asdmin", adminApp);
 //console.log("FIREBASE messaging", getMessaging(adminApp));
@@ -18,12 +20,14 @@ const message = {
     notification: {
         title: 'Nouveau transfert',
         body: 'Sita Maria - 150',
-        icon: 'https://webapp.dandela.com/img/logo.png'
+        //icon: 'https://webapp.dandela.com/img/logo.png'
     },
     android: {
         notification: {
             icon: 'https://webapp.dandela.com/img/logo.png',
-            color: '#094397'
+            imageUrl: 'https://webapp.dandela.com/img/logo.png',
+            color: '#094397',
+            sound: 'default',
         }
       },
     data: {
@@ -33,7 +37,7 @@ const message = {
     //to: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
     //registration_id: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
     tokens: tokens,
-    //messageId:"15252434",
+    //token: deviceToken
 };
 
 
@@ -42,15 +46,15 @@ const message = {
 // Firestore under the path /messages/:documentId/original
 exports.createTransfer = functions.firestore
     .document(`transfert/{uid}`)
-    .onCreate(async (snap, context) => {
+    .onCreate((snap, context) => {
         // Get an object representing the document
         // e.g. {'name': 'Marie', 'age': 66}
         const newValue = snap.data();
 
         // access a particular field as you would any JS property
-        const name = newValue.name;
+        //const name = newValue.name;
         //console.log("OKKKKKAY", snap.data());
-        await messaging.sendMulticast(message)
+        messaging.sendMulticast(message)
             .then((response) => {
                 // Response is a message ID string.
                 console.log('Successfully sent message:', response);
