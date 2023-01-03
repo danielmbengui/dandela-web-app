@@ -5427,3 +5427,456 @@ INFO: Detected non-HTTP/2 connection.
 [debug] [2023-01-03T19:22:23.460Z] Jan 03, 2023 8:22:23 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose
 INFO: channel closed
  {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:22:23 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose\nINFO: channel closed\n"}}
+[debug] [2023-01-03T19:22:53.048Z] Jan 03, 2023 8:22:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:22:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:23:53.082Z] Jan 03, 2023 8:23:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:23:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:24:53.111Z] Jan 03, 2023 8:24:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:24:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:24:53.829Z] Jan 03, 2023 8:24:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:24:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:24:53.836Z] Jan 03, 2023 8:24:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:24:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:24:53.839Z] Jan 03, 2023 8:24:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:24:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:24:53.869Z] [work-queue] {"queuedWork":["/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0-2023-01-03T19:24:53.868Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2023-01-03T19:24:53.869Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0-2023-01-03T19:24:53.868Z"],"workRunningCount":1}
+[debug] [2023-01-03T19:24:53.869Z] Accepted request POST /functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0 --> us-central1-createTransfer-0
+[debug] [2023-01-03T19:24:53.875Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2023-01-03T19:24:53.876Z] [functions] Got req.url=/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0, mapping to path=/functions/projects/ {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0, mapping to path=/functions/projects/"}}
+[debug] [2023-01-03T19:24:53.876Z] [worker-pool] submitRequest(triggerId=us-central1-createTransfer) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-createTransfer)"}}
+[debug] [2023-01-03T19:24:53.876Z] [worker-us-central1-createTransfer-fb4e7ee7-7d42-4d99-84f1-2fd2ef579789]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-fb4e7ee7-7d42-4d99-84f1-2fd2ef579789]: BUSY"}}
+[info] i  functions: Beginning execution of "createTransfer" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"Beginning execution of \"createTransfer\""}}
+[debug] [2023-01-03T19:24:53.885Z] [runtime-status] [20227] ProcessBackground: lifting resource.name from resource {"name":"projects/dandelawebapp/databases/(default)/documents/transfert/slD0jDERxP2wU8aLOujz","service":"firestore.googleapis.com"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20227] ProcessBackground: lifting resource.name from resource {\"name\":\"projects/dandelawebapp/databases/(default)/documents/transfert/slD0jDERxP2wU8aLOujz\",\"service\":\"firestore.googleapis.com\"}"}}
+[debug] [2023-01-03T19:24:53.886Z] [runtime-status] [20227] RunBackground {"data":{"value":{"name":"projects/dandelawebapp/databases/(default)/documents/transfert/slD0jDERxP2wU8aLOujz","fields":{"uid":{"stringValue":"slD0jDERxP2wU8aLOujz"},"amount":{"integerValue":"100"},"receiver":{"stringValue":"Test Cool"}},"createTime":"2023-01-03T19:24:53.845048Z","updateTime":"2023-01-03T19:24:53.845048Z"},"updateMask":{}},"context":{"eventId":"905ced85-f1a5-479b-adbb-58d1886e20e2","timestamp":"2023-01-03T19:24:53.845Z","eventType":"providers/cloud.firestore/eventTypes/document.create","resource":"projects/dandelawebapp/databases/(default)/documents/transfert/slD0jDERxP2wU8aLOujz"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20227] RunBackground {\"data\":{\"value\":{\"name\":\"projects/dandelawebapp/databases/(default)/documents/transfert/slD0jDERxP2wU8aLOujz\",\"fields\":{\"uid\":{\"stringValue\":\"slD0jDERxP2wU8aLOujz\"},\"amount\":{\"integerValue\":\"100\"},\"receiver\":{\"stringValue\":\"Test Cool\"}},\"createTime\":\"2023-01-03T19:24:53.845048Z\",\"updateTime\":\"2023-01-03T19:24:53.845048Z\"},\"updateMask\":{}},\"context\":{\"eventId\":\"905ced85-f1a5-479b-adbb-58d1886e20e2\",\"timestamp\":\"2023-01-03T19:24:53.845Z\",\"eventType\":\"providers/cloud.firestore/eventTypes/document.create\",\"resource\":\"projects/dandelawebapp/databases/(default)/documents/transfert/slD0jDERxP2wU8aLOujz\"}}"}}
+[info] >  {"severity":"WARNING","message":"Function returned undefined, expected Promise or value"} {"user":{"severity":"WARNING","message":"Function returned undefined, expected Promise or value"},"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m {\"severity\":\"WARNING\",\"message\":\"Function returned undefined, expected Promise or value\"}"}}
+[debug] [2023-01-03T19:24:53.891Z] Jan 03, 2023 8:24:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:24:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:24:53.892Z] [worker-us-central1-createTransfer-fb4e7ee7-7d42-4d99-84f1-2fd2ef579789]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-fb4e7ee7-7d42-4d99-84f1-2fd2ef579789]: IDLE"}}
+[debug] [2023-01-03T19:24:53.892Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[info] i  functions: Finished "createTransfer" in 7.5565ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"Finished \"createTransfer\" in 7.5565ms"}}
+[info] >  Successfully sent message: { {"user":"Successfully sent message: {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m Successfully sent message: {"}}
+[info] >    responses: [ {"user":"  responses: [","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   responses: ["}}
+[info] >      { {"user":"    {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     {"}}
+[info] >        success: true, {"user":"      success: true,","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       success: true,"}}
+[info] >        messageId: 'projects/dandelawebapp/messages/93de2dcc-03a5-40ad-b80d-d4e2e78e9a6a' {"user":"      messageId: 'projects/dandelawebapp/messages/93de2dcc-03a5-40ad-b80d-d4e2e78e9a6a'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       messageId: 'projects/dandelawebapp/messages/93de2dcc-03a5-40ad-b80d-d4e2e78e9a6a'"}}
+[info] >      }, {"user":"    },","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     },"}}
+[info] >      { {"user":"    {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     {"}}
+[info] >        success: true, {"user":"      success: true,","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       success: true,"}}
+[info] >        messageId: 'projects/dandelawebapp/messages/82d716f8-b29f-4620-a075-85f6da6bcd69' {"user":"      messageId: 'projects/dandelawebapp/messages/82d716f8-b29f-4620-a075-85f6da6bcd69'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       messageId: 'projects/dandelawebapp/messages/82d716f8-b29f-4620-a075-85f6da6bcd69'"}}
+[info] >      } {"user":"    }","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     }"}}
+[info] >    ], {"user":"  ],","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   ],"}}
+[info] >    successCount: 2, {"user":"  successCount: 2,","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   successCount: 2,"}}
+[info] >    failureCount: 0 {"user":"  failureCount: 0","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   failureCount: 0"}}
+[info] >  } {"user":"}","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m }"}}
+[debug] [2023-01-03T19:25:52.080Z] File /Users/couzmec/DANDELA/dandela-web-app/functions/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/couzmec/DANDELA/dandela-web-app/functions/index.js changed, reloading triggers"}}
+[debug] [2023-01-03T19:25:53.083Z] Validating nodejs source
+[debug] [2023-01-03T19:25:53.441Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^11.4.1",
+    "firebase-functions": "^4.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-01-03T19:25:53.441Z] Building nodejs source
+[debug] [2023-01-03T19:25:53.442Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-01-03T19:25:53.545Z] Serving at port 9005
+
+[debug] [2023-01-03T19:25:53.684Z] Got response from /__/functions.yaml {"endpoints":{"createTransfer":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"eventTrigger":{"eventType":"providers/cloud.firestore/eventTypes/document.create","eventFilters":{"resource":"projects/dandelawebapp/databases/(default)/documents/transfert/{uid}"},"retry":false},"labels":{},"entryPoint":"createTransfer"},"addMessage":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"addMessage"},"makeUppercase":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"eventTrigger":{"eventType":"providers/cloud.firestore/eventTypes/document.create","eventFilters":{"resource":"projects/dandelawebapp/databases/(default)/documents/messages/{documentId}"},"retry":false},"labels":{},"entryPoint":"makeUppercase"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2023-01-03T19:25:53.689Z] shutdown requested via /__/quitquitquit
+
+[info] ✔  functions: Loaded functions definitions from source: createTransfer, addMessage, makeUppercase. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createTransfer, addMessage, makeUppercase."}}
+[debug] [2023-01-03T19:25:53.694Z] [worker-pool] Shutting down IDLE worker (us-central1-createTransfer) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Shutting down IDLE worker (us-central1-createTransfer)"}}
+[debug] [2023-01-03T19:25:53.694Z] [worker-us-central1-createTransfer-fb4e7ee7-7d42-4d99-84f1-2fd2ef579789]: FINISHING {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-fb4e7ee7-7d42-4d99-84f1-2fd2ef579789]: FINISHING"}}
+[debug] [2023-01-03T19:25:53.701Z] [worker-us-central1-createTransfer-fb4e7ee7-7d42-4d99-84f1-2fd2ef579789]: exited {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-fb4e7ee7-7d42-4d99-84f1-2fd2ef579789]: exited"}}
+[debug] [2023-01-03T19:25:53.701Z] [worker-us-central1-createTransfer-fb4e7ee7-7d42-4d99-84f1-2fd2ef579789]: FINISHED {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-fb4e7ee7-7d42-4d99-84f1-2fd2ef579789]: FINISHED"}}
+[debug] [2023-01-03T19:25:53.887Z] Jan 03, 2023 8:25:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:25:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:25:53.910Z] Jan 03, 2023 8:25:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:25:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:25:54.367Z] Jan 03, 2023 8:25:54 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:25:54 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:25:54.381Z] Jan 03, 2023 8:25:54 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:25:54 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose\nINFO: channel closed\n"}}
+[debug] [2023-01-03T19:26:16.838Z] Jan 03, 2023 8:26:16 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:26:16 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:26:16.851Z] Jan 03, 2023 8:26:16 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:26:16 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:26:16.855Z] Jan 03, 2023 8:26:16 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:26:16 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:26:16.908Z] [work-queue] {"queuedWork":["/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0-2023-01-03T19:26:16.908Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2023-01-03T19:26:16.908Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0-2023-01-03T19:26:16.908Z"],"workRunningCount":1}
+[debug] [2023-01-03T19:26:16.908Z] Accepted request POST /functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0 --> us-central1-createTransfer-0
+[debug] [2023-01-03T19:26:16.918Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2023-01-03T19:26:16.918Z] [functions] Got req.url=/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0, mapping to path=/functions/projects/ {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0, mapping to path=/functions/projects/"}}
+[debug] [2023-01-03T19:26:16.918Z] [worker-pool] Cleaned up workers for us-central1-createTransfer: 1 --> 0 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Cleaned up workers for us-central1-createTransfer: 1 --> 0"}}
+[debug] [2023-01-03T19:26:16.922Z] [worker-pool] addWorker(us-central1-createTransfer) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(us-central1-createTransfer)"}}
+[debug] [2023-01-03T19:26:16.922Z] [worker-pool] Adding worker with key us-central1-createTransfer, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key us-central1-createTransfer, total=1"}}
+[debug] [2023-01-03T19:26:16.925Z] Jan 03, 2023 8:26:16 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:26:16 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:26:17.485Z] [runtime-status] [20862] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.4.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20862] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.4.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2023-01-03T19:26:17.485Z] [runtime-status] [20862] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.1.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20862] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.1.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-01-03T19:26:17.486Z] [runtime-status] [20862] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20862] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2023-01-03T19:26:17.486Z] [runtime-status] [20862] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.1.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20862] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.1.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-01-03T19:26:17.610Z] [runtime-status] [20862] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20862] Checked functions.config() {\"config\":{}}"}}
+[debug] [2023-01-03T19:26:17.610Z] [runtime-status] [20862] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"4.1.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20862] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"4.1.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js\"}}"}}
+[debug] [2023-01-03T19:26:17.611Z] [runtime-status] [20862] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.1.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20862] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.1.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-01-03T19:26:17.611Z] [runtime-status] [20862] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.4.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20862] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.4.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2023-01-03T19:26:17.612Z] [runtime-status] [20862] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.1.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20862] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.1.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-01-03T19:26:17.612Z] [runtime-status] [20862] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"11.4.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-admin/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20862] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"11.4.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-admin/lib/index.js\"}}"}}
+[debug] [2023-01-03T19:26:17.613Z] [runtime-status] [20862] initializeApp(DEFAULT) {"storageBucket":"dandelawebapp.appspot.com","projectId":"dandelawebapp"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20862] initializeApp(DEFAULT) {\"storageBucket\":\"dandelawebapp.appspot.com\",\"projectId\":\"dandelawebapp\"}"}}
+[debug] [2023-01-03T19:26:17.617Z] [runtime-status] [20862] Functions runtime initialized. {"cwd":"/Users/couzmec/DANDELA/dandela-web-app/functions","node_version":"16.17.1"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20862] Functions runtime initialized. {\"cwd\":\"/Users/couzmec/DANDELA/dandela-web-app/functions\",\"node_version\":\"16.17.1\"}"}}
+[debug] [2023-01-03T19:26:17.617Z] [runtime-status] [20862] Listening to port: /var/folders/7c/_mj9t0s568q15qb8r1t76_k00000gn/T/fire_emu_782eb45cc4ad00e2.sock {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20862] Listening to port: /var/folders/7c/_mj9t0s568q15qb8r1t76_k00000gn/T/fire_emu_782eb45cc4ad00e2.sock"}}
+[debug] [2023-01-03T19:26:17.635Z] [worker-us-central1-createTransfer-69c913b3-e512-46f2-98d1-c9749930eb4a]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-69c913b3-e512-46f2-98d1-c9749930eb4a]: IDLE"}}
+[debug] [2023-01-03T19:26:17.635Z] [worker-pool] submitRequest(triggerId=us-central1-createTransfer) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-createTransfer)"}}
+[debug] [2023-01-03T19:26:17.635Z] [worker-us-central1-createTransfer-69c913b3-e512-46f2-98d1-c9749930eb4a]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-69c913b3-e512-46f2-98d1-c9749930eb4a]: BUSY"}}
+[info] i  functions: Beginning execution of "createTransfer" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"Beginning execution of \"createTransfer\""}}
+[debug] [2023-01-03T19:26:17.640Z] [runtime-status] [20862] ProcessBackground: lifting resource.name from resource {"name":"projects/dandelawebapp/databases/(default)/documents/transfert/aw087uvaPSr4Zter0lNi","service":"firestore.googleapis.com"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20862] ProcessBackground: lifting resource.name from resource {\"name\":\"projects/dandelawebapp/databases/(default)/documents/transfert/aw087uvaPSr4Zter0lNi\",\"service\":\"firestore.googleapis.com\"}"}}
+[debug] [2023-01-03T19:26:17.640Z] [runtime-status] [20862] RunBackground {"data":{"value":{"name":"projects/dandelawebapp/databases/(default)/documents/transfert/aw087uvaPSr4Zter0lNi","fields":{"uid":{"stringValue":"aw087uvaPSr4Zter0lNi"},"amount":{"integerValue":"50"},"receiver":{"stringValue":"new test"}},"createTime":"2023-01-03T19:26:16.861825Z","updateTime":"2023-01-03T19:26:16.861825Z"},"updateMask":{}},"context":{"eventId":"ad58bced-3139-4ad7-81eb-64ec38efa05c","timestamp":"2023-01-03T19:26:16.861Z","eventType":"providers/cloud.firestore/eventTypes/document.create","resource":"projects/dandelawebapp/databases/(default)/documents/transfert/aw087uvaPSr4Zter0lNi"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20862] RunBackground {\"data\":{\"value\":{\"name\":\"projects/dandelawebapp/databases/(default)/documents/transfert/aw087uvaPSr4Zter0lNi\",\"fields\":{\"uid\":{\"stringValue\":\"aw087uvaPSr4Zter0lNi\"},\"amount\":{\"integerValue\":\"50\"},\"receiver\":{\"stringValue\":\"new test\"}},\"createTime\":\"2023-01-03T19:26:16.861825Z\",\"updateTime\":\"2023-01-03T19:26:16.861825Z\"},\"updateMask\":{}},\"context\":{\"eventId\":\"ad58bced-3139-4ad7-81eb-64ec38efa05c\",\"timestamp\":\"2023-01-03T19:26:16.861Z\",\"eventType\":\"providers/cloud.firestore/eventTypes/document.create\",\"resource\":\"projects/dandelawebapp/databases/(default)/documents/transfert/aw087uvaPSr4Zter0lNi\"}}"}}
+[info] >  {"severity":"WARNING","message":"Function returned undefined, expected Promise or value"} {"user":{"severity":"WARNING","message":"Function returned undefined, expected Promise or value"},"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m {\"severity\":\"WARNING\",\"message\":\"Function returned undefined, expected Promise or value\"}"}}
+[debug] [2023-01-03T19:26:17.649Z] [worker-us-central1-createTransfer-69c913b3-e512-46f2-98d1-c9749930eb4a]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-69c913b3-e512-46f2-98d1-c9749930eb4a]: IDLE"}}
+[debug] [2023-01-03T19:26:17.649Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[info] i  functions: Finished "createTransfer" in 9.064333ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"Finished \"createTransfer\" in 9.064333ms"}}
+[info] >  Successfully sent message: { {"user":"Successfully sent message: {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m Successfully sent message: {"}}
+[info] >    responses: [ {"user":"  responses: [","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   responses: ["}}
+[info] >      { success: false, error: [FirebaseMessagingError] }, {"user":"    { success: false, error: [FirebaseMessagingError] },","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     { success: false, error: [FirebaseMessagingError] },"}}
+[info] >      { success: false, error: [FirebaseMessagingError] } {"user":"    { success: false, error: [FirebaseMessagingError] }","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     { success: false, error: [FirebaseMessagingError] }"}}
+[info] >    ], {"user":"  ],","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   ],"}}
+[info] >    successCount: 0, {"user":"  successCount: 0,","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   successCount: 0,"}}
+[info] >    failureCount: 2 {"user":"  failureCount: 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   failureCount: 2"}}
+[info] >  } {"user":"}","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m }"}}
+[debug] [2023-01-03T19:26:46.946Z] Jan 03, 2023 8:26:46 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:26:46 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:27:05.231Z] File /Users/couzmec/DANDELA/dandela-web-app/functions/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/couzmec/DANDELA/dandela-web-app/functions/index.js changed, reloading triggers"}}
+[debug] [2023-01-03T19:27:06.234Z] Validating nodejs source
+[debug] [2023-01-03T19:27:06.570Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^11.4.1",
+    "firebase-functions": "^4.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-01-03T19:27:06.570Z] Building nodejs source
+[debug] [2023-01-03T19:27:06.570Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-01-03T19:27:06.691Z] Serving at port 9005
+
+[debug] [2023-01-03T19:27:06.829Z] Got response from /__/functions.yaml {"endpoints":{"createTransfer":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"eventTrigger":{"eventType":"providers/cloud.firestore/eventTypes/document.create","eventFilters":{"resource":"projects/dandelawebapp/databases/(default)/documents/transfert/{uid}"},"retry":false},"labels":{},"entryPoint":"createTransfer"},"addMessage":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"addMessage"},"makeUppercase":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"eventTrigger":{"eventType":"providers/cloud.firestore/eventTypes/document.create","eventFilters":{"resource":"projects/dandelawebapp/databases/(default)/documents/messages/{documentId}"},"retry":false},"labels":{},"entryPoint":"makeUppercase"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2023-01-03T19:27:06.831Z] shutdown requested via /__/quitquitquit
+
+[info] ✔  functions: Loaded functions definitions from source: createTransfer, addMessage, makeUppercase. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createTransfer, addMessage, makeUppercase."}}
+[debug] [2023-01-03T19:27:06.834Z] [worker-pool] Shutting down IDLE worker (us-central1-createTransfer) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Shutting down IDLE worker (us-central1-createTransfer)"}}
+[debug] [2023-01-03T19:27:06.834Z] [worker-us-central1-createTransfer-69c913b3-e512-46f2-98d1-c9749930eb4a]: FINISHING {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-69c913b3-e512-46f2-98d1-c9749930eb4a]: FINISHING"}}
+[debug] [2023-01-03T19:27:06.841Z] [worker-us-central1-createTransfer-69c913b3-e512-46f2-98d1-c9749930eb4a]: exited {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-69c913b3-e512-46f2-98d1-c9749930eb4a]: exited"}}
+[debug] [2023-01-03T19:27:06.841Z] [worker-us-central1-createTransfer-69c913b3-e512-46f2-98d1-c9749930eb4a]: FINISHED {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-69c913b3-e512-46f2-98d1-c9749930eb4a]: FINISHED"}}
+[debug] [2023-01-03T19:27:16.951Z] Jan 03, 2023 8:27:16 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:27:16 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:27:17.448Z] Jan 03, 2023 8:27:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:27:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:27:17.473Z] Jan 03, 2023 8:27:17 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:27:17 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose\nINFO: channel closed\n"}}
+[debug] [2023-01-03T19:27:25.717Z] File /Users/couzmec/DANDELA/dandela-web-app/functions/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/couzmec/DANDELA/dandela-web-app/functions/index.js changed, reloading triggers"}}
+[debug] [2023-01-03T19:27:26.721Z] Validating nodejs source
+[debug] [2023-01-03T19:27:27.809Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^11.4.1",
+    "firebase-functions": "^4.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-01-03T19:27:27.810Z] Building nodejs source
+[debug] [2023-01-03T19:27:27.811Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-01-03T19:27:27.908Z] Serving at port 9005
+
+[debug] [2023-01-03T19:27:28.022Z] Got response from /__/functions.yaml {"endpoints":{"createTransfer":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"eventTrigger":{"eventType":"providers/cloud.firestore/eventTypes/document.create","eventFilters":{"resource":"projects/dandelawebapp/databases/(default)/documents/transfert/{uid}"},"retry":false},"labels":{},"entryPoint":"createTransfer"},"addMessage":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"addMessage"},"makeUppercase":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"eventTrigger":{"eventType":"providers/cloud.firestore/eventTypes/document.create","eventFilters":{"resource":"projects/dandelawebapp/databases/(default)/documents/messages/{documentId}"},"retry":false},"labels":{},"entryPoint":"makeUppercase"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2023-01-03T19:27:28.024Z] shutdown requested via /__/quitquitquit
+
+[info] ✔  functions: Loaded functions definitions from source: createTransfer, addMessage, makeUppercase. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createTransfer, addMessage, makeUppercase."}}
+[debug] [2023-01-03T19:27:46.967Z] Jan 03, 2023 8:27:46 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:27:46 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:27:53.104Z] Jan 03, 2023 8:27:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:27:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:27:53.113Z] Jan 03, 2023 8:27:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:27:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:27:53.116Z] Jan 03, 2023 8:27:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:27:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:27:53.142Z] [work-queue] {"queuedWork":["/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0-2023-01-03T19:27:53.142Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2023-01-03T19:27:53.142Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0-2023-01-03T19:27:53.142Z"],"workRunningCount":1}
+[debug] [2023-01-03T19:27:53.142Z] Accepted request POST /functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0 --> us-central1-createTransfer-0
+[debug] [2023-01-03T19:27:53.145Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2023-01-03T19:27:53.145Z] [functions] Got req.url=/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0, mapping to path=/functions/projects/ {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0, mapping to path=/functions/projects/"}}
+[debug] [2023-01-03T19:27:53.145Z] [worker-pool] Cleaned up workers for us-central1-createTransfer: 1 --> 0 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Cleaned up workers for us-central1-createTransfer: 1 --> 0"}}
+[debug] [2023-01-03T19:27:53.151Z] [worker-pool] addWorker(us-central1-createTransfer) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(us-central1-createTransfer)"}}
+[debug] [2023-01-03T19:27:53.151Z] [worker-pool] Adding worker with key us-central1-createTransfer, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key us-central1-createTransfer, total=1"}}
+[debug] [2023-01-03T19:27:53.157Z] Jan 03, 2023 8:27:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:27:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:27:53.751Z] [runtime-status] [20885] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.4.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.4.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2023-01-03T19:27:53.751Z] [runtime-status] [20885] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.1.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.1.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-01-03T19:27:53.751Z] [runtime-status] [20885] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2023-01-03T19:27:53.752Z] [runtime-status] [20885] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.1.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.1.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-01-03T19:27:53.850Z] [runtime-status] [20885] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] Checked functions.config() {\"config\":{}}"}}
+[debug] [2023-01-03T19:27:53.850Z] [runtime-status] [20885] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"4.1.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"4.1.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js\"}}"}}
+[debug] [2023-01-03T19:27:53.850Z] [runtime-status] [20885] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.1.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.1.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-01-03T19:27:53.850Z] [runtime-status] [20885] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.4.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.4.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2023-01-03T19:27:53.851Z] [runtime-status] [20885] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.1.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.1.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-01-03T19:27:53.851Z] [runtime-status] [20885] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"11.4.1","resolution":"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-admin/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"11.4.1\",\"resolution\":\"/Users/couzmec/DANDELA/dandela-web-app/functions/node_modules/firebase-admin/lib/index.js\"}}"}}
+[debug] [2023-01-03T19:27:53.852Z] [runtime-status] [20885] initializeApp(DEFAULT) {"storageBucket":"dandelawebapp.appspot.com","projectId":"dandelawebapp"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] initializeApp(DEFAULT) {\"storageBucket\":\"dandelawebapp.appspot.com\",\"projectId\":\"dandelawebapp\"}"}}
+[debug] [2023-01-03T19:27:53.856Z] [runtime-status] [20885] Functions runtime initialized. {"cwd":"/Users/couzmec/DANDELA/dandela-web-app/functions","node_version":"16.17.1"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] Functions runtime initialized. {\"cwd\":\"/Users/couzmec/DANDELA/dandela-web-app/functions\",\"node_version\":\"16.17.1\"}"}}
+[debug] [2023-01-03T19:27:53.857Z] [runtime-status] [20885] Listening to port: /var/folders/7c/_mj9t0s568q15qb8r1t76_k00000gn/T/fire_emu_35fc301249f88374.sock {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] Listening to port: /var/folders/7c/_mj9t0s568q15qb8r1t76_k00000gn/T/fire_emu_35fc301249f88374.sock"}}
+[debug] [2023-01-03T19:27:53.863Z] [worker-us-central1-createTransfer-3264a576-579d-4312-b4dd-6e1ca60d1d9d]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-3264a576-579d-4312-b4dd-6e1ca60d1d9d]: IDLE"}}
+[debug] [2023-01-03T19:27:53.863Z] [worker-pool] submitRequest(triggerId=us-central1-createTransfer) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-createTransfer)"}}
+[debug] [2023-01-03T19:27:53.863Z] [worker-us-central1-createTransfer-3264a576-579d-4312-b4dd-6e1ca60d1d9d]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-3264a576-579d-4312-b4dd-6e1ca60d1d9d]: BUSY"}}
+[info] i  functions: Beginning execution of "createTransfer" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"Beginning execution of \"createTransfer\""}}
+[debug] [2023-01-03T19:27:53.869Z] [runtime-status] [20885] ProcessBackground: lifting resource.name from resource {"name":"projects/dandelawebapp/databases/(default)/documents/transfert/Ws5KdqXoP0CnxnaGdta0","service":"firestore.googleapis.com"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] ProcessBackground: lifting resource.name from resource {\"name\":\"projects/dandelawebapp/databases/(default)/documents/transfert/Ws5KdqXoP0CnxnaGdta0\",\"service\":\"firestore.googleapis.com\"}"}}
+[debug] [2023-01-03T19:27:53.869Z] [runtime-status] [20885] RunBackground {"data":{"value":{"name":"projects/dandelawebapp/databases/(default)/documents/transfert/Ws5KdqXoP0CnxnaGdta0","fields":{"uid":{"stringValue":"Ws5KdqXoP0CnxnaGdta0"},"amount":{"integerValue":"300"},"receiver":{"stringValue":"test okay"}},"createTime":"2023-01-03T19:27:53.122186Z","updateTime":"2023-01-03T19:27:53.122186Z"},"updateMask":{}},"context":{"eventId":"b2250b2d-8066-4de0-ad15-cedd42c1772e","timestamp":"2023-01-03T19:27:53.122Z","eventType":"providers/cloud.firestore/eventTypes/document.create","resource":"projects/dandelawebapp/databases/(default)/documents/transfert/Ws5KdqXoP0CnxnaGdta0"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] RunBackground {\"data\":{\"value\":{\"name\":\"projects/dandelawebapp/databases/(default)/documents/transfert/Ws5KdqXoP0CnxnaGdta0\",\"fields\":{\"uid\":{\"stringValue\":\"Ws5KdqXoP0CnxnaGdta0\"},\"amount\":{\"integerValue\":\"300\"},\"receiver\":{\"stringValue\":\"test okay\"}},\"createTime\":\"2023-01-03T19:27:53.122186Z\",\"updateTime\":\"2023-01-03T19:27:53.122186Z\"},\"updateMask\":{}},\"context\":{\"eventId\":\"b2250b2d-8066-4de0-ad15-cedd42c1772e\",\"timestamp\":\"2023-01-03T19:27:53.122Z\",\"eventType\":\"providers/cloud.firestore/eventTypes/document.create\",\"resource\":\"projects/dandelawebapp/databases/(default)/documents/transfert/Ws5KdqXoP0CnxnaGdta0\"}}"}}
+[info] >  {"severity":"WARNING","message":"Function returned undefined, expected Promise or value"} {"user":{"severity":"WARNING","message":"Function returned undefined, expected Promise or value"},"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m {\"severity\":\"WARNING\",\"message\":\"Function returned undefined, expected Promise or value\"}"}}
+[debug] [2023-01-03T19:27:53.879Z] [worker-us-central1-createTransfer-3264a576-579d-4312-b4dd-6e1ca60d1d9d]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-3264a576-579d-4312-b4dd-6e1ca60d1d9d]: IDLE"}}
+[debug] [2023-01-03T19:27:53.879Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[info] i  functions: Finished "createTransfer" in 10.091375ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"Finished \"createTransfer\" in 10.091375ms"}}
+[info] >  Successfully sent message: { {"user":"Successfully sent message: {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m Successfully sent message: {"}}
+[info] >    responses: [ {"user":"  responses: [","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   responses: ["}}
+[info] >      { {"user":"    {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     {"}}
+[info] >        success: true, {"user":"      success: true,","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       success: true,"}}
+[info] >        messageId: 'projects/dandelawebapp/messages/8121e24e-bff0-44fd-a8c3-8f0b30e8c0c6' {"user":"      messageId: 'projects/dandelawebapp/messages/8121e24e-bff0-44fd-a8c3-8f0b30e8c0c6'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       messageId: 'projects/dandelawebapp/messages/8121e24e-bff0-44fd-a8c3-8f0b30e8c0c6'"}}
+[info] >      }, {"user":"    },","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     },"}}
+[info] >      { {"user":"    {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     {"}}
+[info] >        success: true, {"user":"      success: true,","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       success: true,"}}
+[info] >        messageId: 'projects/dandelawebapp/messages/8650fa6a-3eda-4b07-8862-d8e17730e7a5' {"user":"      messageId: 'projects/dandelawebapp/messages/8650fa6a-3eda-4b07-8862-d8e17730e7a5'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       messageId: 'projects/dandelawebapp/messages/8650fa6a-3eda-4b07-8862-d8e17730e7a5'"}}
+[info] >      } {"user":"    }","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     }"}}
+[info] >    ], {"user":"  ],","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   ],"}}
+[info] >    successCount: 2, {"user":"  successCount: 2,","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   successCount: 2,"}}
+[info] >    failureCount: 0 {"user":"  failureCount: 0","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   failureCount: 0"}}
+[info] >  } {"user":"}","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m }"}}
+[debug] [2023-01-03T19:28:53.170Z] Jan 03, 2023 8:28:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:28:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:28:53.174Z] Jan 03, 2023 8:28:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:28:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:28:53.328Z] Jan 03, 2023 8:28:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:28:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:28:53.332Z] Jan 03, 2023 8:28:53 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:28:53 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose\nINFO: channel closed\n"}}
+[debug] [2023-01-03T19:29:53.209Z] Jan 03, 2023 8:29:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:29:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:30:53.235Z] Jan 03, 2023 8:30:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:30:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:31:53.283Z] Jan 03, 2023 8:31:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:31:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:32:53.326Z] Jan 03, 2023 8:32:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:32:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:33:53.361Z] Jan 03, 2023 8:33:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:33:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:34:53.396Z] Jan 03, 2023 8:34:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:34:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:35:53.434Z] Jan 03, 2023 8:35:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:35:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:36:53.473Z] Jan 03, 2023 8:36:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:36:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:37:53.513Z] Jan 03, 2023 8:37:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:37:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:38:53.544Z] Jan 03, 2023 8:38:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:38:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:39:15.006Z] Jan 03, 2023 8:39:15 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Jan 03, 2023 8:39:15 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Jan 03, 2023 8:39:15 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:39:15 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\nJan 03, 2023 8:39:15 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\nJan 03, 2023 8:39:15 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:39:33.491Z] Jan 03, 2023 8:39:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:39:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:39:33.511Z] Jan 03, 2023 8:39:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:39:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:39:33.520Z] Jan 03, 2023 8:39:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:39:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:39:33.547Z] [work-queue] {"queuedWork":["/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0-2023-01-03T19:39:33.547Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2023-01-03T19:39:33.548Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0-2023-01-03T19:39:33.547Z"],"workRunningCount":1}
+[debug] [2023-01-03T19:39:33.548Z] Accepted request POST /functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0 --> us-central1-createTransfer-0
+[debug] [2023-01-03T19:39:33.562Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2023-01-03T19:39:33.566Z] [functions] Got req.url=/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0, mapping to path=/functions/projects/ {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0, mapping to path=/functions/projects/"}}
+[debug] [2023-01-03T19:39:33.567Z] [worker-pool] submitRequest(triggerId=us-central1-createTransfer) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-createTransfer)"}}
+[debug] [2023-01-03T19:39:33.567Z] [worker-us-central1-createTransfer-3264a576-579d-4312-b4dd-6e1ca60d1d9d]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-3264a576-579d-4312-b4dd-6e1ca60d1d9d]: BUSY"}}
+[debug] [2023-01-03T19:39:33.568Z] Jan 03, 2023 8:39:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:39:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[info] i  functions: Beginning execution of "createTransfer" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"Beginning execution of \"createTransfer\""}}
+[debug] [2023-01-03T19:39:33.587Z] [runtime-status] [20885] ProcessBackground: lifting resource.name from resource {"name":"projects/dandelawebapp/databases/(default)/documents/transfert/rLPfaGbQLpWPySRxgRUR","service":"firestore.googleapis.com"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] ProcessBackground: lifting resource.name from resource {\"name\":\"projects/dandelawebapp/databases/(default)/documents/transfert/rLPfaGbQLpWPySRxgRUR\",\"service\":\"firestore.googleapis.com\"}"}}
+[debug] [2023-01-03T19:39:33.587Z] [runtime-status] [20885] RunBackground {"data":{"value":{"name":"projects/dandelawebapp/databases/(default)/documents/transfert/rLPfaGbQLpWPySRxgRUR","fields":{"uid":{"stringValue":"rLPfaGbQLpWPySRxgRUR"},"amount":{"stringValue":"100"},"receiver":{"stringValue":"Arlette Matondo"}},"createTime":"2023-01-03T19:39:33.527293Z","updateTime":"2023-01-03T19:39:33.527293Z"},"updateMask":{}},"context":{"eventId":"0794493c-6527-45e4-a98d-9b672e6507b2","timestamp":"2023-01-03T19:39:33.527Z","eventType":"providers/cloud.firestore/eventTypes/document.create","resource":"projects/dandelawebapp/databases/(default)/documents/transfert/rLPfaGbQLpWPySRxgRUR"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] RunBackground {\"data\":{\"value\":{\"name\":\"projects/dandelawebapp/databases/(default)/documents/transfert/rLPfaGbQLpWPySRxgRUR\",\"fields\":{\"uid\":{\"stringValue\":\"rLPfaGbQLpWPySRxgRUR\"},\"amount\":{\"stringValue\":\"100\"},\"receiver\":{\"stringValue\":\"Arlette Matondo\"}},\"createTime\":\"2023-01-03T19:39:33.527293Z\",\"updateTime\":\"2023-01-03T19:39:33.527293Z\"},\"updateMask\":{}},\"context\":{\"eventId\":\"0794493c-6527-45e4-a98d-9b672e6507b2\",\"timestamp\":\"2023-01-03T19:39:33.527Z\",\"eventType\":\"providers/cloud.firestore/eventTypes/document.create\",\"resource\":\"projects/dandelawebapp/databases/(default)/documents/transfert/rLPfaGbQLpWPySRxgRUR\"}}"}}
+[info] >  {"severity":"WARNING","message":"Function returned undefined, expected Promise or value"} {"user":{"severity":"WARNING","message":"Function returned undefined, expected Promise or value"},"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m {\"severity\":\"WARNING\",\"message\":\"Function returned undefined, expected Promise or value\"}"}}
+[debug] [2023-01-03T19:39:33.595Z] [worker-us-central1-createTransfer-3264a576-579d-4312-b4dd-6e1ca60d1d9d]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-3264a576-579d-4312-b4dd-6e1ca60d1d9d]: IDLE"}}
+[debug] [2023-01-03T19:39:33.596Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[info] i  functions: Finished "createTransfer" in 9.391041ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"Finished \"createTransfer\" in 9.391041ms"}}
+[info] >  Successfully sent message: { {"user":"Successfully sent message: {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m Successfully sent message: {"}}
+[info] >    responses: [ {"user":"  responses: [","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   responses: ["}}
+[info] >      { {"user":"    {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     {"}}
+[info] >        success: true, {"user":"      success: true,","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       success: true,"}}
+[info] >        messageId: 'projects/dandelawebapp/messages/131a4c95-a599-494f-8af3-12b7c197fa2d' {"user":"      messageId: 'projects/dandelawebapp/messages/131a4c95-a599-494f-8af3-12b7c197fa2d'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       messageId: 'projects/dandelawebapp/messages/131a4c95-a599-494f-8af3-12b7c197fa2d'"}}
+[info] >      }, {"user":"    },","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     },"}}
+[info] >      { {"user":"    {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     {"}}
+[info] >        success: true, {"user":"      success: true,","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       success: true,"}}
+[info] >        messageId: 'projects/dandelawebapp/messages/e231d0cf-c9ba-48ea-9b2f-199716b584fe' {"user":"      messageId: 'projects/dandelawebapp/messages/e231d0cf-c9ba-48ea-9b2f-199716b584fe'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       messageId: 'projects/dandelawebapp/messages/e231d0cf-c9ba-48ea-9b2f-199716b584fe'"}}
+[info] >      } {"user":"    }","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     }"}}
+[info] >    ], {"user":"  ],","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   ],"}}
+[info] >    successCount: 2, {"user":"  successCount: 2,","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   successCount: 2,"}}
+[info] >    failureCount: 0 {"user":"  failureCount: 0","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   failureCount: 0"}}
+[info] >  } {"user":"}","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m }"}}
+[debug] [2023-01-03T19:40:03.600Z] Jan 03, 2023 8:40:03 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:40:03 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:40:33.555Z] Jan 03, 2023 8:40:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:40:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:40:33.560Z] Jan 03, 2023 8:40:33 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:40:33 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose\nINFO: channel closed\n"}}
+[debug] [2023-01-03T19:40:44.214Z] Jan 03, 2023 8:40:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:40:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:40:44.220Z] Jan 03, 2023 8:40:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:40:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:40:44.224Z] Jan 03, 2023 8:40:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:40:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:40:44.249Z] [work-queue] {"queuedWork":["/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0-2023-01-03T19:40:44.249Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2023-01-03T19:40:44.249Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0-2023-01-03T19:40:44.249Z"],"workRunningCount":1}
+[debug] [2023-01-03T19:40:44.249Z] Accepted request POST /functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0 --> us-central1-createTransfer-0
+[debug] [2023-01-03T19:40:44.252Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2023-01-03T19:40:44.252Z] [functions] Got req.url=/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0, mapping to path=/functions/projects/ {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/functions/projects/dandelawebapp/triggers/us-central1-createTransfer-0, mapping to path=/functions/projects/"}}
+[debug] [2023-01-03T19:40:44.252Z] [worker-pool] submitRequest(triggerId=us-central1-createTransfer) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-createTransfer)"}}
+[debug] [2023-01-03T19:40:44.252Z] [worker-us-central1-createTransfer-3264a576-579d-4312-b4dd-6e1ca60d1d9d]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-3264a576-579d-4312-b4dd-6e1ca60d1d9d]: BUSY"}}
+[info] i  functions: Beginning execution of "createTransfer" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"Beginning execution of \"createTransfer\""}}
+[debug] [2023-01-03T19:40:44.257Z] [runtime-status] [20885] ProcessBackground: lifting resource.name from resource {"name":"projects/dandelawebapp/databases/(default)/documents/transfert/VPec3RlkT6zkbk2yuOUX","service":"firestore.googleapis.com"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] ProcessBackground: lifting resource.name from resource {\"name\":\"projects/dandelawebapp/databases/(default)/documents/transfert/VPec3RlkT6zkbk2yuOUX\",\"service\":\"firestore.googleapis.com\"}"}}
+[debug] [2023-01-03T19:40:44.257Z] [runtime-status] [20885] RunBackground {"data":{"value":{"name":"projects/dandelawebapp/databases/(default)/documents/transfert/VPec3RlkT6zkbk2yuOUX","fields":{"uid":{"stringValue":"VPec3RlkT6zkbk2yuOUX"},"amount":{"integerValue":"50"},"receiver":{"stringValue":"test merde"}},"createTime":"2023-01-03T19:40:44.231207Z","updateTime":"2023-01-03T19:40:44.231207Z"},"updateMask":{}},"context":{"eventId":"300120b3-df94-44b3-933d-ff799154d57c","timestamp":"2023-01-03T19:40:44.231Z","eventType":"providers/cloud.firestore/eventTypes/document.create","resource":"projects/dandelawebapp/databases/(default)/documents/transfert/VPec3RlkT6zkbk2yuOUX"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"[runtime-status] [20885] RunBackground {\"data\":{\"value\":{\"name\":\"projects/dandelawebapp/databases/(default)/documents/transfert/VPec3RlkT6zkbk2yuOUX\",\"fields\":{\"uid\":{\"stringValue\":\"VPec3RlkT6zkbk2yuOUX\"},\"amount\":{\"integerValue\":\"50\"},\"receiver\":{\"stringValue\":\"test merde\"}},\"createTime\":\"2023-01-03T19:40:44.231207Z\",\"updateTime\":\"2023-01-03T19:40:44.231207Z\"},\"updateMask\":{}},\"context\":{\"eventId\":\"300120b3-df94-44b3-933d-ff799154d57c\",\"timestamp\":\"2023-01-03T19:40:44.231Z\",\"eventType\":\"providers/cloud.firestore/eventTypes/document.create\",\"resource\":\"projects/dandelawebapp/databases/(default)/documents/transfert/VPec3RlkT6zkbk2yuOUX\"}}"}}
+[info] >  {"severity":"WARNING","message":"Function returned undefined, expected Promise or value"} {"user":{"severity":"WARNING","message":"Function returned undefined, expected Promise or value"},"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m {\"severity\":\"WARNING\",\"message\":\"Function returned undefined, expected Promise or value\"}"}}
+[debug] [2023-01-03T19:40:44.261Z] [worker-us-central1-createTransfer-3264a576-579d-4312-b4dd-6e1ca60d1d9d]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-createTransfer-3264a576-579d-4312-b4dd-6e1ca60d1d9d]: IDLE"}}
+[debug] [2023-01-03T19:40:44.262Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[info] i  functions: Finished "createTransfer" in 5.329083ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"Finished \"createTransfer\" in 5.329083ms"}}
+[debug] [2023-01-03T19:40:44.265Z] Jan 03, 2023 8:40:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:40:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[info] >  Successfully sent message: { {"user":"Successfully sent message: {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m Successfully sent message: {"}}
+[info] >    responses: [ {"user":"  responses: [","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   responses: ["}}
+[info] >      { {"user":"    {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     {"}}
+[info] >        success: true, {"user":"      success: true,","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       success: true,"}}
+[info] >        messageId: 'projects/dandelawebapp/messages/567c87d0-b894-48dd-916d-a79e185deb94' {"user":"      messageId: 'projects/dandelawebapp/messages/567c87d0-b894-48dd-916d-a79e185deb94'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       messageId: 'projects/dandelawebapp/messages/567c87d0-b894-48dd-916d-a79e185deb94'"}}
+[info] >      }, {"user":"    },","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     },"}}
+[info] >      { {"user":"    {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     {"}}
+[info] >        success: true, {"user":"      success: true,","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       success: true,"}}
+[info] >        messageId: 'projects/dandelawebapp/messages/4ba21fd5-cd34-437c-9c02-e986a55a1c7a' {"user":"      messageId: 'projects/dandelawebapp/messages/4ba21fd5-cd34-437c-9c02-e986a55a1c7a'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m       messageId: 'projects/dandelawebapp/messages/4ba21fd5-cd34-437c-9c02-e986a55a1c7a'"}}
+[info] >      } {"user":"    }","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m     }"}}
+[info] >    ], {"user":"  ],","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   ],"}}
+[info] >    successCount: 2, {"user":"  successCount: 2,","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   successCount: 2,"}}
+[info] >    failureCount: 0 {"user":"  failureCount: 0","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m   failureCount: 0"}}
+[info] >  } {"user":"}","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-createTransfer"},"extension":{},"message":"\u001b[90m> \u001b[39m }"}}
+[debug] [2023-01-03T19:41:14.288Z] Jan 03, 2023 8:41:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:41:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:41:44.267Z] Jan 03, 2023 8:41:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:41:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:41:44.688Z] Jan 03, 2023 8:41:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:41:44 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-01-03T19:41:44.690Z] Jan 03, 2023 8:41:44 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:41:44 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose\nINFO: channel closed\n"}}
+[debug] [2023-01-03T19:42:14.327Z] Jan 03, 2023 8:42:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 03, 2023 8:42:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}

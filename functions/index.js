@@ -38,13 +38,25 @@ exports.createTransfer = functions.firestore
                 headers: {
                   //image: 'https://foo.bar.pizza-monster.png',
                   icon: 'https://webapp.dandela.com/img/logo.png',
+                  image: 'https://webapp.dandela.com/img/logo.png',
                 }
               },
             android: {
                 notification: {
                     icon: 'https://webapp.dandela.com/img/logo.png',
+                    imageUrl: 'https://webapp.dandela.com/img/logo.png',
                     color: '#094397',
                     sound: 'default',
+                }
+              },
+              apns: {
+                payload: {
+                  aps: {
+                    'mutable-content': 1
+                  }
+                },
+                fcm_options: {
+                    image: 'https://webapp.dandela.com/img/logo.png',
                 }
               },
             data: {
