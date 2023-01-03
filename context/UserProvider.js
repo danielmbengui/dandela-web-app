@@ -147,18 +147,27 @@ export default function UserProvider({ children }) {
                             body: payload.notification.body,
                             icon: '/img/logo.png',
                             /*
-
+webpush: {
+                                headers: {
+                                  //image: 'https://foo.bar.pizza-monster.png',
+                                  icon: '/img/logo.png',
+                                }
+                              },
                             android: {
                                 notification: {
                                     icon: '/img/logo.png',
                                     color: '#094397',
                                     sound: 'default',
+                                    
                                 }
                               },
                             */
+                            
                         };
+                        /*
                         self.registration.showNotification(notificationTitle,
                             notificationOptions);
+                            */
                     });
                 }
             }

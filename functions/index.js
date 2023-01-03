@@ -27,17 +27,22 @@ exports.createTransfer = functions.firestore
     .onCreate((snap, context) => {
         // Get an object representing the document
         // e.g. {'name': 'Marie', 'age': 66}
-        const newValue = snap.data();
+        //§1    2-àconst newValue = snap.data();
         const transfer = snap.data();
         const message = {
             notification: {
                 title: 'Nouveau transfert',
                 body: `${transfer.receiver} - ${transfer.amount}`,
             },
+            webpush: {
+                headers: {
+                  //image: 'https://foo.bar.pizza-monster.png',
+                  icon: 'https://webapp.dandela.com/img/logo.png',
+                }
+              },
             android: {
                 notification: {
                     icon: 'https://webapp.dandela.com/img/logo.png',
-                    imageUrl: 'https://webapp.dandela.com/img/logo.png',
                     color: '#094397',
                     sound: 'default',
                 }
