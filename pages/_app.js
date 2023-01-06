@@ -138,6 +138,8 @@ function App({ Component, pageProps, }) {
           </Head>
 
           <Script async src="https://www.googletagmanager.com/gtag/js?id=GT-57Z6PD7" />
+          <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2953886510697247"
+     crossorigin="anonymous" />
           <Component {...pageProps}
             langage={langage} setLangage={setLangage}
             logo={logo} links={links}
