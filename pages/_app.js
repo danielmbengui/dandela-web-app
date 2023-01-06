@@ -139,7 +139,7 @@ function App({ Component, pageProps, }) {
 
           <Script async src="https://www.googletagmanager.com/gtag/js?id=GT-57Z6PD7" />
           <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2953886510697247"
-     crossorigin="anonymous" />
+            crossorigin="anonymous" />
           <Component {...pageProps}
             langage={langage} setLangage={setLangage}
             logo={logo} links={links}
@@ -149,6 +149,17 @@ function App({ Component, pageProps, }) {
             userFirebase={userFirebase} handleUserFirebase={handleUserFirebase}
             uid={uid}
           />
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2953886510697247"
+            crossorigin="anonymous"></script>
+          <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-2953886510697247"
+            data-ad-slot="9442176526"></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({ });
+          </script>
         </UserProvider>
       </ThemeModeProvider>
     </Provider>
