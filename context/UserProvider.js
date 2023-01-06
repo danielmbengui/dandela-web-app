@@ -7,6 +7,7 @@ import Country, { countryConverter } from "../classes/CountryClass";
 import Currency, { currencyConverter } from "../classes/CurrencyClass";
 import { addCurrencyFirestore, getCurrenciesFirestore, getCurrencyFirestore, getCurrencySnapshot, isCurrencyFirestore } from "../lib/firebase-functions/Currency/CurrencyFunctions";
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
+import { getMessaging } from "firebase/messaging";
 
 const UserContext = createContext();
 
@@ -140,31 +141,17 @@ export default function UserProvider({ children }) {
                         }
                     });
 
+                    
                     messaging.onMessage((payload) => {
                         console.log('[firebase-messaging-sw.js] Received message ', payload);
+                        /*
                         const notificationTitle = payload.notification.title;
                         const notificationOptions = {
                             body: payload.notification.body,
-                            icon: '/img/logo.png',
-                            /*
-webpush: {
-                                headers: {
-                                  //image: 'https://foo.bar.pizza-monster.png',
-                                  icon: '/img/logo.png',
-                                }
-                              },
-                            android: {
-                                notification: {
-                                    icon: '/img/logo.png',
-                                    color: '#094397',
-                                    sound: 'default',
-                                    
-                                }
-                              },
-                            */
-                            
+                            icon: 'https://webapp.dandela.com/img/logo.png',
                         };
-                        /*
+                        
+                        
                         self.registration.showNotification(notificationTitle,
                             notificationOptions);
                             */

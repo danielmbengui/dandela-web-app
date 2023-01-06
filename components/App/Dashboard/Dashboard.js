@@ -58,7 +58,7 @@ export default function Dashboard(props) {
 
     return (
         <Box sx={{ display: user ? 'flex' : 'none', bgcolor: user.authorized ? 'var(--menu-background)' : 'var(--background-color)' }}>
-            {!user.authorized && <><PermanentBackdrop /><Unauthorized firebase={firebase} /></>}
+            {!user.authorized && <><PermanentBackdrop /></>}
             {user.uid && user.phoneNumber && user.authorized && <>
                 <CssBaseline sx={{ bgcolor: 'var(--menu-background)' }} />
             <BarApp drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
@@ -78,27 +78,7 @@ export default function Dashboard(props) {
                      />
                     <Divider />
                     <ProfileComponent profilePage={pages.profilePage} />
-                    
-                    {
-                        /* 
-                        <AddTransferComponent addtransferPage={pages.addtransferPage} />
                     <Divider />
-                    <InProgressListComponent inprogressPage={pages.inprogressPage} />
-                        */
-                    }
-                    <Divider />
-
-                    {
-                        /**
-                         * <TransfertComponent user={user} isAdmin={isAdmin} openSub={pages.newtransfert || pages.inprogress || pages.novalid || pages.alltransfert} pages={{
-                newtransfert: pages.newtransfert,
-                inprogress: pages.inprogress,
-                novalid: pages.novalid,
-                alltransfert: pages.alltransfert,
-            }}
-                         */
-                    }
-
                     <LangageComponent langage={langage} setLangage={setLangage} />
                     <CompanyNameComponent />
                 </div>

@@ -100,6 +100,16 @@ function App({ Component, pageProps, }) {
   const [langage, setLangage] = useState(DEFAULT_LANGAGE);
 
   useEffect(() => {
+    if (window) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'GT-57Z6PD7');
+    }
+  })
+
+  useEffect(() => {
     let _screenMode = getScreenModeStorage();
     setScreenMode(_screenMode);
     console.log("SCREENMODE _app", _screenMode)

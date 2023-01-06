@@ -1,9 +1,19 @@
 // The Firebase Admin SDK to access Firestore.
 const admin = require('firebase-admin');
+//const { initializeApp, applicationDefault } = require('firebase-admin/app');
+//const { getMessaging } = require('firebase-admin/messaging');
 // The Cloud Functions for Firebase SDK to create Cloud Functions and set up triggers.
 const functions = require('firebase-functions');
 admin.initializeApp();
+/*
+initializeApp({
+    credential: applicationDefault(),
+    //databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
+});
+*/
 const messaging = admin.messaging();
+const firestore = admin.firestore();
+//const messaging = getMessaging();
 //const messaging = 
 const tokens = [
     "eJrSSFwrGgun-0Yrj9xLha:APA91bE1v8C5TVdZA9OUx0FTOnWVArtB6C4kvbOV749ZSForXZwX5_nuPpl1mA1gsrtejp60KnY4UmeRpEkOtESh3OHVbqDoo1EnvK4QXzCjiezcqwnCLYY0RdLLCFJuEGw_bTtDiH8g",
@@ -16,8 +26,73 @@ const deviceToken = "eJrSSFwrGgun-0Yrj9xLha:APA91bE1v8C5TVdZA9OUx0FTOnWVArtB6C4k
 
 //console.log("FIREBASE asdmin", adminApp);
 //console.log("FIREBASE messaging", getMessaging(adminApp));
+async function getTokens(type) {
+    const registrationTokens = await firestore.collection("USER")
+        .where("type", "==", type)
+        //.where("type", "==", 'Employé Angola')
+        .get()
+        .then((docs) => {
+            const _registrationTokens = [];
+            docs.forEach((doc) => {
+                if (doc.exists) {
+                    const user = doc.data();
+                    user.tokens.forEach((token) => {
+                        _registrationTokens.push(token);
+                    })
+                    console.log("Exist user", doc.data());
+                } else {
+                    console.log("NO user", "null");
+                }
+            });
 
+            return (_registrationTokens);
+        })
+        .catch(() => {
+            console.log("ERROR NO user", "null");
+            return ([]);
+        });
+    return (registrationTokens);
+}
+/*
 
+*/
+exports.updateTokenUser = functions.firestore
+    .document('USER/{userId}')
+    .onUpdate(async (change, context) => {
+        // Get an object representing the document
+        // e.g. {'name': 'Marie', 'age': 66}
+        const newValue = change.after.data();
+
+        // ...or the previous value before this update
+        const previousValue = change.before.data();
+
+        // access a particular field as you would any JS property
+        const name = newValue.name;
+        const _user = change.after.data();
+        //const registrationTokens = _user.tokens;
+        const topic = "/topics/" + _user.type;
+        //const _normalize = messaging.normalizeTopic(topic)
+
+        //firestore.doc('some/otherdoc').set({ ... });
+        const registrationTokensAdmin = await getTokens('Admin');
+        const registrationTokensAngola = await getTokens('Employé Angola');
+        console.log("CONTXT", context)
+        console.log("TOKENS Admin", registrationTokensAdmin, registrationTokensAdmin.length);
+        console.log("TOKENS Angola", registrationTokensAngola, registrationTokensAngola.length);
+        /*
+                messaging.subscribeToTopic(registrationTokens, topic)
+                    .then((response) => {
+                        // See the MessagingTopicManagementResponse reference documentation
+                        // for the contents of response.
+                        console.log('Successfully subscribed to topic:', response);
+                    })
+                    .catch((error) => {
+                        console.log('Error subscribing to topic:', error);
+                    });
+                    */
+
+        // perform desired operations ...
+    });
 
 
 // Take the text parameter passed to this HTTP endpoint and insert it into 
@@ -28,6 +103,9 @@ exports.createTransfer = functions.firestore
         // Get an object representing the document
         // e.g. {'name': 'Marie', 'age': 66}
         //const newValue = snap.data();
+        //const condition = "'Admin' in topics && 'Employé Angola' in topics";
+        const condition = '\'Admin\' in topics || \'Employé Angola\' in topics';
+
         const transfer = snap.data();
         const message = {
             notification: {
@@ -36,10 +114,15 @@ exports.createTransfer = functions.firestore
             },
             webpush: {
                 headers: {
-                  icon: 'https://webapp.dandela.com/img/logo.png',
-                  image: 'https://webapp.dandela.com/img/logo.png',
+                    Urgency: "high"
+                },
+                notification: {
+                    body: "This is a message from FCM to web",
+                    requireInteraction: "true",
+                    badge: "https://webapp.dandela.com/img/logo.png"
                 }
-              },
+            },
+            /*
             android: {
                 notification: {
                     icon: 'https://webapp.dandela.com/img/logo.png',
@@ -47,30 +130,36 @@ exports.createTransfer = functions.firestore
                     color: '#094397',
                     sound: 'default',
                 }
-              },
-              apns: {
+            },
+            apns: {
                 payload: {
-                  aps: {
-                    'mutable-content': 1
-                  }
+                    aps: {
+                        'mutable-content': 1
+                    }
                 },
                 fcm_options: {
                     image: 'https://webapp.dandela.com/img/logo.png',
                 }
-              },
+            },
+            */
+
             data: {
                 score: '850',
                 time: '2:45'
             },
+
             //to: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
             //registration_id: "fKvZ5cp6JX3r6TrBy-EDe9:APA91bGkVCAyBxruthCWG_C29dSiX67rAKaYibTcuYMgnNsNJ9EfVm41JPusAVMMovYzDG-h_Lw9Pc_Ajp44bQbnT-ntSTCf0U_uU-hFGQPwkPzhrp2Bqk-87IPAB6zjBPIZOmPwFYi8",
-            tokens: tokens,
+            //tokens: tokens,
+            condition: condition,
+            //tokens: condition,
             //token: deviceToken
         };
 
         // access a particular field as you would any JS property
         //const name = newValue.name;
         //console.log("OKKKKKAY", snap.data());
+        /*
         messaging.sendMulticast(message)
             .then((response) => {
                 // Response is a message ID string.
@@ -80,6 +169,16 @@ exports.createTransfer = functions.firestore
             .catch((error) => {
                 console.log('Error sending message:', error);
 
+            });
+            */
+
+        messaging.send(message)
+            .then((response) => {
+                // Response is a message ID string.
+                console.log('Successfully sent message:', response);
+            })
+            .catch((error) => {
+                console.log('Error sending message:', error);
             });
         // perform desired operations ...
     });
