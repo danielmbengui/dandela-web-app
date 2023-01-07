@@ -144,10 +144,12 @@ export default function TransfersComponent(props) {
                                     primaryTypographyProps={{ fontSize: 'x-large', fontFamily: 'ChangaOneRegular', }}
                                 />
                             </ListItemButton>
+                            {
+                                index !== data.menu.length - 1 && <Divider />
+                            }
                         </Link>
                     ))}
             </Box>
-            <Divider /><Divider /><Divider /><Divider /><Divider />
         </div>
 
     );

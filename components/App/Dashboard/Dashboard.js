@@ -61,52 +61,52 @@ export default function Dashboard(props) {
             {!user.authorized && <><PermanentBackdrop /></>}
             {user.uid && user.phoneNumber && user.authorized && <>
                 <CssBaseline sx={{ bgcolor: 'var(--menu-background)' }} />
-            <BarApp drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
-            <DrawerCustom drawerWidth={drawerWidth} mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle}>
-                <div style={{ textAlign: 'center', backgroundColor: 'var(--menu-background)' }}>
-                    <SwitchThemeComponent />
-                    <Divider />
-                    <SettingsComponent settingsPage={pages.settingsPage} />
-                    <Divider />
-                    <TransfersComponent 
-                    user={user}
-                    openSub={pages.addtransferPage || pages.inprogressPage} 
-                    pages={{
-                        addtransfertPage: pages.addtransferPage,
-                        inprogressPage: pages.inprogressPage,
+                <BarApp drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+                <DrawerCustom drawerWidth={drawerWidth} mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle}>
+                    <div style={{ textAlign: 'center', backgroundColor: 'var(--menu-background)' }}>
+                        <SwitchThemeComponent />
+                        <div style={{height: '1vh', backgroundColor: 'var(--grey)',}} />
+                        <SettingsComponent settingsPage={pages.settingsPage} />
+                        <div style={{height: '1vh', backgroundColor: 'var(--grey)',}} />
+                        <TransfersComponent
+                            user={user}
+                            openSub={pages.addtransferPage || pages.inprogressPage}
+                            pages={{
+                                addtransfertPage: pages.addtransferPage,
+                                inprogressPage: pages.inprogressPage,
+                            }}
+                        />
+                        <div style={{height: '1vh', backgroundColor: 'var(--grey)',}} />
+                        <ProfileComponent profilePage={pages.profilePage} />
+                        <div style={{height: '1vh', backgroundColor: 'var(--grey)',}} />
+                        <LangageComponent langage={langage} setLangage={setLangage} />
+                        <CompanyNameComponent />
+                    </div>
+                </DrawerCustom>
+                <Box
+                    component="main"
+                    sx={{
+                        flexGrow: 1, p: 1,
+                        width: { xs: `calc(100% - ${drawerWidth - 60}px)`, md: `calc(100% - ${drawerWidth}px)` },
+                        bgcolor: 'var(--background-color)',
                     }}
-                     />
-                    <Divider />
-                    <ProfileComponent profilePage={pages.profilePage} />
-                    <Divider />
-                    <LangageComponent langage={langage} setLangage={setLangage} />
-                    <CompanyNameComponent />
-                </div>
-            </DrawerCustom>
-            <Box
-                component="main"
-                sx={{
-                    flexGrow: 1, p: 1,
-                    width: { xs: `calc(100% - ${drawerWidth - 60}px)`, md: `calc(100% - ${drawerWidth}px)` },
-                    bgcolor: 'var(--background-color)',
-                }}
-            >
-                <Toolbar />
-                {contentInstall}
-                <Grid container direction={'row'} justifyContent={'center'} alignItems={'center'}>
-                    <Grid item>
-                        <h1 style={{ fontFamily: 'ChangaOneRegular' }}>{title}</h1>
+                >
+                    <Toolbar />
+                    {contentInstall}
+                    <Grid container direction={'row'} justifyContent={'center'} alignItems={'center'}>
+                        <Grid item>
+                            <h1 style={{ fontFamily: 'ChangaOneRegular' }}>{title}</h1>
+                        </Grid>
                     </Grid>
-                </Grid>
-                {children}
-            <div style={{ marginTop: '30vh' }}>
-                            <Footer />
-                        </div>
-            </Box>
+                    {children}
+                    <div style={{ marginTop: '30vh' }}>
+                        <Footer />
+                    </div>
+                </Box>
             </>}
 
 
-            
+
 
 
         </Box>

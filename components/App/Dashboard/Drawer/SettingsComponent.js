@@ -33,7 +33,6 @@ export default function SettingsComponent({ firebase, settingsPage }) {
 
     return (
         <div>
-            <Divider /><Divider /><Divider /><Divider /><Divider />
             <ListItem component="div" disablePadding>
                 <ListItemButton
                     onClick={() => {
@@ -119,7 +118,6 @@ export default function SettingsComponent({ firebase, settingsPage }) {
                     </Stack>
                 </Link>
             </ListItem>
-            <Divider /><Divider /><Divider /><Divider /><Divider />
         </div>
     );
 }
