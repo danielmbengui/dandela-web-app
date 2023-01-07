@@ -118,6 +118,15 @@ function App({ Component, pageProps, }) {
     console.log("LANGAGE _app", _langage)
   }, [])
 
+  useEffect(() => {
+    var ads = document.getElementsByClassName("adsbygoogle").length;
+    for (var i = 0; i < ads; i++) {
+      try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) { }
+    }
+  }, []);
+
 
   const handleUser = (pUser) => {
     setUser(pUser);
@@ -153,6 +162,12 @@ function App({ Component, pageProps, }) {
             userFirebase={userFirebase} handleUserFirebase={handleUserFirebase}
             uid={uid}
           />
+          <ins className="adsbygoogle"
+            style={{ display: 'block', textAlign: 'center', }}
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-2953886510697247"
+            data-ad-slot="9442176526"></ins>
           {
             /*
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2953886510697247"
