@@ -5,6 +5,6 @@ import { Avatar } from '@mui/material';
 export const SmallAvatar = styled(Avatar)(() => ({
     width: 30,
     height: 30,
-    border: `2px solid var('--primary')`,
+    border: `2px solid var(--primary)`,
     padding: '1.5vw',
   }));

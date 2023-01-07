@@ -1,7 +1,7 @@
 @font-face {
   font-family: "EximaGeometric";   /*Can be any text*/
   src: local("EximaGeometric"),
-    url("./fonts/Exima\ Geometric.ttf") format("truetype");
+    url("./fonts/Exima Geometric.ttf") format("truetype");
 }
 
 @font-face {

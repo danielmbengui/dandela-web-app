@@ -1,5 +1,4 @@
-import { FormatQuoteRounded } from '@mui/icons-material';
-import { Stack, Typography } from '@mui/material';
+import React from 'react';
 import { Container } from '@mui/system';
 import Head from 'next/head'
 import Image from "next/image";
@@ -33,7 +32,6 @@ export default function Footer() {
                 //priority
                 quality={100}
                 loader={myLoader}
-                
             />
         </Container>
         </footer>

@@ -5,11 +5,18 @@ export default function Document() {
         <Html >
             <Head>
                 <meta name="description" content="Created by Daniel Slaver Mbengui" />
+                <meta name='viewport' content='minimum-scale=1, maximum-scale=5, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=yes, viewport-fit=cover' />
+
                 <link rel="icon" href="/favicon.ico" />
-                <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+                {
+                    /*
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=optional" />
+<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+                    */
+                }
 
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                
+
                 <meta name="application-name" content="Dandela Web App" />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -33,7 +40,6 @@ export default function Document() {
                 <meta name="theme-color" content="#094397" />
                 <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#5bbad5" />
                 <link rel="shortcut icon" href="/favicon32x32.ico" />
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=optional" />
 
                 <meta name="twitter:card" content="summary" />
                 <meta name="twitter:url" content="https://webapp.dandela.com" />

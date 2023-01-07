@@ -51,7 +51,7 @@ export default function BarApp(props) {
                             >
                                 <MenuIcon />
                             </IconButton>
-                            <Avatar id="avatar-user" className={styles['fullscreen']} src={user.profilPhotoURL} sx={{ width: 40, height: 40 }} />
+                            <Avatar id="avatar-user" alt='myProfile' className={styles['fullscreen']} src={user.profilPhotoURL} sx={{ width: 40, height: 40 }} />
                             <Typography variant="h8" noWrap component="div" className='evidence' sx={{ fontWeight: 'bold' }}>
                                 {user.phoneNumber}
                             </Typography>
