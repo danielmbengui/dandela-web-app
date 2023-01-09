@@ -27,9 +27,9 @@ export default function Footer() {
             <Image
                 src={logo}
                 width={72}
-                height={72}
+                height={55}
                 alt="logo"
-                //priority
+                priority
                 //fill
                 quality={100}
                 loader={myLoader}

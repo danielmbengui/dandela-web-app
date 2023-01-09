@@ -52,7 +52,7 @@ export default function Dashboard(props) {
         } else {
             setContentInstall(<></>);
         }
-    }, []);
+    }, [contentInstall]);
 
 
     const handleDrawerToggle = () => {
@@ -68,9 +68,9 @@ export default function Dashboard(props) {
                 <DrawerCustom drawerWidth={drawerWidth} mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle}>
                     <div style={{ textAlign: 'center', backgroundColor: 'var(--menu-background)' }}>
                         <SwitchThemeComponent />
-                        <div style={{height: '1vh', backgroundColor: 'var(--grey)',}} />
+                        <div style={{height: '0.5vh', backgroundColor: 'var(--grey)',}} />
                         <SettingsComponent firebase={firebase} settingsPage={pages.settingsPage} />
-                        <div style={{height: '1vh', backgroundColor: 'var(--grey)',}} />
+                        <div style={{height: '0.5vh', backgroundColor: 'var(--grey)',}} />
                         <TransfersComponent
                             user={user}
                             openSub={pages.addtransferPage || pages.inprogressPage}
@@ -79,9 +79,9 @@ export default function Dashboard(props) {
                                 inprogressPage: pages.inprogressPage,
                             }}
                         />
-                        <div style={{height: '1vh', backgroundColor: 'var(--grey)',}} />
+                        <div style={{height: '0.5vh', backgroundColor: 'var(--grey)',}} />
                         <ProfileComponent profilePage={pages.profilePage} />
-                        <div style={{height: '1vh', backgroundColor: 'var(--grey)',}} />
+                        <div style={{height: '0.5vh', backgroundColor: 'var(--grey)',}} />
                         <LangageComponent langage={langage} setLangage={setLangage} />
                         <CompanyNameComponent />
                     </div>
