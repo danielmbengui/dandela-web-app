@@ -19,7 +19,6 @@ import Transfert, { transfertConverter } from '../../../../../classes/TransfertC
 import CheckBoxCustom from '../../../CustomComponents/CheckBoxCustom';
 import User, { userConverter } from '../../../../../classes/UserClass';
 import LoadingButton from '@mui/lab/LoadingButton';
-//import DialogEditTransfert from '../../MyComponents/DialogEditTransfert';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DialogCustom from '../../../CustomComponents/DialogCustom';
 
