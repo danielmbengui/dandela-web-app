@@ -52,7 +52,11 @@ export default function Dashboard(props) {
 
     return (
         <Box sx={{ display: user ? 'flex' : 'none', bgcolor: user.authorized ? 'var(--menu-background)' : 'var(--background-color)' }}>
-            {!user.authorized && <><PermanentBackdrop /></>}
+            {
+            /*
+            !user.authorized && <><PermanentBackdrop /></>
+            */
+            }
             {user.uid && user.phoneNumber && user.authorized && <>
                 <CssBaseline sx={{ bgcolor: 'var(--menu-background)' }} />
                 <BarApp drawerWidth={drawerWidth} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />

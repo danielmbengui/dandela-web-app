@@ -15,7 +15,10 @@ export default function InstallApp(props) {
             <Grid item>
                 <div className={styles.grid}>
                     <div className={styles.card}>
-                        <p style={{ paddingBottom: '2vh', }}>{t('InstallApp')}</p>
+                        <Typography sx={{
+                            fontFamily: 'ChangaOneRegular',
+                            paddingBottom: '1.5vh'
+                        }}>{t('InstallApp')}</Typography>
                         <MaterialUIButton
                             variant="contained"
                             text={"Install"}

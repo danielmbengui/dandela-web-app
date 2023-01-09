@@ -176,7 +176,7 @@ export default function Profile({ firebase, firestore, storage }) {
               </label>
             }
           >
-                        <Avatar id="avatar-user" alt='myProfile' className={styles['fullscreen']} src={photoURL} sx={{ width: 100, height: 100 }} />
+            <Avatar id="avatar-user" alt='myProfile' className={styles['fullscreen']} src={photoURL} sx={{ width: 100, height: 100 }} />
 
             {
               /*
@@ -192,7 +192,7 @@ export default function Profile({ firebase, firestore, storage }) {
                             />} />
               */
             }
-            
+
           </Badge>
           <input id="image-input" type="file" accept="image/jpeg, image/png, image/jpg" style={{ display: 'none' }} />
         </Grid>
@@ -219,14 +219,11 @@ export default function Profile({ firebase, firestore, storage }) {
           />
           <AccordionCustom expanded={expanded} onChange={() => {
             handleExpanded(expanded ? false : true);
-          }} sx={{
-            //width:'60%',
           }}>
             <AccordionSummaryCustom aria-controls="panel1d-content" id="panel1d-header">
               <Typography sx={{ fontFamily: fontFamilyMain }}>{t('informations')}</Typography>
             </AccordionSummaryCustom>
             <AccordionDetailsCustom>
-
               <Stack
                 direction={'column'}
                 justifyContent={'center'}
@@ -234,50 +231,28 @@ export default function Profile({ firebase, firestore, storage }) {
                 spacing={2}
               >
                 <TextFieldCustom
-                  fullWidth
                   id="uid"
                   label={t('Id')}
                   disabled
                   value={user.uid}
                 />
                 <TextFieldCustom
-                  fullWidth
-                  //error={false}
                   id="phoneNumber"
                   label={t('Phone')}
-                  //required
                   disabled
-                  //defaultValue={displayName}
                   value={user.phoneNumber}
-                //helperText="Incorrect entry."
-                //theme={theme}
-                //placeholder={"Name"}
                 />
                 <TextFieldCustom
-                  fullWidth
-                  //error={false}
                   id="userCountry"
                   label={t('Country')}
-                  //required
                   disabled
-                  //defaultValue={displayName}
                   value={t(`${user.country.name}`)}
-                //helperText="Incorrect entry."
-                //theme={theme}
-                //placeholder={"Name"}
                 />
                 <TextFieldCustom
-                  fullWidth
-                  //error={false}
                   id="userType"
                   label={t('Type')}
-                  //required
                   disabled
-                  //defaultValue={displayName}
                   value={t(`${user.type}`)}
-                //helperText="Incorrect entry."
-                //theme={theme}
-                //placeholder={"Name"}
                 />
               </Stack>
             </AccordionDetailsCustom>
@@ -287,12 +262,8 @@ export default function Profile({ firebase, firestore, storage }) {
             display: user.displayName !== displayName || user.profilPhotoURL !== photoURL ? 'flex' : 'none'
           }}>
             <Button variant='contained' onClick={() => {
-              //setDisplayName('Claav');
-              //setPassword('123456');
               clickModifyUser();
             }
-
-
             }>
               {t('edit')}
             </Button>
