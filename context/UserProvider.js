@@ -7,7 +7,6 @@ import Country, { countryConverter } from "../classes/CountryClass";
 import Currency, { currencyConverter } from "../classes/CurrencyClass";
 import { addCurrencyFirestore, getCurrenciesFirestore, getCurrencyFirestore, getCurrencySnapshot, isCurrencyFirestore } from "../lib/firebase-functions/Currency/CurrencyFunctions";
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
-import { getMessaging } from "firebase/messaging";
 
 const UserContext = createContext();
 
@@ -60,8 +59,8 @@ export default function UserProvider({ children }) {
                 console.log("onAuthStateChanged USER", _user.phoneNumber);
             } else {
                 console.log("onAuthStateChanged USER", _user);
-                setPhoneNumber('');
-                setUid('');
+                setPhoneNumber(null);
+                setUid(null);
                 setConnected(false);
             }
         });
@@ -125,7 +124,7 @@ export default function UserProvider({ children }) {
         return (_user);
     }
 
-    async function init() {
+    function init() {
         if (uid && phoneNumber) {
             
             console.log("NEW UseEffect", phoneNumber);
@@ -138,16 +137,20 @@ export default function UserProvider({ children }) {
                         _user.country = await getCountry(_user.country_uid);
 
                         if (window && 'serviceWorker' in navigator) {
-                            console.log('Firebase Worker Registered');
+                            
                             if (isGranted()) {
                                 const messaging = firebase.messaging(app);
                                 messaging.getToken({ vapidKey: process.env.FIREBASE_VAPID_KEY }).then(async (currentToken) => {
                                     if (currentToken) {
-                                        firestore.collection(COLLECTION_USER).doc(uid)
-                                            //.withConverter(userConverter)
+                                        console.log('CURRENT TOKEN', currentToken);
+                                        if (!_user.tokens.includes(currentToken))
+                                        {
+                                            firestore.collection(COLLECTION_USER).doc(uid)
+                                            .withConverter(userConverter)
                                             .update({
                                                 tokens: firebase.firestore.FieldValue.arrayUnion(currentToken),
                                             });
+                                        }
                                     }
                                 });
             

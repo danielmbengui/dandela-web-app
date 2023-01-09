@@ -66,6 +66,6 @@ export default function MaterialUISwitch() {
         updateScreenModeStorage(event.target.checked ? 'dark' : 'light');
     }
     return (
-        <CustomSwitch aria-label='Hello' checked={checked} onChange={onChangeMode} />
+        <CustomSwitch aria-label='Switch custom' checked={checked} onChange={onChangeMode} />
     )
 }

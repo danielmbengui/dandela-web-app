@@ -21,17 +21,19 @@ export default function Footer() {
             alignItems: 'center',
             justifyContent: 'center',
             marginTop: '3vh',
-            marginBottom: '3vh',
+            marginBottom: '1vh',
 
         }}>
             <Image
                 src={logo}
                 width={72}
-                height={70}
+                height={72}
                 alt="logo"
                 //priority
+                //fill
                 quality={100}
                 loader={myLoader}
+                
             />
         </Container>
         </footer>
