@@ -1,6 +1,6 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid } from '@mui/material';
-import {  useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import { firestore } from '../../../../config.firebase';
 import firebase from '../../../../config.firebase';
 import { COLLECTION_USER, PAGE_LINK_ERROR_FIREBASE, PAGE_LINK_ERROR_LOGIN, PAGE_LINK_PROFILE, } from '../../../../constants';
@@ -13,13 +13,14 @@ export default function Login() {
     const theme = useTheme();
     const [user, setUser] = useUserContext();
     const router = useRouter();
+    const [signInURL, setSignInURL] = useState(PAGE_LINK_PROFILE);
 
     useEffect(() => {
         var firebaseui = require('firebaseui');
-        var signInURL = PAGE_LINK_ERROR_LOGIN;
+        //var signInURL = PAGE_LINK_ERROR_LOGIN;
         var uiConfig = {
             callbacks: {
-                signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+                signInSuccessWithAuthResult: async function (authResult, redirectUrl) {
                     // User successfully signed in.
                     // Return type determines whether we continue the redirect automatically
                     // or whether we leave that to developer to handle.
@@ -29,12 +30,27 @@ export default function Login() {
 
                     docRef.get().then((doc) => {
                         if (doc.exists) {
-                            const _user = new User(JSON.parse(JSON.stringify(user)));
+                            const _user = new User(doc.data());
                             if (_user.authorized) {
-                                signInURL = PAGE_LINK_PROFILE;
+                                //signInURL = PAGE_LINK_PROFILE;
+                                //setSignInURL(PAGE_LINK_PROFILE);
+                                setUser(_user);
+                                router.push(PAGE_LINK_PROFILE);
+                                //return false;
+                            } else {
+                                //setSignInURL(PAGE_LINK_ERROR_LOGIN);
+                                setUser(new User({ uid: userFirebase.uid, phoneNumber: userFirebase.phoneNumber }));
+                                router.push(PAGE_LINK_ERROR_LOGIN);
                             }
+                        } else {
+                            //setSignInURL(PAGE_LINK_ERROR_LOGIN);
+                            setUser(new User({ uid: userFirebase.uid, phoneNumber: userFirebase.phoneNumber }));
+                            router.push(PAGE_LINK_ERROR_LOGIN);
                         }
+                        //router.push(PAGE_LINK_ERROR_LOGIN);
+                        //return false;
                     });
+                    //router.push(PAGE_LINK_ERROR_LOGIN);
                     return true;
                 },
                 signInFailure: function (error) {
@@ -45,6 +61,7 @@ export default function Login() {
                     // occurs. Check below for more details on this.
                     //return handleUIError(error);
                     //window.location.href = "/authentication/errorfirebase";
+                    setUser(new User({}));
                     router.push(PAGE_LINK_ERROR_FIREBASE);
                     //router.push("/connected");
                     return false;
@@ -59,7 +76,7 @@ export default function Login() {
             signInFlow: 'popup',
             //signInSuccessUrl: '/profil',
             //signInSuccessUrl: "/connected",
-            signInSuccessUrl: signInURL,
+            signInSuccessUrl: '/',
             signInOptions: [
                 // Leave the lines as is for the providers you want to offer your users.
                 {

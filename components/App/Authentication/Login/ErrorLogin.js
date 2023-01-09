@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { AlertTitle, Grid } from '@mui/material';
 import { useUserContext } from '../../../../context/UserProvider';
 import { useRouter } from 'next/router';
-import { PAGE_LINK_HOME } from '../../../../constants';
+import { PAGE_LINK_HOME, PAGE_LINK_PROFILE } from '../../../../constants';
 
 export default function ErrorLogin(props) {
     const { firebase } = props;
@@ -18,6 +18,10 @@ export default function ErrorLogin(props) {
             setShowUserPhone(user.phoneNumber);
         } else {
             setShowUserPhone('unknow');
+        }
+
+        if (user.authorized) {
+            router.push(PAGE_LINK_PROFILE);
         }
     }, [user]);
 
@@ -43,6 +47,7 @@ export default function ErrorLogin(props) {
                         </Alert>
                         <Button
                             color='primary'
+                            variant='contained'
                             onClick={() => {
                                 firebase.auth().signOut().then(() => {
                                     // Sign-out successful.

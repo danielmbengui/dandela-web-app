@@ -8,8 +8,9 @@ import { useTranslation } from 'react-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { LANGAGE_ENGLISH, LANGAGE_FRENCH, LANGAGE_PORTUGUESE, NAMESPACE_LANGAGE_COMMON, NAMESPACE_LANGAGE_PROFILE, PAGE_LINK_HOME } from '../../../constants';
 import Settings from '../../../components/App/Dashboard/Settings/Settings';
+import firebase from "../../../config.firebase";
 
-export default function SettingsPage({ firebase, langage, setLangage }) {
+export default function SettingsPage({langage, setLangage}) {
     const { t, i18n } = useTranslation(NAMESPACE_LANGAGE_COMMON);
     const router = useRouter();
 

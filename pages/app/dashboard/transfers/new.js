@@ -8,8 +8,10 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Dashboard from '../../../../components/App/Dashboard/Dashboard';
 import { LANGAGE_ENGLISH, LANGAGE_FRENCH, LANGAGE_PORTUGUESE, NAMESPACE_LANGAGE_COMMON, NAMESPACE_LANGAGE_INPROGRESS_LIST, NAMESPACE_LANGAGE_NEW_TRANSFER, NAMESPACE_LANGAGE_PROFILE } from '../../../../constants';
 import NewTransfer from '../../../../components/App/Dashboard/Transfers/NewTransfer';
+import firebase from "../../../../config.firebase";
+import {firestore} from "../../../../config.firebase";
 
-export default function AddTransfertPage({firebase, firestore, langage, setLangage  }) {
+export default function AddTransfertPage({langage, setLangage  }) {
     const { t, i18n } = useTranslation(NAMESPACE_LANGAGE_NEW_TRANSFER);
     const router = useRouter();
 

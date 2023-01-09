@@ -1,4 +1,5 @@
 const { i18n } = require('./next-i18next.config')
+//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

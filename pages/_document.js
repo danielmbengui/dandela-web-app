@@ -5,9 +5,13 @@ export default function Document() {
         <Html >
             <Head>
                 <meta name="description" content="Created by Daniel Slaver Mbengui" />
-                <meta name='viewport' content='minimum-scale=1, maximum-scale=5, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=yes, viewport-fit=cover' />
-
                 <link rel="icon" href="/favicon.ico" />
+                {
+                    /*
+                                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                                    */
+                }
                 {
                     /*
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=optional" />
@@ -15,7 +19,6 @@ export default function Document() {
                     */
                 }
 
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
                 <meta name="application-name" content="Dandela Web App" />
                 <meta name="apple-mobile-web-app-capable" content="yes" />

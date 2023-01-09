@@ -2,9 +2,9 @@ import { DEFAULT_SCREEN_MODE, USER_TYPE_ADMIN } from "../constants";
 import Country from "./CountryClass";
 
 class User {
-    constructor({uid = null, phoneNumber = null, displayName = null, photoURL = null, profilPhotoURL = null,
-        type = null, country_uid = null, verified=false, tokens=[]}) {
-            /* FIRESTORE variables */
+    constructor({uid = '', phoneNumber = '', displayName = '', photoURL = '', profilPhotoURL = '',
+        type = '', country_uid = '', verified = false, tokens = [] }) {
+        /* FIRESTORE variables */
         this.uid = uid;
         this.phoneNumber = phoneNumber;
         this.displayName = displayName;
@@ -22,7 +22,7 @@ class User {
 
     toString() {
         return [
-            "UID: " + this.uid, 
+            "UID: " + this.uid,
             "PHONE: " + this.phoneNumber,
             "NAME: " + this.displayName,
             "PHOTO URL: " + this.photoURL,
@@ -40,7 +40,7 @@ class User {
 
 // Firestore data converter
 export const userConverter = {
-    toFirestore: function(user) {
+    toFirestore: function (user) {
         return {
             uid: user.uid,
             phoneNumber: user.phoneNumber,
@@ -51,13 +51,15 @@ export const userConverter = {
             country_uid: user.country_uid,
             verified: user.verified,
             tokens: user.tokens,
-            };
+        };
     },
-    fromFirestore: function(snapshot, options){
+    fromFirestore: function (snapshot, options) {
         const data = snapshot.data(options);
-        return new User({uid:data.uid, phoneNumber: data.phoneNumber, displayName: data.displayName, photoURL: data.photoURL,
+        return new User({
+            uid: data.uid, phoneNumber: data.phoneNumber, displayName: data.displayName, photoURL: data.photoURL,
             profilPhotoURL: data.profilPhotoURL, type: data.type, country_uid: data.country_uid, verified: data.verified,
-            tokens: data.tokens});
+            tokens: data.tokens
+        });
         /*
 uid = null, phoneNumber = null, displayName = '', photoURL = '', profilPhotoURL = '',
         verified=false, screenMode=DEFAULT_SCREEN_MODE

@@ -12,8 +12,8 @@ import { getMessaging } from "firebase/messaging";
 const UserContext = createContext();
 
 export default function UserProvider({ children }) {
-    const [user, setUser] = useState(DEFAULT_USER);
-    const [_user, _setUser] = useState(new User({}));
+    const [user, setUser] = useState(new User({}));
+    //const [_user, _setUser] = useState(new User({}));
     const [uid, setUid] = useState(null);
     const [phoneNumber, setPhoneNumber] = useState(null);
     const [connected, setConnected] = useState(false);
@@ -60,8 +60,8 @@ export default function UserProvider({ children }) {
                 console.log("onAuthStateChanged USER", _user.phoneNumber);
             } else {
                 console.log("onAuthStateChanged USER", _user);
-                setPhoneNumber(null);
-                setUid(null);
+                setPhoneNumber('');
+                setUid('');
                 setConnected(false);
             }
         });
@@ -127,53 +127,56 @@ export default function UserProvider({ children }) {
 
     async function init() {
         if (uid && phoneNumber) {
-            if (window && 'serviceWorker' in navigator) {
-                console.log('Firebase Worker Registered');
-                if (isGranted()) {
-                    const messaging = firebase.messaging(app);
-                    messaging.getToken({ vapidKey: process.env.FIREBASE_VAPID_KEY }).then(async (currentToken) => {
-                        if (currentToken) {
-                            firestore.collection(COLLECTION_USER).doc(uid)
-                                .withConverter(userConverter)
-                                .update({
-                                    tokens: firebase.firestore.FieldValue.arrayUnion(currentToken),
-                                });
-                        }
-                    });
-
-                    
-                    messaging.onMessage((payload) => {
-                        console.log('[firebase-messaging-sw.js] Received message ', payload);
-                        /*
-                        const notificationTitle = payload.notification.title;
-                        const notificationOptions = {
-                            body: payload.notification.body,
-                            icon: 'https://webapp.dandela.com/img/logo.png',
-                        };
-                        
-                        
-                        self.registration.showNotification(notificationTitle,
-                            notificationOptions);
-                            */
-                    });
-                }
-            }
+            
             console.log("NEW UseEffect", phoneNumber);
-            const userRef = firestore.collection(COLLECTION_USER);
-            userRef.doc(uid)
+            const unsubscribe = firestore.collection(COLLECTION_USER).doc(uid)
                 .withConverter(userConverter)
                 .onSnapshot(async (doc) => {
-                    var _user = new User(doc.data());
+                    var _user = new User({});
                     if (doc.exists) {
                         _user = new User(doc.data());
                         _user.country = await getCountry(_user.country_uid);
+
+                        if (window && 'serviceWorker' in navigator) {
+                            console.log('Firebase Worker Registered');
+                            if (isGranted()) {
+                                const messaging = firebase.messaging(app);
+                                messaging.getToken({ vapidKey: process.env.FIREBASE_VAPID_KEY }).then(async (currentToken) => {
+                                    if (currentToken) {
+                                        firestore.collection(COLLECTION_USER).doc(uid)
+                                            //.withConverter(userConverter)
+                                            .update({
+                                                tokens: firebase.firestore.FieldValue.arrayUnion(currentToken),
+                                            });
+                                    }
+                                });
+            
+                                messaging.onMessage((payload) => {
+                                    console.log('[firebase-messaging-sw.js] Received message ', payload);
+                                    /*
+                                    const notificationTitle = payload.notification.title;
+                                    const notificationOptions = {
+                                        body: payload.notification.body,
+                                        icon: 'https://webapp.dandela.com/img/logo.png',
+                                    };
+                                    
+                                    
+                                    self.registration.showNotification(notificationTitle,
+                                        notificationOptions);
+                                        */
+                                });
+                            }
+                        }
+                        setUser(_user);
                     } else {
                         _user.uid = uid;
                         _user.phoneNumber = phoneNumber;
                         _user = new User({ uid: uid, phoneNumber: phoneNumber });
+                        setUser(_user);
+                        unsubscribe();
                     }
                     console.log("UUUUSER connected", _user);
-                    setUser(_user);
+                    
                 });
         } else {
             console.log("NEW UseEffect ERROR", uid);

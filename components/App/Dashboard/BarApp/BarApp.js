@@ -9,6 +9,8 @@ import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import styles from './BarApp.module.css';
 import { useUserContext } from '../../../../context/UserProvider';
+import Image from 'next/image';
+import { myLoader } from '../../../../lib/functions/ImageLoader';
 
 export default function BarApp(props) {
     const {  drawerWidth, mobileOpen, setMobileOpen } = props;
@@ -52,6 +54,21 @@ export default function BarApp(props) {
                                 <MenuIcon />
                             </IconButton>
                             <Avatar id="avatar-user" alt='myProfile' className={styles['fullscreen']} src={user.profilPhotoURL} sx={{ width: 40, height: 40 }} />
+{
+    /*
+<Avatar sx={{ width: 40, height: 40 }}  className={styles['fullscreen']} children={<Image 
+                            id="avatar-user" 
+                            src={user.profilPhotoURL} 
+                            alt={'myProfile'}
+                            quality={100}
+                                loader={myLoader}
+                            width={40}
+                            height={40} 
+                            responsive
+                            />} />
+    */
+}
+                            
                             <Typography variant="h8" noWrap component="div" className='evidence' sx={{ fontWeight: 'bold' }}>
                                 {user.phoneNumber}
                             </Typography>

@@ -22,6 +22,7 @@ import InProgressListComponent from './Drawer/InProgressListComponent';
 import AddTransferComponent from './Drawer/AddTransferComponent';
 import TransfersComponent from './Drawer/TransfersComponent';
 import ProfileComponent from './Drawer/ProfileComponent';
+import { PAGE_LINK_ERROR_LOGIN } from '../../../constants';
 
 const drawerWidth = 300;
 
@@ -30,6 +31,7 @@ export default function Dashboard(props) {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [contentInstall, setContentInstall] = useState(<></>);
     const [user,] = useUserContext();
+    const router = useRouter();
 
     useEffect(() => {
         if (window) {
@@ -50,7 +52,8 @@ export default function Dashboard(props) {
         } else {
             setContentInstall(<></>);
         }
-    });
+    }, []);
+
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -66,7 +69,7 @@ export default function Dashboard(props) {
                     <div style={{ textAlign: 'center', backgroundColor: 'var(--menu-background)' }}>
                         <SwitchThemeComponent />
                         <div style={{height: '1vh', backgroundColor: 'var(--grey)',}} />
-                        <SettingsComponent settingsPage={pages.settingsPage} />
+                        <SettingsComponent firebase={firebase} settingsPage={pages.settingsPage} />
                         <div style={{height: '1vh', backgroundColor: 'var(--grey)',}} />
                         <TransfersComponent
                             user={user}

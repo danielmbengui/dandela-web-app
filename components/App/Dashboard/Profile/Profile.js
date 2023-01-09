@@ -17,6 +17,8 @@ import { AccordionCustom, AccordionDetailsCustom, AccordionSummaryCustom } from 
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import { SmallAvatar } from '../../CustomComponents/AvatarCustom';
 import SnackBarCustom from '../../CustomComponents/SnackBarCustom';
+import { myLoader } from '../../../../lib/functions/ImageLoader';
+import Image from 'next/image';
 
 
 const fontFamilyMain = [
@@ -174,7 +176,23 @@ export default function Profile({ firebase, firestore, storage }) {
               </label>
             }
           >
-            <Avatar id="avatar-user" alt='myProfile' className={styles['fullscreen']} src={photoURL} sx={{ width: 100, height: 100 }} />
+                        <Avatar id="avatar-user" alt='myProfile' className={styles['fullscreen']} src={photoURL} sx={{ width: 100, height: 100 }} />
+
+            {
+              /*
+<Avatar sx={{ width: 100, height: 100 }} children={<Image 
+                            id="avatar-user" 
+                            src={user.profilPhotoURL} 
+                            alt={'myProfile'}
+                            quality={100}
+                                loader={myLoader}
+                            //width={100}
+                            //height={100} 
+                            fill
+                            />} />
+              */
+            }
+            
           </Badge>
           <input id="image-input" type="file" accept="image/jpeg, image/png, image/jpg" style={{ display: 'none' }} />
         </Grid>
