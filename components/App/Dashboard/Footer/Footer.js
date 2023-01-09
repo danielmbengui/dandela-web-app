@@ -5,8 +5,8 @@ import Image from "next/image";
 import { styled, useTheme } from '@mui/material/styles';
 import styles from './Footer.module.css';
 import { myLoader } from '../../../../lib/functions/ImageLoader';
-
-const logo = "/img/logo.png";
+//import profilePic from '../public/me.png'
+import logo from "../../../../public/img/logo.png";
 //const logoBlack = "/img/logos/logo-black.png";
 //const logoWhite = "/img/logos/logo-white.png";
 
@@ -30,10 +30,8 @@ export default function Footer() {
                 height={55}
                 alt="logo"
                 priority
-                //fill
                 quality={100}
                 loader={myLoader}
-                
             />
         </Container>
         </footer>

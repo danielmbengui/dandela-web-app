@@ -2,27 +2,18 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { useUserContext } from '../../../context/UserProvider';
-import ContainerAuthentication from '../Authentication/ContainerAuthentication';
-import ErrorLogin from '../Authentication/Login/ErrorLogin';
-import Unauthorized from '../Authentication/Login/Unauthorized';
 import PermanentBackdrop from '../CustomComponents/PermanentBackdrop';
 import BarApp from './BarApp/BarApp';
-import { useTranslation } from 'react-i18next';
-import { updateLangageStorage } from '../../../lib/functions/storage/UserStorageFunctions';
-import { Box, CssBaseline, Divider, Drawer, Grid, Toolbar } from '@mui/material';
+import { Box, CssBaseline, Grid, Toolbar } from '@mui/material';
 import DrawerCustom from '../CustomComponents/DrawerCustom';
-import { Container } from '@mui/system';
 import Footer from './Footer/Footer';
 import InstallApp from './InstallApp/InstallApp';
 import CompanyNameComponent from './Drawer/CompanyNameComponent';
 import LangageComponent from './Drawer/LangageComponent';
 import SwitchThemeComponent from './Drawer/SwitchThemeComponent';
 import SettingsComponent from './Drawer/SettingsComponent';
-import InProgressListComponent from './Drawer/InProgressListComponent';
-import AddTransferComponent from './Drawer/AddTransferComponent';
 import TransfersComponent from './Drawer/TransfersComponent';
 import ProfileComponent from './Drawer/ProfileComponent';
-import { PAGE_LINK_ERROR_LOGIN } from '../../../constants';
 
 const drawerWidth = 300;
 
@@ -115,11 +106,3 @@ export default function Dashboard(props) {
         </Box>
     )
 }
-
-Dashboard.propTypes = {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
-    window: PropTypes.func,
-};

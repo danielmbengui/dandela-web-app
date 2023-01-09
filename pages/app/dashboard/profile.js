@@ -7,6 +7,7 @@ import Dashboard from '../../../components/App/Dashboard/Dashboard';
 import Profile from '../../../components/App/Dashboard/Profile/Profile';
 import firebase from "../../../config.firebase";
 import {firestore, storage} from "../../../config.firebase";
+import Head from 'next/head';
 
 
 export default function ProfilePage({ langage, setLangage }) {
@@ -21,6 +22,10 @@ export default function ProfilePage({ langage, setLangage }) {
         onChangeLanguage(langage);
     }, [langage]);
     return (
+        <>
+        <Head>
+          <title>{t('menuProfile')}</title>
+        </Head>
         <Dashboard
             firebase={firebase}
             langage={langage} setLangage={setLangage}
@@ -32,6 +37,7 @@ export default function ProfilePage({ langage, setLangage }) {
             storage={storage} 
             />
         </Dashboard>
+        </>
     )
 }
 

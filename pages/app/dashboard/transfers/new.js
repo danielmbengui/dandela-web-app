@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head'
-import Image from "next/image";
-import { Button } from '@mui/material';
+import React, {useEffect} from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -11,9 +9,8 @@ import NewTransfer from '../../../../components/App/Dashboard/Transfers/NewTrans
 import firebase from "../../../../config.firebase";
 import {firestore} from "../../../../config.firebase";
 
-export default function AddTransfertPage({langage, setLangage  }) {
+export default function AddTransfertPage({langage, setLangage}) {
     const { t, i18n } = useTranslation(NAMESPACE_LANGAGE_NEW_TRANSFER);
-    const router = useRouter();
 
 const onChangeLanguage = (language) => {
   i18n.changeLanguage(language);
@@ -24,6 +21,12 @@ useEffect(() => {
 }, [langage]);
 
     return (
+        <>
+        <Head>
+          <title>
+            {`${t('menuTransferts', {ns: NAMESPACE_LANGAGE_COMMON})} - ${t('menuTransfertsNew', {ns: NAMESPACE_LANGAGE_COMMON})}`}
+            </title>
+        </Head>
         <Dashboard
         firebase={firebase} 
         langage={langage} setLangage={setLangage}
@@ -32,6 +35,7 @@ useEffect(() => {
         >
         <NewTransfer langage={langage} firestore={firestore} />
         </Dashboard>
+        </>
     )
 }
 

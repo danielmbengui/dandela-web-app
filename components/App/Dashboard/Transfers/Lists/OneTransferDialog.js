@@ -179,6 +179,7 @@ const theme = useTheme();
       //width={350}
       fullScreen={fullScreen}
       fullWidth
+      sx={{height: {xs:'100%'}}}
     >
       <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
         <Typography sx={{

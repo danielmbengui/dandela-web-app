@@ -4,7 +4,9 @@ import Image from "next/image";
 import MaterialUISwitch from '../CustomComponents/MaterialUISwitch';
 import { myLoader } from '../../../lib/functions/ImageLoader';
 
-const srcLogo = "/img/logo.png";
+import srcLogo from "../../../public/img/logo.png";
+//import logo from "../../../../public/img/logo.png";
+
 
 const AppBarLogin = () => {
     return (
@@ -38,15 +40,11 @@ export default function ContainerAuthentication({ children }) {
                     <Image
                         src={srcLogo}
                         width={72}
-                        height={72}
+                        height={56}
                         alt="logo"
                         priority
                         quality={100}
                         loader={myLoader}
-                        style={{
-                            maxWidth: "100%",
-                            height: "auto",
-                          }}
                     />
                 </Grid>
             </Grid>

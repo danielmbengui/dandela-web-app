@@ -23,6 +23,12 @@ useEffect(() => {
   onChangeLanguage(langage);
 }, [langage]);
     return (
+        <>
+        <Head>
+          <title>
+            {`${t('menuTransferts', {ns: NAMESPACE_LANGAGE_COMMON})} - ${t('menuTransfertsInProgress', {ns: NAMESPACE_LANGAGE_COMMON})}`}
+            </title>
+        </Head>
         <Dashboard
         firebase={firebase} 
         langage={langage} setLangage={setLangage}
@@ -31,6 +37,7 @@ useEffect(() => {
         >
         <InProgressTransfers firestore={firestore} />
         </Dashboard>
+        </>
     )
 }
 

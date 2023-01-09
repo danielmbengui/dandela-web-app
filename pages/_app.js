@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import '../styles/globals.css';
-import '../styles/firebaseui.css';
 import Head from "next/head";
 import ThemeModeProvider from "../context/ThemeProvider";
 import UserProvider from "../context/UserProvider";
